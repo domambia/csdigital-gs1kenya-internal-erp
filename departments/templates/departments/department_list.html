@@ -1,0 +1,55 @@
+{% extends "layout/main_layout.html" %}
+{% block header %}
+  <div class="card">
+      <h2 class="header pull-left">DEPARTMENT</h2>
+  </div>
+{% endblock%}
+{% block content %}
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card body">
+            <div class="header">
+                <h2 class="card body">
+                  <span><a class="btn btn-primary" href = "{% url 'departments:add_department' %}" >ADD DEPARTMENT</a></span>
+                  <span><a class="btn btn-primary" href = "{% url 'departments:list_department' %}">DEPARTMENT</a></span>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr>
+                                <th>Depatment Name</th>
+                                <th>Depatment Abbreviations</th>
+                                <th>Created On</th>
+                                <th style="text-align:center;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if departments %}
+                              {% for department in departments %}
+                                  <tr>
+                                      <td>{{ department.name }}</td>
+                                      <td>{{ department.initials }}</td>
+                                      <td>{{ department.created_on }}</td>
+                                      <td>
+                                          <span> <a href = "{% url 'departments:show_department' pk=department.pk %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>
+                                          <span> <a href = "{% url 'departments:edit_department' pk=department.pk %}"><i class="material-icons">edit</i></a> </span>
+                                          <span> <a href = "{% url 'departments:delete_department' pk=department.pk %}"><i class="material-icons" style = "color:#cc0000;">delete</i></a> </span>
+                                      </td>
+                                  </tr>
+                              {% endfor %}
+                            {% else %}
+
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Exportable Table -->
+
+{% endblock %}

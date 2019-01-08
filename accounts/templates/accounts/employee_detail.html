@@ -1,0 +1,87 @@
+{% extends "employee/layout.html" %}
+{% block content %}
+  <div class="card">
+      <div class="body">
+            <div class="row clearfix">
+              <div class="col-md-4">
+                <p >Username</p>
+                <p class="card body">{{ employee.user.username }}</p>
+              </div>
+              <div class="col-md-4">
+                <p >Email Address</p>
+                <p class="card body">{{ employee.user.email }}</p>
+              </div>
+              <div class="col-md-4">
+                <p >First Name</p>
+                <p class="card body">{{ employee.user.first_name }}</p>
+              </div>
+
+            </div>
+
+            <div class="row clearfix">
+              <div class="col-md-4">
+                <p >Last Name</p>
+                <p class="card body">{{ employee.user.last_name }}</p>
+              </div>
+              <div class="col-md-4">
+                <p >Address</p>
+                <p class="card body">{{ employee.address }}</p>
+              </div>
+              <div class="col-md-4">
+                <p >Phone Number</p>
+                <p class="card body">{{ employee.phone }}</p>
+              </div>
+            </div
+
+            <!-- Three -->
+            <div class="row clearfix">
+              <div class="col-md-4">
+                <p >County</p>
+                <p class="card body">{{ employee.county }}</p>
+              </div>
+              <div class="col-md-4">
+                <p >Currrent Position</p>
+                <p class="card body">{{ employee.current_position }}</p>
+              </div>
+              <div class="col-md-4">
+                <p >Department </p>
+                <p class="card body">{{ employee.department }}</p>
+              </div>
+
+            </div>
+            <!-- END of three-->
+            <!--  Start of Four -->
+            <div class="row clearfix">
+              <div class="col-md-4">
+                <p >Dependent/ Emergency Phone</p>
+                <p class="card body">{{ employee.dependant_contact }}</p>
+              </div>
+              <div class="col-md-4">
+                <p >Dependent/ Emergency Name</p>
+                <p class="card body">{{ employee.dependant_name }}</p>
+              </div>
+              <div class="col-md-4">
+                <p >Dependent / Emergency Email Address </p>
+                <p class="card body">{{ employee.kin_email }}</p>
+              </div>
+
+            </div>
+            <!--  End of Four-->
+            <!--  Start Five-->
+            <div class="row clearfix">
+              <div class="col-md-4">
+                <p >Salary</p>
+                <p class="card body">{{ employee.salary }}</p>
+              </div>
+              <div class="col-md-4  pull-right" style="margin-top: 4rem;">
+                <a href="{% url 'hrm:hrm_index' %}" class="btn btn-primary"><span style="color: orangered;">&larr;</span> BACK</a>
+              </div>
+            </div>
+            <!--  END of Five -->
+
+
+
+      </div>
+  </div>
+
+{% endblock %}

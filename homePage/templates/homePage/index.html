@@ -1,0 +1,71 @@
+{% extends "homePage/layout.html" %}
+{% load staticfiles %}
+{% block content %}
+    <div class="container">
+    <div class="col-md-12" style="border-bottom: 2px solid #f5f5f5;margin-bottom:20px;">
+     <h3 style="text-align:center;color:#00bcd4;"> Welcome </h3>
+     <h5 style="text-align:center;"> Choose your desired action below</h5>
+    </div>
+
+    <div class="row clearfix" >
+       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+         <div class="col-lg-2">
+         </div>
+       <div class="col-md-3" style="padding: 4%;">
+         <div class="logo">
+             <a href="javascript:void(0);">  <img style=" margin-left: -70px;margin-bottom:10px;" src="{% static 'images/gs1ea.png' %}" width="230" height="150" alt="LOGO" /></a>
+         </div>
+       </div>
+
+         <div class="col-md-6">
+
+               <div class="info-box-2 bg-cyan hover-expand-effect">
+                   <div class="icon">
+                       <i class="material-icons">playlist_add_check</i>
+                   </div>
+                   <div class="content">
+                       <div class="text">Customer resource management</div>
+                         <div class="text"><a href="#" style="color: black;font-size: 16px;font-weight: 600;">Click to open</a></div>
+                       <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20"></div>
+                   </div>
+               </div>
+
+               <div class="info-box-2 bg-red hover-zoom-effect">
+                   <div class="icon">
+                       <i class="material-icons">face</i>
+                   </div>
+                   <div class="content">
+                       <div class="text">Human resource management</div>
+                         <div class="text"><a href="{% url 'hrm:hrm_index' %}" style="color: black;font-size: 16px;font-weight: 600;">Click to open</a></div>
+                       <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20"></div>
+                   </div>
+               </div>
+
+               <div class="info-box-2 bg-light-green hover-zoom-effect">
+                   <div class="icon">
+                       <i class="material-icons">attach_money</i>
+                   </div>
+                   <div class="content">
+                       <div class="text">Accounts</div>
+                         <div class="text"><a href="#" style="color: black;font-size: 16px;font-weight: 600;">Click to open</a></div>
+                       <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20"></div>
+                   </div>
+               </div>
+
+       </div>
+     </div>
+    </div>
+    <div class="row clearfix" style="border-top: 2px solid #f5f5f5; padding:5px;">
+     <div class="col-md-3 pull-right" >
+           <div class="text"><a href="{% url 'accounts:logout'%}" style="color: #00bcd4;font-size: 16px;font-weight: 600;">Logout</a></div>
+     </div>
+
+     <div class="col-md-3" >
+
+         <p></p>
+
+     </div>
+    </div>
+
+    </div>
+{% endblock %}

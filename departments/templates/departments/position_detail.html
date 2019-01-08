@@ -1,0 +1,34 @@
+{% extends 'layout/main_layout.html' %}
+{% load widget_tweaks %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+{{ employee_form.media }}            {# Adds date-picker required JS and CSS #}
+
+{% block content %}
+  <div class="jumbotron card">
+    <a href="{% url 'departments:list_position' %}" class="btn btn-primary">BACK</a>
+    <a href="{% url 'departments:delete_position' pk=position.pk %}" class="btn btn-danger">DELETE</a>
+      <div class="body">
+        <div class="row clearfix">
+            <div class="col-md-6 jumbotron">
+                Job Positon Name <br> <br>{{ position.name }}
+            </div>
+
+            <div class="col-md-6 jumbotron">
+                Job Positon Abbreviations <br> <br> {{ position.initials }}
+            </div>
+        </div>
+
+        <div class="row clearfix">
+            <div class="col-md-6 jumbotron">
+              Started On: <br> <br>{{ position.created_on }}
+            </div>
+        </div>
+
+      </div>
+
+
+  </div>
+
+{% endblock %}

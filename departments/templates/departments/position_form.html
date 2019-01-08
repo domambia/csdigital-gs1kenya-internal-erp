@@ -1,0 +1,58 @@
+{% extends 'layout/main_layout.html' %}
+{% load widget_tweaks %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+{{ form.media }}            {# Adds date-picker required JS and CSS #}
+{% block header %}
+  <div class="card">
+      <h2 class="header pull-left">ADD NEW JOB POSITIONS</h2>
+  </div>
+{% endblock%}
+{% block content %}
+  <div class="card">
+    <div class="body">
+      <h2 class="header"><a class="btn btn-primary" href = "{% url 'departments:list_position'%}">JOB POSITIONS</a></h2>
+
+      <form class="form" action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+          <div class="row clearfix">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="form-line">
+                        <label for="{{ user_form.first_name.id_for_label }}">Job Position Name</label>
+                        {{ form.name|add_class:"form-control"}}
+                        <ul>
+                          {% for error in form.name.errors%}
+                            <li class="alert alert-danger">{{ error }}</li>
+                          {% endfor %}
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <div class="form-line">
+                          <label for="{{ user_form.first_name.id_for_label }}">Abbreviations(e.g D.I)</label>
+                          {{ form.initials|add_class:"form-control" }}
+                          <ul>
+                            {% for error in form.initials.errors%}
+                              <li class="alert alert-danger">{{ error }}</li>
+                            {% endfor %}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+
+          </div>
+          <div class="row clearfix">
+            <div class="col-md-4 pull-right">
+                <input type="submit" class="btn btn-primary btn-lg m-l-15 waves-effect" value="submit">
+            </div>
+          </div>
+          </form>
+      </div>
+
+
+{% endblock %}

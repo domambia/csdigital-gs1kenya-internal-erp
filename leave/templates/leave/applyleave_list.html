@@ -1,0 +1,56 @@
+{% extends "layout/main_layout.html" %}
+
+{% block content %}
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2 class="card body">
+                  <span><a class="btn btn-primary" href = "{% url 'leave:leave_list' %}" >BACK</a></span>
+                  <span><a class="btn btn-primary" href = "{% url 'leave:add_leave' %}" >ADD LEAVE</a></span>
+                  <span><a class="btn btn-primary" href = "{% url 'leave:applyleave_list' %}">APPLIED LEAVES</a></span>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr>
+                                <th>Leave Name</th>
+                                <th>Starting Date</th>
+                                <th>Ending Date</th>
+                                <th>Employee</th>
+                                <th > Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if applied_leaves %}
+                              {% for leave in applied_leaves %}
+                                  <tr>
+                                      <td>{{ leave.leave.name }}</td>
+                                      <td>{{ leave.start_date }}</td>
+                                      <td>{{ leave.end_date }}</td>
+                                      <td>{{ leave.employee.user.first_name  }}
+                                            &nbsp;
+                                          {{ leave.employee.user.last_name }}</td>
+                                      <td style=" margin: 40px auto; text-align:center;"> {% if leave.status %}
+                                            <span style="padding:.4rem;" class="btn-success" name="button">Approved</span>
+                                          {% else %}
+                                            <a href="{% url 'leave:approve' pk=leave.id %}"  class="btn-danger" style="padding:.4rem;" name="button">Approve</a>
+                                          {% endif %}
+                                  </tr>
+                              {% endfor %}
+                            {% else %}
+
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Exportable Table -->
+
+{% endblock %}

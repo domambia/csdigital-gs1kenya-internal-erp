@@ -1,0 +1,34 @@
+{% extends 'layout/main_layout.html' %}
+{% load widget_tweaks %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+{{ employee_form.media }}            {# Adds date-picker required JS and CSS #}
+
+{% block content %}
+  <div class="jumbotron card">
+    <a href="{% url 'leave:leave_list' %}" class="btn btn-primary">BACK</a>
+    <a href="{% url 'leave:leave_delete' pk=leave.pk %}" class="btn btn-danger">DELETE</a>
+      <div class="body">
+        <div class="row clearfix">
+            <div class="col-md-6 jumbotron">
+                Leave Name <br> <br>{{ leave.name }}
+            </div>
+
+            <div class="col-md-6 jumbotron">
+                Leave Period <br> <br> {{ leave.period }} weeks
+            </div>
+        </div>
+
+        <div class="row clearfix">
+            <div class="col-md-6 jumbotron">
+                Details: <br> <br>{{ leave.description }}
+            </div>
+        </div>
+
+      </div>
+
+
+  </div>
+
+{% endblock %}

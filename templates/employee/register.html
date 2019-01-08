@@ -1,0 +1,271 @@
+{% extends 'layout/main_layout.html' %}
+{% load widget_tweaks %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+{{ employee_form.media }}            {# Adds date-picker required JS and CSS #}
+{% block header %}
+  <div class="card">
+      <h2 class="header pull-left">ADD NEW EMPLOYEE</h2>
+  </div>
+{% endblock%}
+{% block content %}
+  <div class="card">
+    <div class="body">
+      <h2 class="header"><a class="btn btn-primary" href = "{% url 'hrm:hrm_index'%}">ALL EMPLOYEES</a></h2>
+
+      <form class="form" action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row clearfix">
+          <div class="header">
+              <h2>DEMOGRAPHIC INFORMATION</h2>
+          </div>
+
+          <div class="col-md-4">
+              <div class="form-group">
+                  <div class="form-line">
+                      <label for="{{ user_form.first_name.id_for_label }}">Username</label>
+                      {{ user_form.username|add_class:"form-control" }}
+                      <ul>
+                        {% for error in user_form.username.errors%}
+                          <li class="alert alert-danger">{{ error }}</li>
+                        {% endfor %}
+                      </ul>
+
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="form-group">
+                  <div class="form-line">
+                      <label for="{{ employee_form.date_of_birth.id_for_label }}">Birth Date</label>
+                      {{ employee_form.date_of_birth|add_class:"form-control"|attr:"type:date" }}
+                      <ul>
+                        {% for error in employee_form.date_of_birth.errors%}
+                          <li class="alert alert-danger">{{ error }}</li>
+                        {% endfor %}
+                      </ul>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="form-group">
+                  <div class="form-line">
+                      <label for="">Email Address</label>
+                      {{ user_form.email|add_class:"form-control" }}
+                      <ul>
+                        {% for error in user_form.email.errors%}
+                          <li class="alert alert-danger">{{ error }}</li>
+                        {% endfor %}
+                      </ul>
+                  </div>
+              </div>
+          </div>
+        </div>
+          <div class="row clearfix">
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <div class="form-line">
+                          <label for="{{ user_form.first_name.id_for_label }}">First Name</label>
+                          {{ user_form.first_name|add_class:"form-control" }}
+                          <ul>
+                            {% for error in user_form.first_name.errors%}
+                              <li class="alert alert-danger">{{ error }}</li>
+                            {% endfor %}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <div class="form-line">
+                          <label for="{{ user_form.last_name.id_for_label }}">Last Name</label>
+                          {{ user_form.last_name|add_class:"form-control" }}
+                          <ul>
+                            {% for error in user_form.last_name.errors%}
+                              <li class="alert alert-danger">{{ error }}</li>
+                            {% endfor %}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <div class="form-line">
+                          <label for="{{ user_form.county.id_for_label }}">County</label>
+                          {{ employee_form.county|add_class:"form-control" }}
+                          <ul>
+                            {% for error in employee_form.county.errors%}
+                              <li class="alert alert-danger">{{ error }}</li>
+                            {% endfor %}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row clearfix">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="form-line">
+                        <label for="{{ employee_form.address.id_for_label }}">Address</label>
+                        {{ employee_form.address|add_class:"form-control" }}
+                        <ul>
+                          {% for error in employee_form.address.errors%}
+                            <li class="alert alert-danger">{{ error }}</li>
+                          {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="form-line">
+                        <label for="{{ user_form.phone.id_for_label }}">Phone Number</label>
+                        {{ employee_form.phone|add_class:"form-control"|attr:"number" }}
+                        <ul>
+                          {% for error in employee_form.phone.errors%}
+                            <li class="alert alert-danger">{{ error }}</li>
+                          {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <!-- END OF Demographic INFORMATION  -->
+          <!-- Start of Dependants INFORMATION -->
+          <div class="row clearfix">
+            <div class="header">
+                <h2>DEPENDANT / EMERGENCY INFORMATION</h2>
+            </div>
+
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <div class="form-line">
+                          <label for="{{ employee_form.dependant_name.id_for_label }}">Full Name </label>
+                          {{ employee_form.dependant_name|add_class:"form-control" }}
+                          <ul>
+                            {% for error in employee_form.dependant_name.errors%}
+                              <li class="alert alert-danger">{{ error }}</li>
+                            {% endfor %}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <div class="form-line">
+                          <label for="{{ employee_form.dependant_contact.id_for_label }}">Contacts </label>
+                          {{ employee_form.dependant_contact|add_class:"form-control" }}
+                          <ul>
+                            {% for error in employee_form.dependant_contact.errors%}
+                              <li class="alert alert-danger">{{ error }}</li>
+                            {% endfor %}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <div class="form-line">
+                          <label for="{{ employee_form.dependant_relationship.id_for_label }}">Relationship</label>
+                          {{ employee_form.dependant_relationship|add_class:"form-control" }}
+                          <ul>
+                            {% for error in employee_form.dependant_relationship.errors%}
+                              <li class="alert alert-danger">{{ error }}</li>
+                            {% endfor %}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="row clearfix">
+            <div class="col-md-5">
+              <div class="form-group">
+                  <div class="form-line">
+                      <label for="{{ employee_form.dependant_relationship.id_for_label }}">Email Address</label>
+                      {{ employee_form.kin_email|add_class:"form-control" }}
+                      <ul>
+                        {% for error in  employee_form.kin_email.errors%}
+                          <li class="alert alert-danger">{{ error }}</li>
+                        {% endfor %}
+                      </ul>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <!-- END of Dependants INFORMATION -->
+          <!-- Start of Work INFORMATION -->
+          <div class="row clearfix">
+            <div class="header">
+                <h2>WORK INFORMATION</h2>
+            </div>
+
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <div class="form-line">
+                          <label for="{{ employee_form.current_position.id_for_label }}">Current Position</label>
+                          {{ employee_form.position }}
+                          <ul>
+                            {% for error in employee_form.position.errors%}
+                              <li class="alert alert-danger">{{ error }}</li>
+                            {% endfor %}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-5">
+                  <div class="form-group">
+                      <div class="form-line">
+                          <label for="{{ user_form.department.id_for_label }}">Department</label>
+                          {{ employee_form.department }}
+                          <ul>
+                            {% for error in employee_form.department.errors%}
+                              <li class="alert alert-danger">{{ error }}</li>
+                            {% endfor %}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-3">
+                  <div class="form-group">
+                      <div class="form-line">
+                          <label for="{{ user_form.password.id_for_label }}">Salary</label>
+                          {{ employee_form.salary|add_class:"form-control" }}
+                          <ul>
+                            {% for error in employee_form.salary.errors%}
+                              <li class="alert alert-danger">{{ error }}</li>
+                            {% endfor %}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+
+
+          </div>
+          <div class="row clearfix">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <div class="form-line">
+                        <label for="{{ user_form.password.id_for_label }}">Password</label>
+                        {{ user_form.password|add_class:"form-control" }}
+                        <ul>
+                          {% for error in user_form.password.errors%}
+                            <li class="alert alert-danger">{{ error }}</li>
+                          {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 pull-right">
+                <input type="submit" class="btn btn-primary btn-lg m-l-15 waves-effect" value="ADD NEW EMPLOYEE">
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+{% endblock %}

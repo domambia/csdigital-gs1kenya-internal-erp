@@ -1,0 +1,54 @@
+{% extends "layout/main_layout.html" %}
+
+{% block content %}
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2 class="card body">
+                  <span><a class="btn btn-primary" href = "{% url 'leave:add_leave' %}" >ADD LEAVE</a></span>
+                  <span><a class="btn btn-primary" href = "{% url 'leave:apply_leave' %}">APPLY LEAVE</a></span>
+                  <span><a class="btn btn-primary" href = "{% url 'leave:applyleave_list' %}">APPLIED LEAVES</a></span>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr>
+                                <th>Leave Name</th>
+                                <th>Description </th>
+                                <th>Leave Period(Weeks)</th>
+                                <th>Created On</th>
+                                <th style="text-align:center;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if leaves %}
+                              {% for leave in leaves %}
+                                  <tr>
+                                      <td>{{ leave.name }}</td>
+                                      <td>{{ leave.description }}</td>
+                                      <td>{{ leave.period }}</td>
+                                      <td>{{ leave.created_on }}</td>
+                                      <td >
+                                          <span> <a href = "{% url 'leave:leave_detail' pk=leave.pk %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>
+                                          <span> <a href = "{% url 'leave:leave_edit' pk=leave.pk %}"><i class="material-icons">edit</i></a> </span>
+                                          <span> <a href = "{% url 'leave:leave_delete' pk=leave.pk %}"><i class="material-icons" style = "color:#cc0000;">delete</i></a> </span>
+                                      </td>
+                                  </tr>
+                              {% endfor %}
+                            {% else %}
+
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Exportable Table -->
+
+{% endblock %}
