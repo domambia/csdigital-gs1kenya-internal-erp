@@ -10,7 +10,6 @@ urlpatterns = [
             url(r'^edit/(?P<pk>\d+)/$', login_required(views.UpdateDepartmentView.as_view()), name = "edit_department" ),
             url(r'^show/(?P<pk>\d+)/$', login_required(views.DetailDepartmentView.as_view()), name = "show_department" ),
             url(r'^delete/(?P<pk>\d+)/$', login_required(views.DeleteDepartmentView.as_view()), name = "delete_department" ),
-            # position
 
             url(r'^positions/add/', login_required(views.CreatePositionView.as_view()), name = "add_position" ),
             url(r'^positions/$', login_required(views.ListPositionView.as_view()), name = "list_position" ),
