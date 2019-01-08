@@ -21,6 +21,7 @@ def index(request):
 """Add New Employee Information
 This includes the login Information
 """
+@login_required
 def add_employee(request):
     u = User.objects.all()
 
