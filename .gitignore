@@ -1,6 +1,6 @@
 setup.cnf
 /env/
-/accounts/__pycache__/
+*__pycache__/
 /hrm/__pycache__/
 /department/__pycache__/
 
