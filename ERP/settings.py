@@ -72,6 +72,9 @@ DATABASES = {
         'OPTIONS': {
          'init_command': 'SET default_storage_engine=INNODB',
          },
+         'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
          'NAME': 'gs1',
          'USER': 'root',
          'PASSWORD': 'root',
@@ -85,7 +88,7 @@ DATABASES = {
 
 PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.Argon2PasswordHasher',
-    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher', 
     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
     'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
 ]

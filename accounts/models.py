@@ -4,7 +4,6 @@ from departments.models import Position, Department
 
 # Create your models here.
 
-
 class Employee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     # additional attributes for the employee

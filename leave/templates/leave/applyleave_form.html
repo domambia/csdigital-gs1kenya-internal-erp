@@ -18,6 +18,37 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <div class="form-line">
+                        <label for="{{ form.employee.id_for_label }}">Employee's Name</label>
+                        {{ form.employee }}
+                        <ul>
+                          {% for error in form.employee.errors%}
+                            <li class="alert alert-danger">{{ error }}</li>
+                          {% endfor %}
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="form-line">
+                        <label for="{{ form.leave.id_for_label }}">Which Type of Leave</label>
+                        {{ form.leave }}
+                        <ul>
+                          {% for error in form.leave.errors%}
+                            <li class="alert alert-danger">{{ error }}</li>
+                          {% endfor %}
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+          </div>
+        <div class="row clearfix">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <div class="form-line">
                         <label for="{{ user_form.first_name.id_for_label }}">Start Date</label>
                         {{ form.start_date|add_class:"form-control datepciker"}}
                         <ul>
@@ -29,10 +60,10 @@
                     </div>
                 </div>
             </div>
-              <div class="col-md-6">
+              <div class="col-md-4">
                   <div class="form-group">
                       <div class="form-line">
-                          <label for="{{ user_form.first_name.id_for_label }}">End Date</label>
+                          <label for="{{ user_form.first_name.id_for_label }}">End Date(Inclusive)</label>
                           {{ form.end_date|add_class:"form-control" }}
                           <ul>
                             {% for error in form.description.errors%}
@@ -42,16 +73,30 @@
                       </div>
                   </div>
               </div>
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <div class="form-line">
+                          <label for="{{ user_form.first_name.id_for_label }}">Resume Duty On</label>
+                          {{ form.resume_date|add_class:"form-control" }}
+                          <ul>
+                            {% for error in form.resume_date.errors%}
+                              <li class="alert alert-danger">{{ error }}</li>
+                            {% endfor %}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
 
           </div>
-          <div class="row clearfix">
+        
+         <div class="row clearfix">
             <div class="col-md-6">
                 <div class="form-group">
                     <div class="form-line">
-                        <label for="{{ form.period.id_for_label }}">Type of Leave</label>
-                        {{ form.leave }}
+                        <label for="{{ form.department.id_for_label }}">Department/ Work Station</label>
+                        {{ form.department }}
                         <ul>
-                          {% for error in form.leave.errors%}
+                          {% for error in form.department.errors%}
                             <li class="alert alert-danger">{{ error }}</li>
                           {% endfor %}
                         </ul>
@@ -63,10 +108,10 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <div class="form-line">
-                        <label for="{{ form.period.id_for_label }}">Employee's Name</label>
-                        {{ form.employee }}
+                        <label for="{{ form.home_phone.id_for_label }}">Employee's Name</label>
+                        {{ form.home_phone }}
                         <ul>
-                          {% for error in form.employee.errors%}
+                          {% for error in form.home_phone.errors%}
                             <li class="alert alert-danger">{{ error }}</li>
                           {% endfor %}
                         </ul>
@@ -75,7 +120,6 @@
                 </div>
             </div>
           </div>
-
           <div class="row clearfix">
             <div class="col-md-4 pull-right">
                 <input type="submit" class="btn btn-primary btn-lg m-l-15 waves-effect" value="submit">
