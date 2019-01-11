@@ -1,4 +1,9 @@
 setup.cnf
 env/
 *__pycache__/
+accounts/__pycache__/
+departments/__pycache__/
+leave/__pycache__/
+hrm/__pycache__/
+homePage/__pycache__
 
