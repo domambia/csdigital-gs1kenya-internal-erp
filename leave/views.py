@@ -35,7 +35,10 @@ class LeaveDeleteView(DeleteView):
 
 
 class CreateApplyLeaveView(CreateView):
-    fields = ('start_date', 'end_date', 'employee', 'leave')
+    fields = (
+            'start_date', 'resume_date', 'home_phone','person_taking_charge', 'leave', 'employee',
+            'end_date',
+        )
     model = ApplyLeave
     template_name = "leave/applyleave_form.html"
 

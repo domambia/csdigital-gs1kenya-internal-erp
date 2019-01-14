@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='applyleave',
             name='department',
-            field=models.ForeignKey(default=0, on_delete=django.db.models.deletion.CASCADE, related_name='department', to='departments.Department'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='department', to='departments.Department'),
         ),
         migrations.AddField(
             model_name='applyleave',
@@ -26,11 +26,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='applyleave',
             name='person_taking_charge',
-            field=models.ForeignKey(default='hr', on_delete=django.db.models.deletion.CASCADE, related_name='person_charge', to='accounts.Employee'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='person_charge', to='accounts.Employee'),
         ),
         migrations.AddField(
             model_name='applyleave',
             name='resume_date',
-            field=models.DateField(default='1/1/2018'),
+            field=models.DateField(),
         ),
     ]

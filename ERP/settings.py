@@ -142,7 +142,7 @@ LOGIN_URL = 'accounts/user_login'
 
 
 # ALLOWED_HOSTS HOSTS
-ALLOWED_HOSTS = ['192.168.0.18', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.1.23']
 
 #Bootstrap
 BOOTSTRAP4 = {

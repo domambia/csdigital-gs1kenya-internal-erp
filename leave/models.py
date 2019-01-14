@@ -20,12 +20,9 @@ class Leave(models.Model):
 class ApplyLeave(models.Model):
     start_date = models.DateField()
     status = models.IntegerField(default = 0)
-
     end_date = models.DateField()
-    resume_date = models.DateField(default = "1/1/2018")
-    person_taking_charge = models.ForeignKey(Employee, related_name ="person_charge",
-                                        on_delete = models.CASCADE, default ="hr"
-                                    ) # From here take his phone number and other details 
+    resume_date = models.DateField()
+    person_taking_charge = models.CharField(default="HOD", max_length=50) # From here take his phone number and other details 
     employee = models.ForeignKey(Employee, related_name = "employees",
                                         on_delete = models.CASCADE
                                 )

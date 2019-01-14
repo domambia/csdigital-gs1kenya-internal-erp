@@ -10,7 +10,7 @@
 {% block content %}
   <div class="card">
     <div class="body">
-          <span><a class="btn btn-primary" href = "{% url 'leave:applyleave_list' %}">APPLIED LEAVES</a></span>
+          <span><a class="btn btn-primary" href = "{% url 'leave:applyleave_list' %}">BACK</a></span>
       <p> </p>
       <form class="form" action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
@@ -50,9 +50,9 @@
                 <div class="form-group">
                     <div class="form-line">
                         <label for="{{ user_form.first_name.id_for_label }}">Start Date</label>
-                        {{ form.start_date|add_class:"form-control datepciker"}}
+                        {{ form.start_date|add_class:"form-control "}}
                         <ul>
-                          {% for error in form.name.errors%}
+                          {% for error in form.start_date.errors%}
                             <li class="alert alert-danger">{{ error }}</li>
                           {% endfor %}
                         </ul>
@@ -63,21 +63,8 @@
               <div class="col-md-4">
                   <div class="form-group">
                       <div class="form-line">
-                          <label for="{{ user_form.first_name.id_for_label }}">End Date(Inclusive)</label>
-                          {{ form.end_date|add_class:"form-control" }}
-                          <ul>
-                            {% for error in form.description.errors%}
-                              <li class="alert alert-danger">{{ error }}</li>
-                            {% endfor %}
-                          </ul>
-                      </div>
-                  </div>
-              </div>
-              <div class="col-md-4">
-                  <div class="form-group">
-                      <div class="form-line">
-                          <label for="{{ user_form.first_name.id_for_label }}">Resume Duty On</label>
-                          {{ form.resume_date|add_class:"form-control" }}
+                          <label for="{{ user_form.resume_date.id_for_label }}">End Date(Inclusive)</label>
+                          {{ form.end_date|add_class:"form-control"  }}
                           <ul>
                             {% for error in form.resume_date.errors%}
                               <li class="alert alert-danger">{{ error }}</li>
@@ -86,30 +73,26 @@
                       </div>
                   </div>
               </div>
-
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <div class="form-line">
+                          <label for="{{ user_form.first_name.id_for_label }}">Resume Date(Inclusive)</label>
+                          {{ form.resume_date|add_class:"form-control"  }}
+                          <ul>
+                            {% for error in form.resume_date.errors%}
+                              <li class="alert alert-danger">{{ error }}</li>
+                            {% endfor %}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
           </div>
-        
          <div class="row clearfix">
             <div class="col-md-6">
                 <div class="form-group">
                     <div class="form-line">
-                        <label for="{{ form.department.id_for_label }}">Department/ Work Station</label>
-                        {{ form.department }}
-                        <ul>
-                          {% for error in form.department.errors%}
-                            <li class="alert alert-danger">{{ error }}</li>
-                          {% endfor %}
-                        </ul>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="form-group">
-                    <div class="form-line">
-                        <label for="{{ form.home_phone.id_for_label }}">Employee's Name</label>
-                        {{ form.home_phone }}
+                        <label for="{{ form.home_phone.id_for_label }}">Home Phone Number(For any communicatons)</label>
+                        {{ form.home_phone |add_class:"form-control" }}
                         <ul>
                           {% for error in form.home_phone.errors%}
                             <li class="alert alert-danger">{{ error }}</li>
@@ -119,7 +102,23 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="form-line">
+                        <label for="{{ form.person_taking_charge.id_for_label }}">Person Taking In Charge</label>
+                        {{ form.person_taking_charge|add_class:"form-control" }}
+                        <ul>
+                          {% for error in form.person_taking_charge.errors%}
+                            <li class="alert alert-danger">{{ error }}</li>
+                          {% endfor %}
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
           </div>
+        
           <div class="row clearfix">
             <div class="col-md-4 pull-right">
                 <input type="submit" class="btn btn-primary btn-lg m-l-15 waves-effect" value="submit">
