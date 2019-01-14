@@ -1,0 +1,39 @@
+{% extends 'layout/main_layout.html' %}
+{% load widget_tweaks %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+{{ employee_form.media }}            {# Adds date-picker required JS and CSS #}
+
+{% block content %}
+  <div class="jumbotron card">
+    <a href="{% url 'target:target_list' %}" class="btn btn-primary">BACK</a>
+    <a href="{% url 'target:target_delete' pk=target.pk %}" class="btn btn-danger">DELETE</a>
+      <div class="body">
+        <div class="row clearfix jumbotron">
+            <div class="col-md-6 ">
+                Employee Name <br> <br>{{ target.employee.user.first_name }} &nbsp; {{ target.employee.user.first_name }}
+            </div>
+            <div class="col-md-6 ">
+                Which Target ? <br> <br> {{ target.name }}
+            </div>
+        </div>
+
+        <div class="row clearfix jumbotron" >
+            <div class="col-md-4">
+              Started From : <br> <br>{{ target.start_date }}
+            </div>
+            <div class="col-md-4">
+              Started From : <br> <br>{{ target.end_date }}
+            </div>
+            <div class="col-md-4">
+              Status : <br> <br>{{ target.status }}
+            </div>
+        </div>
+
+      </div>
+
+
+  </div>
+
+{% endblock %}

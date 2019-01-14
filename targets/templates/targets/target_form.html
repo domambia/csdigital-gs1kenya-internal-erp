@@ -1,0 +1,88 @@
+{% extends 'layout/main_layout.html' %}
+{% load widget_tweaks %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+{{ form.media }}            {# Adds date-picker required JS and CSS #}
+{% block header %}
+{% endblock%}
+{% block content %}
+  <div class="card">
+    <h3> Create Target </h3>
+    <div class="body">
+      <h2><a class="btn btn-primary" href = "{% url 'target:target_list' %}" >BACK</a></h2>
+
+      <form class="form" action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+          <div class="row clearfix">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <div class="form-line">
+                        <label for="{{ form.employee.id_for_label }}">Employee's Name</label>
+                        {{ form.employee|add_class:"form-control" }}
+                        <ul>
+                          {% for error in form.employee.errors%}
+                            <li class="alert alert-danger">{{ error }}</li>
+                          {% endfor %}
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+              <div class="col-md-8">
+                  <div class="form-group">
+                      <div class="form-line">
+                          <label for="{{ form.name.id_for_label }}">Give a target(Target Name)</label>
+                          {{ form.name|add_class:"form-control" }}
+                          <ul>
+                            {% for error in form.name.errors%}
+                              <li class="alert alert-danger">{{ error }}</li>
+                            {% endfor %}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+
+          </div>
+
+          <div class="row clearfix">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <div class="form-line">
+                        <label for="{{ form.start_date.id_for_label }}">Target Starting Date</label>
+                        {{ form.start_date|add_class:"form-control" }}
+                        <ul>
+                          {% for error in form.start_date.errors%}
+                            <li class="alert alert-danger">{{ error }}</li>
+                          {% endfor %}
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+              <div class="col-md-8">
+                  <div class="form-group">
+                      <div class="form-line">
+                          <label for="{{ form.end_date.id_for_label }}">Target ending Date</label>
+                          {{ form.end_date|add_class:"form-control" }}
+                          <ul>
+                            {% for error in form.end_date.errors%}
+                              <li class="alert alert-danger">{{ error }}</li>
+                            {% endfor %}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+
+          </div>
+          <div class="row clearfix">
+            <div class="col-md-4 pull-right">
+                <input type="submit" class="btn btn-primary btn-lg m-l-15 waves-effect" value="submit">
+            </div>
+          </div>
+          </form>
+      </div>
+
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "layout/main_layout.html" %}
+
+{% block content %}
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2 class="card body">
+                  <span><a class="btn btn-primary" href = "{% url 'target:target_create' %}">ASSIGN TARGET</a></span>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr>
+                                <th>Employee</th>
+                                <th>Target </th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th style="text-align:center;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if targets %}
+                              {% for target in targets %}
+                                  <tr>
+                                      <td>{{ target.employee }}</td>
+                                      <td>{{ target.name }}</td>
+                                      <td>{{ target.start_date }}</td>
+                                      <td>{{ target.end_date }}</td>
+                                      <td >
+                                          <span> <a href = "{% url 'target:target_detail' pk=target.pk %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>
+                                          <span> <a href = "{% url 'target:target_edit' pk=target.pk %}"><i class="material-icons">edit</i></a> </span>
+                                          <span> <a href = "{% url 'target:target_delete' pk=target.pk %}"><i class="material-icons" style = "color:#cc0000;">delete</i></a> </span>
+                                      </td>
+                                  </tr>
+                              {% endfor %}
+                            {% else %}
+
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Exportable Table -->
+
+{% endblock %}

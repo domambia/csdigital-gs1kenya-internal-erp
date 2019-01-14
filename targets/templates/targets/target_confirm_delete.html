@@ -1,0 +1,13 @@
+{% extends 'layout/main_layout.html' %}
+{% load widget_tweaks %}
+{% block content %}
+  <div class="jumbotron card">
+      REMOVE TARGET
+      <form method="POST">
+        {% csrf_token %}
+        Are you sure you want remove {{target.name }} ?
+        <input class="btn btn-danger" type="submit" value="YES" /> OR <a href="{% url 'target:target_list'%}" class="btn btn-primary">NO</a>
+      </form>
+  </div>
+
+{% endblock %}
