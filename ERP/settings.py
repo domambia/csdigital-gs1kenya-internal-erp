@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'homePage',
     'leave',
     'departments',
+    'targets',
 ]
 
 MIDDLEWARE = [

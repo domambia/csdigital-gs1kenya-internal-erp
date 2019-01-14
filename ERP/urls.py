@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^departments/', include('departments.urls'), name = "departments"),
     url(r'^hrm/', include('hrm.urls'), name = "hrm"),
     url(r'^accounts/', include('accounts.urls')),
+    url(r'^targets/', include('targets.urls')),
 ]
