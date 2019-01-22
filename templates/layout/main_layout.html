@@ -228,36 +228,6 @@
                       </a>
                   </li>
                   <li>
-                      <a href="{% url 'leave:leave_list' %}">
-                          <i class="material-icons">person</i>
-                          <span>LEAVES</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{% url 'accounts:employees' %}">
-                          <i class="material-icons">person</i>
-                          <span>EMPLOYEES</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{% url 'departments:list_department' %}">
-                          <i class="material-icons">person</i>
-                          <span>DEPARTMENT</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{% url 'departments:list_position' %}">
-                          <i class="material-icons">person</i>
-                          <span>JOB POSITION</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{% url 'target:target_list'%}">
-                          <i class="material-icons">home</i>
-                          <span>TARGET</span>
-                      </a>
-                  </li>
-                  <li>
                       <a href="{% url 'index'%}">
                           <i class="material-icons">home</i>
                           <span>Back to Panel</span>
@@ -285,7 +255,65 @@
                   <h2>{% block header %} {% endblock%}</h2>
               </div>
 
-
+            <!-- Widgets -->
+            <div class="row clearfix">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-pink hover-expand-effect">
+                        <a href="{% url 'target:target_list'%}">
+                        <div class="icon">
+                            <i class="material-icons">center_focus_weak</i>
+                        </div>
+                        <div class="content">
+                                
+                            <div class="text">TARGETS</div>
+                            <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20"></div>
+                        </div>
+                    </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-cyan hover-expand-effect">
+                    <a href="{% url 'leave:leave_list' %}">
+                        <div class="icon">
+                            <i class="material-icons">all_out</i>
+                        </div>
+                        <div class="content">
+                                
+                            <div class="text">LEAVES</div>
+                            <div class="number count-to" data-from="0" data-to="257" data-speed="1000" data-fresh-interval="20"></div>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-light-green hover-expand-effect">
+                        <a href="{% url 'departments:list_department' %}">
+                        <div class="icon">
+                            <i class="material-icons">forum</i>
+                        </div>
+                        <div class="content">
+                           
+                            <div class="text">DEPARTMENTS</div>
+                            <div class="number count-to" data-from="0" data-to="243" data-speed="1000" data-fresh-interval="20"></div>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-orange hover-expand-effect">
+                        <a href="{% url 'accounts:employees' %}">
+                        <div class="icon">
+                            <i class="material-icons">person_add</i>
+                        </div>
+                        <div class="content">
+                            <div class="text">EMPLOYEES</div>
+                            <div class="number count-to" data-from="0" data-to="1225" data-speed="1000" data-fresh-interval="20"></div>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Widgets -->
   {% block content %}
 
   {% endblock %}
@@ -346,7 +374,7 @@
     <!-- Custom Js -->
     <script src="{% static 'js/admin.js' %}"></script>
 
-      <script src="{% static 'js/pages/tables/jquery-datatable.js' %}"></script>
+      <script src="{% static 'js/pages/forms/basic-form-element.js' %}"></script>
 </body>
 
 </html>

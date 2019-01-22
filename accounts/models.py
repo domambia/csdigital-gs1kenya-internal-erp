@@ -1,8 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 from departments.models import Position, Department
+from helpers.help import get_country
 
-# Create your models here.
+
 
 class Employee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -14,7 +15,7 @@ class Employee(models.Model):
     next_of_kin_name = models.CharField(max_length=60, blank=True)
     # more
     kin_email = models.CharField(max_length=100, blank=True)
-    county = models.CharField(max_length=100,  blank=True)
+    county = models.CharField(max_length=100,  blank=True, choices = get_country(), default = "No country")
     next_of_kin_phone = models.CharField(max_length=20, blank=True)
 
     # Dependants info
@@ -35,3 +36,5 @@ class Employee(models.Model):
     # def get_absolute_url(self):
     #
     #     return reverse("accounts:list", {'pk': self.pk })
+
+

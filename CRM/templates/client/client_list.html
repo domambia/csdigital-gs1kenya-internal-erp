@@ -1,0 +1,59 @@
+{% extends "layout/crm_layout.html" %}
+{% block content %}
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card body">
+            <div class="header">
+                <h2 class="card body">
+                  <span><a class="btn btn-primary" href = "{% url 'CRM:create_client' %}" >ADD CLIENT</a></span>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Location</th>
+                                <th>Director Details</th>
+                                <th>Category</th>
+                                <th>Sector</th>
+                                <th>Nature of Business</th>
+                                <th>Date of Issues</th>
+                                <th style="text-align:center;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if clients %}
+                              {% for client in clients %}
+                                  <tr>
+                                      <td>{{ client.company_name }}</td>
+                                      <td>{{ client.company_phone }}</td>
+                                      <td>{{ client.physical_location }}</td>
+                                      <td>{{ client.director_info }}</td>
+                                      <td>{{ client.category }}</td>
+                                      <td>{{ client.sector }}</td>
+                                      <td>{{ client.nature_of_business }}</td>
+                                      <td>{{ client.date_of_issue }}</td>
+                                      <td>
+                                          <span> <a href = "{% url 'CRM:list_client'%}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>
+                                          <span> <a href = "{% url 'CRM:list_client' %}"><i class="material-icons">edit</i></a> </span>
+                                          <span> <a href = "{% url 'CRM:list_client' %}"><i class="material-icons" style = "color:#cc0000;">delete</i></a> </span>
+                                      </td>
+                                  </tr>
+                              {% endfor %}
+                            {% else %}
+
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Exportable Table -->
+
+{% endblock %}

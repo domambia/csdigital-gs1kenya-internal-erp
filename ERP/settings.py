@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     'leave',
     'departments',
     'targets',
+    'CRM',
+    'helpers'
 ]
 
 MIDDLEWARE = [

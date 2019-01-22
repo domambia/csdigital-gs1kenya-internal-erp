@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^hrm/', include('hrm.urls'), name = "hrm"),
     url(r'^accounts/', include('accounts.urls')),
     url(r'^targets/', include('targets.urls')),
+    url(r'^crm/', include('CRM.urls')),
 ]

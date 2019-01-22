@@ -7,9 +7,12 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import DetailView
+from django.core.mail import send_mail
+from helpers.help import get_country
 
 """List
 """
+
 @login_required
 def index(request):
 
@@ -24,7 +27,7 @@ This includes the login Information
 @login_required
 def add_employee(request):
     u = User.objects.all()
-
+    countries = get_country()
     user_form = UserForm(request.POST or None)
     employee_form = EmployeeForm(request.POST or None)
     if request.method == 'POST':
@@ -32,7 +35,6 @@ def add_employee(request):
         if user_form.is_valid() and employee_form.is_valid():
             user = user_form.save(commit = False)
             password = user_form.cleaned_data['password']
-            print(password)
             user.set_password(password)
             user.save()
 
@@ -40,15 +42,40 @@ def add_employee(request):
 
             employee.user = user
             employee.save()
+
+            ''' Sending an email to our new employees: 
+                This includes the user login credentials such as username or email and his/her password
+            '''
+            from_email = "hr@gs1kenya.org"
+            to_email = user_form.cleaned_data['email']
+            subject = "Welcome to GS1Kenya Organization"
+            message = """
+                    Dear {}.
+                    We warmly welcome to GS1Kenya oraganization. You has a power to work with us. With this email find your login 
+                    inforamtion to allow you access any information through our ERP system.
+
+                        Username: {},
+                        Password: {}
+                    If your have any concern please contact our Human  Resource at NextGen Mall 4th floor.
+                    Thank you,
+                    GS1Kenya Hiring Team.
+            """
+
+            send = send_mail(subject, message.format(user_form.cleaned_data['username'], user_form.cleaned_data['username'],user_form.cleaned_data['password'], from_email, [to_email]))
+            if send:
+                print("Recruited a new Employee!!!!! Send the Email")
+            else:
+                print("Email Not Sent")
+
             return HttpResponseRedirect(reverse('hrm:hrm_index'))
         else:
             print(user_form.errors)
             print(employee_form.errors)
             return render(request, "employee/register.html",
-                                {'user_form': user_form, 'employee_form': employee_form,})
+                                {'user_form': user_form, 'employee_form': employee_form, "countries": countries,})
 
     return render(request, "employee/register.html",
-                        {'user_form': user_form, 'employee_form': employee_form,})
+                        {'user_form': user_form, 'employee_form': employee_form, "countries": countries,})
 
 
 """LOGIN: All User
