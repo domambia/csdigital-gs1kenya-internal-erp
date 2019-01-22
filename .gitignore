@@ -1,5 +1,5 @@
 setup.cnf
-env/
+env/*
 *__pycache__/
 accounts/__pycache__/
 departments/__pycache__/
