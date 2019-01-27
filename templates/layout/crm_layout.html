@@ -24,11 +24,11 @@
     <link href="{% static 'plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css' %}" rel="stylesheet">
     <!-- Animation Css -->
     <link href="{% static 'plugins/animate-css/animate.css' %}" rel="stylesheet" />
-    <link href="{% static 'plugins/morrisjs/morris.css' %}" rel="stylesheet" />
+  
     <!-- Custom Css -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
-    <link href="{% static 'css/all-themes.css' %}" rel="stylesheet" />
-    <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+
+  <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}">
 </head>
 
 <body>
@@ -219,22 +219,45 @@
           <!-- #User Info -->
           <!-- Menu -->
           <div class="menu">
-              <ul class="list">
-                  <li class="header">HRM EMPLOYEE</li>
-                  <li class="active">
-                      <a href="{% url  'hrm:hrm_index' %}">
-                          <i class="material-icons">home</i>
-                          <span>DASHBOARD</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{% url 'index'%}">
-                          <i class="material-icons">home</i>
-                          <span>Back to Panel</span>
-                      </a>
-                  </li>
-
-              </ul>
+            <ul class="list">
+                <li class="active">
+                    <a href="{% url  'CRM:index' %}">
+                        <i class="material-icons">apps</i>
+                        <span>DASHBOARD</span>
+                    </a>
+                </li>
+                <li class="active">
+                  <a href="{% url  'CRM:list_client' %}">
+                      <i class="material-icons">people</i>
+                      <span>CLIENTS</span>
+                  </a>
+              </li>
+                <li class="active">
+                  <a href="{% url  'CRM:list_supplier' %}">
+                      <i class="material-icons">local_shipping</i>
+                      <span>SUPPLIERS</span>
+                  </a>
+              </li>
+            </li>
+                <li class="active">
+                <a href="{% url  'CRM:list_feedback' %}">
+                    <i class="material-icons">feedback</i>
+                    <span>FEEDBACK</span>
+                </a>
+            </li>
+              <li class="active">
+                  <a href="{% url  'CRM:list_training' %}">
+                      <i class="material-icons">business</i>
+                      <span>TRAINING</span>
+                  </a>
+              </li>
+              <li class="active">
+                  <a href="{% url  'index' %}">
+                      <i class="material-icons">keyboard_return</i>
+                      <span>BACK TO PANEL</span>
+                  </a>
+              </li>
+            </ul>
           </div>
           <!-- #Menu -->
           <!-- Footer -->
@@ -255,70 +278,10 @@
                   <h2>{% block header %} {% endblock%}</h2>
               </div>
 
-            <!-- Widgets -->
-            <div class="row clearfix">
-                
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-cyan hover-expand-effect">
-                    <a href="{% url 'leave:leave_list' %}">
-                        <div class="icon">
-                            <i class="material-icons">all_out</i>
-                        </div>
-                        <div class="content">
-                                
-                            <div class="text">CLIENTS</div>
-                            <div class="number count-to" data-from="0" data-to="257" data-speed="1000" data-fresh-interval="20"></div>
-                        </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-light-green hover-expand-effect">
-                        <a href="{% url 'departments:list_department' %}">
-                        <div class="icon">
-                            <i class="material-icons">forum</i>
-                        </div>
-                        <div class="content">
-                           
-                            <div class="text">SUPPLIERS</div>
-                            <div class="number count-to" data-from="0" data-to="243" data-speed="1000" data-fresh-interval="20"></div>
-                        </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-orange hover-expand-effect">
-                        <a href="{% url 'accounts:employees' %}">
-                        <div class="icon">
-                            <i class="material-icons">person_add</i>
-                        </div>
-                        <div class="content">
-                            <div class="text">FEEDBACK</div>
-                            <div class="number count-to" data-from="0" data-to="1225" data-speed="1000" data-fresh-interval="20"></div>
-                        </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <div class="info-box bg-pink hover-expand-effect">
-                            <a href="{% url 'target:target_list'%}">
-                            <div class="icon">
-                                <i class="material-icons">center_focus_weak</i>
-                            </div>
-                            <div class="content">
-                                    
-                                <div class="text">TRAINING</div>
-                                <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20"></div>
-                            </div>
-                        </a>
-                        </div>
-                    </div>
-            </div>
-
-            <!-- #END# Widgets -->
   {% block content %}
 
   {% endblock %}
+
 
     <!-- Jquery Core Js -->
     <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
@@ -328,55 +291,64 @@
 
     <!-- Waves Effect Plugin Js -->
     <script src="{% static 'plugins/node-waves/waves.js' %}"></script>
-
-    <!-- Validation Plugin Js -->
-    <script src="{% static 'plugins/jquery-validation/jquery.validate.js' %}"></script>
-
-    <!-- Custom Js -->
-    <script src="{% static 'js/admin.js' %}"></script>
-    <script src="{% static 'js/pages/examples/sign-in.js' %}"></script>
-    <!-- Select Plugin Js -->
-    <script src="{% static 'plugins/bootstrap-select/js/bootstrap-select.js' %}"></script>
-
-    <!-- Slimscroll Plugin Js -->
-    <script src="{% static 'plugins/jquery-slimscroll/jquery.slimscroll.js' %}"></script>
-
-
-    <!-- Jquery CountTo Plugin Js -->
-    <script src="{% static 'plugins/jquery-countto/jquery.countTo.js' %}"></script>
-
-    <!-- Morris Plugin Js -->
-    <script src="{% static 'plugins/raphael/raphael.min.js' %}"></script>
-    <script src="{% static 'plugins/morrisjs/morris.js' %}"></script>
-
-    <!-- ChartJs -->
-    <script src="{% static 'plugins/chartjs/Chart.bundle.js' %}"></script>
-
-    <!-- Flot Charts Plugin Js -->
-    <script src="{% static 'plugins/flot-charts/jquery.flot.js' %}"></script>
-    <script src="{% static 'plugins/flot-charts/jquery.flot.resize.js' %}"></script>
-    <script src="{% static 'plugins/flot-charts/jquery.flot.pie.js' %}"></script>
-    <script src="{% static 'plugins/flot-charts/jquery.flot.categories.js' %}"></script>
-    <script src="{% static 'plugins/flot-charts/jquery.flot.time.js' %}"></script>
-
-    <!-- Sparkline Chart Plugin Js -->
-    <script src="{% static 'plugins/jquery-sparkline/jquery.sparkline.js' %}"></script>
-
-    <!-- Jquery DataTable Plugin Js -->
-    <script src="{% static 'plugins/jquery-datatable/jquery.dataTables.js' %}"></script>
-    <script src="{% static 'plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js' %}"></script>
-    <script src="{% static 'plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js' %}"></script>
-    <script src="{% static 'plugins/jquery-datatable/extensions/export/buttons.flash.min.js' %}"></script>
-    <script src="{% static 'plugins/jquery-datatable/extensions/export/jszip.min.js' %}"></script>
-    <script src="{% static 'plugins/jquery-datatable/extensions/export/pdfmake.min.js' %}"></script>
-    <script src="{% static 'plugins/jquery-datatable/extensions/export/vfs_fonts.js' %}"></script>
-    <script src="{% static 'plugins/jquery-datatable/extensions/export/buttons.html5.min.js' %}"></script>
-    <script src="{% static 'plugins/jquery-datatable/extensions/export/buttons.print.min.js' %}"></script>
-
-    <!-- Custom Js -->
-    <script src="{% static 'js/admin.js' %}"></script>
-
-      <script src="{% static 'js/pages/tables/jquery-datatable.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    
+    <script>
+        $( function() {
+            $( ".datepicker" ).datepicker();
+        } );
+    </script>
+        <!-- Waves Effect Plugin Js -->
+        <script src="{% static 'plugins/node-waves/waves.js' %}"></script>
+    
+        <!-- Validation Plugin Js -->
+        <script src="{% static 'plugins/jquery-validation/jquery.validate.js' %}"></script>
+    
+        <!-- Custom Js -->
+        <script src="{% static 'js/admin.js' %}"></script>
+        <script src="{% static 'js/pages/examples/sign-in.js' %}"></script>
+        <!-- Select Plugin Js -->
+        <script src="{% static 'plugins/bootstrap-select/js/bootstrap-select.js' %}"></script>
+    
+        <!-- Slimscroll Plugin Js -->
+        <script src="{% static 'plugins/jquery-slimscroll/jquery.slimscroll.js' %}"></script>
+    
+    
+        <!-- Jquery CountTo Plugin Js -->
+        <script src="{% static 'plugins/jquery-countto/jquery.countTo.js' %}"></script>
+    
+        <!-- Morris Plugin Js -->
+        <script src="{% static 'plugins/raphael/raphael.min.js' %}"></script>
+        <script src="{% static 'plugins/morrisjs/morris.js' %}"></script>
+    
+        <!-- ChartJs -->
+        <script src="{% static 'plugins/chartjs/Chart.bundle.js' %}"></script>
+    
+        <!-- Flot Charts Plugin Js -->
+        <script src="{% static 'plugins/flot-charts/jquery.flot.js' %}"></script>
+        <script src="{% static 'plugins/flot-charts/jquery.flot.resize.js' %}"></script>
+        <script src="{% static 'plugins/flot-charts/jquery.flot.pie.js' %}"></script>
+        <script src="{% static 'plugins/flot-charts/jquery.flot.categories.js' %}"></script>
+        <script src="{% static 'plugins/flot-charts/jquery.flot.time.js' %}"></script>
+    
+        <!-- Sparkline Chart Plugin Js -->
+        <script src="{% static 'plugins/jquery-sparkline/jquery.sparkline.js' %}"></script>
+    
+        <!-- Jquery DataTable Plugin Js -->
+        <script src="{% static 'plugins/jquery-datatable/jquery.dataTables.js' %}"></script>
+        <script src="{% static 'plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js' %}"></script>
+        <script src="{% static 'plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js' %}"></script>
+        <script src="{% static 'plugins/jquery-datatable/extensions/export/buttons.flash.min.js' %}"></script>
+        <script src="{% static 'plugins/jquery-datatable/extensions/export/jszip.min.js' %}"></script>
+        <script src="{% static 'plugins/jquery-datatable/extensions/export/pdfmake.min.js' %}"></script>
+        <script src="{% static 'plugins/jquery-datatable/extensions/export/vfs_fonts.js' %}"></script>
+        <script src="{% static 'plugins/jquery-datatable/extensions/export/buttons.html5.min.js' %}"></script>
+        <script src="{% static 'plugins/jquery-datatable/extensions/export/buttons.print.min.js' %}"></script>
+    
+        <!-- Custom Js -->
+        <script src="{% static 'js/admin.js' %}"></script>
+    
+          <script src="{% static 'js/pages/tables/jquery-datatable.js' %}"></script>
 </body>
 
 </html>

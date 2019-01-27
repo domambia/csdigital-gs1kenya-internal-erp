@@ -1,0 +1,12 @@
+{% extends 'layout/crm_layout.html' %}
+{% load widget_tweaks %}
+{% block content %}
+  <div class="jumbotron center-container card">
+      DELETE TRAINING EVENT
+      <form method="POST">
+        {% csrf_token %}
+        Are you sure you want delete {{traing.name }}  supplier?
+        <input class="btn btn-danger" type="submit" value="YES" /> OR <a href="{% url 'CRM:list_training'%}" class="btn btn-primary">NO</a>
+      </form>
+  </div>
+{% endblock %}

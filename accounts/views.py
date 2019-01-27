@@ -69,12 +69,10 @@ def add_employee(request):
 
             return HttpResponseRedirect(reverse('hrm:hrm_index'))
         else:
-            print(user_form.errors)
-            print(employee_form.errors)
-            return render(request, "employee/register.html",
+            return render(request, "accounts/register.html",
                                 {'user_form': user_form, 'employee_form': employee_form, "countries": countries,})
 
-    return render(request, "employee/register.html",
+    return render(request, "accounts/register.html",
                         {'user_form': user_form, 'employee_form': employee_form, "countries": countries,})
 
 
@@ -131,7 +129,7 @@ def employee_update(request, pk):
     if request.method == "POST":
         if employee_form.is_valid():
             employee = employee_form.save()
-            return HttpResponseRedirect(reverse('accounts:index'))
+            return HttpResponseRedirect(reverse('accounts:employees'))
     return render(request, "accounts/edit.html",
                     {'employee_form': employee_form,})
 

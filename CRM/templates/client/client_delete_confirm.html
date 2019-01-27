@@ -1,0 +1,13 @@
+{% extends 'layout/crm_layout.html' %}
+{% load widget_tweaks %}
+{% block content %}
+  <div class="jumbotron card">
+      DELETE CLIENT
+      <form method="POST">
+        {% csrf_token %}
+        Are you sure you want delete {{client.company_name }} ?
+        <input class="btn btn-danger" type="submit" value="YES" /> OR <a href="{% url 'CRM:list_client'%}" class="btn btn-primary">NO</a>
+      </form>
+  </div>
+
+{% endblock %}

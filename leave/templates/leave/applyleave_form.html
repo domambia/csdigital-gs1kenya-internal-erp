@@ -50,7 +50,7 @@
                 <div class="form-group">
                     <div class="form-line">
                         <label for="{{ user_form.first_name.id_for_label }}">Start Date</label>
-                        {{ form.start_date|add_class:"form-control "}}
+                        {{ form.start_date|add_class:"form-control datepicker"}}
                         <ul>
                           {% for error in form.start_date.errors%}
                             <li class="alert alert-danger">{{ error }}</li>
@@ -64,7 +64,7 @@
                   <div class="form-group">
                       <div class="form-line">
                           <label for="{{ user_form.resume_date.id_for_label }}">End Date(Inclusive)</label>
-                          {{ form.end_date|add_class:"form-control"  }}
+                          {{ form.end_date|add_class:"form-control datepicker"  }}
                           <ul>
                             {% for error in form.resume_date.errors%}
                               <li class="alert alert-danger">{{ error }}</li>
@@ -77,7 +77,7 @@
                   <div class="form-group">
                       <div class="form-line">
                           <label for="{{ user_form.first_name.id_for_label }}">Resume Date(Inclusive)</label>
-                          {{ form.resume_date|add_class:"form-control"  }}
+                          {{ form.resume_date|add_class:"form-control datepicker"  }}
                           <ul>
                             {% for error in form.resume_date.errors%}
                               <li class="alert alert-danger">{{ error }}</li>

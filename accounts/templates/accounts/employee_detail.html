@@ -1,19 +1,23 @@
-{% extends "employee/layout.html" %}
+{% extends "layout/main_layout.html" %}
 {% block content %}
-  <div class="card">
-      <div class="body">
+  <div class="card ">
+   
+      <div class="body jumbotron ">
+          <div class="helper-cls">
+              <a href="{% url 'accounts:employees' %}" class="btn btn-primary"><span style="color: orangered;">&larr;</span> BACK</a> 
+          </div> <br> <br>
             <div class="row clearfix">
               <div class="col-md-4">
                 <p >Username</p>
-                <p class="card body">{{ employee.user.username }}</p>
+                <p class=" body">{{ employee.user.username }}</p>
               </div>
               <div class="col-md-4">
                 <p >Email Address</p>
-                <p class="card body">{{ employee.user.email }}</p>
+                <p class=" body">{{ employee.user.email }}</p>
               </div>
               <div class="col-md-4">
                 <p >First Name</p>
-                <p class="card body">{{ employee.user.first_name }}</p>
+                <p class=" body">{{ employee.user.first_name }}</p>
               </div>
 
             </div>
@@ -21,15 +25,15 @@
             <div class="row clearfix">
               <div class="col-md-4">
                 <p >Last Name</p>
-                <p class="card body">{{ employee.user.last_name }}</p>
+                <p class=" body">{{ employee.user.last_name }}</p>
               </div>
               <div class="col-md-4">
                 <p >Address</p>
-                <p class="card body">{{ employee.address }}</p>
+                <p class=" body">{{ employee.address }}</p>
               </div>
               <div class="col-md-4">
                 <p >Phone Number</p>
-                <p class="card body">{{ employee.phone }}</p>
+                <p class=" body">{{ employee.phone }}</p>
               </div>
             </div
 
@@ -37,15 +41,15 @@
             <div class="row clearfix">
               <div class="col-md-4">
                 <p >County</p>
-                <p class="card body">{{ employee.county }}</p>
+                <p class=" body">{{ employee.county }}</p>
               </div>
               <div class="col-md-4">
                 <p >Currrent Position</p>
-                <p class="card body">{{ employee.current_position }}</p>
+                <p class=" body">{{ employee.position.name }}</p>
               </div>
               <div class="col-md-4">
                 <p >Department </p>
-                <p class="card body">{{ employee.department }}</p>
+                <p class=" body">{{ employee.department }}</p>
               </div>
 
             </div>
@@ -54,15 +58,15 @@
             <div class="row clearfix">
               <div class="col-md-4">
                 <p >Dependent/ Emergency Phone</p>
-                <p class="card body">{{ employee.dependant_contact }}</p>
+                <p class=" body">{{ employee.dependant_contact }}</p>
               </div>
               <div class="col-md-4">
                 <p >Dependent/ Emergency Name</p>
-                <p class="card body">{{ employee.dependant_name }}</p>
+                <p class=" body">{{ employee.dependant_name }}</p>
               </div>
               <div class="col-md-4">
                 <p >Dependent / Emergency Email Address </p>
-                <p class="card body">{{ employee.kin_email }}</p>
+                <p class=" body">{{ employee.kin_email }}</p>
               </div>
 
             </div>
@@ -71,11 +75,9 @@
             <div class="row clearfix">
               <div class="col-md-4">
                 <p >Salary</p>
-                <p class="card body">{{ employee.salary }}</p>
+                <p class=" body">{{ employee.salary }}</p>
               </div>
-              <div class="col-md-4  pull-right" style="margin-top: 4rem;">
-                <a href="{% url 'hrm:hrm_index' %}" class="btn btn-primary"><span style="color: orangered;">&larr;</span> BACK</a>
-              </div>
+              
             </div>
             <!--  END of Five -->
 

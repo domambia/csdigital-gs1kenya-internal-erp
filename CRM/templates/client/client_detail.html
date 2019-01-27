@@ -1,0 +1,92 @@
+{% extends 'layout/crm_layout.html' %}
+{% load widget_tweaks %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+{{ form.media }}            {# Adds date-picker required JS and CSS #}
+
+{% block content %}
+  <div class="jumbotron card custom-h">
+      <div class="helper_cls">
+        <a href="{% url 'CRM:list_client' %}" class="btn btn-primary">BACK</a>
+        <a href="{% url 'CRM:edit_client' pk=client.pk %}" class="btn btn-success">EDIT</a>
+      </div>
+      <div class="body jumbotron">
+        <div class="row clearfix">
+            <div class="col-md-6">
+                <h3 class="heading-1">Client Details</h3>
+                <div class="record">
+                    <div class="col-md-3">Name</div>
+                    <div class="col-md-8">{{ client.company_name }}</div>
+                </div>
+                <div class="record">
+                    <div class="col-md-3">Phone</div>
+                    <div class="col-md-8">{{ client.company_phone }} or ( {{ client.company_phone_alt }} )</div>
+                </div>
+                <div class="record">
+                    <div class="col-md-3">Location</div>
+                    <div class="col-md-8">{{ client.physical_location }}</div>
+                </div>
+
+                <div class="record">
+                    <div class="col-md-6">Director Information</div>
+                    <div class="col-md-6">{{ client.director_info}}</div>
+                </div>
+                <div class="record">
+                    <div class="col-md-3">Category</div>
+                    <div class="col-md-8">{{ client.category }}</div>
+                </div>
+                <div class="record">
+                    <div class="col-md-3">Sector</div>
+                    <div class="col-md-8">{{ client.sector }}</div>
+                </div>
+                <div class="record">
+                    <div class="col-md-3">Location</div>
+                    <div class="col-md-8">{{ client.nature_of_business  }}</div>
+                </div>
+                <div class="record">
+                    <div class="col-md-5">Date of issue</div>
+                    <div class="col-md-7">{{ client.date_of_issue  }}</div>
+                </div>
+               
+            </div>
+            <div class="col-md-6">
+                    <h3 class="heading-1">Client Documents</h3>
+                    <div class="record row">
+                        <div class="col-md-8">Cerficate of Id</div>      
+                        <div class="col-md-3"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i>  </div>
+                    </div>
+                    <div class="record row">
+                        <div class="col-md-8">Certificate of in Corporation</div>
+                        <div class="col-md-3"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i>  </div>
+                    </div> 
+                    
+                    <div class="record row">
+                        <div class="col-md-8">Company Certificate Pin</div>
+                        <div class="col-md-3"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i>  </div>
+                    </div> 
+                    <div class="record row">
+                        <div class="col-md-8">Copy of blank Cheque</div>
+                        <div class="col-md-3"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i>  </div>
+                    </div> 
+                    <div class="record row">
+                        <div class="col-md-8">Copy of KEBS Certificate</div>
+                        <div class="col-md-3"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i>  </div>
+                    </div> 
+                    <div class="record row">
+                        <div class="col-md-8">Director Pin Number</div>
+                        <div class="col-md-3"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i>  </div>
+                    </div> 
+                    <div class="record row">
+                        <div class="col-md-8">List of product Barcoded</div>
+                        <div class="col-md-3"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i>  </div>
+                    </div> 
+            </div>
+
+        </div>
+      </div>
+
+
+  </div>
+
+{% endblock %}

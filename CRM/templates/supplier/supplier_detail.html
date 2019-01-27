@@ -1,0 +1,70 @@
+{% extends 'layout/crm_layout.html' %}
+{% load widget_tweaks %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+{{ employee_form.media }}            {# Adds date-picker required JS and CSS #}
+
+{% block content %}
+  <div class="jumbotron card custom-h">
+    <div class="helper_cls">
+        <a href="{% url 'CRM:list_supplier' %}" class="btn btn-primary">BACK</a>
+        <a href="{% url 'CRM:edit_supplier' pk=supplier.pk %}" class="btn btn-success">EDIT</a>
+    </div>
+
+    <div class="body jumbotron">
+            <div class="row clearfix">
+                <div class="col-md-12 ">
+                    <div class="">
+                        <div class="col-md-3">Supplier Name </div>
+                        <div class="col-md-8">{{ supplier.name }}</div>
+                    </div>
+                    <div class="record">
+                        <div class="col-md-3">Country </div>
+                        <div class="col-md-8">{{ supplier.country }}</div>
+                    </div>
+                    <div class="record">
+                        <div class="col-md-3">website </div>
+                        <div class="col-md-8">{{ supplier.website }}</div>
+                    </div>
+        
+                    <div class="record">
+                        <div class="col-md-3">Phone </div>
+                        <div class="col-md-8">{{ supplier.phone }}</div>
+                    </div>
+                    <div class="record">
+                        <div class="col-md-3">Description </div>
+                        <div class="col-md-8">{{ supplier.description }}</div>
+                    </div>
+                </div>
+            </div>
+          </div>
+  </div>
+
+{% endblock %}
+
+
+<!-- 
+        <div class="col-md-12 ">
+            <div class="">
+                <div class="col-md-3">Supplier Name </div>
+                <div class="col-md-8">{{ supplier.name }}</div>
+            </div>
+            <div class="record">
+                <div class="col-md-3">Country </div>
+                <div class="col-md-8">{{ supplier.country }}</div>
+            </div>
+            <div class="record">
+                <div class="col-md-3">website </div>
+                <div class="col-md-8">{{ supplier.website }}</div>
+            </div>
+
+            <div class="record">
+                <div class="col-md-3">Phone </div>
+                <div class="col-md-8">{{ supplier.phone }}</div>
+            </div>
+            <div class="record">
+                <div class="col-md-3">Description </div>
+                <div class="col-md-8">{{ supplier.description }}</div>
+            </div>
+        </div> -->

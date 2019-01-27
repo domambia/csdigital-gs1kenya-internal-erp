@@ -8223,3 +8223,24 @@ html.ie11 .bs-searchbox .form-control {
   width: 90%; }
 
 /* CUSTOM CSS */
+
+.helper_cls{
+  margin-bottom: 2rem;
+  margin-left: 3rem;
+}
+.record{
+  margin-bottom: 1rem;
+}
+.heading-1{
+  text-align: left;
+  margin-bottom: 1rem;
+  letter-spacing: .2rem;
+}
+
+.padding-btm{
+  padding-bottom: 1rem;
+}
+
+.custom-h{
+  min-height: 80vh;
+}

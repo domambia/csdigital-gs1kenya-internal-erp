@@ -4,28 +4,30 @@
 {% bootstrap_css %}         {# Embed Bootstrap CSS #}
 {% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
 {{ employee_form.media }}            {# Adds date-picker required JS and CSS #}
-
+{% block header %}
+  <div class="card">
+      <h2 class="header pull-left">DEPARTMENT</h2>
+  </div>
+{% endblock%}
 {% block content %}
-  <div class="jumbotron card">
-    <a href="{% url 'departments:list_department' %}" class="btn btn-primary">BACK</a>
-    <a href="{% url 'departments:delete_department' pk=department.pk %}" class="btn btn-danger">DELETE</a>
-      <div class="body">
-        <div class="row clearfix">
-            <div class="col-md-6 jumbotron">
-                Department Name <br> <br>{{ department.name }}
-            </div>
-
-            <div class="col-md-6 jumbotron">
-                Department Abbreviations <br> <br> {{ department.initials }}
-            </div>
+  <div class="jumbotron card custom-h" >
+      <div class="helper-cls">
+        <a href="{% url 'departments:list_department' %}" class="btn btn-primary">BACK</a>
+        <a href="{% url 'departments:edit_department' pk=department.pk %}" class="btn btn-success">EDIT</a>
+      </div> <br> <br>
+      <div class="body jumbotron">
+        <div class="row  ">
+            <div class="col-md-3">Department Name </div>
+            <div class="col-md-6">{{ department.name }}</div>
         </div>
-
-        <div class="row clearfix">
-            <div class="col-md-6 jumbotron">
-              Started On: <br> <br>{{ department.created_on }}
-            </div>
+        <div class="row  ">
+            <div class="col-md-3">Department Initials </div>
+            <div class="col-md-6">{{ department.initials }}</div>
         </div>
-
+        <div class="row  ">
+            <div class="col-md-3">Created On </div>
+            <div class="col-md-6">{{ department.created_on }}</div>
+        </div>
       </div>
 
 

@@ -1,8 +1,12 @@
 {% extends 'layout/main_layout.html' %}
 {% load widget_tweaks %}
+{% block header %}
+  <div class="card">
+      <h2 class="header pull-left">DELETE DEPARTMENT</h2>
+  </div>
+{% endblock%}
 {% block content %}
   <div class="jumbotron card">
-      DELETE LEAVE
       <form method="POST">
         {% csrf_token %}
         Are you sure you want delete {{department.name }} ?

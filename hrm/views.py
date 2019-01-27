@@ -5,7 +5,5 @@ from accounts.models import Employee
 
 class IndexView(ListView):
     context_object_name = 'users'
-
     model = Employee
-
-    template_name = "hrm/index.html"
+    template_name = "hrm/dashboard.html"

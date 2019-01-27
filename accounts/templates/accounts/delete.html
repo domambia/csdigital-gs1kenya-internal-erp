@@ -4,13 +4,17 @@
 {% bootstrap_css %}         {# Embed Bootstrap CSS #}
 {% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
 {{ employee_form.media }}            {# Adds date-picker required JS and CSS #}
-
+{% block header %}
+  <div class="card">
+      <h2 class="header pull-left">DELETE EMPLOYEE</h2>
+  </div>
+{% endblock%}
 {% block content %}
-  <div class="jumbotron card">
+  <div class="jumbotron center-container card">
       <form method="POST">
         {% csrf_token %}
         Are you sure you want delete an empoyee by the name <span style = "color: #f1c000; ">"{{ employee.user.username }}"</span>  ?
-        <input class="btn btn-danger" type="submit" value="YES" /> OR <a href="{% url 'hrm:hrm_index'%}" class="btn btn-primary">NO</a>
+      </br> </br> </br> <input class="btn btn-danger" type="submit" value="YES" /> OR <a href="{% url 'hrm:hrm_index'%}" class="btn btn-primary">NO</a>
       </form>
   </div>
 
