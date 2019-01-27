@@ -4,5 +4,5 @@ from hrm import views
 app_name = "hrm"
 
 urlpatterns = [
-        url(r'^$', views.IndexView.as_view(), name = "hrm_index")
+        url(r'^$', views.index, name = "hrm_index")
     ]

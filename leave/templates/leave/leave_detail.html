@@ -3,29 +3,31 @@
 {% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
 {% bootstrap_css %}         {# Embed Bootstrap CSS #}
 {% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
-{{ employee_form.media }}            {# Adds date-picker required JS and CSS #}
-
+{{ form.media }}            {# Adds date-picker required JS and CSS #}
+{% block header %}
+  <div class="card">
+      <h2 class="header pull-left">HRM | DASHBOARD |> LEAVE</h2>
+  </div>
+{% endblock%}
 {% block content %}
-  <div class="jumbotron card">
-    <a href="{% url 'leave:leave_list' %}" class="btn btn-primary">BACK</a>
-    <a href="{% url 'leave:leave_delete' pk=leave.pk %}" class="btn btn-danger">DELETE</a>
+  <div class="jumbotron card custom-h">
+    <div class="helper_cls">
+        <a href="{% url 'leave:leave_list' %}" class="btn btn-primary">BACK</a>
+        <a href="{% url 'leave:leave_edit' pk=leave.pk %}" class="btn btn-success">EDIT</a>
+    </div>
       <div class="body">
-        <div class="row clearfix">
-            <div class="col-md-6 jumbotron">
-                Leave Name <br> <br>{{ leave.name }}
-            </div>
-
-            <div class="col-md-6 jumbotron">
-                Leave Period <br> <br> {{ leave.period }} weeks
-            </div>
-        </div>
-
-        <div class="row clearfix">
-            <div class="col-md-6 jumbotron">
-                Details: <br> <br>{{ leave.description }}
+        <div class="row clearfix jumbotron">
+            <div class="col-md-12">
+                <div class="record">
+                    <div class="col-md-3">Leave Name</div>
+                    <div class="col-md-8">{{ leave.name }}</div>
+                </div>
+                <div class="record">
+                    <div class="col-md-3">Descriptions</div>
+                    <div class="col-md-8">{{ leave.description }}</div>
+                </div>
             </div>
         </div>
-
       </div>
 
 

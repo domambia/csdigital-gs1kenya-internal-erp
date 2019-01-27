@@ -5,10 +5,12 @@
 {% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
 {{ form.media }}            {# Adds date-picker required JS and CSS #}
 {% block header %}
-
+  <div class="card">
+      <h2 class="header pull-left">HRM | DASHBOARD</h2>
+  </div>
 {% endblock%}
 {% block content %}
-  <div class="card">
+  <div class="card custom-h">
     <div class="body">
           <span><a class="btn btn-primary" href = "{% url 'leave:applyleave_list' %}">BACK</a></span>
       <p> </p>
