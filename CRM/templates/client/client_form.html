@@ -5,8 +5,8 @@
 {% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
 {{ form.media }}            {# Adds date-picker required JS and CSS #}
 {% block header %}
-  <div class="card">
-      <h2 class="header pull-left">CRM | CLIENTS / MEMBERS</h2>
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
+      <h2 class="pull-left">CRM | ADD CLIENTS / MEMBERS</h2>
   </div>
 {% endblock%}
 {% block content %}
@@ -17,13 +17,10 @@
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card custom-h">
-                        <div class="header">
-                            <h2>
-                                ADD CLIENT / MEMBER
-                            </h2>
-                        </div>
-                        
+                        <div class="body">
                         <span class="body" style="padding-left: 2rem;"><a class="btn btn-primary" href = "{% url 'CRM:list_client' %}" >BACK</a></span>
+
+                        </div>
                         <div class="body">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">

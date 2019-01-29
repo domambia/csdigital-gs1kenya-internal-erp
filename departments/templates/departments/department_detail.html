@@ -5,17 +5,17 @@
 {% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
 {{ employee_form.media }}            {# Adds date-picker required JS and CSS #}
 {% block header %}
-  <div class="card">
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
       <h2 class="header pull-left">HRM | DEPARTMENTS</h2>
   </div>
 {% endblock%}
 {% block content %}
-  <div class="jumbotron card custom-h" >
+  <div class="jumbotron" >
       <div class="helper-cls">
         <a href="{% url 'departments:list_department' %}" class="btn btn-primary">BACK</a>
         <a href="{% url 'departments:edit_department' pk=department.pk %}" class="btn btn-success">EDIT</a>
       </div> <br> <br>
-      <div class="body jumbotron">
+      <div class="body ">
         <div class="row  ">
             <div class="col-md-3">Department Name </div>
             <div class="col-md-6">{{ department.name }}</div>

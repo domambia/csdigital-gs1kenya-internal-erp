@@ -8247,3 +8247,14 @@ html.ie11 .bs-searchbox .form-control {
 .btn-group button{
   visibility: hidden;
 }
+.jumbotron{
+  padding:2rem;
+}
+
+.card-md{
+  background:none !important;
+  box-shadow: none !important;
+}
+.header-sp{
+  padding: .4rem .5rem;
+}

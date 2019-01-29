@@ -1,13 +1,13 @@
 {% extends 'layout/crm_layout.html' %}
 {% load widget_tweaks %}
 {% block header %}
-  <div class="card">
-      <h2 class="header pull-left">CRM | FEEDBACK</h2>
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
+      <h2 class="header pull-left">CRM | DELETE FEEDBACK </h2>
   </div>
 {% endblock%}
 {% block content %}
-  <div class="jumbotron card">
-      DELETE FEEDBACK
+  <div class="row jumbotron card">
+     
       <form method="POST">
         {% csrf_token %}
         Are you sure you want delete feedback by( {{feedback.client_name }} )?

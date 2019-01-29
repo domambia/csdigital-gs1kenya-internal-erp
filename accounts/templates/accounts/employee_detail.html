@@ -1,15 +1,16 @@
 {% extends "layout/main_layout.html" %}
 {% block header %}
-  <div class="card">
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
       <h2 class="header pull-left">HRM | EMPLOYEE DETAILS</h2>
   </div>
 {% endblock%}
 {% block content %}
-  <div class="card ">
+  <div>
    
       <div class="body jumbotron ">
           <div class="helper-cls">
               <a href="{% url 'accounts:employees' %}" class="btn btn-primary"><span style="color: orangered;">&larr;</span> BACK</a> 
+              <a href="{% url 'accounts:employee_update' employee.id %}" class="btn btn-success">EDIT</a> 
           </div> <br> <br>
             <div class="row clearfix">
               <div class="col-md-4">

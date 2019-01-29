@@ -1,14 +1,14 @@
 {% extends "layout/crm_layout.html" %}
 {% block header %}
-  <div class="card">
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
       <h2 class="header pull-left">CRM | FEEDBACK</h2>
   </div>
 {% endblock%}
 {% block content %}
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="card body custom-h">
-            <div class="header">
+        <div class="card body">
+            <div class="">
                 <h2 class="body">
                   <span><a class="btn btn-primary" href = "{% url 'CRM:create_feedback' %}" >ADD FEEDBACK</a></span>
                 </h2>

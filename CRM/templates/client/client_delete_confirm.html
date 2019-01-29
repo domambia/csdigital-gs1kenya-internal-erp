@@ -1,13 +1,12 @@
 {% extends 'layout/crm_layout.html' %}
 {% load widget_tweaks %}
 {% block header %}
-  <div class="card">
-      <h2 class="header pull-left">CRM | CLIENTS / MEMBERS</h2>
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
+      <h2 class="header pull-left">CRM | DELETE CLIENTS / MEMBERS</h2>
   </div>
 {% endblock%}
 {% block content %}
-  <div class="jumbotron card">
-      DELETE CLIENT
+  <div class="row jumbotron clearfix">
       <form method="POST">
         {% csrf_token %}
         Are you sure you want delete {{client.company_name }} ?

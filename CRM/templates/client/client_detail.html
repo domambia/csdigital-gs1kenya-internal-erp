@@ -5,17 +5,18 @@
 {% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
 {{ form.media }}            {# Adds date-picker required JS and CSS #}
 {% block header %}
-  <div class="card">
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
       <h2 class="header pull-left">CRM | CLIENTS / MEMBERS</h2>
   </div>
 {% endblock%}
 {% block content %}
-  <div class="jumbotron card custom-h">
-      <div class="helper_cls">
-        <a href="{% url 'CRM:list_client' %}" class="btn btn-primary">BACK</a>
-        <a href="{% url 'CRM:edit_client' pk=client.pk %}" class="btn btn-success">EDIT</a>
-      </div>
-      <div class="body jumbotron">
+  <div class="card">
+      
+      <div class="body">
+            <div class="helper_cls">
+                <a href="{% url 'CRM:list_client' %}" class="btn btn-primary">BACK</a>
+                <a href="{% url 'CRM:edit_client' pk=client.pk %}" class="btn btn-success">EDIT</a>
+            </div>
         <div class="row clearfix">
             <div class="col-md-6">
                 <h3 class="heading-1">Client Details</h3>

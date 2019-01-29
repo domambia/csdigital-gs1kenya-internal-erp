@@ -1,12 +1,12 @@
 {% extends 'layout/crm_layout.html' %}
 {% load widget_tweaks %}
 {% block header %}
-  <div class="card">
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
       <h2 class="header pull-left">CRM | TRAINING</h2>
   </div>
 {% endblock%}
 {% block content %}
-  <div class="jumbotron center-container card">
+  <div class=" jumbotron row clearfix card">
       DELETE TRAINING EVENT
       <form method="POST">
         {% csrf_token %}

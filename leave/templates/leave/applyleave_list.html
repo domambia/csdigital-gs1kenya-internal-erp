@@ -1,14 +1,14 @@
 {% extends "layout/main_layout.html" %}
 {% block header %}
-  <div class="card">
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
       <h2 class="header pull-left">HRM | DASHBOARD</h2>
   </div>
 {% endblock%}
 {% block content %}
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="card custom-h">
-            <div class="header">
+        <div class="card">
+            <div>
                 <h2 class=" body">
                   <span><a class="btn btn-primary" href = "{% url 'leave:leave_list' %}" >BACK</a></span>
                   <span><a class="btn btn-primary" href = "{% url 'leave:apply_leave' %}">APPLY LEAVE</a></span>
