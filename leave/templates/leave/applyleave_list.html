@@ -35,7 +35,7 @@
                                     <td>{{ leave.employee.user.first_name  }}
                                             &nbsp;
                                           {{ leave.employee.user.last_name }}</td>
-                                      <td>{{ leave.person_taking_charge }}</td>
+                                      <td>{{ leave.person_taking_charge.user.username}}</td>
                                       <td>{{ leave.leave.name }}</td>
                                       <td>{{ leave.start_date }}</td>
                                       <td>{{ leave.end_date }}</td>
@@ -43,10 +43,10 @@
                                       <td style=" margin: 40px auto; text-align:center;"> 
                                           {% if leave.status %}
                                             <span style="padding:.4rem;" class="btn btn-success" name="button">Approved</span>
+                                            <a href="{% url 'leave:download_leave' pk=leave.id %}"  class="btn btn-danger" style="padding:.4rem;" name="button">Approve</a>
                                           {% else %}
                                             <a href="{% url 'leave:approve' pk=leave.id %}"  class="btn btn-danger" style="padding:.4rem;" name="button">Approve</a>
                                           {% endif %}
-                                          <span class = "btn btn-primary">print</span>
                                   </tr>
                               {% endfor %}
                             {% else %}

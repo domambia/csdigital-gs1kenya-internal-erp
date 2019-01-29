@@ -88,7 +88,6 @@ class Feedback(models.Model):
     
 
 class Training(models.Model):
-    topic = models.CharField(max_length = 100)
     trainer = models.ForeignKey(Employee, on_delete = models.CASCADE)
     number_of_trainee = models.PositiveIntegerField()
     happened_on  = models.DateField(default = datetime.datetime.now)

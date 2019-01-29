@@ -4,6 +4,11 @@
 {% bootstrap_css %}         {# Embed Bootstrap CSS #}
 {% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
 {{ form.media }}            {# Adds date-picker required JS and CSS #}
+{% block header %}
+  <div class="card">
+      <h2 class="header pull-left">CRM | TRAINING</h2>
+  </div>
+{% endblock%}
 {% block content %}
 
     <section>
@@ -42,22 +47,9 @@
                                         <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    {{ form.topic | add_class:"form-control"}}
-                                                    <label class="form-label">Which topic</label>
-                                                     <ul>
-                                                        {% for error in form.topic.errors%}
-                                                        <li class="alert alert-danger">{{ error }}</li>
-                                                        {% endfor %}
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
-                                            <div class="form-group form-float">
-                                                <div class="form-line">
                                                     
                                                     {{ form.number_of_trainee | add_class:"form-control"}}
-                                                    <label class="form-label"> Number if Trainees /label>
+                                                    <label class="form-label"> Number of Trainees </label>
                                                      <ul>
                                                         {% for error in form.number_of_trainee.errors%}
                                                         <li class="alert alert-danger">{{ error }}</li>

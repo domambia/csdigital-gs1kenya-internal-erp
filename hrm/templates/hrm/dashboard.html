@@ -4,7 +4,11 @@
 {% bootstrap_css %}         {# Embed Bootstrap CSS #}
 {% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
 {{ form.media }}            {# Adds date-picker required JS and CSS #}
-
+{% block header %}
+  <div class="card">
+      <h2 class="header pull-left">HRM | DASHBOARD</h2>
+  </div>
+{% endblock%}
 {% block content %}
   <div class="jumbotron card custom-h">
       <div class="body">
@@ -21,7 +25,7 @@
                             <div class="content">
                                     
                                 <div class="number count-to" data-from="0" data-to="257" data-speed="1000" data-fresh-interval="20" style="text-align: center;">{{ employees }}</div>
-                                <div class="text">OUR EMPLOYEES</div>
+                                <div class="text">EMPLOYEES</div>
                             </div>
                         </div>
                     </div>
@@ -53,8 +57,9 @@
                                     <i class="material-icons">center_focus_weak</i>
                                 </div>
                                 <div class="content">
+                                    <div class="text" style="font-size:1rem;">APPLIED LEAVES</div> 
                                     <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20" style="text-align: center;">{{ applied_leaves }}</div>                    
-                                    <div class="text">APPLIED LEAVES</div>
+                                    
                                 </div>
                             </div>
                         </div>

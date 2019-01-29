@@ -22,7 +22,6 @@
                             <tr>
                                 <th>Leave Name</th>
                                 <th>Description </th>
-                                <th>Leave Period(Weeks)</th>
                                 <th>Created On</th>
                                 <th style="text-align:center;">Actions</th>
                             </tr>
@@ -33,7 +32,6 @@
                                   <tr>
                                       <td>{{ leave.name }}</td>
                                       <td>{{ leave.description }}</td>
-                                      <td>{{ leave.period }}</td>
                                       <td>{{ leave.created_on }}</td>
                                       <td >
                                           <span> <a href = "{% url 'leave:leave_detail' pk=leave.pk %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>

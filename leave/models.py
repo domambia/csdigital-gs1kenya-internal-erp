@@ -8,7 +8,6 @@ from departments.models import Department
 class Leave(models.Model):
     name = models.CharField(max_length = 256)
     description = models.CharField(max_length = 256)
-    period = models.PositiveIntegerField(default = 3)
     created_on = models.DateField(default = datetime.now)
 
     def get_absolute_url (self):
@@ -22,14 +21,16 @@ class ApplyLeave(models.Model):
     status = models.IntegerField(default = 0)
     end_date = models.DateField()
     resume_date = models.DateField()
-    person_taking_charge = models.CharField(default="HOD", max_length=50) # From here take his phone number and other details 
+    person_taking_charge = models.ForeignKey(Employee, related_name = "person_taking",
+                                        on_delete = models.CASCADE
+                                )
+    period = models.PositiveIntegerField(default = 3)
     employee = models.ForeignKey(Employee, related_name = "employees",
-                                        on_delete = models.CASCADE
-                                )
-    home_phone = models.IntegerField()
+                                        on_delete = models.CASCADE, default = 1,)
+    home_phone = models.CharField(max_length = 20, default ='0708067459')
     leave = models.ForeignKey(Leave, related_name = "leave",
-                                        on_delete = models.CASCADE
-                                )
+                                        on_delete = models.CASCADE)
+
     def get_absolute_url (self):
         return reverse("leave:applyleave_list")
 

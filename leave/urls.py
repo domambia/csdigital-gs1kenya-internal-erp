@@ -13,6 +13,7 @@ urlpatterns = [
         url(r'^apply/', views.CreateApplyLeaveView.as_view(), name = "apply_leave"),
         url(r'^applied_leaves/', views.ApplyLeaveListView.as_view(), name = "applyleave_list"),
         url(r'^approve/(?P<pk>\d+)/$', views.approve_leave, name = "approve"),
+        url(r'^download/(?P<pk>\d+)/$', views.leave_download, name = "download_leave"),
     ]
 
 # url(r'^edit/(?P<pk>\d+)/$', views.LeaveUpdateView.as_view(), name = "leave_edit"),

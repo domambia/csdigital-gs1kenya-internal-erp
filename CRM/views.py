@@ -125,13 +125,13 @@ The Training Feedback
 
 class TrainingCreateView(CreateView):
     model = Training 
-    fields = ('trainer', 'topic', 'number_of_trainee', 'happened_on')
+    fields = ('trainer', 'number_of_trainee', 'happened_on')
     template_name  = "training/training_form.html"
 
 
 class TrainingUpdateView(UpdateView):
     model = Training 
-    fields = ('trainer', 'topic', 'number_of_trainee', 'happened_on')
+    fields = ('trainer', 'number_of_trainee', 'happened_on')
     template_name  = "training/training_form.html"
 
 

@@ -6,7 +6,7 @@
 {{ employee_form.media }}            {# Adds date-picker required JS and CSS #}
 {% block header %}
   <div class="card">
-      <h2 class="header pull-left">ADD NEW EMPLOYEE</h2>
+      <h2 class="header pull-left">HRM | ADD EMPLOYEE</h2>
   </div>
 {% endblock%}
 {% block content %}
@@ -106,7 +106,7 @@
               </div>
           </div>
           <div class="row clearfix">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     <div class="form-line">
                         <label for="{{ employee_form.address.id_for_label }}">Address</label>
@@ -119,13 +119,28 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     <div class="form-line">
                         <label for="{{ user_form.phone.id_for_label }}">Phone Number</label>
                         {{ employee_form.phone|add_class:"form-control"|attr:"number" }}
                         <ul>
                           {% for error in employee_form.phone.errors%}
+                            <li class="alert alert-danger">{{ error }}</li>
+                          {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <div class="form-line">
+                        <label for="{{ user_form.alt_phone_number.id_for_label }}">Alternative Phone Number</label>
+                        {{ employee_form.alt_phone_number|add_class:"form-control"|attr:"number" }}
+                        <ul>
+                          {% for error in employee_form.alt_phone_number.errors%}
                             <li class="alert alert-danger">{{ error }}</li>
                           {% endfor %}
                         </ul>

@@ -13,6 +13,7 @@ class Employee(models.Model):
     phone = models.CharField(max_length=14)
     date_of_birth = models.CharField(max_length=20)
     next_of_kin_name = models.CharField(max_length=60, blank=True)
+    alt_phone_number = models.IntegerField(default = 0)
     # more
     kin_email = models.CharField(max_length=100, blank=True)
     county = models.CharField(max_length=100,  blank=True, choices = get_country(), default = "No country")

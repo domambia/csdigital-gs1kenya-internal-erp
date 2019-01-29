@@ -4,7 +4,11 @@
 {% bootstrap_css %}         {# Embed Bootstrap CSS #}
 {% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
 {{ employee_form.media }}            {# Adds date-picker required JS and CSS #}
-
+{% block header %}
+  <div class="card">
+      <h2 class="header pull-left">CRM | SUPPLIERS</h2>
+  </div>
+{% endblock%}
 {% block content %}
   <div class="jumbotron card custom-h">
     <div class="helper_cls">

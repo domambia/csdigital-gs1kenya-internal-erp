@@ -17,22 +17,33 @@
       <form class="form" action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
           <div class="row clearfix">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <div class="form-line">
-                        <label for="{{ form.employee.id_for_label }}">Employee's Name</label>
-                        {{ form.employee }}
-                        <ul>
-                          {% for error in form.employee.errors%}
-                            <li class="alert alert-danger">{{ error }}</li>
-                          {% endfor %}
-                        </ul>
-
+            <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label for="{{ form.period.id_for_label }}">Leave Period in Weeks(eg. 3)</label>
+                            {{ form.period |add_class:"form-control" }}
+                            <ul>
+                                {% for error in form.period.errors%}
+                                <li class="alert alert-danger">{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-md-6">
+                <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="form-line">
+                                <label for="{{ form.period.id_for_label }}">Leave Period in Weeks(eg. 3)</label>
+                                {{ form.employee |add_class:"form-control" }}
+                                <ul>
+                                    {% for error in form.employee.errors%}
+                                    <li class="alert alert-danger">{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+            <div class="col-md-4">
                 <div class="form-group">
                     <div class="form-line">
                         <label for="{{ form.leave.id_for_label }}">Which Type of Leave</label>

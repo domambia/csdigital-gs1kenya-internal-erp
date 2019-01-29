@@ -10,6 +10,10 @@ from leave.models import Leave, ApplyLeave
 from django.conf import settings
 
 from django.core.mail import send_mail
+import io
+from django.http import FileResponse
+from reportlab.pdfgen import canvas
+
 
 
 class LeaveListView(ListView):
@@ -22,11 +26,11 @@ class LeaveDetailView(DetailView):
 
 
 class LeaveCreateView(CreateView):
-    fields = ('name', 'description', 'period')
+    fields = ('name', 'description',)
     model = Leave
 
 class LeaveUpdateView(UpdateView):
-    fields = ('name', 'description', 'period')
+    fields = ('name', 'description',)
     model = Leave
 
 class LeaveDeleteView(DeleteView):
@@ -37,7 +41,7 @@ class LeaveDeleteView(DeleteView):
 class CreateApplyLeaveView(CreateView):
     fields = (
             'start_date', 'resume_date', 'home_phone','person_taking_charge', 'leave', 'employee',
-            'end_date',
+            'end_date', 'period'
         )
     model = ApplyLeave
     template_name = "leave/applyleave_form.html"
@@ -87,3 +91,34 @@ def approve_leave(request, pk):
         return HttpResponseRedirect(reverse('leave:applyleave_list'))
     print("Not Updated Today")
     return HttpResponseRedirect(reverse('leave:applyleave_list'))
+
+'''
+Create pdf 
+'''
+def create_pdf(request):
+    return ""
+'''
+View to Download a user leave 
+'''
+
+def leave_download(request, pk):
+    leave = ApplyLeave.objects.get(pk=pk)
+    start_date = leave.start_date 
+    end_date = leave.end_date 
+    resume_date = leave.resume_date 
+    home_phone = leave.home_phone
+    leave_name = leave.leave.name 
+    # Create a file-like buffer to receive PDF data.
+    buffer = io.BytesIO()
+    # Create the PDF object, using the buffer as its "file."
+    p = canvas.Canvas(buffer)
+    # Draw things on the PDF. Here's where the PDF generation happens.
+    # See the ReportLab documentation for the full list of functionality.
+    p.drawString(100, 100, "Hello world.")
+    # Close the PDF object cleanly, and we're done.
+    p.showPage()
+    p.save()
+    # FileResponse sets the Content-Disposition header so that browsers
+    # present the option to save the file.
+    return FileResponse(buffer, as_attachment=True, filename='{}.pdf'.format(leave.employee.user.username+'_leave'))
+
