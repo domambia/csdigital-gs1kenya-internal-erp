@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     'departments',
     'targets',
     'CRM',
-    'helpers'
+    'helpers',
+    'payroll',
 ]
 
 MIDDLEWARE = [

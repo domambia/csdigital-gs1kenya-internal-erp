@@ -1,0 +1,55 @@
+{% extends "layout/main_layout.html" %}
+{% block header %}
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
+      <h2 class="header pull-left">HRM | PAYROLLS</h2>
+  </div>
+{% endblock%}
+
+{% block content %}
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card body">
+            <div class="header">
+                <h2 class="body">
+                  <span><a class="btn btn-primary" href = "{% url 'payroll:create_payroll' %}" >ADD PAYROLL</a></span>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr>
+                                <th>Employee</th>
+                                <th>File</th>
+                                <th>Dated On</th>
+                                <th style="text-align:center;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if payrolls %}
+                              {% for payroll in payrolls %}
+                                  <tr>
+                                      <td>{{ payroll.employee.user.first_name }}  {{ payroll.employee.user.last_name }}</td>
+                                      <td>{{ payroll.initials }}</td>
+                                      <td>{{ payroll.created_on }}</td>
+                                      <td style="text-align: center;">
+                                          <span> <a href = "{% url 'payroll:detail_payroll' pk=payroll.pk %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>
+                                          <span> <a href = "{% url 'payroll:edit_payroll' pk=payroll.pk %}"><i class="material-icons">edit</i></a> </span>
+                                          <span> <a href = "{% url 'payroll:delete_payroll' pk=payroll.pk %}"><i class="material-icons" style = "color:#cc0000;">delete</i></a> </span>
+                                      </td>
+                                  </tr>
+                              {% endfor %}
+                            {% else %}
+
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Exportable Table -->
+
+{% endblock %}
