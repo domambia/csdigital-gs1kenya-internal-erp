@@ -20,6 +20,14 @@
             <div class="col-md-4">
                     <div class="form-group">
                         <div class="form-line">
+                            <label for="{{ form.period.id_for_label }}">Your Username</label> <br>
+                            <input type="text" name="{{ form.employee.name }}" value="{{ current_user }}" class="form-control">
+                        </div>
+                    </div>
+            </div>
+            <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="form-line">
                             <label for="{{ form.period.id_for_label }}">Leave Period in Weeks(eg. 3)</label>
                             {{ form.period |add_class:"form-control" }}
                             <ul>
@@ -30,19 +38,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                        <div class="form-group">
-                            <div class="form-line">
-                                <label for="{{ form.period.id_for_label }}">Leave Period in Weeks(eg. 3)</label>
-                                {{ form.employee |add_class:"form-control" }}
-                                <ul>
-                                    {% for error in form.employee.errors%}
-                                    <li class="alert alert-danger">{{ error }}</li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+               
             <div class="col-md-4">
                 <div class="form-group">
                     <div class="form-line">

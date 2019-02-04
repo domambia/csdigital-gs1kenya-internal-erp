@@ -4,11 +4,13 @@ from django.http import HttpResponseRedirect
 from django.views.generic import (DetailView, ListView,
                                   TemplateView, CreateView,
                                   UpdateView, DeleteView)
-
+from leave.forms import ApplyForm
 from django.urls import reverse_lazy
+from django.contrib.auth.models import User
+from accounts.models import Employee
 from leave.models import Leave, ApplyLeave
 from django.conf import settings
-
+from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
 import io
 from django.http import FileResponse
@@ -38,14 +40,24 @@ class LeaveDeleteView(DeleteView):
     success_url = reverse_lazy("leave:leave_list")
 
 
-class CreateApplyLeaveView(CreateView):
-    fields = (
-            'start_date', 'resume_date', 'home_phone','person_taking_charge', 'leave', 'employee',
-            'end_date', 'period'
-        )
-    model = ApplyLeave
-    template_name = "leave/applyleave_form.html"
+# class CreateApplyLeaveView(CreateView):
+#     fields = (
+#             'start_date', 'resume_date', 'home_phone','person_taking_charge', 'leave', 'employee',
+#             'end_date', 'period'
+#         )
+#     model = ApplyLeave
+#     template_name = "leave/applyleave_form.html"
 
+def applyleave(request):
+    form = ApplyForm(request.POST or None)
+    user_name  = request.session['username']
+    # print(employee_user)
+    if form.is_valid():
+        user_data = form.save()
+        return HttpResponseRedirect(reverse('leave:applyleave_list'))
+    
+
+    return render(request,"leave/applyleave_form.html", {'current_user': user_name, 'form': form})
 class ApplyLeaveListView(ListView):
     context_object_name = "applied_leaves"
     model = ApplyLeave
@@ -70,7 +82,8 @@ def approve_leave(request, pk):
             Send Email
         '''
         from_email="hr@gs1kenya.org"
-        to_email = leave.employee.user.email
+        user = User.objects.get(username = leave.employee)
+        to_email = user.email
         subject="Approved Leave and Effective as From Tomorrow"
         content ="""
             Dear {} {},
@@ -81,8 +94,8 @@ def approve_leave(request, pk):
             Thank you.
             HR. GS1Kenya
             """
-        send = send_mail(subject, content.format(leave.employee.user.first_name,
-                        leave.employee.user.first_name, leave.start_date, leave.end_date), from_email, [to_email])
+        send = send_mail(subject, content.format(user.first_name,
+                        user.first_name, leave.start_date, leave.end_date), from_email, [to_email])
         if(send):
             print("Send Email")
         else:

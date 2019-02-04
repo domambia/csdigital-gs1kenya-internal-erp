@@ -32,9 +32,7 @@
                             {% if applied_leaves %}
                               {% for leave in applied_leaves %}
                                   <tr>
-                                    <td>{{ leave.employee.user.first_name  }}
-                                            &nbsp;
-                                          {{ leave.employee.user.last_name }}</td>
+                                    <td>{{ leave.employee  }}  </td>
                                       <td>{{ leave.person_taking_charge.user.username}}</td>
                                       <td>{{ leave.leave.name }}</td>
                                       <td>{{ leave.start_date }}</td>
