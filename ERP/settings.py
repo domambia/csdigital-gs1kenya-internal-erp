@@ -13,7 +13,7 @@ SECRET_KEY = '!g@tkxv!rqru#+fje9xk!m!4m5#s9ai1um#m-r4buc&g37cank'
 #SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['18.222.185.44']
 
 # Application definition
 
@@ -81,7 +81,7 @@ DATABASES = {
         },
          'NAME': 'gs1',
          'USER': 'root',
-         'PASSWORD': 'root',
+         'PASSWORD': 'PASSWORD',
          'HOST': 'localhost',
          'PORT': '3306'
     }
@@ -144,9 +144,6 @@ MEDIA_URL = '/media/'
 # login url
 LOGIN_URL = 'accounts/user_login'
 
-
-# ALLOWED_HOSTS HOSTS
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.1.23']
 
 #Bootstrap
 BOOTSTRAP4 = {
