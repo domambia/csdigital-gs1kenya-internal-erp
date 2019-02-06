@@ -10,8 +10,7 @@
         <div class="card">
             <div>
                 <h2 class=" body">
-                  <span><a class="btn btn-primary" href = "{% url 'leave:leave_list' %}" >BACK</a></span>
-                  <span><a class="btn btn-primary" href = "{% url 'leave:apply_leave' %}">APPLY LEAVE</a></span>
+                 <span><a class="btn btn-primary" href = "{% url 'leave:apply_leave' %}">APPLY LEAVE</a></span>
                 </h2>
             </div>
             <div class="body">
@@ -39,13 +38,13 @@
                                       <td>{{ leave.end_date }}</td>
                                       <td>{{ leave.resume_date }}</td>
                                       <td style=" margin: 40px auto; text-align:center;"> 
-                                          {% if leave.status %}
-                                            <span style="padding:.4rem;" class="btn btn-success" name="button">Approved</span>
-                                            <a href="{% url 'leave:download_leave' pk=leave.id %}"  class="btn btn-danger" style="padding:.4rem;" name="button">Approve</a>
-                                          {% else %}
-                                            <a href="{% url 'leave:approve' pk=leave.id %}"  class="btn btn-danger" style="padding:.4rem;" name="button">Approve</a>
-                                          {% endif %}
-                                  </tr>
+					{% if leave.status  == 1 %}
+						<span class="label bg-green" >Approved</span>
+					{% else %}
+						<span  class = "label bg-orange">Pending</span>
+					{% endif %}
+				      </td> 
+                                 </tr>
                               {% endfor %}
                             {% else %}
 
