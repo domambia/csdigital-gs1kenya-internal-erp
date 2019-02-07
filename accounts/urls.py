@@ -8,7 +8,7 @@ urlpatterns = [
         url(r'^add_employee/', views.add_employee, name = 'add_employee'),
         url(r'^profile/(?P<pk>\d+)/$', login_required(views.EmployeeDetailView.as_view()), name = "profile"),
         url(r'^delete/(?P<pk>\d+)/$', views.employee_delete, name = 'employee_delete'),
-        url(r'^edit/(?P<pk>\d+)/$', views.employee_update, name = "employee_update"),
+        url(r'^edit/(?P<pk>\d+)/$', views.EmployeeUpdateView.as_view(), name = "employee_update"),
         url(r'^user_login/$', views.user_login, name = "login"),
         url(r'^user_logout/$', views.user_logout, name = "logout"),
 

@@ -19,73 +19,76 @@
             </div>
         <div class="row clearfix">
             <div class="col-md-6">
-                <h3 class="heading-1">Client Details</h3>
-                <div class="record">
-                    <div class="col-md-3">Name</div>
-                    <div class="col-md-8">{{ client.company_name }}</div>
-                </div>
-                <div class="record">
-                    <div class="col-md-3">Phone</div>
-                    <div class="col-md-8">{{ client.company_phone }} or ( {{ client.company_phone_alt }} )</div>
-                </div>
-                <div class="record">
-                    <div class="col-md-3">Location</div>
-                    <div class="col-md-8">{{ client.physical_location }}</div>
-                </div>
-
-                <div class="record">
-                    <div class="col-md-6">Director Information</div>
-                    <div class="col-md-6">{{ client.director_info}}</div>
-                </div>
-                <div class="record">
-                    <div class="col-md-3">Category</div>
-                    <div class="col-md-8">{{ client.category }}</div>
-                </div>
-                <div class="record">
-                    <div class="col-md-3">Sector</div>
-                    <div class="col-md-8">{{ client.sector }}</div>
-                </div>
-                <div class="record">
-                    <div class="col-md-3">Location</div>
-                    <div class="col-md-8">{{ client.nature_of_business  }}</div>
-                </div>
-                <div class="record">
-                    <div class="col-md-5">Date of issue</div>
-                    <div class="col-md-7">{{ client.date_of_issue  }}</div>
-                </div>
-               
+                <table class="table table-responsive">
+                    <tbody>
+                        <tr>
+                            <td>Name</td>
+                            <td>{{ client.company_name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Phone</td>
+                            <td>{{ client.company_phone }} or ( {{ client.company_phone_alt }} )</td>
+                        </tr>
+                        <tr>
+                            <td>Location</td>
+                            <td>{{ client.physical_location }}</td>
+                        </tr>
+                        <tr>
+                            <td>Director Information</td>
+                            <td>{{ client.director_info}}</td>
+                        </tr>
+                        <tr>
+                            <td>Category</td>
+                            <td>{{ client.category }}</td>
+                        </tr>
+                        <tr>
+                            <td>Sector</td>
+                            <td>{{ client.sector }}</td>
+                        </tr>
+                        <tr>
+                            <td>Business Nature</td>
+                            <td>{{ client.nature_of_business  }}</td>
+                        </tr>
+                        <tr>
+                            <td>Date of Issue</td>
+                            <td>{{ client.date_of_issue  }}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <div class="col-md-6">
-                    <h3 class="heading-1">Client Documents</h3>
-                    <div class="record row">
-                        <div class="col-md-8">Cerficate of Id</div>      
-                        <div class="col-md-3"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i>  </div>
-                    </div>
-                    <div class="record row">
-                        <div class="col-md-8">Certificate of in Corporation</div>
-                        <div class="col-md-3"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i>  </div>
-                    </div> 
-                    
-                    <div class="record row">
-                        <div class="col-md-8">Company Certificate Pin</div>
-                        <div class="col-md-3"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i>  </div>
-                    </div> 
-                    <div class="record row">
-                        <div class="col-md-8">Copy of blank Cheque</div>
-                        <div class="col-md-3"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i>  </div>
-                    </div> 
-                    <div class="record row">
-                        <div class="col-md-8">Copy of KEBS Certificate</div>
-                        <div class="col-md-3"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i>  </div>
-                    </div> 
-                    <div class="record row">
-                        <div class="col-md-8">Director Pin Number</div>
-                        <div class="col-md-3"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i>  </div>
-                    </div> 
-                    <div class="record row">
-                        <div class="col-md-8">List of product Barcoded</div>
-                        <div class="col-md-3"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i>  </div>
-                    </div> 
+                    <table class="table table-responsive">
+                            <tbody>
+                                <tr>
+                                    <td>Cerficate of Id</td>
+                                    <td><i class="material-icons" style = "color:#cc0000;">assignment_returned</i>  </td>
+                                </tr>
+                                <tr>
+                                    <td>Certificate of in Corporation</td>
+                                    <td><i class="material-icons" style = "color:#cc0000;">assignment_returned</i>  </td>
+                                </tr>
+                                <tr>
+                                    <td>Company Certificate Pin</td>
+                                    <td><i class="material-icons" style = "color:#cc0000;">assignment_returned</i>  </td>
+                                </tr>
+                                <tr>
+                                    <td>Copy of blank Cheque</td>
+                                    <td><i class="material-icons" style = "color:#cc0000;">assignment_returned</i>  </td>
+                                </tr>
+                                <tr>
+                                    <td>Copy of KEBS Certificate</td>
+                                    <td><i class="material-icons" style = "color:#cc0000;">assignment_returned</i>  </td>
+                                </tr>
+                                <tr>
+                                    <td>Director Pin Number</td>
+                                    <td><i class="material-icons" style = "color:#cc0000;">assignment_returned</i>  </td>
+                                </tr>
+                                <tr>
+                                    <td>List of product Barcoded</td>
+                                    <td><i class="material-icons" style = "color:#cc0000;">assignment_returned</i>  </td>
+                                </tr>
+                            </tbody>
+                        </table>
             </div>
 
         </div>

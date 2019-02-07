@@ -7,88 +7,80 @@
 {% block content %}
   <div>
    
-      <div class="body jumbotron ">
-          <div class="helper-cls">
+      <div class="body card ">
+          <div class="helper-cls body">
               <a href="{% url 'accounts:employees' %}" class="btn btn-primary"><span style="color: orangered;">&larr;</span> BACK</a> 
               <a href="{% url 'accounts:employee_update' employee.id %}" class="btn btn-success">EDIT</a> 
-          </div> <br> <br>
-            <div class="row clearfix">
-              <div class="col-md-4">
-                <p >Username</p>
-                <p class=" body">{{ employee.user.username }}</p>
-              </div>
-              <div class="col-md-4">
-                <p >Email Address</p>
-                <p class=" body">{{ employee.user.email }}</p>
-              </div>
-              <div class="col-md-4">
-                <p >First Name</p>
-                <p class=" body">{{ employee.user.first_name }}</p>
-              </div>
-
+          </div>
+          <div class="row body">
+            {% if employee.profile_pic %}
+            <div class="profile" style="display:flex; justify-content: center; align-items: center; padding: 3rem;">
+              <img src="{{ employee.profile_pic.url }}" class="profile__img" style="height: 8rem; width: 8rem; border-radius: .4rem;">
             </div>
-
-            <div class="row clearfix">
-              <div class="col-md-4">
-                <p >Last Name</p>
-                <p class=" body">{{ employee.user.last_name }}</p>
+            {% else %}
+              <div class="profile" style=" width: 8rem; height: 8rem; display:flex; justify-content: center; align-items: center; padding: 3rem; background-color: #eee;">
+                <p style ="color:orange; text-align: center;">No profile</p>
               </div>
-              <div class="col-md-4">
-                <p >Address</p>
-                <p class=" body">{{ employee.address }}</p>
-              </div>
-              <div class="col-md-4">
-                <p >Phone Number</p>
-                <p class=" body">{{ employee.phone }}</p>
-              </div>
-            </div
-
-            <!-- Three -->
-            <div class="row clearfix">
-              <div class="col-md-4">
-                <p >County</p>
-                <p class=" body">{{ employee.county }}</p>
-              </div>
-              <div class="col-md-4">
-                <p >Currrent Position</p>
-                <p class=" body">{{ employee.position.name }}</p>
-              </div>
-              <div class="col-md-4">
-                <p >Department </p>
-                <p class=" body">{{ employee.department }}</p>
-              </div>
-
+            {% endif %}
+            <div class="col-md-6">
+                <table class="table">
+                    <tr>
+                      <td>Username</td>
+                      <td>{{ employee.user.username }}</td>
+                    </tr>
+                    <tr>
+                      <td>Email Address</td>
+                      <td>{{ employee.user.email }}</td>
+                    </tr>
+                    <tr>
+                      <td>First Name</td>
+                      <td>{{ employee.user.first_name }}</td>
+                    </tr>
+                    <tr>
+                      <td>Last Name</td>
+                      <td>{{ employee.user.last_name }}</td>
+                    </tr>
+                    <tr>
+                      <td>Address</td>
+                      <td>{{ employee.address }}</td>
+                    </tr>
+                    <tr>
+                      <td>Phone Number</td>
+                      <td>{{ employee.phone }}</td>
+                    </tr>
+    
+                  </table>
             </div>
-            <!-- END of three-->
-            <!--  Start of Four -->
-            <div class="row clearfix">
-              <div class="col-md-4">
-                <p >Dependent/ Emergency Phone</p>
-                <p class=" body">{{ employee.dependant_contact }}</p>
-              </div>
-              <div class="col-md-4">
-                <p >Dependent/ Emergency Name</p>
-                <p class=" body">{{ employee.dependant_name }}</p>
-              </div>
-              <div class="col-md-4">
-                <p >Dependent / Emergency Email Address </p>
-                <p class=" body">{{ employee.kin_email }}</p>
-              </div>
+            <div class="col-md-6">
 
+                <table class="table table-responsive">
+                    <tr>
+                      <td>Country</td>
+                      <td>{{ employee.county }}</td>
+                    </tr>
+                    <tr>
+                      <td>Current Job Position</td>
+                      <td>{{ employee.position.name }}</td>
+                    </tr>
+                    <tr>
+                      <td>Department</td>
+                      <td>{{employee.position.department.name}}</td>
+                    </tr>
+                    <tr>
+                      <td>Dependent/ Emergency Phone</td>
+                      <td>{{ employee.dependant_contact }}</td>
+                    </tr>
+                    <tr>
+                      <td>Dependent / Emergency Email Address </td>
+                      <td>{{ employee.kin_email }}</td>
+                    </tr>
+                    <tr>
+                      <td>Salary</td>
+                      <td>{{ employee.salary }}</td>
+                    </tr>
+                </table>
             </div>
-            <!--  End of Four-->
-            <!--  Start Five-->
-            <div class="row clearfix">
-              <div class="col-md-4">
-                <p >Salary</p>
-                <p class=" body">{{ employee.salary }}</p>
-              </div>
-              
-            </div>
-            <!--  END of Five -->
-
-
-
+          </div>
       </div>
   </div>
 

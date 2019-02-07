@@ -20,8 +20,8 @@
                         <thead>
                             <tr>
                                 <th>Job Position Name</th>
-                                <th>Position Abbreviations</th>
-                                <th>Created On</th>
+                                <th>Department</th>
+                                <th>Position Abbrs</th>
                                 <th style="text-align:center;">Actions</th>
                             </tr>
                         </thead>
@@ -30,8 +30,8 @@
                               {% for position in positions %}
                                   <tr>
                                       <td>{{ position.name }}</td>
+                                      <td>{{ position.department.name }}</td>
                                       <td>{{ position.initials }}</td>
-                                      <td>{{ position.created_on }}</td>
                                       <td style="text-align: center;">
                                           <span> <a href = "{% url 'departments:show_position' pk=position.pk %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>
                                           <span> <a href = "{% url 'departments:edit_position' pk=position.pk %}"><i class="material-icons">edit</i></a> </span>

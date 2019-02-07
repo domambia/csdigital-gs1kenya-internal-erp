@@ -10,41 +10,27 @@
   </div>
 {% endblock%}
 {% block content %}
-  <div class="">
-    
-      <div class="body">
-           
-        <div class="row clearfix">
-                
-            <div class="col-md-12 jumbotron">
-                    <div class="helper_cls">
-                        <a href="{% url 'CRM:list_training' %}" class="btn btn-primary">BACK</a>
-                        <a href="{% url 'CRM:edit_training' pk=training.pk %}" class="btn btn-success">EDIT</a>
-                    </div>
-                <div class="record">
-                    <div class="col-md-3">Trainer</div>
-                    <div class="col-md-8">{{ training.trainer }}</div>
+        <div class="card body">
+                <div class="helper_cls body">
+                    <a href="{% url 'CRM:list_training' %}" class="btn btn-primary">BACK</a>
+                    <a href="{% url 'CRM:edit_training' pk=training.pk %}" class="btn btn-success">EDIT</a>
                 </div>
-                <div class="record">
-                    <div class="col-md-3">Topic</div>
-                    <div class="col-md-8">{{ training.topic }}</div>
-                </div>
-
-                <div class="record">
-                    <div class="col-md-6">Number of Training</div>
-                    <div class="col-md-4">{{ training.number_of_trainee }}</div>
-                </div>
-
-                <div class="record">
-                        <div class="col-md-5">Happened On</div>
-                        <div class="col-md-4">{{ training.happened_on }}</div>
-                    </div>
-               
+                <table class="table table-responsive">
+                    <tbody>
+                        <tr>
+                            <td>Trainer</td>
+                            <td>{{ training.trainer }}</td>
+                        </tr>
+                        <tr>
+                            <td>Number of Trainees</td>
+                            <td>{{ training.number_of_trainee }}</td>
+                        </tr>
+                        <tr>
+                            <td>Happened on</td>
+                            <td>{{ training.happened_on }}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-      </div>
-
-
-  </div>
-
 {% endblock %}

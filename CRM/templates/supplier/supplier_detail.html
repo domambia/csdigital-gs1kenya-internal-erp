@@ -10,66 +10,37 @@
   </div>
 {% endblock%}
 {% block content %}
-  <div class="card">
-    
-
-    <div class="body jumbotron">
-            <div class="helper_cls">
+    <div class="body card">
+            <div class="helper_cls body">
                     <a href="{% url 'CRM:list_supplier' %}" class="btn btn-primary">BACK</a>
                     <a href="{% url 'CRM:edit_supplier' pk=supplier.pk %}" class="btn btn-success">EDIT</a>
                 </div>
-            <div class="row clearfix">
-                <div class="col-md-12 ">
-                    <div class="">
-                        <div class="col-md-3">Supplier Name </div>
-                        <div class="col-md-8">{{ supplier.name }}</div>
-                    </div>
-                    <div class="record">
-                        <div class="col-md-3">Country </div>
-                        <div class="col-md-8">{{ supplier.country }}</div>
-                    </div>
-                    <div class="record">
-                        <div class="col-md-3">website </div>
-                        <div class="col-md-8">{{ supplier.website }}</div>
-                    </div>
-        
-                    <div class="record">
-                        <div class="col-md-3">Phone </div>
-                        <div class="col-md-8">{{ supplier.phone }}</div>
-                    </div>
-                    <div class="record">
-                        <div class="col-md-3">Description </div>
-                        <div class="col-md-8">{{ supplier.description }}</div>
-                    </div>
+            <div class="body">
+                <table class="table table-responsive">
+                    <tbody>
+                        <tr>
+                            <td>Supplier Name</td>
+                            <td>{{ supplier.name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Country</td>
+                            <td>{{ supplier.country }}</td>
+                        </tr>
+                        <tr>
+                            <td>Website</td>
+                            <td>{{ supplier.website }}</td>
+                        </tr>
+                        <tr>
+                            <td>Phone</td>
+                            <td>{{ supplier.phone }}</td>
+                        </tr>
+                        <tr>
+                            <td>Description</td>
+                            <td>{{supplier.description }}</td>
+                        </tr>
+                    </tbody>
+                </table>
                 </div>
             </div>
           </div>
-  </div>
-
 {% endblock %}
-
-
-<!-- 
-        <div class="col-md-12 ">
-            <div class="">
-                <div class="col-md-3">Supplier Name </div>
-                <div class="col-md-8">{{ supplier.name }}</div>
-            </div>
-            <div class="record">
-                <div class="col-md-3">Country </div>
-                <div class="col-md-8">{{ supplier.country }}</div>
-            </div>
-            <div class="record">
-                <div class="col-md-3">website </div>
-                <div class="col-md-8">{{ supplier.website }}</div>
-            </div>
-
-            <div class="record">
-                <div class="col-md-3">Phone </div>
-                <div class="col-md-8">{{ supplier.phone }}</div>
-            </div>
-            <div class="record">
-                <div class="col-md-3">Description </div>
-                <div class="col-md-8">{{ supplier.description }}</div>
-            </div>
-        </div> -->

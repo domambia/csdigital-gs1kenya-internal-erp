@@ -6,6 +6,7 @@ from accounts.models import Employee
 import datetime
 from uuid import uuid4
 from django.utils.deconstruct import deconstructible
+from multiselectfield import MultiSelectField
 # Create your models here.
 
 @deconstructible
@@ -87,9 +88,21 @@ class Feedback(models.Model):
         return reverse("CRM:list_feedback")
     
 
+
+def get_clients():
+    list_clients = Client.objects.all()
+    clients = []
+    for cl in list_clients:
+        clients.append((cl.id, cl.company_name ,))
+    return tuple(clients)
+
+print(get_clients())
+
 class Training(models.Model):
     trainer = models.ForeignKey(Employee, on_delete = models.CASCADE)
     number_of_trainee = models.PositiveIntegerField()
+
+    all_trainee = MultiSelectField(choices=get_clients(), max_choices= 3, max_length=3)
     happened_on  = models.DateField(default = datetime.datetime.now)
 
     def __str__(self):

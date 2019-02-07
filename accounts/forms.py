@@ -25,4 +25,4 @@ class EmployeeForm(forms.ModelForm):
         model = Employee
         fields = ('address', 'phone', 'date_of_birth',
         'county', 'dependant_name', 'dependant_contact', 'dependant_relationship',
-        'position', 'department', 'salary', 'kin_email', 'alt_phone_number')
+        'position', 'department', 'salary', 'kin_email', 'alt_phone_number', 'profile_pic')

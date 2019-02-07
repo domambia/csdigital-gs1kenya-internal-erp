@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.conf.urls import url, include
 from homePage.views import PanelView
 from hrm.views import index as hrm_view_index
+from django.conf import settings
+from django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', login_required(PanelView.as_view()), name="index"),
@@ -15,3 +17,9 @@ urlpatterns = [
     url(r'^crm/', include('CRM.urls')),
     url(r'payroll/', include('payroll.urls')),
 ]
+
+
+if settings.DEBUG: 
+        urlpatterns += static(settings.MEDIA_URL,  document_root=settings.MEDIA_ROOT) 
+
+

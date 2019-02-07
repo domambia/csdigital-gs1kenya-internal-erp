@@ -274,6 +274,19 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <div class="form-line">
+                        <label for="{{ employee_form.profile_pic.id_for_label }}">Profile Picture</label>
+                        {{ employee_form.profile_pic|add_class:"form-control" }}
+                        <ul>
+                            {% for error in employee_form.profile_pic.errors%}
+                            <li class="alert alert-danger">{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
             <div class="col-md-4 pull-right">
                 <input type="submit" class="btn btn-primary btn-lg m-l-15 waves-effect" value="SUBMIT">
             </div>

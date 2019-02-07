@@ -41,7 +41,7 @@ the GS1 ERP systemself.
 """
 
 class CreatePositionView(CreateView):
-    fields = ('name', 'initials')
+    fields = ('name', 'initials', 'department')
     model = models.Position
 
     template_name = "departments/position_form.html"
@@ -52,7 +52,7 @@ class DetailPositionView(DetailView):
     template_name = "departments/position_detail.html"
 
 class UpdatePositionView(UpdateView):
-    fields = ('name', 'initials')
+    fields = ('name', 'initials', 'department')
     model = models.Position
     template_name = "departments/position_form.html"
 

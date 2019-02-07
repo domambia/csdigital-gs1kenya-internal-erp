@@ -7695,6 +7695,10 @@ fieldset[disabled] .form-control {
         list-style: none;
         display: none;
         padding-left: 0; }
+        .ml-menu li a{
+          font-size: 10px;
+          text-transform: capitalize;
+        }
         .sidebar .menu .list .ml-menu span {
           font-weight: normal;
           font-size: 14px;
@@ -8258,3 +8262,6 @@ html.ie11 .bs-searchbox .form-control {
 .header-sp{
   padding: .4rem .5rem;
 }
+
+
+/* Profile pcitures */

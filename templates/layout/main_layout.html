@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 
 {% load staticfiles %}
-
 <html>
 
 <head>
@@ -132,32 +131,34 @@
                         <span>EMPLOYEES</span>
                     </a>
                 </li>
-                <li class="active">
-                    <a href="{% url  'departments:list_department' %}">
-                        <i class="material-icons">view_agenda</i>
+                <li>
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">business</i>
                         <span>DEPARTMENT</span>
                     </a>
-                </li>
-                <li class="active">
-                    <a href="{% url  'departments:list_position' %}">
-                        <i class="material-icons">business</i>
-                        <span>JOB POSITIONS</span>
+                    <ul class="ml-menu">
+                        <li>
+                            <a href="{% url 'departments:list_department' %}"> ALL DEPARTMENTS</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'departments:list_position' %}">JOB POSITIONS</a>
+                        </li>
+                    </ul>
+              </li>
+                <li>
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">assignment</i>
+                        <span>LEAVE MANAGEMENT</span>
                     </a>
-                </li>
-		            <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">assignment</i>
-                            <span>LEAVE MANAGEMENT</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li>
-                                <a href="{% url 'leave:leave_list'%}">Leave type</a>
-                            </li>
-                           <li>
-                                <a href="{% url 'leave:applyleave_list' %}">Apply Leave</a>
-                            </li>
+                    <ul class="ml-menu" style="font-size: 14px;">
+                        <li>
+                            <a href="{% url 'leave:leave_list'%}">LEAVE TYPE</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'leave:applyleave_list' %}">APPLY LEAVE</a>
+                        </li>
 
-                        </ul>
+                    </ul>
               </li>
                 <li class="active">
                     <a href="{% url  'payroll:list_payroll' %}">

@@ -1,4 +1,4 @@
-#!/home/kwach/omambia_dev/csdigital-gs1kenya-internal-erp/venv/bin/python3.5
+#!/home/hackert/workspace/csdigital/gs1/ERP/venv/bin/python
 from django.core import management
 
 if __name__ == "__main__":

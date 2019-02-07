@@ -24,6 +24,8 @@ class Employee(models.Model):
     dependant_relationship = models.CharField(max_length=60, blank=True)
     dependant_contact = models.CharField(max_length=60, blank=True)
 
+    profile_pic = models.ImageField(upload_to = 'profile_pics', blank = True)
+
     # Job Information
     position = models.ForeignKey(Position, on_delete =models.CASCADE, default = 0)
     department = models.ForeignKey(Department, on_delete =models.CASCADE, default = 0)
@@ -34,8 +36,8 @@ class Employee(models.Model):
     def __str__(self):
         return (self.user.first_name + " " +self.user.last_name)
 
-    # def get_absolute_url(self):
-    #
-    #     return reverse("accounts:list", {'pk': self.pk })
+    def get_absolute_url(self):
+    
+        return reverse("accounts:list", {'pk': self.pk })
 
 

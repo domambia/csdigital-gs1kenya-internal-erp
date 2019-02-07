@@ -13,7 +13,7 @@ SECRET_KEY = '!g@tkxv!rqru#+fje9xk!m!4m5#s9ai1um#m-r4buc&g37cank'
 #SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['18.222.185.44']
+ALLOWED_HOSTS = ['18.222.185.44', 'localhost']
 
 # Application definition
 
@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'bootstrap_datepicker_plus',
     'bootstrap4',
+    'multiselectfield',
     # Usable apps
     'accounts',
     'hrm',
@@ -81,7 +82,7 @@ DATABASES = {
         },
          'NAME': 'gs1',
          'USER': 'root',
-         'PASSWORD': 'PASSWORD',
+         'PASSWORD': 'root',
          'HOST': 'localhost',
          'PORT': '3306'
     }
@@ -92,7 +93,7 @@ DATABASES = {
 
 PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.Argon2PasswordHasher',
-    'django.contrib.auth.hashers.PBKDF2PasswordHasher', 
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
     'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
 ]

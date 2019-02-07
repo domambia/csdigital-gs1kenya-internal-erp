@@ -3,7 +3,7 @@
 {% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
 {% bootstrap_css %}         {# Embed Bootstrap CSS #}
 {% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
-{{ employee_form.media }}       {# Adds date-picker required JS and CSS #}
+{{ form.media }}       {# Adds date-picker required JS and CSS #}
 {% block header %}
   <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
       <h2 class="header pull-left">HRM | EMPLOYEE</h2>
@@ -24,9 +24,9 @@
               <div class="form-group">
                   <div class="form-line">
                       <label for="{{ employee_form.date_of_birth.id_for_label }}">Birth Date</label>
-                      {{ employee_form.date_of_birth|add_class:"form-control"|attr:"type:date" }}
+                      {{ form.date_of_birth|add_class:"form-control"|attr:"type:date" }}
                       <ul>
-                        {% for error in employee_form.date_of_birth.errors%}
+                        {% for error in form.date_of_birth.errors%}
                           <li class="alert alert-danger">{{ error }}</li>
                         {% endfor %}
                       </ul>
@@ -37,9 +37,9 @@
               <div class="form-group">
                   <div class="form-line">
                       <label for="{{ user_form.county.id_for_label }}">County</label>
-                      {{ employee_form.county|add_class:"form-control" }}
+                      {{ form.county|add_class:"form-control" }}
                       <ul>
-                        {% for error in employee_form.county.errors%}
+                        {% for error in form.county.errors%}
                           <li class="alert alert-danger">{{ error }}</li>
                         {% endfor %}
                       </ul>
@@ -49,10 +49,10 @@
           <div class="col-md-4">
               <div class="form-group">
                   <div class="form-line">
-                      <label for="{{ employee_form.address.id_for_label }}">Address</label>
-                      {{ employee_form.address|add_class:"form-control" }}
+                      <label for="{{ form.address.id_for_label }}">Address</label>
+                      {{ form.address|add_class:"form-control" }}
                       <ul>
-                        {% for error in employee_form.address.errors%}
+                        {% for error in form.address.errors%}
                           <li class="alert alert-danger">{{ error }}</li>
                         {% endfor %}
                       </ul>
@@ -66,9 +66,9 @@
                 <div class="form-group">
                     <div class="form-line">
                         <label for="{{ user_form.phone.id_for_label }}">Phone Number</label>
-                        {{ employee_form.phone|add_class:"form-control"|attr:"number" }}
+                        {{ form.phone|add_class:"form-control"|attr:"number" }}
                         <ul>
-                          {% for error in employee_form.phone.errors%}
+                          {% for error in form.phone.errors%}
                             <li class="alert alert-danger">{{ error }}</li>
                           {% endfor %}
                         </ul>
@@ -79,9 +79,9 @@
                 <div class="form-group">
                     <div class="form-line">
                         <label for="{{ user_form.alt_phone_number.id_for_label }}">Alternative Phone Number</label>
-                        {{ employee_form.alt_phone_number|add_class:"form-control"|attr:"number" }}
+                        {{ form.alt_phone_number|add_class:"form-control"|attr:"number" }}
                         <ul>
-                          {% for error in employee_form.alt_phone_number.errors%}
+                          {% for error in form.alt_phone_number.errors%}
                             <li class="alert alert-danger">{{ error }}</li>
                           {% endfor %}
                         </ul>
@@ -99,10 +99,10 @@
               <div class="col-md-4">
                   <div class="form-group">
                       <div class="form-line">
-                          <label for="{{ employee_form.dependant_name.id_for_label }}">Full Name </label>
-                          {{ employee_form.dependant_name|add_class:"form-control" }}
+                          <label for="{{ form.dependant_name.id_for_label }}">Full Name </label>
+                          {{ form.dependant_name|add_class:"form-control" }}
                           <ul>
-                            {% for error in employee_form.dependant_name.errors%}
+                            {% for error in form.dependant_name.errors%}
                               <li class="alert alert-danger">{{ error }}</li>
                             {% endfor %}
                           </ul>
@@ -112,10 +112,10 @@
               <div class="col-md-4">
                   <div class="form-group">
                       <div class="form-line">
-                          <label for="{{ employee_form.dependant_contact.id_for_label }}">Contacts </label>
-                          {{ employee_form.dependant_contact|add_class:"form-control" }}
+                          <label for="{{ form.dependant_contact.id_for_label }}">Contacts </label>
+                          {{ form.dependant_contact|add_class:"form-control" }}
                           <ul>
-                            {% for error in employee_form.dependant_contact.errors%}
+                            {% for error in form.dependant_contact.errors%}
                               <li class="alert alert-danger">{{ error }}</li>
                             {% endfor %}
                           </ul>
@@ -125,10 +125,10 @@
               <div class="col-md-4">
                   <div class="form-group">
                       <div class="form-line">
-                          <label for="{{ employee_form.dependant_relationship.id_for_label }}">Relationship</label>
-                          {{ employee_form.dependant_relationship|add_class:"form-control" }}
+                          <label for="{{ form.dependant_relationship.id_for_label }}">Relationship</label>
+                          {{ form.dependant_relationship|add_class:"form-control" }}
                           <ul>
-                            {% for error in employee_form.dependant_relationship.errors%}
+                            {% for error in form.dependant_relationship.errors%}
                               <li class="alert alert-danger">{{ error }}</li>
                             {% endfor %}
                           </ul>
@@ -141,10 +141,10 @@
             <div class="col-md-5">
               <div class="form-group">
                   <div class="form-line">
-                      <label for="{{ employee_form.kin_email.id_for_label }}">Email Address</label>
-                      {{ employee_form.kin_email|add_class:"form-control" }}
+                      <label for="{{ form.kin_email.id_for_label }}">Email Address</label>
+                      {{ form.kin_email|add_class:"form-control" }}
                       <ul>
-                        {% for error in  employee_form.kin_email.errors%}
+                        {% for error in  form.kin_email.errors%}
                           <li class="alert alert-danger">{{ error }}</li>
                         {% endfor %}
                       </ul>
@@ -162,10 +162,10 @@
               <div class="col-md-4">
                   <div class="form-group">
                       <div class="form-line">
-                          <label for="{{ employee_form.position.id_for_label }}">Current Position</label>
-                          {{ employee_form.position }}
+                          <label for="{{ form.position.id_for_label }}">Current Position</label>
+                          {{ form.position }}
                           <ul>
-                            {% for error in employee_form.position.errors%}
+                            {% for error in form.position.errors%}
                               <li class="alert alert-danger">{{ error }}</li>
                             {% endfor %}
                           </ul>
@@ -176,9 +176,9 @@
                   <div class="form-group">
                       <div class="form-line">
                           <label for="{{ user_form.department.id_for_label }}">Department</label>
-                          {{ employee_form.department }}
+                          {{ form.department }}
                           <ul>
-                            {% for error in employee_form.department.errors%}
+                            {% for error in form.department.errors%}
                               <li class="alert alert-danger">{{ error }}</li>
                             {% endfor %}
                           </ul>
@@ -189,15 +189,28 @@
                   <div class="form-group">
                       <div class="form-line">
                           <label for="{{ user_form.salary.id_for_label }}">Salary</label>
-                          {{ employee_form.salary|add_class:"form-control" }}
+                          {{ form.salary|add_class:"form-control" }}
                           <ul>
-                            {% for error in employee_form.salary.errors%}
+                            {% for error in form.salary.errors%}
                               <li class="alert alert-danger">{{ error }}</li>
                             {% endfor %}
                           </ul>
                       </div>
                   </div>
               </div>
+              <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label for="{{ form.profile_pic.id_for_label }}">Profile Picture</label>
+                            {{ form.profile_pic|add_class:"form-control" }}
+                            <ul>
+                                {% for error in form.profile_pic.errors%}
+                                <li class="alert alert-danger">{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
 
           </div>

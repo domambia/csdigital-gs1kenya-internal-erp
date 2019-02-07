@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
-from django.views.generic import DetailView
+from django.views.generic import DetailView, UpdateView
 from django.core.mail import send_mail
 from helpers.help import get_country
 
@@ -41,6 +41,8 @@ def add_employee(request):
             employee = employee_form.save(commit = False)
 
             employee.user = user
+            if 'profile_pic' in request.FILES:
+                employee.profile_pic = request.FILES['profile_pic']
             employee.save()
 
             ''' Sending an email to our new employees: 
@@ -123,12 +125,23 @@ def employee_delete(request, pk):
 """
 
 
+class EmployeeUpdateView(UpdateView):
+    fields = ('address', 'phone', 'date_of_birth',
+        'county', 'dependant_name', 'dependant_contact', 'dependant_relationship',
+        'position', 'department', 'salary', 'kin_email', 'alt_phone_number', 'profile_pic')
+    model = Employee 
+    template_name  = "accounts/edit.html"
+
 def employee_update(request, pk):
     employee_form = EmployeeForm(request.POST or None,
                     instance = get_object_or_404(Employee, pk=pk))
     if request.method == "POST":
+        
         if employee_form.is_valid():
-            employee = employee_form.save()
+            employee = employee_form.save(commit = False)
+            if 'profile_pic' in request.FILES['profile_pic']:
+                employee.profile_pic = request.FILES['profile_pic']
+            employee.save()
             return HttpResponseRedirect(reverse('accounts:employees'))
     return render(request, "accounts/edit.html",
                     {'employee_form': employee_form,})

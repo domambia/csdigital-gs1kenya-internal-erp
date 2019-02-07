@@ -10,27 +10,28 @@
   </div>
 {% endblock%}
 {% block content %}
-  <div class="jumbotron  ">
-      <div class="body">
-        <a href="{% url 'departments:list_position' %}" class="btn btn-primary">BACK</a>
-        <a href="{% url 'departments:edit_position' pk=position.pk %}" class="btn btn-success">EDIT</a>
-            <div class="body jumbotron">
-                <div class="row  ">
-                    <div class="col-md-3">Job Position</div>
-                    <div class="col-md-6">{{ position.name }}</div>
-                </div>
-                <div class="row  ">
-                    <div class="col-md-3">Positon Abbreviations </div>
-                    <div class="col-md-6">{{ position.initials }}</div>
-                </div>
-                <div class="row  ">
-                    <div class="col-md-3">Created On </div>
-                    <div class="col-md-6">{{ position.created_on }}</div>
-                </div>
-            </div>
-      </div>
-
-
-  </div>
+    <div class="card">
+        <div class="helper_cls body">
+            <a href="{% url 'departments:list_position' %}" class="btn btn-primary">BACK</a>
+            <a href="{% url 'departments:edit_position' pk=position.pk %}" class="btn btn-success">EDIT</a>
+        </div>
+            
+        <table class="table table-responsive body  table-bordered">
+            <tbody>
+                <tr>
+                    <td>Job Positon</td>
+                    <td>{{ position.name }}</td>
+                </tr>
+                <tr>
+                    <td>Department</td>
+                    <td>{{ position.department.name }}</td>
+                </tr>
+                <tr>
+                    <td>Job Abbrs</td>
+                    <td>{{ position.initials }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
 {% endblock %}

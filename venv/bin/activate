@@ -40,7 +40,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/kwach/omambia_dev/csdigital-gs1kenya-internal-erp/venv"
+VIRTUAL_ENV="/home/hackert/workspace/csdigital/gs1/ERP/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
@@ -54,17 +54,17 @@ if ! [ -z "${PYTHONHOME+_}" ] ; then
 fi
 
 if [ -z "${VIRTUAL_ENV_DISABLE_PROMPT-}" ] ; then
-    _OLD_VIRTUAL_PS1="$PS1"
+    _OLD_VIRTUAL_PS1="${PS1-}"
     if [ "x" != x ] ; then
-        PS1="$PS1"
+        PS1="${PS1-}"
     else
-        PS1="(`basename \"$VIRTUAL_ENV\"`) $PS1"
+        PS1="(`basename \"$VIRTUAL_ENV\"`) ${PS1-}"
     fi
     export PS1
 fi
 
 # Make sure to unalias pydoc if it's already there
-alias pydoc 2>/dev/null >/dev/null && unalias pydoc
+alias pydoc 2>/dev/null >/dev/null && unalias pydoc || true
 
 pydoc () {
     python -m pydoc "$@"

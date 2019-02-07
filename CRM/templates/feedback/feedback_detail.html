@@ -12,23 +12,24 @@
 
 {% block content %}
 
-      <div class="body jumbotron">
-            <div class="helper_cls">
+      <div class="body card">
+            <div class="helper_cls body">
                     <a href="{% url 'CRM:list_feedback' %}" class="btn btn-primary">BACK</a>
                     <a href="{% url 'CRM:edit_feedback' pk=feedback.pk %}" class="btn btn-success">EDIT</a>
                 </div>
-        <div class="row clearfix ">
-            <div class="col-md-12">
-                <div class="record">
-                    <div class="col-md-3">Client Name</div>
-                    <div class="col-md-8">{{ feedback.client_name }}</div>
-                </div>
-                <div class="record">
-                    <div class="col-md-3">Feeback Message</div>
-                    <div class="col-md-8">{{ feedback.feedback }}</div>
-                </div>
-               
-            </div>
+        <div class="row body ">
+            <table class="table table-responsive">
+                <tbody>
+                    <tr>
+                        <td>Cleint Name</td>
+                        <td>{{ feedback.client_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Feedback Message</td>
+                        <td>{{ feedback.feedback }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
       </div>
 

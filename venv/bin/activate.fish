@@ -1,10 +1,28 @@
-# This file must be used using `. bin/activate.fish` *within a running fish ( http://fishshell.com ) session*.
+# This file must be used using `source bin/activate.fish` *within a running fish ( http://fishshell.com ) session*.
 # Do not run it directly.
+
+function _bashify_path -d "Converts a fish path to something bash can recognize"
+    set fishy_path $argv
+    set bashy_path $fishy_path[1]
+    for path_part in $fishy_path[2..-1]
+        set bashy_path "$bashy_path:$path_part"
+    end
+    echo $bashy_path
+end
+
+function _fishify_path -d "Converts a bash path to something fish can recognize"
+    echo $argv | tr ':' '\n'
+end
 
 function deactivate -d 'Exit virtualenv mode and return to the normal environment.'
     # reset old environment variables
     if test -n "$_OLD_VIRTUAL_PATH"
-        set -gx PATH $_OLD_VIRTUAL_PATH
+        # https://github.com/fish-shell/fish-shell/issues/436 altered PATH handling
+        if test (echo $FISH_VERSION | tr "." "\n")[1] -lt 3
+            set -gx PATH (_fishify_path $_OLD_VIRTUAL_PATH)
+        else
+            set -gx PATH $_OLD_VIRTUAL_PATH
+        end
         set -e _OLD_VIRTUAL_PATH
     end
 
@@ -30,15 +48,22 @@ function deactivate -d 'Exit virtualenv mode and return to the normal environmen
         # Self-destruct!
         functions -e pydoc
         functions -e deactivate
+        functions -e _bashify_path
+        functions -e _fishify_path
     end
 end
 
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/home/kwach/omambia_dev/csdigital-gs1kenya-internal-erp/venv"
+set -gx VIRTUAL_ENV "/home/hackert/workspace/csdigital/gs1/ERP/venv"
 
-set -gx _OLD_VIRTUAL_PATH $PATH
+# https://github.com/fish-shell/fish-shell/issues/436 altered PATH handling
+if test (echo $FISH_VERSION | tr "." "\n")[1] -lt 3
+   set -gx _OLD_VIRTUAL_PATH (_bashify_path $PATH)
+else
+    set -gx _OLD_VIRTUAL_PATH $PATH
+end
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH
 
 # Unset `$PYTHONHOME` if set.
@@ -64,7 +89,7 @@ if test -z "$VIRTUAL_ENV_DISABLE_PROMPT"
         if test -n ""
             printf '%s%s' "" (set_color normal)
         else
-            printf '%s(%s%s%s) ' (set_color normal) (set_color -o white) (basename "$VIRTUAL_ENV") (set_color normal)
+            printf '%s(%s) ' (set_color normal) (basename "$VIRTUAL_ENV")
         end
 
         # Restore the original $status

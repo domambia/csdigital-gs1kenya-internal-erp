@@ -1,4 +1,4 @@
-#!/home/kwach/omambia_dev/csdigital-gs1kenya-internal-erp/venv/bin/python
+#!/home/hackert/workspace/csdigital/gs1/ERP/venv/bin/python
 
 import sys
 import getopt
