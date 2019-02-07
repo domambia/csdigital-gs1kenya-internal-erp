@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 29, 2019 at 08:23 AM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.3.1
+-- Generation Time: Feb 07, 2019 at 08:21 AM
+-- Server version: 10.3.12-MariaDB
+-- PHP Version: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -44,15 +44,17 @@ CREATE TABLE `accounts_employee` (
   `department_id` int(11) NOT NULL,
   `position_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `alt_phone_number` int(11) NOT NULL
+  `alt_phone_number` int(11) NOT NULL,
+  `profile_pic` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `accounts_employee`
 --
 
-INSERT INTO `accounts_employee` (`id`, `address`, `phone`, `date_of_birth`, `next_of_kin_name`, `kin_email`, `county`, `next_of_kin_phone`, `dependant_name`, `dependant_relationship`, `dependant_contact`, `salary`, `department_id`, `position_id`, `user_id`, `alt_phone_number`) VALUES
-(1, 'Kisumu-K', '07051545121', '2019-01-16', '', 'junior@gmail.com', '', '', 'Omambia Daug', 'Son', '074404509', '20000', 1, 1, 1, 751545121);
+INSERT INTO `accounts_employee` (`id`, `address`, `phone`, `date_of_birth`, `next_of_kin_name`, `kin_email`, `county`, `next_of_kin_phone`, `dependant_name`, `dependant_relationship`, `dependant_contact`, `salary`, `department_id`, `position_id`, `user_id`, `alt_phone_number`, `profile_pic`) VALUES
+(1, 'Kisumu-K', '07051545121', '2019-01-16', '', 'junior@gmail.com', '', '', 'Omambia Daug', 'Son', '074404509', '20000', 1, 1, 1, 751545121, 'profile_pics/IMG-20170917-WA0014.jpg'),
+(2, 'Masaku', '705045453', '1993-02-06', '', 'junior@gmail.com', 'Kenya', '', 'Omambia Daug', 'Son', '0705045453', '12500', 1, 1, 2, 705045453, 'profile_pics/IMGP8617.JPG');
 
 -- --------------------------------------------------------
 
@@ -158,7 +160,11 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (61, 'Can add training', 16, 'add_training'),
 (62, 'Can change training', 16, 'change_training'),
 (63, 'Can delete training', 16, 'delete_training'),
-(64, 'Can view training', 16, 'view_training');
+(64, 'Can view training', 16, 'view_training'),
+(65, 'Can add payroll', 17, 'add_payroll'),
+(66, 'Can change payroll', 17, 'change_payroll'),
+(67, 'Can delete payroll', 17, 'delete_payroll'),
+(68, 'Can view payroll', 17, 'view_payroll');
 
 -- --------------------------------------------------------
 
@@ -185,7 +191,8 @@ CREATE TABLE `auth_user` (
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(1, 'argon2$argon2i$v=19$m=512,t=2,p=2$ekZJcGRjeWxscEZZ$o8sU42ChUu8MUMSRLkP19Q', '2019-01-28 18:00:04.189952', 0, 'omambia', 'Omambia', 'Dauglous', 'omambiadauglous@gmail.com', 0, 1, '2019-01-28 17:59:33.409242');
+(1, 'argon2$argon2i$v=19$m=512,t=2,p=2$ekZJcGRjeWxscEZZ$o8sU42ChUu8MUMSRLkP19Q', '2019-02-07 06:37:37.949204', 0, 'omambia', 'Omambia', 'Dauglous', 'omambiadauglous@gmail.com', 0, 1, '2019-01-28 17:59:33.409242'),
+(2, 'argon2$argon2i$v=19$m=512,t=2,p=2$aU5LVG10akkxV0wx$46lMhUxTyG6KVGgL0c9+ww', NULL, 0, 'domambia', 'Omambia', 'Joshua', 'omambiadauglous@gmail.com', 0, 1, '2019-02-07 05:13:05.951886');
 
 -- --------------------------------------------------------
 
@@ -246,7 +253,8 @@ CREATE TABLE `CRM_client` (
 --
 
 INSERT INTO `CRM_client` (`id`, `company_name`, `company_phone`, `company_phone_alt`, `company_email`, `company_email_alt`, `post_address`, `physical_location`, `director_info`, `sector`, `category`, `date_of_issue`, `nature_of_business`, `certificate_of_incorporation`, `copy_of_id`, `copy_of_blank_cheque`, `copy_of_trade_licence`, `list_of_product_barcoded`, `director_pin_number`, `company_certificate_pin`, `copy_of_kebs_certicate`) VALUES
-(1, 'BrugKe', 701246475, 701246475, 'kafomombia@gmail.com', 'kafomambia@gmial.com', '01004', 'Nairobi', 'GS1Kenya. 07050424525', 'HELATHCARE', 'CATEGORY B', '2019-01-16', 'Large', 'documents/clients/ef5a3c4f6348421c8e37afd32dc04fc7.pdf', 'documents/clients/29c47c7760ba483eab11f417296c0716.pdf', 'documents/clients/89426bfc37af4b9a97252767b913af86.pdf', 'documents/clients/faa1a83216d9480b9b8bbaee9476f20e.pdf', 'documents/clients/03de7a21ec994665bfc19d737867188f.pdf', 'documents/clients/0967531a25464e3e805282a150988d46.pdf', 'documents/clients/ef561cd4d42343378af77ca19422e153.pdf', 'documents/clients/0bb35ead1b744cc2b40e72a04996109b.pdf');
+(1, 'BrugKe', 701246475, 701246475, 'kafomombia@gmail.com', 'kafomambia@gmial.com', '01004', 'Nairobi', 'GS1Kenya. 07050424525', 'HELATHCARE', 'CATEGORY B', '2019-01-16', 'Large', 'documents/clients/ef5a3c4f6348421c8e37afd32dc04fc7.pdf', 'documents/clients/29c47c7760ba483eab11f417296c0716.pdf', 'documents/clients/89426bfc37af4b9a97252767b913af86.pdf', 'documents/clients/faa1a83216d9480b9b8bbaee9476f20e.pdf', 'documents/clients/03de7a21ec994665bfc19d737867188f.pdf', 'documents/clients/0967531a25464e3e805282a150988d46.pdf', 'documents/clients/ef561cd4d42343378af77ca19422e153.pdf', 'documents/clients/0bb35ead1b744cc2b40e72a04996109b.pdf'),
+(2, 'gs1', 1117144527, 1117144519, 'kaf@gmail.com', 'kafomambia@gmial.com', '0012', '00124', 'dr. 01117144527', 'MANUFACTURER,TRADING &FINANCIAL INSTITUTIONS', 'CATEGORY B', '2019-02-21', 'Large', 'documents/clients/415843e43d4d423e8dfe1fe3addd6854.jpg', 'documents/clients/86528d7b37fb4d168ccd81d90bebbf3c.pdf', 'documents/clients/4cb90ddf3a544fd58d63dd9a5b7eb1b4.pdf', 'documents/clients/3a94036317914eab966085bb4348a168.pdf', 'documents/clients/41dc2871d460464ab50c0bf9407e5231.pdf', 'documents/clients/bfe71405e51444c98bb496471d958b1d.pdf', 'documents/clients/4cfb9d94b7ae4d2281cf278c32c3713e.pdf', 'documents/clients/9f3d09e11a9b4f4c8a9c0b4842af70a2.pdf');
 
 -- --------------------------------------------------------
 
@@ -301,15 +309,16 @@ CREATE TABLE `CRM_training` (
   `id` int(11) NOT NULL,
   `trainer_id` int(11) NOT NULL,
   `happened_on` date NOT NULL,
-  `number_of_trainee` int(10) UNSIGNED NOT NULL
+  `number_of_trainee` int(10) UNSIGNED NOT NULL,
+  `all_trainee` varchar(3) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `CRM_training`
 --
 
-INSERT INTO `CRM_training` (`id`, `trainer_id`, `happened_on`, `number_of_trainee`) VALUES
-(1, 1, '2019-01-29', 14);
+INSERT INTO `CRM_training` (`id`, `trainer_id`, `happened_on`, `number_of_trainee`, `all_trainee`) VALUES
+(1, 1, '2019-01-29', 14, '1');
 
 -- --------------------------------------------------------
 
@@ -341,15 +350,16 @@ CREATE TABLE `departments_position` (
   `id` int(11) NOT NULL,
   `name` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
   `initials` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_on` date NOT NULL
+  `department_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `departments_position`
 --
 
-INSERT INTO `departments_position` (`id`, `name`, `initials`, `created_on`) VALUES
-(1, 'Manager', 'HRM', '2019-01-28');
+INSERT INTO `departments_position` (`id`, `name`, `initials`, `department_id`) VALUES
+(1, 'Manager', 'HRM', 1),
+(2, 'Secretary', 'SHR', 1);
 
 -- --------------------------------------------------------
 
@@ -360,7 +370,7 @@ INSERT INTO `departments_position` (`id`, `name`, `initials`, `created_on`) VALU
 CREATE TABLE `django_admin_log` (
   `id` int(11) NOT NULL,
   `action_time` datetime(6) NOT NULL,
-  `object_id` longtext COLLATE utf8mb4_unicode_ci,
+  `object_id` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `object_repr` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `action_flag` smallint(5) UNSIGNED NOT NULL,
   `change_message` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -399,6 +409,7 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (11, 'departments', 'position'),
 (8, 'leave', 'applyleave'),
 (9, 'leave', 'leave'),
+(17, 'payroll', 'payroll'),
 (6, 'sessions', 'session'),
 (12, 'targets', 'target');
 
@@ -451,7 +462,12 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (29, 'targets', '0002_auto_20190114_0749', '2019-01-28 15:44:06.988403'),
 (30, 'targets', '0003_auto_20190114_0751', '2019-01-28 15:44:07.036846'),
 (31, 'CRM', '0008_remove_training_topic', '2019-01-29 07:20:14.576211'),
-(32, 'leave', '0002_auto_20190129_0738', '2019-01-29 07:38:20.797441');
+(32, 'leave', '0002_auto_20190129_0738', '2019-01-29 07:38:20.797441'),
+(33, 'payroll', '0001_initial', '2019-01-30 15:48:45.509011'),
+(34, 'leave', '0003_auto_20190204_1233', '2019-02-04 12:33:19.514687'),
+(35, 'departments', '0002_auto_20190207_0310', '2019-02-07 03:10:46.744475'),
+(36, 'accounts', '0004_employee_profile_pic', '2019-02-07 05:07:57.673607'),
+(37, 'CRM', '0009_training_all_trainee', '2019-02-07 07:06:44.360112');
 
 -- --------------------------------------------------------
 
@@ -470,7 +486,9 @@ CREATE TABLE `django_session` (
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
-('vqyxl3hpqiar7vudllni1tdt8joyu8ta', 'MjBkZDIyZGQ4OWQ2MjkxNWVkOWU5ODFmYjZkYTgyZjNlODhkODgwZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkZWUxNmIxOWRjOTZiYThlODBjNDdlNmJiZmRjY2EzNmFkYmJkZmVhIiwidXNlcm5hbWUiOiJvbWFtYmlhIn0=', '2019-02-11 18:00:04.248476');
+('4qoegj2dle3j7zuhywc1xpgbgvq1ta4i', 'MjBkZDIyZGQ4OWQ2MjkxNWVkOWU5ODFmYjZkYTgyZjNlODhkODgwZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkZWUxNmIxOWRjOTZiYThlODBjNDdlNmJiZmRjY2EzNmFkYmJkZmVhIiwidXNlcm5hbWUiOiJvbWFtYmlhIn0=', '2019-02-21 06:37:38.299883'),
+('vqyxl3hpqiar7vudllni1tdt8joyu8ta', 'MjBkZDIyZGQ4OWQ2MjkxNWVkOWU5ODFmYjZkYTgyZjNlODhkODgwZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkZWUxNmIxOWRjOTZiYThlODBjNDdlNmJiZmRjY2EzNmFkYmJkZmVhIiwidXNlcm5hbWUiOiJvbWFtYmlhIn0=', '2019-02-11 18:00:04.248476'),
+('x0onayibalndacehynr5dgn3yszcjs83', 'MjBkZDIyZGQ4OWQ2MjkxNWVkOWU5ODFmYjZkYTgyZjNlODhkODgwZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkZWUxNmIxOWRjOTZiYThlODBjNDdlNmJiZmRjY2EzNmFkYmJkZmVhIiwidXNlcm5hbWUiOiJvbWFtYmlhIn0=', '2019-02-14 17:48:16.157073');
 
 -- --------------------------------------------------------
 
@@ -485,7 +503,7 @@ CREATE TABLE `leave_applyleave` (
   `end_date` date NOT NULL,
   `resume_date` date NOT NULL,
   `home_phone` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `employee_id` int(11) NOT NULL,
+  `employee` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `leave_id` int(11) NOT NULL,
   `person_taking_charge_id` int(11) NOT NULL,
   `period` int(10) UNSIGNED NOT NULL
@@ -495,8 +513,8 @@ CREATE TABLE `leave_applyleave` (
 -- Dumping data for table `leave_applyleave`
 --
 
-INSERT INTO `leave_applyleave` (`id`, `start_date`, `status`, `end_date`, `resume_date`, `home_phone`, `employee_id`, `leave_id`, `person_taking_charge_id`, `period`) VALUES
-(1, '2019-01-16', 1, '2019-01-31', '2019-02-01', '0708067459', 1, 1, 1, 3);
+INSERT INTO `leave_applyleave` (`id`, `start_date`, `status`, `end_date`, `resume_date`, `home_phone`, `employee`, `leave_id`, `person_taking_charge_id`, `period`) VALUES
+(9, '2019-02-01', 1, '2019-02-07', '2019-02-05', '0708067459', 'omambia', 1, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -517,6 +535,27 @@ CREATE TABLE `leave_leave` (
 
 INSERT INTO `leave_leave` (`id`, `name`, `description`, `created_on`) VALUES
 (1, 'Sick Leave', 'Given any employee seeking medical attention', '2019-01-29');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payroll_payroll`
+--
+
+CREATE TABLE `payroll_payroll` (
+  `id` int(11) NOT NULL,
+  `payroll_file` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_on` date NOT NULL,
+  `employee_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `payroll_payroll`
+--
+
+INSERT INTO `payroll_payroll` (`id`, `payroll_file`, `created_on`, `employee_id`) VALUES
+(1, 'documents/payroll/80cda5f7804548698721c849fc1783a4.pdf', '2019-01-30', 1),
+(2, 'documents/payroll/09ff2e3f1253412b838528bdae750be5.pdf', '2019-01-30', 1);
 
 -- --------------------------------------------------------
 
@@ -629,7 +668,8 @@ ALTER TABLE `departments_department`
 -- Indexes for table `departments_position`
 --
 ALTER TABLE `departments_position`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `departments_position_department_id_8b23d744_fk_departmen` (`department_id`);
 
 --
 -- Indexes for table `django_admin_log`
@@ -665,14 +705,20 @@ ALTER TABLE `django_session`
 ALTER TABLE `leave_applyleave`
   ADD PRIMARY KEY (`id`),
   ADD KEY `leave_applyleave_leave_id_24f45d69_fk_leave_leave_id` (`leave_id`),
-  ADD KEY `leave_applyleave_person_taking_charge_ca981a05_fk_accounts_` (`person_taking_charge_id`),
-  ADD KEY `leave_applyleave_employee_id_02bd00e1_fk_accounts_employee_id` (`employee_id`);
+  ADD KEY `leave_applyleave_person_taking_charge_ca981a05_fk_accounts_` (`person_taking_charge_id`);
 
 --
 -- Indexes for table `leave_leave`
 --
 ALTER TABLE `leave_leave`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `payroll_payroll`
+--
+ALTER TABLE `payroll_payroll`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `payroll_payroll_employee_id_cd24ccf6_fk_accounts_employee_id` (`employee_id`);
 
 --
 -- Indexes for table `targets_target`
@@ -689,7 +735,7 @@ ALTER TABLE `targets_target`
 -- AUTO_INCREMENT for table `accounts_employee`
 --
 ALTER TABLE `accounts_employee`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `auth_group`
@@ -707,13 +753,13 @@ ALTER TABLE `auth_group_permissions`
 -- AUTO_INCREMENT for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `auth_user`
 --
 ALTER TABLE `auth_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `auth_user_groups`
@@ -731,7 +777,7 @@ ALTER TABLE `auth_user_user_permissions`
 -- AUTO_INCREMENT for table `CRM_client`
 --
 ALTER TABLE `CRM_client`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `CRM_feedback`
@@ -761,7 +807,7 @@ ALTER TABLE `departments_department`
 -- AUTO_INCREMENT for table `departments_position`
 --
 ALTER TABLE `departments_position`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `django_admin_log`
@@ -773,25 +819,31 @@ ALTER TABLE `django_admin_log`
 -- AUTO_INCREMENT for table `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `leave_applyleave`
 --
 ALTER TABLE `leave_applyleave`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `leave_leave`
 --
 ALTER TABLE `leave_leave`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `payroll_payroll`
+--
+ALTER TABLE `payroll_payroll`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `targets_target`
@@ -851,6 +903,12 @@ ALTER TABLE `CRM_training`
   ADD CONSTRAINT `CRM_training_trainer_id_9d2300d5_fk_accounts_employee_id` FOREIGN KEY (`trainer_id`) REFERENCES `accounts_employee` (`id`);
 
 --
+-- Constraints for table `departments_position`
+--
+ALTER TABLE `departments_position`
+  ADD CONSTRAINT `departments_position_department_id_8b23d744_fk_departmen` FOREIGN KEY (`department_id`) REFERENCES `departments_department` (`id`);
+
+--
 -- Constraints for table `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
@@ -861,9 +919,14 @@ ALTER TABLE `django_admin_log`
 -- Constraints for table `leave_applyleave`
 --
 ALTER TABLE `leave_applyleave`
-  ADD CONSTRAINT `leave_applyleave_employee_id_02bd00e1_fk_accounts_employee_id` FOREIGN KEY (`employee_id`) REFERENCES `accounts_employee` (`id`),
   ADD CONSTRAINT `leave_applyleave_leave_id_24f45d69_fk_leave_leave_id` FOREIGN KEY (`leave_id`) REFERENCES `leave_leave` (`id`),
   ADD CONSTRAINT `leave_applyleave_person_taking_charge_ca981a05_fk_accounts_` FOREIGN KEY (`person_taking_charge_id`) REFERENCES `accounts_employee` (`id`);
+
+--
+-- Constraints for table `payroll_payroll`
+--
+ALTER TABLE `payroll_payroll`
+  ADD CONSTRAINT `payroll_payroll_employee_id_cd24ccf6_fk_accounts_employee_id` FOREIGN KEY (`employee_id`) REFERENCES `accounts_employee` (`id`);
 
 --
 -- Constraints for table `targets_target`

@@ -96,7 +96,6 @@ def get_clients():
         clients.append((cl.id, cl.company_name ,))
     return tuple(clients)
 
-print(get_clients())
 
 class Training(models.Model):
     trainer = models.ForeignKey(Employee, on_delete = models.CASCADE)
