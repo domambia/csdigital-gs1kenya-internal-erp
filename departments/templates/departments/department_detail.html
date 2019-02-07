@@ -10,24 +10,28 @@
   </div>
 {% endblock%}
 {% block content %}
-  <div class="jumbotron" >
-      <div class="helper-cls">
+  <div class="card body" >
+      <div class="helper-cls body">
         <a href="{% url 'departments:list_department' %}" class="btn btn-primary">BACK</a>
         <a href="{% url 'departments:edit_department' pk=department.pk %}" class="btn btn-success">EDIT</a>
       </div> <br> <br>
       <div class="body ">
-        <div class="row  ">
-            <div class="col-md-3">Department Name </div>
-            <div class="col-md-6">{{ department.name }}</div>
-        </div>
-        <div class="row  ">
-            <div class="col-md-3">Department Initials </div>
-            <div class="col-md-6">{{ department.initials }}</div>
-        </div>
-        <div class="row  ">
-            <div class="col-md-3">Created On </div>
-            <div class="col-md-6">{{ department.created_on }}</div>
-        </div>
+        <table class="table table-responsive"> 
+            <tbody>
+                <tr>
+                    <td>Department Name</td>
+                    <td>{{ department.name }}</td>
+                </tr>
+                <tr>
+                    <td>Department Abbrs</td>
+                    <td>{{ department.initials }}</td>
+                </tr>
+                <tr>
+                    <td>Created On </td>
+                    <td>{{ department.created_on }}</td>
+                </tr>
+            </tbody>
+        </table>
       </div>
 
 

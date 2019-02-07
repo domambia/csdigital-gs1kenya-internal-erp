@@ -10,27 +10,28 @@
   </div>
 {% endblock%}
 {% block content %}
-  <div class="jumbotron">
-    <div class="helper_cls">
-        <a href="{% url 'leave:leave_list' %}" class="btn btn-primary">BACK</a>
-        <a href="{% url 'leave:leave_edit' pk=leave.pk %}" class="btn btn-success">EDIT</a>
-    </div>
       <div class="body">
-        <div class="row clearfix jumbotron">
-            <div class="col-md-12">
-                <div class="record">
-                    <div class="col-md-3">Leave Name</div>
-                    <div class="col-md-8">{{ leave.name }}</div>
-                </div>
-                <div class="record">
-                    <div class="col-md-3">Descriptions</div>
-                    <div class="col-md-8">{{ leave.description }}</div>
-                </div>
+        <div class="card body">
+            <div class="helper_cls body">
+                    <a href="{% url 'leave:leave_list' %}" class="btn btn-primary">BACK</a>
+                    <a href="{% url 'leave:leave_edit' pk=leave.pk %}" class="btn btn-success">EDIT</a>
+            </div>
+            <div class="body">
+                
+            <table class="table table-responsive">
+                <tbody>
+                    <tr>
+                        <td>Leave Name</td>
+                        <td>{{ leave.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>{{ leave.description }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            
             </div>
         </div>
       </div>
-
-
-  </div>
-
 {% endblock %}
