@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy 
-from CRM.models import Client, Supplier, Feedback, Training
+from CRM.models import Client, Supplier, Feedback, Training, Barcode
 from helpers.help import get_country, get_sectors
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView 
 # Create your views here.
@@ -151,3 +151,34 @@ class TrainingDetailView(DetailView):
     model = Training 
     context_object_name = "training"
     template_name = "training/training_detail.html"
+
+
+'''
+Barcode Details 
+'''
+class BarcodeListView(ListView):
+    model = Barcode 
+    context_object_name = "barcodes"
+    template_name = "barcode/barcode_list.html"
+
+class BarcodeCreateView(CreateView):
+    fields = ('GTIN', 'client', 'product_description', 'brand_name', 'name_packaging', 'type',
+                'depth', 'width', 'height', 'gross_weight', 'net_weight', 'size')
+    model = Barcode
+    template_name  = "barcode/barcode_form.html"
+
+class BarcodeUpdateView(UpdateView):
+    fields = ('GTIN', 'client', 'product_description', 'brand_name', 'name_packaging', 'type',
+                'depth', 'width', 'height', 'gross_weight', 'net_weight', 'size')
+    model = Barcode
+    template_name  = "barcode/barcode_form.html"
+
+
+class BarcodeDeleteView(DeleteView):
+    model = Barcode 
+    template_name  = "barcode/barcode_confirm_delete.html"
+    success_url = reverse_lazy("CRM:list_barcode")
+class BarcodeDetailView(DetailView):
+    model = Barcode 
+    context_object_name  = 'barcode'
+    template_name = "barcode/barcode_detail.html"

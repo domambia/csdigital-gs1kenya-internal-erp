@@ -30,5 +30,11 @@ urlpatterns = [
     url(r'^training/detail/(?P<pk>\d+)/$', login_required(views.TrainingDetailView.as_view()), name = "detail_training"), 
     url(r'^training/delete/(?P<pk>\d+)/$', login_required(views.TrainingDeleteView.as_view()), name = "delete_training"), 
     url(r'^training/edit/(?P<pk>\d+)/$', login_required(views.TrainingUpdateView.as_view()), name = "edit_training"), 
+    # barcode 
+    url(r'^barcode/list/', login_required(views.BarcodeListView.as_view()), name = "list_barcode"),  
+    url(r'^barcode/add/', login_required(views.BarcodeCreateView.as_view()), name = "create_barcode"), 
+    url(r'^barcode/detail/(?P<pk>\d+)/$', login_required(views.BarcodeDetailView.as_view()), name = "detail_barcode"), 
+    url(r'^barcode/delete/(?P<pk>\d+)/$', login_required(views.BarcodeDeleteView.as_view()), name = "delete_barcode"), 
+    url(r'^barcode/edit/(?P<pk>\d+)/$', login_required(views.BarcodeUpdateView.as_view()), name = "edit_barcode" ),   
 
 ]

@@ -1,0 +1,17 @@
+{% extends 'layout/crm_layout.html' %}
+{% load widget_tweaks %}
+{% block header %}
+  <div style="background: none; box-shadow: none">
+      <h2 class="header pull-left">CRM | SUPPLIERS BARCODE</h2>
+  </div>
+{% endblock%}
+{% block content %}
+  <div class="jumbotron card">
+      DELETE SUPPLIER
+      <form method="POST">
+        {% csrf_token %}
+        Are you sure you want delete {{barcode.client.company_name }}  Code?
+        <input class="btn btn-danger" type="submit" value="YES" /> OR <a href="{% url 'CRM:list_barcode'%}" class="btn btn-primary">NO</a>
+      </form>
+  </div>
+{% endblock %}

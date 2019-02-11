@@ -104,15 +104,27 @@ class Training(models.Model):
     all_trainee = MultiSelectField(choices=get_clients(), max_choices= 3, max_length=3)
     happened_on  = models.DateField(default = datetime.datetime.now)
 
-    def __str__(self):
-        return self.trainer 
-
-
     def get_absolute_url(self):
         return reverse("CRM:list_training")
     
         
+class Barcode(models.Model):
+    GTIN = models.CharField(max_length = 40, unique = True)
+    client = models.ForeignKey("Client", on_delete=models.CASCADE)
+    product_description = models.CharField(max_length = 100)
+    brand_name = models.CharField(max_length = 100)
+    name_packaging = models.CharField(max_length = 100, blank = True)
+    type = models.CharField(max_length=50)
+    depth = models.CharField(max_length=50, blank = True)
+    width = models.CharField(max_length=50, blank = True)
+    height = models.CharField(max_length=50, blank = True)
+    gross_weight = models.CharField(max_length=50, blank = True) 
+    net_weight = models.CharField(max_length=50, blank = True)
+    size = models.IntegerField(blank = True)
+    
+    def __str__(self):
+        return self.GTIN
 
-
-
-
+    def get_absolute_url(self):
+        return reverse("CRM:detail_barcode", kwargs={"pk": self.pk})
+    

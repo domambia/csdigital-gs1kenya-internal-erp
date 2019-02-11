@@ -1,0 +1,62 @@
+{% extends "layout/crm_layout.html" %}
+{% block header %}
+  <div style="background: none; box-shadow: none">
+      <h2 class="header pull-left">CRM |> BARCODES</h2>
+  </div>
+{% endblock%}
+{% block content %}
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card body">
+            <div class="">
+                <h2 class="body">
+                  <span><a class="btn btn-primary" href = "{% url 'CRM:create_barcode' %}" >ADD BARCODE</a></span>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr>
+                                <th>GTINS</th>
+                                <th>Company Name</th>
+                                <th>Brand Name</th>
+                                <th>Packing Name</th>
+                                <th>Type</th>
+                                <th>Depth</th>
+                                <th>Width</th>
+                                <th style="text-align:center;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if barcodes %}
+                              {% for barcode in barcodes %}
+                                  <tr>
+                                      <td>{{ barcode.GTIN }}</td>
+                                      <td>{{ barcode.client.company_name }}</td>
+                                      <td>{{ barcode.brand_name }}</td>
+                                      <td>{{ barcode.name_packaging }}</td>
+                                      <td>{{ barcode.type }}</td>
+                                      <td>{{ barcode.depth }}</td>
+                                      <td>{{ barcode.width }}</td>
+                                      <td>
+                                          <span> <a href = "{% url 'CRM:detail_barcode' barcode.id %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>
+                                          <span> <a href = "{% url 'CRM:edit_barcode' barcode.id %}"><i class="material-icons">edit</i></a> </span>
+                                          <span> <a href = "{% url 'CRM:delete_barcode' barcode.id %}"><i class="material-icons" style = "color:#cc0000;">delete</i></a> </span>
+                                      </td>
+                                  </tr>
+                              {% endfor %}
+                            {% else %}
+
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Exportable Table -->
+
+{% endblock %}

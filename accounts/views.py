@@ -83,9 +83,11 @@ def add_employee(request):
 def user_login(request):
     if request.method == "POST":
         username = request.POST.get('username')
+        
         password = request.POST.get('password')
 
         user = authenticate(username=username, password=password)
+        print(user)
         if user:
             if user.is_active:
                 login(request, user)

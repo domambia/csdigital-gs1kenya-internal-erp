@@ -1,0 +1,85 @@
+{% extends 'layout/crm_layout.html' %}
+{% load widget_tweaks %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+{{ employee_form.media }}            {# Adds date-picker required JS and CSS #}
+{% block header %}
+  <div class = "row" style="margin-left: 4px; background: none; box-shadow: none;">
+      <h2 class="header pull-left">CRM | SUPPLIERS</h2>
+  </div>
+{% endblock%}
+{% block content %}
+    <div class="body card">
+            <div class="helper_cls body">
+                    <a href="{% url 'CRM:list_barcode' %}" class="btn btn-primary">BACK</a>
+                    <a href="{% url 'CRM:edit_barcode' pk=barcode.pk %}" class="btn btn-success">EDIT</a>
+                </div>
+
+            <div class="body row">
+                <div class="col-md-6">
+
+                <table class="table table-responsive">
+                        <tbody>
+                           <tr>
+                               <td>GTIN</td>
+                               <td>{{ barcode.GTIN }}</td>
+                           </tr>
+                           <tr>
+                               <td>Company Name</td>
+                               <td>{{ barcode.client.company_name }}</td>
+                           </tr>
+                           <tr>
+                               <td>Product Description</td>
+                               <td>{{ barcode.product_description }}</td>
+                           </tr>
+                           <tr>
+                               <td>Brand Name</td>
+                               <td>{{ barcode.brand_name }}</td>
+                           </tr>
+                           <tr>
+                               <td>Name of Packaging</td>
+                               <td>{{ barcode.name_packaging }}</td>
+                           </tr>
+                           <tr>
+                               <td>Type</td>
+                               <td>{{ barcode.type }}</td>
+                           </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <!-- table two -->
+                <table class="table table-responsive">
+                        <tbody>
+                            <tr>
+                                <td>Depth</td>
+                                <td>{{ barcode.depth }}</td>
+                            </tr>
+                            <tr>
+                                <td>Width</td>
+                                <td>{{ barcode.width }}</td>
+                            </tr>
+                            <tr>
+                                <td>Height</td>
+                                <td>{{ barcode.height }}</td>
+                            </tr>
+                            <tr>
+                                <td>Gross Weight</td>
+                                <td>{{ barcode.gross_weight }}</td>
+                            </tr>
+                            <tr>
+                                 <td>Net Weight</td>
+                                 <td>{{ barcode.net_weight }}</td>
+                             </tr>
+                             <tr>
+                                 <td>Size</td>
+                                 <td>{{ barcode.size }}</td>
+                             </tr>
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+            </div>
+          </div>
+{% endblock %}

@@ -15,7 +15,7 @@ class Employee(models.Model):
     next_of_kin_name = models.CharField(max_length=60, blank=True)
     alt_phone_number = models.IntegerField(default = 0)
     # more
-    kin_email = models.CharField(max_length=100, blank=True)
+    kin_email = models.CharField(max_length=100, blank=True, unique = True)
     county = models.CharField(max_length=100,  blank=True, choices = get_country(), default = "No country")
     next_of_kin_phone = models.CharField(max_length=20, blank=True)
 
