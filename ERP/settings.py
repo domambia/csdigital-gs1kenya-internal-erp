@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'CRM',
     'helpers',
     'payroll',
+    'easy_pdf',
 ]
 
 MIDDLEWARE = [

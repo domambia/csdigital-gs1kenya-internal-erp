@@ -12,10 +12,7 @@ from leave.models import Leave, ApplyLeave
 from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
-import io
-from django.http import FileResponse
-from reportlab.pdfgen import canvas
-
+from easy_pdf.views import PDFTemplateResponseMixin
 
 
 class LeaveListView(ListView):
@@ -51,13 +48,16 @@ class LeaveDeleteView(DeleteView):
 def applyleave(request):
     form = ApplyForm(request.POST or None)
     user_name  = request.session['username']
+    user = User.objects.get(username = user_name)
+    emp = Employee.objects.get(id = user.id)
+    phone_number = emp.alt_phone_number
     # print(employee_user)
     if form.is_valid():
         user_data = form.save()
         return HttpResponseRedirect(reverse('leave:applyleave_list'))
     
 
-    return render(request,"leave/applyleave_form.html", {'current_user': user_name, 'form': form})
+    return render(request,"leave/applyleave_form.html", {'current_user': user_name, 'phone_number': phone_number, 'form': form})
 class ApplyLeaveListView(ListView):
     context_object_name = "applied_leaves"
     model = ApplyLeave
@@ -75,6 +75,11 @@ Leave Operations
 def approve_leave(request, pk):
 
     leave = ApplyLeave.objects.get(id = pk)
+    start_date = leave.start_date 
+    end_date = leave.end_date 
+    resume_date = leave.resume_date 
+    home_phone = leave.home_phone
+    leave_name = leave.leave.name 
     if(leave):
         leave.status = 1
         leave.save()
@@ -90,6 +95,7 @@ def approve_leave(request, pk):
 
             Your leave has been approved Today its will be starting as form {} to {}.
             Please hand on the necessary documents to your department Effectively and Immediately.
+            Pick the fully signed document from the HR Office by the End of the Day.
 
             Thank you.
             HR. GS1Kenya
@@ -114,24 +120,19 @@ def create_pdf(request):
 View to Download a user leave 
 '''
 
-def leave_download(request, pk):
+def leave_download(request, pk): 
     leave = ApplyLeave.objects.get(pk=pk)
     start_date = leave.start_date 
     end_date = leave.end_date 
     resume_date = leave.resume_date 
     home_phone = leave.home_phone
     leave_name = leave.leave.name 
-    # Create a file-like buffer to receive PDF data.
-    buffer = io.BytesIO()
-    # Create the PDF object, using the buffer as its "file."
-    p = canvas.Canvas(buffer)
-    # Draw things on the PDF. Here's where the PDF generation happens.
-    # See the ReportLab documentation for the full list of functionality.
-    p.drawString(100, 100, "Hello world.")
-    # Close the PDF object cleanly, and we're done.
-    p.showPage()
-    p.save()
-    # FileResponse sets the Content-Disposition header so that browsers
-    # present the option to save the file.
-    return FileResponse(buffer, as_attachment=True, filename='{}.pdf'.format(leave.employee.user.username+'_leave'))
+    
+    return "SOme text"
 
+
+class CreatePDF(PDFTemplateResponseMixin, DetailView):
+    model = ApplyLeave
+    context_object_name = "leave"
+    template_name = "leave/leave_pdf.html"
+    

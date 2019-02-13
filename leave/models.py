@@ -26,9 +26,8 @@ class ApplyLeave(models.Model):
                                 )
     period = models.PositiveIntegerField(default = 3)
     employee = models.CharField(max_length =200)
-    home_phone = models.CharField(max_length = 20, default ='0708067459')
-    leave = models.ForeignKey(Leave, related_name = "leave",
-                                        on_delete = models.CASCADE)
+    home_phone = models.CharField(max_length = 20)
+    leave = models.ForeignKey(Leave, related_name = "leave", on_delete = models.CASCADE)
 
     # def get_absolute_url (self):
     #     return reverse("leave:applyleave_list")

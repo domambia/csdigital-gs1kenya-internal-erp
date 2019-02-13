@@ -175,19 +175,6 @@
               <div class="col-md-4">
                   <div class="form-group">
                       <div class="form-line">
-                          <label for="{{ user_form.department.id_for_label }}">Department</label>
-                          {{ form.department }}
-                          <ul>
-                            {% for error in form.department.errors%}
-                              <li class="alert alert-danger">{{ error }}</li>
-                            {% endfor %}
-                          </ul>
-                      </div>
-                  </div>
-              </div>
-              <div class="col-md-4">
-                  <div class="form-group">
-                      <div class="form-line">
                           <label for="{{ user_form.salary.id_for_label }}">Salary</label>
                           {{ form.salary|add_class:"form-control" }}
                           <ul>
@@ -216,7 +203,7 @@
           </div>
           <div class="row clearfix">
             <div class="col-md-4 pull-right">
-                <input type="submit" class="btn btn-primary btn-lg m-l-15 waves-effect" value="ADD NEW EMPLOYEE">
+                <input type="submit" class="btn btn-primary btn-lg m-l-15 waves-effect" value="SUBMIT">
             </div>
           </div>
 

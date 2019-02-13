@@ -93,7 +93,7 @@
 
               <div class="col-md-5">
                   <div class="form-group">
-                      <div class="form-line">
+                      <div class="">
                        <label for="">County</label>     
                           {{ employee_form.county }}
                           <ul>
@@ -218,26 +218,13 @@
                 <h2>WORK INFORMATION</h2>
             </div>
 
-              <div class="col-md-4">
+              <div class="col-md-6">
                   <div class="form-group">
-                      <div class="form-line">
+                      <div class="">
                           <label for="{{ employee_form.current_position.id_for_label }}">Current Position</label>
                           {{ employee_form.position }}
                           <ul>
                             {% for error in employee_form.position.errors%}
-                              <li class="alert alert-danger">{{ error }}</li>
-                            {% endfor %}
-                          </ul>
-                      </div>
-                  </div>
-              </div>
-              <div class="col-md-5">
-                  <div class="form-group">
-                      <div class="form-line">
-                          <label for="{{ user_form.department.id_for_label }}">Department</label>
-                          {{ employee_form.department }}
-                          <ul>
-                            {% for error in employee_form.department.errors%}
                               <li class="alert alert-danger">{{ error }}</li>
                             {% endfor %}
                           </ul>

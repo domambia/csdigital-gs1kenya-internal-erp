@@ -130,7 +130,7 @@ def employee_delete(request, pk):
 class EmployeeUpdateView(UpdateView):
     fields = ('address', 'phone', 'date_of_birth',
         'county', 'dependant_name', 'dependant_contact', 'dependant_relationship',
-        'position', 'department', 'salary', 'kin_email', 'alt_phone_number', 'profile_pic')
+        'position', 'salary', 'kin_email', 'alt_phone_number', 'profile_pic')
     model = Employee 
     template_name  = "accounts/edit.html"
 

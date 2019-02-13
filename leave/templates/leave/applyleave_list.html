@@ -19,12 +19,12 @@
                         <thead>
                             <tr>
                                 <th>Employee</th>
-                                <th> Person taking Charge</th>
+                                <th>Person taking Charge</th>
                                 <th>Leave Name</th>
                                 <th>Starting Date</th>
                                 <th>Ending Date</th>
-                                <th> Resumption Date</th>
-                                <th > Status & print</th>
+                                <th>Resumption Date</th>
+                                <th style="text-align:center;">Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -32,18 +32,20 @@
                               {% for leave in applied_leaves %}
                                   <tr>
                                     <td>{{ leave.employee  }}  </td>
-                                      <td>{{ leave.person_taking_charge.user.username}}</td>
-                                      <td>{{ leave.leave.name }}</td>
-                                      <td>{{ leave.start_date }}</td>
-                                      <td>{{ leave.end_date }}</td>
-                                      <td>{{ leave.resume_date }}</td>
-                                      <td style=" margin: 40px auto; text-align:center;"> 
-					{% if leave.status  == 1 %}
-						<span class="label bg-green" >Approved</span>
-					{% else %}
-						<span  class = "label bg-orange">Pending</span>
-					{% endif %}
-				      </td> 
+                                        <td>{{ leave.person_taking_charge.user.first_name}} &nbsp; &nbsp; {{ leave.person_taking_charge.user.last_name}}</td>
+                                        <td>{{ leave.leave.name }}</td>
+                                        <td>{{ leave.start_date }}</td>
+                                        <td>{{ leave.end_date }}</td>
+                                        <td>{{ leave.resume_date }}</td>
+                                        <td style=" margin: 40px auto; text-align:center;"> 
+                                            {% if leave.status  == 1 %}
+                                                <span class="label btn bg-green" >Approved</span>
+                                                <span> <a href = "{% url 'leave:download_leave' pk=leave.pk %}" class="btn label bg-orange">print</a> </span>
+                                            {% else %}
+                                                <span  class = "btn label bg-yellow">Pending</span>
+                                                <span> <a href = "{% url 'leave:approve' pk=leave.pk %}" target="_blank" class="btn label bg-orange">approve</a> </span>
+                                            {% endif %}
+                                        </td> 
                                  </tr>
                               {% endfor %}
                             {% else %}

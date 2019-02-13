@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from departments.models import Position, Department
 from helpers.help import get_country
+from django.urls import reverse
 
 
 
@@ -23,12 +24,12 @@ class Employee(models.Model):
     dependant_name = models.CharField(max_length=100, blank=True)
     dependant_relationship = models.CharField(max_length=60, blank=True)
     dependant_contact = models.CharField(max_length=60, blank=True)
-
+    leave_balance = models.IntegerField(default= 30)
+    leave_bal = models.IntegerField(default= 4)
     profile_pic = models.ImageField(upload_to = 'profile_pics', blank = True)
 
     # Job Information
     position = models.ForeignKey(Position, on_delete =models.CASCADE, default = 0)
-    department = models.ForeignKey(Department, on_delete =models.CASCADE, default = 0)
 
     # Salary Information
     salary = models.CharField(max_length=100, blank=True)
@@ -38,6 +39,6 @@ class Employee(models.Model):
 
     def get_absolute_url(self):
     
-        return reverse("accounts:list", {'pk': self.pk })
+        return reverse("accounts:employees")
 
 

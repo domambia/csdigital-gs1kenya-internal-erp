@@ -18,12 +18,12 @@
         {% csrf_token %}
           <div class="row clearfix">
             <div class="col-md-4">
-                    <div class="form-group">
-                        <div class="form-line">
-                            <label for="{{ form.period.id_for_label }}">Your Username</label> <br>
-                            <input type="text" name="{{ form.employee.name }}" value="{{ current_user }}" class="form-control">
-                        </div>
+                <div class="form-group">
+                    <div class="form-line">
+                        <label for="{{ form.period.id_for_label }}">Your Username</label> <br>
+                        <input type="text" name="{{ form.employee.name }}" value="{{ current_user }}" class="form-control">
                     </div>
+                </div>
             </div>
             <div class="col-md-4">
                     <div class="form-group">
@@ -100,14 +100,8 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <div class="form-line">
-                        <label for="{{ form.home_phone.id_for_label }}">Home Phone Number(For any communicatons)</label>
-                        {{ form.home_phone |add_class:"form-control" }}
-                        <ul>
-                          {% for error in form.home_phone.errors%}
-                            <li class="alert alert-danger">{{ error }}</li>
-                          {% endfor %}
-                        </ul>
-
+                        <label for="{{ form.home_phone.id_for_label }}">Phone Number</label> <br>
+                        <input type="text" name="{{ form.home_phone.name }}" value="{{ phone_number }}" class="form-control">
                     </div>
                 </div>
             </div>
