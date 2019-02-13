@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Leave | Docs</title>
+    <style>
+        body{
+            background-color:#fff;
+            font-size: 15px;
+        }
+        .header{
+            text-align: center;
+            font-size: 35px;
+            letter-spacing: 1;
+        }
+        .header__info{
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .print_date{
+            font-weight: 500;
+        }
+        .dotted{
+            border-bottom: 1px dotted #333;
+        }
+        .value{
+                    
+            }
+    </style>
+</head>
+<body>
+    <div class="header">
+            <img src="{% static 'images/gs1ea.png' %}" alt="LOGO" />
+        <h2 class="header__info">
+            <span class="header__main" style="font-size: 26px;">LEAVE REQUEST</span><br>
+            <span class="header__sub" style="font-size: 20px;">LEAVE WILL NOT BE APPROVED IF ANY OF THE FIELDS IS MISSING</span>
+        </h2>
+    </div>
+
+    <div class="print_date">Date: <span class="dotted"> {{ leave.start_date }} </span></div>
+
+    <h2 class="office">
+        <span  class="office__1">Finance & administration Mananger,</span> <br>
+        <span class="office__2">GS1 Kenya,</span><br>
+        <span class="office__3">PO BOX 3243-00200.</span><br>
+    </h2>
+
+    <p class="paragraph">
+        I <span class="dotted"> {{ leave.employee.user.first_name}} &nbsp; {{ leave.employee.user.last_name}}</span> (full names)
+        wish to apply for<b> <em class="value"> {{ leave.leave.name }} </em> </b> for a period of<b> <em class="value">  {{ leave.period }} </em></b> days. 
+        With effect from<b><em class="value"> {{ leave.start_date }} to {{ leave.end_date }}</em></b>, i shall resume on <b><em class="value dotted"> {{ leave.resume_date }} </em></b>
+    </p>
+    <br> <br>
+    <div class="yours__info">
+        <p>Yours Faithfull</p>
+        <em> <span class="value"> <b>{{ leave.employee}}</b></span></em> 
+    </div>
+    <br> <br>
+    <div class="work">
+        <p> Work Station/ Department: <em> <span class="dotted value"> {{ leave.employee.position }} </span> </em> </p>
+        <p> Tel. No while away:<em> <span class="dotted value"> {{ leave.employee.employee.alt_phone_number }} </span></em> </p>
+        <p> Person Taking Charge: <em> <span class="dotted value">{{ leave.person_taking_charge.user.first_name}} &nbsp; &nbsp; {{ leave.person_taking_charge.user.last_name}} </span></em> </p>
+        <p> Person Taking Charge Tel. No: <em>  <span class="dotted value"> {{ leave.person_taking_charge.phone}} </span></em> </p>
+        
+    </div>
+    <br> <br>
+    <div class="balance">
+        <p>Your leave balance is: <span class="value dotted"><em>{{ leave.employee.leave_bal }}</em></p>
+    </div>
+    <br> <br>
+    <div class="yours__info">
+        <p>Thank You</p>
+        <p> GS1 KENYA</p>
+    </div>
+    
+</body>
+</html>
