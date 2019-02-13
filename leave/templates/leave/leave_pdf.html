@@ -31,7 +31,7 @@
             }
     </style>
 </head>
-<body>
+<body style="margin:5rem;">
     <div class="header">
             <img src="{% static 'images/gs1ea.png' %}" alt="LOGO" />
         <h2 class="header__info">
@@ -49,15 +49,11 @@
     </h2>
 
     <p class="paragraph">
-        I <span class="dotted"> {{ leave.employee.user.first_name}} &nbsp; {{ leave.employee.user.last_name}}</span> (full names)
+        I <span class="dotted"> {{ leave.employee.first_name}} &nbsp; {{ leave.employee.last_name}}</span> (full names)
         wish to apply for<b> <em class="value"> {{ leave.leave.name }} </em> </b> for a period of<b> <em class="value">  {{ leave.period }} </em></b> days. 
         With effect from<b><em class="value"> {{ leave.start_date }} to {{ leave.end_date }}</em></b>, i shall resume on <b><em class="value dotted"> {{ leave.resume_date }} </em></b>
     </p>
-    <br> <br>
-    <div class="yours__info">
-        <p>Yours Faithfull</p>
-        <em> <span class="value"> <b>{{ leave.employee}}</b></span></em> 
-    </div>
+
     <br> <br>
     <div class="work">
         <p> Work Station/ Department: <em> <span class="dotted value"> {{ leave.employee.position }} </span> </em> </p>
@@ -65,10 +61,6 @@
         <p> Person Taking Charge: <em> <span class="dotted value">{{ leave.person_taking_charge.user.first_name}} &nbsp; &nbsp; {{ leave.person_taking_charge.user.last_name}} </span></em> </p>
         <p> Person Taking Charge Tel. No: <em>  <span class="dotted value"> {{ leave.person_taking_charge.phone}} </span></em> </p>
         
-    </div>
-    <br> <br>
-    <div class="balance">
-        <p>Your leave balance is: <span class="value dotted"><em>{{ leave.employee.leave_bal }}</em></p>
     </div>
     <br> <br>
     <div class="yours__info">
