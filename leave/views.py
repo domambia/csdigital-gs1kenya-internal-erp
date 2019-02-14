@@ -12,7 +12,7 @@ from leave.models import Leave, ApplyLeave
 from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
-from easy_pdf.views import PDFTemplateResponseMixin
+from easy_pdf.rendering import render_to_pdf_response
 
 
 class LeaveListView(ListView):
@@ -64,12 +64,14 @@ class ApplyLeaveListView(ListView):
     template_name = "leave/applyleave_list.html"
 
 
+class ApplyLeaveUpdateView(UpdateView):
+    model = ApplyLeave 
+    fields = (
+            'start_date', 'resume_date', 'home_phone','person_taking_charge', 'leave', 'employee',
+            'end_date'
+        )
+    template_name = "leave/applyleave_form.html"
 
-
-"""
-Leave Operations
-
-"""
 
 # approve the leave
 def approve_leave(request, pk):
@@ -114,32 +116,11 @@ def approve_leave(request, pk):
 '''
 Create pdf 
 '''
-def create_pdf(request):
-    return ""
-'''
-View to Download a user leave 
-'''
-
-def leave_download(request, pk): 
-    leave = ApplyLeave.objects.get(pk=pk)
-    start_date = leave.start_date 
-    end_date = leave.end_date 
-    resume_date = leave.resume_date 
-    home_phone = leave.home_phone
-    leave_name = leave.leave.name 
-    
-    return "SOme text"
 
 
-class CreatePDF(PDFTemplateResponseMixin, DetailView):
-    model = ApplyLeave
-    context_object_name = "leave"
-    template_name = "leave/leave_pdf.html"
-    
-from easy_pdf.rendering import render_to_pdf_response
+
 def render_pdf_docs(request, pk):
     leave = ApplyLeave.objects.get(pk=pk)
-    print(leave)
     user  = User.objects.get(username = leave.employee)
     employee = Employee.objects.get(user = user.id)
     start_date = leave.start_date 
