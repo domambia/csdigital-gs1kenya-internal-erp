@@ -8,6 +8,7 @@ defusedxml==0.5.0
 Django==2.1.5
 django-bootstrap-datepicker-plus==3.0.5
 django-bootstrap4==0.0.7
+django-easy-pdf==0.1.1
 django-multiselectfield==0.1.8
 django-weasyprint==0.5.4
 django-widget-tweaks==1.4.3
