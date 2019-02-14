@@ -38,7 +38,7 @@
                                                 <span> <a href = "{% url 'CRM:pend_feedback' feedback.id %}" class="btn lable bg-yellow">open</a></span>
                                           {% elif feedback.status == 11 %}
                                                 <span class="btn lable bg-yellow">opened</span>
-                                                <span> <a href = "{% url 'CRM:pend_feedback' feedback.id %}" class="btn lable bg-orange">close</a></span>
+                                                <span> <a href = "{% url 'CRM:close_feedback' feedback.id %}" class="btn lable bg-orange">close</a></span>
                                           {%elif feedback.status == 1%}
                                                 <span> <a href = "" class="btn lable bg-green">closed</a></span>
                                           {% endif %}
