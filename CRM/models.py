@@ -77,11 +77,16 @@ class Supplier(models.Model):
 
 
 class Feedback(models.Model):
+    STATUS = (
+        (1, "close"),
+        (11, "open"),
+        (0, "pending")
+    )
     client_name = models.ForeignKey(Client, on_delete = models.CASCADE)
     feedback  = models.CharField(max_length = 1000)
     status = models.BooleanField(default = False)
     created_on = models.DateField(default = datetime.datetime.now)
-    status = models.IntegerField(default = 0)
+    status = models.IntegerField(default = 0, choices= STATUS)
 
     def __str__(self):
         return self.feedback

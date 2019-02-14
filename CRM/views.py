@@ -93,13 +93,13 @@ The Feedback Views
 
 class FeedbackCreateView(CreateView):
     model = Feedback 
-    fields = ('client_name', 'feedback')
+    fields = ('client_name', 'feedback', 'status')
     template_name  = "feedback/feedback_form.html"
 
 
 class FeedbackUpdateView(UpdateView):
     model = Feedback 
-    fields = ('client_name', 'feedback')
+    fields = ('client_name', 'feedback', 'status')
     template_name  = "feedback/feedback_form.html"
 
 

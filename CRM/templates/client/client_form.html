@@ -40,7 +40,7 @@
                             <!-- Tab panes -->
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane fade in active" id="home_with_icon_title">
-                                <form action="{% url 'CRM:create_client' " method="POST" enctype="multipart/form-data">   
+                                <form action="{% url 'CRM:create_client' %}" method="POST" enctype="multipart/form-data">   
                                         {% csrf_token %}                              
                                     <div class="row ">
                                         <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
