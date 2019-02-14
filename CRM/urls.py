@@ -24,6 +24,8 @@ urlpatterns = [
     url(r'^feedback/detail/(?P<pk>\d+)/$', login_required(views.FeedbackDetailView.as_view()), name = "detail_feedback"), 
     url(r'^feedback/delete/(?P<pk>\d+)/$', login_required(views.FeedbackDeleteView.as_view()), name = "delete_feedback"), 
     url(r'^feedback/edit/(?P<pk>\d+)/$', login_required(views.FeedbackUpdateView.as_view()), name = "edit_feedback"), 
+    url(r'^feedback/close/(?P<pk>\d+)/$', views.close, name = "close_feedback"), 
+    url(r'^feedback/unpend/(?P<pk>\d+)/$', views.unpend, name = "pend_feedback"), 
     #training
     url(r'^training/list/', login_required(views.TrainingListView.as_view()), name = "list_training"),  
     url(r'^training/add/', login_required(views.TrainingCreateView.as_view()), name = "create_training"), 

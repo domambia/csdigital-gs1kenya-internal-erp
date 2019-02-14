@@ -2,7 +2,10 @@ from django.shortcuts import render
 from django.urls import reverse_lazy 
 from CRM.models import Client, Supplier, Feedback, Training, Barcode
 from helpers.help import get_country, get_sectors
-from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView 
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
+from helpers.sendSMS import SMS
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, HttpResponseRedirect
 # Create your views here.
 
 '''
@@ -14,7 +17,8 @@ def index(request):
     suppliers =  Supplier.objects.count()
     feedbacks = Feedback.objects.count()
     trainings = Training.objects.count()
-
+    # sms = SMS()
+    # sms.send("+254708067459", "Welcome omambia")
     return render(request, "home/index.html", 
                         {'clients': clients, 'suppliers': suppliers, 'feedbacks': feedbacks, 'trainings': trainings})
 
@@ -115,7 +119,22 @@ class FeedbackDetailView(DetailView):
     context_object_name = "feedback"
     template_name = "feedback/feedback_detail.html"
 
+''' Status ACTIVATIONS '''
+@login_required
+def unpend(request, pk):
+    feedback = Feedback.objects.get(id = pk)
+    feedback.status = 11
+    feedback.save()
+    print(feedback.status)
+    return HttpResponseRedirect(reverse('CRM:list_feedback'))
 
+@login_required
+def close(request, pk):
+    feedback = Feedback.objects.get(id = pk)
+    feedback.status = 1
+    feedback.save()
+    print(feedback.status)
+    return HttpResponseRedirect(reverse('CRM:list_feedback'))
 
 
 '''

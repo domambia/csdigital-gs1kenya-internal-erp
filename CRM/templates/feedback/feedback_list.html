@@ -18,9 +18,10 @@
                     <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                         <thead>
                             <tr>
-                                <th>Trainer</th>
+                                <th>Member</th>
                                 <th>Feedback</th>
                                 <th> Created On</th>
+                                <th style="text-align:center;">Status</th>
                                 <th style="text-align:center;">Actions</th>
                             </tr>
                         </thead>
@@ -31,6 +32,17 @@
                                       <td>{{ feedback.client_name }}</td>
                                       <td>{{ feedback.feedback }}</td>
                                       <td>{{ feedback.created_on }}</td>
+                                      <td style="text-align: center;">
+                                          {% if feedback.status == 0%}
+                                                <span class="btn lable bg-orange"> pending</span>
+                                                <span> <a href = "{% url 'CRM:pend_feedback' feedback.id %}" class="btn lable bg-yellow">open</a></span>
+                                          {% elif feedback.status == 11 %}
+                                                <span class="btn lable bg-yellow">opened</span>
+                                                <span> <a href = "{% url 'CRM:pend_feedback' feedback.id %}" class="btn lable bg-orange">close</a></span>
+                                          {%elif feedback.status == 1%}
+                                                <span> <a href = "" class="btn lable bg-green">closed</a></span>
+                                          {% endif %}
+                                      </td>
                                       <td>
                                           <span> <a href = "{% url 'CRM:detail_feedback' pk=feedback.id %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>
                                           <span> <a href = "{% url 'CRM:edit_feedback' pk=feedback.id %}"><i class="material-icons">edit</i></a> </span>

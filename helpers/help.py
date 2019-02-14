@@ -13,7 +13,7 @@ def get_sectors():
                     'Transport / Communication', 'Supply  Chain,warehousing  & construction']
     sectors = []
     for sector in list_sectors:
-        sectors.append((sector.upper(), sector ,))
+        sectors.append((sector.capitalize(), sector ,))
     return tuple(sectors)
 
 
@@ -23,6 +23,6 @@ def get_categs():
                     'Category E']
     categs = []
     for categ in list_categs:
-        categs.append((categ.upper(), categ ,))
+        categs.append((categ.capitalize(), categ ,))
     return tuple(categs)
 
