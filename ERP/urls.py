@@ -7,7 +7,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', index, name="index"),
+    url(r'^$', login_required(index), name="index"),
     url(r'^hrm/home/', hrm_view_index, name = "hrm_index"),
     url(r'^leave/', include('leave.urls'), name = "leave"),
     url(r'^departments/', include('departments.urls'), name = "departments"),
@@ -15,7 +15,6 @@ urlpatterns = [
     url(r'^accounts/', include('accounts.urls')),
     url(r'^targets/', include('targets.urls')),
     url(r'^crm/', include('CRM.urls')),
-    url(r'payroll/', include('payroll.urls')),
 ]
 
 

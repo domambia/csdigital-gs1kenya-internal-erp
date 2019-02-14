@@ -231,7 +231,7 @@
                       </div>
                   </div>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-6g">
                   <div class="form-group">
                       <div class="form-line">
                           <label for="{{ user_form.password.id_for_label }}">Salary</label>
@@ -248,7 +248,7 @@
 
           </div>
           <div class="row clearfix">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="form-group">
                     <div class="form-line">
                         <label for="{{ user_form.password.id_for_label }}">Password</label>
@@ -261,7 +261,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="form-group">
                     <div class="form-line">
                         <label for="{{ employee_form.profile_pic.id_for_label }}">Profile Picture</label>
@@ -273,7 +273,17 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div><br>
+            <div class="row clearfix">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label for="{{ form.company_benifits.id_for_label }}">Company Benefits </label> <br>
+                            <textarea name="{{ form.company_benifits.name }}" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+             </div>
             <div class="col-md-4 pull-right">
                 <input type="submit" class="btn btn-primary btn-lg m-l-15 waves-effect" value="SUBMIT">
             </div>

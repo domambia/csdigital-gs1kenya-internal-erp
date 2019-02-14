@@ -27,6 +27,7 @@ class Employee(models.Model):
     leave_balance = models.IntegerField(default= 30)
     leave_bal = models.IntegerField(default= 4)
     profile_pic = models.ImageField(upload_to = 'profile_pics', blank = True)
+    company_benifits = models.CharField(max_length = 1000, default = "Pay NHIF, NSSF")
 
     # Job Information
     position = models.ForeignKey(Position, on_delete =models.CASCADE, default = 0)

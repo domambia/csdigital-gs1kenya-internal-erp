@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'targets',
     'CRM',
     'helpers',
-    'payroll',
     'easy_pdf',
 ]
 

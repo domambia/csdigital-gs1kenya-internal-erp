@@ -136,3 +136,15 @@ class CreatePDF(PDFTemplateResponseMixin, DetailView):
     context_object_name = "leave"
     template_name = "leave/leave_pdf.html"
     
+from easy_pdf.rendering import render_to_pdf_response
+def render_pdf_docs(request, pk):
+    leave = ApplyLeave.objects.get(pk=pk)
+    print(leave)
+    user  = User.objects.get(username = leave.employee)
+    employee = Employee.objects.get(user = user.id)
+    start_date = leave.start_date 
+    end_date = leave.end_date 
+    days =  float((end_date - start_date).days)
+    return render_to_pdf_response(request, "leave/leave_pdf.html", {"leave": leave, 
+                                    "employee": employee, "days": days, "user": user})
+
