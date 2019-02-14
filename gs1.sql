@@ -54,7 +54,7 @@ CREATE TABLE `accounts_employee` (
 
 INSERT INTO `accounts_employee` (`id`, `address`, `phone`, `date_of_birth`, `next_of_kin_name`, `kin_email`, `county`, `next_of_kin_phone`, `dependant_name`, `dependant_relationship`, `dependant_contact`, `salary`, `department_id`, `position_id`, `user_id`, `alt_phone_number`, `profile_pic`) VALUES
 (1, 'Kisumu-K', '07051545121', '2019-01-16', '', 'junior@gmail.com', '', '', 'Omambia Daug', 'Son', '074404509', '20000', 1, 1, 1, 751545121, 'profile_pics/IMG-20170917-WA0014.jpg'),
-(2, 'Masaku', '705045453', '1993-02-06', '', 'junior@gmail.com', 'Kenya', '', 'Omambia Daug', 'Son', '0705045453', '12500', 1, 1, 2, 705045453, 'profile_pics/IMGP8617.JPG');
+(2, 'Masaku', '705045453', '1993-02-06', '', 'juni1@gmail.com', 'Kenya', '', 'Omambia Daug', 'Son', '0705045453', '12500', 1, 1, 2, 705045453, 'profile_pics/IMGP8617.JPG');
 
 -- --------------------------------------------------------
 
@@ -192,7 +192,7 @@ CREATE TABLE `auth_user` (
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
 (1, 'argon2$argon2i$v=19$m=512,t=2,p=2$ekZJcGRjeWxscEZZ$o8sU42ChUu8MUMSRLkP19Q', '2019-02-07 06:37:37.949204', 0, 'omambia', 'Omambia', 'Dauglous', 'omambiadauglous@gmail.com', 0, 1, '2019-01-28 17:59:33.409242'),
-(2, 'argon2$argon2i$v=19$m=512,t=2,p=2$aU5LVG10akkxV0wx$46lMhUxTyG6KVGgL0c9+ww', NULL, 0, 'domambia', 'Omambia', 'Joshua', 'omambiadauglous@gmail.com', 0, 1, '2019-02-07 05:13:05.951886');
+(2, 'argon2$argon2i$v=19$m=512,t=2,p=2$aU5LVG10akkxV0wx$46lMhUxTyG6KVGgL0c9+ww', NULL, 0, 'domambia', 'Omambia', 'Joshua', 'omambiadauglous1@gmail.com', 0, 1, '2019-02-07 05:13:05.951886');
 
 -- --------------------------------------------------------
 
