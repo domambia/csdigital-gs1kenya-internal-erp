@@ -6,7 +6,7 @@
 {{ form.media }}            {# Adds date-picker required JS and CSS #}
 {% block header %}
   <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
-      <h2 class="pull-left">CRM | ADD CLIENTS / MEMBERS</h2>
+      <h2 class="pull-left">CRM | ADD MEMBERS</h2>
   </div>
 {% endblock%}
 {% block content %}
@@ -131,7 +131,7 @@
                                          <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    {{ form.sector|add_class:"form-control show-tick" }}
+                                                    {{ form.sector|add_class:" show-tick" }}
                                                     <label class="form-label">Choose Sector </label>
                                                     {% for errror in form.sector.errors %}
                                                         <li class = "alert alert-danger"> {{ error }}</li>
@@ -143,7 +143,7 @@
                                          <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                        {{ form.category|add_class:"form-control" }}
+                                                        {{ form.category|add_class:"" }}
                                                         <label class="form-label">Choose Category </label>  
                                                         {% for errror in form.category.errors %}
                                                         <li class = "alert alert-danger"> {{ error }}</li>
