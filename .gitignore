@@ -1,9 +1,3 @@
 setup.cnf
-venv/*
+venv/
 *__pycache__/
-accounts/__pycache__/
-departments/__pycache__/
-leave/__pycache__/
-hrm/__pycache__/
-homePage/__pycache__
-ERP/settings.py
