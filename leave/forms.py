@@ -7,7 +7,7 @@ class ApplyForm(forms.ModelForm):
         model = ApplyLeave
         fields = (
             'start_date', 'resume_date', 'home_phone','person_taking_charge', 'leave', 'employee',
-            'end_date', 'period'
+            'end_date'
         )
     def __str__(self):
         return self.employee
