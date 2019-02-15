@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from accounts.models import Employee 
+from django.contrib.auth.models import User 
+from departments.models import Position
 from django.urls import reverse_lazy 
 from CRM.models import Client, Supplier, Feedback, Training, Barcode
 from helpers.help import get_country, get_sectors
@@ -7,6 +10,8 @@ from helpers.sendSMS import SMS
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
+from datetime import datetime
+from helpers.sendSMS import SMS 
 # Create your views here.
 
 '''
@@ -28,6 +33,7 @@ def index(request):
 
 
 '''
+
 class ClientCreateView(CreateView):
     fields = ('company_name', 'company_phone', 'company_phone_alt', 'company_email','certificate_of_incorporation','copy_of_id', 'copy_of_blank_cheque',
             'copy_of_trade_licence', 'list_of_product_barcoded', 'director_pin_number', 'company_certificate_pin', 'copy_of_kebs_certicate',
@@ -35,22 +41,129 @@ class ClientCreateView(CreateView):
     model = Client 
     template_name = "client/client_form.html"
 
-class ClientListView(ListView):
-    model = Client
-    context_object_name = "clients"
-    template_name = "client/client_list.html"
+# class ClientListView(ListView):
+#     model = Client
+#     context_object_name = "clients"
+#     template_name = "client/client_list.html"
 
+@login_required
+def all_clients(request):
+    user = User.objects.get(username = request.session['username'])
+    employee = Employee.objects.get(user = user.id)
+    clients = Client.objects.all()
+    return render(request, "client/client_list.html", {"clients": clients})
 class ClientUpdateView(UpdateView):
     model = Client
     fields = ('company_name', 'company_phone', 'company_phone_alt', 'company_email','certificate_of_incorporation','copy_of_id', 'copy_of_blank_cheque',
             'copy_of_trade_licence', 'list_of_product_barcoded', 'director_pin_number', 'company_certificate_pin', 'copy_of_kebs_certicate',
              'company_email_alt', 'post_address', 'physical_location', 'director_info','sector', 'category', 'date_of_issue', 'nature_of_business')
     template_name = "client/client_form.html"
-class ClientDetailView(DetailView):
-    model = Client
-    context_object_name = 'client'
-    template_name = "client/client_detail.html"
 
+
+# class ClientDetailView(DetailView):
+#     model = Client
+#     context_object_name = 'client'
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         self.user = 
+#     template_name = "client/client_detail.html"
+
+
+def clients(request, pk):
+    client = Client.objects.get(id = pk)
+    user = User.objects.get(username = request.session['username'])
+    employee = Employee.objects.get(user = user.id)
+    # print(employee.position.initials)
+    # print(employee.phone)
+    
+    return render(request, "client/client_detail.html", {"client": client, "employee": employee})
+
+'''Approving Clients 
+
+'''
+
+def notify(phone, first_name, last_name, company_name, when):
+    message  = """
+                Dear {}  {},
+                You have been requested to aprove our esteemed member[ {} ].
+                Thank you,
+                
+                CEO, GS1 Kenya 
+                Date: {}
+               """
+    msg = message.format(first_name, last_name, company_name, when)
+    SMS().send(phone, msg)
+
+def membership(request, pk):
+    employee = Employee.objects.get(position = Position.objects.get(initials = "CCM"))
+    client = Client.objects.get(id = pk)
+    client.is_me1 = 1
+    client.save()
+    print("ME1 -Approved")
+    notify(employee.phone , employee.user.first_name, employee.user.last_name, client.company_name, datetime.now().date())
+    return HttpResponseRedirect(reverse('CRM:list_client'))
+
+def communication(request, pk):
+    employee = Employee.objects.get(position = Position.objects.get(initials = "ACCM"))
+    client = Client.objects.get(id = pk)
+    client.is_ccm = 1
+    client.save()
+    print("CCM -Approved")
+    notify(employee.phone , employee.user.first_name, employee.user.last_name, client.company_name, datetime.now().date())
+    return HttpResponseRedirect(reverse('CRM:list_client'))
+
+def accounts_manager(request, pk):
+    employee = Employee.objects.get(position = Position.objects.get(initials = "CACC"))
+    client = Client.objects.get(id = pk)
+    client.is_accm = 1
+    client.save()
+    print("ACCM -Approved")
+    print("ME1 -Approved")
+    notify(employee.phone , employee.user.first_name, employee.user.last_name, client.company_name, datetime.now().date())
+    return HttpResponseRedirect(reverse('CRM:list_client'))
+
+def accounts(request, pk):
+    employee = Employee.objects.get(position = Position.objects.get(initials = "TM"))
+    client = Client.objects.get(id = pk)
+    client.is_cacc = 1
+    client.save()
+    print("CACC -Approved")
+    notify(employee.phone , employee.user.first_name, employee.user.last_name, client.company_name, datetime.now().date())
+    return HttpResponseRedirect(reverse('CRM:list_client'))
+
+def technical(request, pk):
+    employee = Employee.objects.get(position = Position.objects.get(initials = "GM"))
+    client = Client.objects.get(id = pk)
+    client.is_tm = 1
+    client.save()
+    notify(employee.phone , employee.user.first_name, employee.user.last_name, client.company_name, datetime.now().date())
+    print("TM -Approved")
+    return HttpResponseRedirect(reverse('CRM:list_client'))
+
+# def membership(request, pk):
+#     employee = Employee.objects.get(position = Position.objects.get(initials = "GM"))
+#     client = Client.objects.get(id = pk)
+#     client.is_me2 = 1
+#     client.save()
+#     notify(employee.phone , employee.user.first_name, employee.user.last_name, client.company_name, datetime.now())
+#     print("ME2 -Approved")
+#     return HttpResponseRedirect(reverse('CRM:list_client'))
+
+
+def general_manager(request, pk):
+    # employee = Employee.objects.get(position = Position.objects.get(initials = "CCM"))
+    client = Client.objects.get(id = pk)
+    client.is_gm = 1
+    client.status = 1
+    client.save()
+    # notify(employee.phone , employee.user.first_name, employee.user.last_name, client.company_name, datetime.now)
+    print("GM -Approved")
+    return HttpResponseRedirect(reverse('CRM:list_client'))
+
+
+'''
+End of Approval 
+'''
 class ClientDeleteView(DeleteView):
     model = Client
     template_name = "client/client_delete_confirm.html"
@@ -198,6 +311,7 @@ class BarcodeDeleteView(DeleteView):
     model = Barcode 
     template_name  = "barcode/barcode_confirm_delete.html"
     success_url = reverse_lazy("CRM:list_barcode")
+    
 class BarcodeDetailView(DetailView):
     model = Barcode 
     context_object_name  = 'barcode'

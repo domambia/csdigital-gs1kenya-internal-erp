@@ -15,7 +15,9 @@
       <div class="body">
             <div class="helper_cls">
                 <a href="{% url 'CRM:list_client' %}" class="btn btn-primary">BACK</a>
+                {% if employee.position.initials == "HRM" or employee.position.initials == "GM" %}
                 <a href="{% url 'CRM:edit_client' pk=client.pk %}" class="btn btn-success">EDIT</a>
+                {% endif %}
             </div>
         <div class="row clearfix">
             <div class="col-md-6">
@@ -89,6 +91,52 @@
                                 </tr>
                             </tbody>
                         </table>
+
+                        <div class="col-md-10 col-md-offset-1">
+                                {% if employee.position.initials == "ME1" %}
+                                    {% if client.is_me1 == 0 %}
+                                        <span > <a href="{% url 'CRM:me' client.id %}" class="label btn bg-orange" > approve </a></span>
+                                    {% else %}
+                                        <span class="btn label bg-green"> approved</span>
+                                    {% endif %}
+
+                                {% elif employee.position.initials == "CCM" %}
+                                    {% if client.is_ccm == 0 %}
+                                        <span> <a href="{% url 'CRM:ccm' client.id %}" class="label btn bg-orange" > approve </a></span>
+                                    {% else %}
+                                        <span class="btn label bg-green"> approved</span>
+                                    {% endif %}
+
+                                {% elif employee.position.initials == "CACC" %}
+                                    {% if client.is_cacc == 0 %}
+                                        <span> <a href="{% url 'CRM:cacc' client.id %}" class="label btn bg-orange" > approve </a></span>
+                                    {% else %}
+                                        <span class="btn label bg-green"> approved</span>
+                                    {% endif %}
+
+                                {% elif employee.position.initials == "ACCM" %}
+                                    {% if client.is_accm == 0 %}
+                                        <span> <a href="{% url 'CRM:accm' client.id %}" class="label btn bg-orange" > approve </a></span>
+                                    {% else %}
+                                        <span class="btn label bg-green"> approved</span>
+                                    {% endif %}
+
+                                {% elif employee.position.initials == "TM" %}
+                                    {% if client.is_tm == 0 %}
+                                        <span> <a href="{% url 'CRM:tm' client.id %}" class="label btn bg-orange" > approve </a></span>
+                                    {% else %}
+                                        <span class="btn label bg-green"> approved</span>
+                                    {% endif %}
+                                    
+                                {% elif employee.position.initials == "GM" %}
+                                    {% if client.is_gm == 0 %}
+                                        <span> <a href="{% url 'CRM:gm'  client.id %}" class="label btn bg-orange" > approve </a></span>
+                                    {% else %}
+                                        <span class="btn label bg-green"> approved</span>
+                                    {% endif %}
+
+                                {% endif %}
+                        </div>
             </div>
 
         </div>

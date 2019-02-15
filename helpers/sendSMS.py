@@ -1,6 +1,6 @@
 # works with both python 2 and 3
 from __future__ import print_function
-
+from datetime import datetime
 import africastalking
 
 class SMS:
@@ -10,8 +10,21 @@ class SMS:
         africastalking.initialize(self.username, self.api_key)
         self.sms = africastalking.SMS
     def send(self, phone, message):
+        print(message)
         try:
-            response = self.sms.send(message, [phone])
+            response = self.sms.send(str(message), ["+254"+phone])
             print (response)
         except Exception as e:
-            print ('Encountered an error while sending: %s' % str(e))
+            message = """
+                        Dear Omambia Mogaka,
+                        Re: Message Notification
+                        ------------------------
+                        There was an error in sending message to your other employee.
+                        The Error is: {}
+                        Thank You,
+                            Humble Developer, Most adored,
+                        GS1 Kenya
+                        Date: {} .
+                      
+                      """
+            print (message.format(str(e), datetime.now))

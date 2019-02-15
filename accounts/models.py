@@ -19,7 +19,6 @@ class Employee(models.Model):
     kin_email = models.CharField(max_length=100, blank=True, unique = True)
     county = models.CharField(max_length=100,  blank=True, choices = get_country(), default = "No country")
     next_of_kin_phone = models.CharField(max_length=20, blank=True)
-
     # Dependants info
     dependant_name = models.CharField(max_length=100, blank=True)
     dependant_relationship = models.CharField(max_length=60, blank=True)
@@ -28,9 +27,8 @@ class Employee(models.Model):
     leave_bal = models.IntegerField(default= 4)
     profile_pic = models.ImageField(upload_to = 'profile_pics', blank = True)
     company_benifits = models.CharField(max_length = 1000, default = "Pay NHIF, NSSF")
-
     # Job Information
-    position = models.ForeignKey(Position, on_delete =models.CASCADE, default = 0)
+    position = models.ForeignKey(Position, on_delete =models.CASCADE)
 
     # Salary Information
     salary = models.CharField(max_length=100, blank=True)

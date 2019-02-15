@@ -8,10 +8,16 @@ urlpatterns = [
     url(r'^dashboard/', login_required(views.index), name = "index"),
     # clients urlpattern 
     url(r'^clients/add/', login_required(views.ClientCreateView.as_view()), name = 'create_client'),    
-    url(r'^clients/list/', login_required(views.ClientListView.as_view()), name = 'list_client'), 
-    url(r'^clients/detail/(?P<pk>\d+)/$', login_required(views.ClientDetailView.as_view()), name = 'detail_client'),
+    url(r'^clients/list/', views.all_clients, name = 'list_client'), 
+    url(r'^clients/detail/(?P<pk>\d+)/$', login_required(views.clients), name = 'detail_client'),
     url(r'^clients/delete/(?P<pk>\d+)/$', login_required(views.ClientDeleteView.as_view()), name = 'delete_client'),
     url(r'^clients/edit/(?P<pk>\d+)/$', login_required(views.ClientUpdateView.as_view()), name = 'edit_client'),
+    url(r'^clients/approve/ME/(?P<pk>\d+)/$', login_required(views.membership), name = 'me'),
+    url(r'^clients/approve/TM/(?P<pk>\d+)/$', login_required(views.technical), name = 'tm'),
+    url(r'^clients/approve/GM/(?P<pk>\d+)/$', login_required(views.general_manager), name = 'gm'),
+    url(r'^clients/approve/ACCM/(?P<pk>\d+)/$', login_required(views.accounts_manager), name = 'accm'),
+    url(r'^clients/approve/CACC/(?P<pk>\d+)/$', login_required(views.accounts), name = 'cacc'),
+    url(r'^clients/approve/CCM/(?P<pk>\d+)/$', login_required(views.communication), name = 'ccm'),
     #suppliers urlpattern
     url(r'^supplier/list/', login_required(views.SupplierListView.as_view()), name = "list_supplier"),
     url(r'^supplier/add/', login_required(views.SupplierCreateView.as_view()), name = 'create_supplier'),  

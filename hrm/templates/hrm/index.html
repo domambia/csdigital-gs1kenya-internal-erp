@@ -33,16 +33,19 @@
                                       <tr>
                                           <td>{{ user.user.first_name }}</td>
                                           <td>{{ user.user.last_name }}</td>
-                                          <td>{{ user.department.name }}</td>
+                                          <td>{{user.position.department.name}}</td>
                                           <td>{{ user.position }}</td>
                                           <td>{{ user.user.email }}</td>
                                           <td>{{ user.user.date_joined }}</td>
                                           <td>{{ user.salary }}</td>
-                                          <td>
-                                              <span> <a href = "{% url 'accounts:profile' pk=user.pk %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>
-                                              <span> <a href = "{% url 'accounts:employee_update' user.id %}"><i class="material-icons">edit</i></a> </span>
-                                              <span> <a href = "{% url 'accounts:employee_delete' user.id %}"><i class="material-icons" style = "color:#cc0000;">delete</i></a> </span>
-                                          </td>
+                                          <td style="text-align: center;">
+                                                {% if employee.position.initials == "HRM" or employee.position.initials == "GM" %}
+                                                    <span> <a href = "{% url 'accounts:employee_update' user.id %}"><i class="material-icons">edit</i></a> </span>
+                                                    <span> <a href = "{% url 'accounts:employee_delete' user.id %}"><i class="material-icons" style = "color:#cc0000;">delete</i></a> </span>
+                                                {% else %}
+                                                <span> <a href = "{% url 'accounts:profile' pk=user.pk %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>
+                                                {% endif %}
+                                            </td>
                                       </tr>
                                   {% endfor %}
                                 {% else %}

@@ -9,8 +9,10 @@
    
       <div class="body card ">
           <div class="helper-cls body">
-              <a href="{% url 'accounts:employees' %}" class="btn btn-primary"><span style="color: orangered;">&larr;</span> BACK</a> 
-              <a href="{% url 'accounts:employee_update' employee.id %}" class="btn btn-success">EDIT</a> 
+              <a href="{% url 'accounts:employees' %}" class="btn btn-primary"><span style="color: orangered;">&larr;</span> BACK</a>
+              {% if employee.position.initials == "HRM" or employee.position.initials == "GM" %} 
+                <a href="{% url 'accounts:employee_update' employee.id %}" class="btn btn-success">EDIT</a> 
+              {% endif %}
           </div>
           <div class="row body">
             {% if employee.profile_pic %}

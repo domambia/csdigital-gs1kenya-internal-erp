@@ -46,7 +46,14 @@ class Client(models.Model):
     director_pin_number = models.FileField(upload_to=file_upload,)
     company_certificate_pin = models.FileField(upload_to=file_upload,)
     copy_of_kebs_certicate = models.FileField(upload_to=file_upload,)
-    
+    is_me1 = models.IntegerField(default=0)
+    is_me2 = models.IntegerField(default=0)
+    is_ccm = models.IntegerField(default=0)
+    is_accm = models.IntegerField(default=0) 
+    is_cacc = models.IntegerField(default=0)
+    is_tm = models.IntegerField(default=0)
+    is_gm = models.IntegerField(default=0)
+    status = models.IntegerField(default=0)
     
     def get_absolute_url(self):
         return reverse("CRM:list_client")
@@ -86,7 +93,7 @@ class Feedback(models.Model):
     feedback  = models.CharField(max_length = 1000)
     status = models.BooleanField(default = False)
     created_on = models.DateField(default = datetime.datetime.now)
-    status = models.IntegerField(default = 0, choices= STATUS)
+    status = models.IntegerField(choices= STATUS)
 
     def __str__(self):
         return self.feedback

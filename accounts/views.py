@@ -45,31 +45,31 @@ def add_employee(request):
                 employee.profile_pic = request.FILES['profile_pic']
             employee.save()
 
-            ''' Sending an email to our new employees: 
-                This includes the user login credentials such as username or email and his/her password
-            '''
-            from_email = "hr@gs1kenya.org"
-            to_email = user_form.cleaned_data['email']
-            subject = "Welcome to GS1Kenya Organization"
-            message = """
-                    Dear {}.
-                    We warmly welcome to GS1Kenya oraganization. You has a power to work with us. With this email find your login 
-                    inforamtion to allow you access any information through our ERP system.
+            # ''' Sending an email to our new employees: 
+            #     This includes the user login credentials such as username or email and his/her password
+            # '''
+            # from_email = "hr@gs1kenya.org"
+            # to_email = user_form.cleaned_data['email']
+            # subject = "Welcome to GS1Kenya Organization"
+            # message = """
+            #         Dear {}.
+            #         We warmly welcome to GS1Kenya oraganization. You has a power to work with us. With this email find your login 
+            #         inforamtion to allow you access any information through our ERP system.
 
-                        Username: {},
-                        Password: {}
-                    If your have any concern please contact our Human  Resource at NextGen Mall 4th floor.
-                    Thank you,
-                    GS1Kenya Hiring Team.
-            """
+            #             Username: {},
+            #             Password: {}
+            #         If your have any concern please contact our Human  Resource at NextGen Mall 4th floor.
+            #         Thank you,
+            #         GS1Kenya Hiring Team.
+            # """
 
-            send = send_mail(subject, message.format(user_form.cleaned_data['username'], user_form.cleaned_data['username'],user_form.cleaned_data['password'], from_email, [to_email]))
-            if send:
-                print("Recruited a new Employee!!!!! Send the Email")
-            else:
-                print("Email Not Sent")
+            # send = send_mail(subject, message.format(user_form.cleaned_data['username'], user_form.cleaned_data['username'],user_form.cleaned_data['password'], from_email, [to_email]))
+            # if send:
+            #     print("Recruited a new Employee!!!!! Send the Email")
+            # else:
+            #     print("Email Not Sent")
 
-            return HttpResponseRedirect(reverse('hrm:hrm_index'))
+            return HttpResponseRedirect(reverse('accounts:employees'))
         else:
             return render(request, "accounts/register.html",
                                 {'user_form': user_form, 'employee_form': employee_form, "countries": countries,})
