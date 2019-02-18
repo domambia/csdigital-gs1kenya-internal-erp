@@ -11,7 +11,9 @@
                    
                    
                 <div class="body">
+                    {% if employee.position.initials == "HRM" or employee.position.initials == "GM"   or employee.position.initials == "CCM"%}
                         <h2><a class="btn btn-primary" href = "{% url 'accounts:add_employee'%}">ADD EMPLOYEE</a></h2>
+                    {% endif %}
                      
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped table-hover dataTable js-exportable">
@@ -39,9 +41,10 @@
                                           <td>{{ user.user.date_joined }}</td>
                                           <td>{{ user.salary }}</td>
                                           <td style="text-align: center;">
-                                                {% if employee.position.initials == "HRM" or employee.position.initials == "GM" %}
+                                                {% if employee.position.initials == "HRM" or employee.position.initials == "GM" or employee.position.initials == "CCM"%}
                                                     <span> <a href = "{% url 'accounts:employee_update' user.id %}"><i class="material-icons">edit</i></a> </span>
                                                     <span> <a href = "{% url 'accounts:employee_delete' user.id %}"><i class="material-icons" style = "color:#cc0000;">delete</i></a> </span>
+                                                    <span> <a href = "{% url 'accounts:profile' pk=user.pk %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>
                                                 {% else %}
                                                 <span> <a href = "{% url 'accounts:profile' pk=user.pk %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>
                                                 {% endif %}

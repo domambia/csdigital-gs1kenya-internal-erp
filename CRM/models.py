@@ -115,7 +115,7 @@ class Training(models.Model):
     trainer = models.ForeignKey(Employee, on_delete = models.CASCADE)
     number_of_trainee = models.PositiveIntegerField()
 
-    all_trainee = MultiSelectField(choices=get_clients(), max_choices= 3, max_length=3)
+    all_trainee = MultiSelectField(choices=get_clients(), max_choices= 3, max_length=3, default = "1,2")
     happened_on  = models.DateField(default = datetime.datetime.now)
 
     def get_absolute_url(self):

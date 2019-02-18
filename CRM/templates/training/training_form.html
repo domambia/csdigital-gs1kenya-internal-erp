@@ -57,12 +57,13 @@
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
                                                 <div class="form-group form-float">
-                                                        {% for value, text in form.all_trainee.field.choices %}
+                                                    {% for value, text in form.all_trainee.field.choices %}
                                                         <div class="ui slider checkbox">
-                                                          <input id="id_all_trainee_{{ forloop.counter0 }}" name="{{ form.all_trainee.name }}" type="checkbox" value="{{ value }}"{% if value in checked_all_trainee %} checked="checked"{% endif %}>
+                                                          <input id="id_all_trainee_{{ forloop.counter0 }}" name="{{ form.all_trainee.name }}[]" type="checkbox" value="{{ value }}"{% if value in checked_all_trainee %} checked="checked"{% endif %}>
                                                           <label>{{ text }}</label>
-                                                        </div>
+                                                        </div>                                                        
                                                       {% endfor %}
+
                                                 </div>
                                             </div>
                                          <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">

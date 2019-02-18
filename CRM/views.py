@@ -12,6 +12,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from datetime import datetime
 from helpers.sendSMS import SMS 
+from CRM.forms import TrainForm
 # Create your views here.
 
 '''
@@ -262,6 +263,20 @@ class TrainingCreateView(CreateView):
     template_name  = "training/training_form.html"
 
 
+def get_clients():
+    list_clients = Client.objects.all()
+    clients = []
+    for cl in list_clients:
+        clients.append((cl.id, cl.company_name ,))
+    return tuple(clients)
+
+@login_required
+def create_train(request):
+    form_train = TrainForm(request.POST or None)
+    if form_train.is_valid():
+        print(form_train.data)
+
+    return render(request, "training/training_form.html", {"form": form_train, "clients": len(get_clients())})
 class TrainingUpdateView(UpdateView):
     model = Training 
     fields = ('trainer', 'number_of_trainee', 'happened_on', 'all_trainee')

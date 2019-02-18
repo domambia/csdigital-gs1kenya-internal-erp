@@ -34,7 +34,7 @@ urlpatterns = [
     url(r'^feedback/unpend/(?P<pk>\d+)/$', views.unpend, name = "pend_feedback"), 
     #training
     url(r'^training/list/', login_required(views.TrainingListView.as_view()), name = "list_training"),  
-    url(r'^training/add/', login_required(views.TrainingCreateView.as_view()), name = "create_training"), 
+    url(r'^training/add/', login_required(views.create_train), name = "create_training"), 
     url(r'^training/detail/(?P<pk>\d+)/$', login_required(views.TrainingDetailView.as_view()), name = "detail_training"), 
     url(r'^training/delete/(?P<pk>\d+)/$', login_required(views.TrainingDeleteView.as_view()), name = "delete_training"), 
     url(r'^training/edit/(?P<pk>\d+)/$', login_required(views.TrainingUpdateView.as_view()), name = "edit_training"), 

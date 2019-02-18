@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'departments',
     'targets',
     'CRM',
+    "ACCNTS",
     'helpers',
     'easy_pdf',
 ]

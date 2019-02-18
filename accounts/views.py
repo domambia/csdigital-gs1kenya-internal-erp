@@ -15,11 +15,11 @@ from helpers.help import get_country
 
 @login_required
 def index(request):
-
+    current_user = User.objects.get(username = request.session['username'])
     users_details = Employee.objects.select_related('user')
-
+    employee = Employee.objects.get(user = current_user.id)
     return render(request, "hrm/index.html",
-                  {'users': users_details,})
+                  {'users': users_details, "employee": employee})
 
 """Add New Employee Information
 This includes the login Information
@@ -156,7 +156,5 @@ def employee_update(request, pk):
 
 class EmployeeDetailView(DetailView):
     context_object_name = "employee"
-    fields = ('username', 'email', 'first_name', 'last_name','salary',
-              'phone')
     model = Employee
     template_name = "accounts/employee_detail.html"
