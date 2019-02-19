@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 
 {% load staticfiles %}
-
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>GS1 ONLINE ERP</title>
     <!-- Favicon-->
     <link rel="icon" href="{% static 'images/gs1ea.png' %}" type="image/png">
-
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
-
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!-- Bootstrap Core Css -->
     <link href="{% static 'plugins/bootstrap/css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'plugins/bootstrap/js/bootstrap.js' %}" rel="stylesheet">
 
     <!-- Waves Effect Css {% static '' %} -->
     <link href="{% static 'plugins/node-waves/waves.css' %} " rel="stylesheet" />
@@ -24,11 +23,11 @@
     <link href="{% static 'plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css' %}" rel="stylesheet">
     <!-- Animation Css -->
     <link href="{% static 'plugins/animate-css/animate.css' %}" rel="stylesheet" />
-  
-    <!-- Custom Css -->
+    <link href="{% static 'plugins/morrisjs/morris.css' %}" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+   <!-- Custom Css -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
-
-  <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}">
+    <link href="{% static 'css/all-themes.css' %}" rel="stylesheet" />
 </head>
 
 <body>
@@ -69,18 +68,18 @@
           <div class="navbar-header">
               <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
               <a href="javascript:void(0);" class="bars"></a>
-              <div class="navbar-brand" >    <img style="float:left; display:inline-block;margin-top: -15px;" src="{% static 'images/gs1ea.png' %}" width="80" height="50" alt="User" /> ONLINE ERP</div>
+              <div class="navbar-brand" > <img style="float:left;display:inline-block;margin-top: -15px;" src="{% static 'images/gs1ea.png' %}" width="80" height="50" alt="User" /> ONLINE ERP</div>
           </div>
           <div class="collapse navbar-collapse" id="navbar-collapse">
               <ul class="nav navbar-nav navbar-right">
-                  <!-- Start of Notifications -->
-                    <li class="dropdown">
-                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                                <i class="material-icons" style="color: #E91E63;">notifications</i>
-                                <span class="label-count" style="color: #fff;  font-size: 1rem;">7</span>
-                            </a>
-                        </li>
-                        <!-- #END# Notifications -->
+                    <!-- Notifications -->
+                  <li class="dropdown">
+                      <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                          <i class="material-icons" style="color: #E91E63;">notifications</i>
+                          <span class="label-count" style="color: #fff;  font-size: 1rem;">7</span>
+                      </a>
+                  </li>
+                  <!-- #END# Notifications -->
               </ul>
           </div>
       </div>
@@ -104,7 +103,8 @@
                   <div class="btn-group user-helper-dropdown">
                       <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                       <ul class="dropdown-menu pull-right">
-                          <li><a href="{% url 'accounts:profile' pk=user.id %}"><i class="material-icons">person</i>Profile</a></li>
+                          
+                          <li><a href="{% url 'accounts:profile' pk=employee.id %}"><i class="material-icons">person</i>Profile</a></li>
                           <li role="separator" class="divider"></li>
                           <li><a href="{% url 'accounts:logout'%}"><i class="material-icons">input</i>Sign Out</a></li>
                       </ul>
@@ -116,20 +116,37 @@
           <!-- #User Info -->
           <!-- Menu -->
           <div class="menu">
-            <ul class="list">
+              <ul class="list">
+                  <li class="active">
+                      <a href="{% url  'hrm:hrm_index' %}">
+                          <i class="material-icons">apps</i>
+                          <span>DASHBOARD</span>
+                      </a>
+                  </li>
+                  {% if employee.position.initials == "HRM" or employee.position.initials == "GM" or employee.position.initials == "CCM" or employee.position.initials == "CACC" or employee.position.initials == "ACCM"  %}
+                  <li class="active">
+                        <a href="">
+                            <i class="material-icons">people</i>
+                            <span>MORE ACCOUNTS</span>
+                        </a>
+                    </li>
+                   
+                  {% else %}
+                    <li class="active">
+                        <a href="">
+                        <i class="material-icons">people</i>
+                            <span>PAYROLL</span>
+                        </a>
+                    </li>
+                  {% endif %}
+                  
                 <li class="active">
-                    <a href="{% url  'CRM:index' %}">
-                        <i class="material-icons">apps</i>
-                        <span>DASHBOARD</span>
+                    <a href="{% url 'index' %}">
+                        <i class="material-icons">keyboard_return</i>
+                        <span>BACK TO PANEL</span>
                     </a>
                 </li>
-              <li class="active">
-                  <a href="{% url  'index' %}">
-                      <i class="material-icons">keyboard_return</i>
-                      <span￼>BACK TO PANEL</span>
-                  </a>
-              </li>
-            </ul>
+              </ul>
           </div>
           <!-- #Menu -->
           <!-- Footer -->
@@ -146,58 +163,73 @@
               <div class="block-header">
                   <h2>{% block header %} {% endblock%}</h2>
               </div>
-                {% block content %}
+  {% block content %}
 
-                {% endblock %}
+  {% endblock %}
+
     <!-- Jquery Core Js -->
     <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+
     <!-- Bootstrap Core Js -->
     <script src="{% static 'plugins/bootstrap/js/bootstrap.js' %}"></script>
+
     <!-- Waves Effect Plugin Js -->
     <script src="{% static 'plugins/node-waves/waves.js' %}"></script>
     <script src="{% static 'js/jquery-ui.min.js' %}"></script>
-    <!-- Waves Effect Plugin Js -->
-    <script src="{% static 'plugins/node-waves/waves.js' %}"></script>
-    <!-- Validation Plugin Js -->
-    <script src="{% static 'plugins/jquery-validation/jquery.validate.js' %}"></script>
-    <script src="{% static 'js/pages/examples/sign-in.js' %}"></script>
-    <!-- Select Plugin Js -->
-    <script src="{% static 'plugins/bootstrap-select/js/bootstrap-select.js' %}"></script>
-    <!-- Slimscroll Plugin Js -->
-    <script src="{% static 'plugins/jquery-slimscroll/jquery.slimscroll.js' %}"></script>
-    <!-- Jquery CountTo Plugin Js -->
-    <script src="{% static 'plugins/jquery-countto/jquery.countTo.js' %}"></script>
-    <!-- Morris Plugin Js -->
-    <script src="{% static 'plugins/raphael/raphael.min.js' %}"></script>
-    <script src="{% static 'plugins/morrisjs/morris.js' %}"></script>
-    <!-- ChartJs -->
-    <script src="{% static 'plugins/chartjs/Chart.bundle.js' %}"></script>
-    <!-- Flot Charts Plugin Js -->
-    <script src="{% static 'plugins/flot-charts/jquery.flot.js' %}"></script>
-    <script src="{% static 'plugins/flot-charts/jquery.flot.resize.js' %}"></script>
-    <script src="{% static 'plugins/flot-charts/jquery.flot.pie.js' %}"></script>
-    <script src="{% static 'plugins/flot-charts/jquery.flot.categories.js' %}"></script>
-    <script src="{% static 'plugins/flot-charts/jquery.flot.time.js' %}"></script>
-    <!-- Sparkline Chart Plugin Js -->
-    <script src="{% static 'plugins/jquery-sparkline/jquery.sparkline.js' %}"></script>
-    <!-- Jquery DataTable Plugin Js -->
-    <script src="{% static 'plugins/jquery-datatable/jquery.dataTables.js' %}"></script>
-    <script src="{% static 'plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js' %}"></script>
-    <script src="{% static 'plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js' %}"></script>
-    <script src="{% static 'plugins/jquery-datatable/extensions/export/buttons.flash.min.js' %}"></script>
-    <script src="{% static 'plugins/jquery-datatable/extensions/export/jszip.min.js' %}"></script>
-    <script src="{% static 'plugins/jquery-datatable/extensions/export/pdfmake.min.js' %}"></script>
-    <script src="{% static 'plugins/jquery-datatable/extensions/export/vfs_fonts.js' %}"></script>
-    <script src="{% static 'plugins/jquery-datatable/extensions/export/buttons.html5.min.js' %}"></script>
-    <script src="{% static 'plugins/jquery-datatable/extensions/export/buttons.print.min.js' %}"></script>
-    <!-- Custom Js -->
-    <script src="{% static 'js/admin.js' %}"></script>
-    <script src="{% static 'js/pages/tables/jquery-datatable.js' %}"></script>
     <script>
         $( function() {
             $( ".datepicker" ).datepicker();
         } );
     </script>
+        <!-- Waves Effect Plugin Js -->
+        <script src="{% static 'plugins/node-waves/waves.js' %}"></script>
+    
+        <!-- Validation Plugin Js -->
+        <script src="{% static 'plugins/jquery-validation/jquery.validate.js' %}"></script>
+    
+        <!-- Custom Js -->
+        <script src="{% static 'js/pages/examples/sign-in.js' %}"></script>
+        <!-- Select Plugin Js -->
+        <script src="{% static 'plugins/bootstrap-select/js/bootstrap-select.js' %}"></script>
+    
+        <!-- Slimscroll Plugin Js -->
+        <script src="{% static 'plugins/jquery-slimscroll/jquery.slimscroll.js' %}"></script>
+    
+    
+        <!-- Jquery CountTo Plugin Js -->
+        <script src="{% static 'plugins/jquery-countto/jquery.countTo.js' %}"></script>
+    
+        <!-- Morris Plugin Js -->
+        <script src="{% static 'plugins/raphael/raphael.min.js' %}"></script>
+        <script src="{% static 'plugins/morrisjs/morris.js' %}"></script>
+    
+        <!-- ChartJs -->
+        <script src="{% static 'plugins/chartjs/Chart.bundle.js' %}"></script>
+    
+        <!-- Flot Charts Plugin Js -->
+        <script src="{% static 'plugins/flot-charts/jquery.flot.js' %}"></script>
+        <script src="{% static 'plugins/flot-charts/jquery.flot.resize.js' %}"></script>
+        <script src="{% static 'plugins/flot-charts/jquery.flot.pie.js' %}"></script>
+        <script src="{% static 'plugins/flot-charts/jquery.flot.categories.js' %}"></script>
+        <script src="{% static 'plugins/flot-charts/jquery.flot.time.js' %}"></script>
+    
+        <!-- Sparkline Chart Plugin Js -->
+        <script src="{% static 'plugins/jquery-sparkline/jquery.sparkline.js' %}"></script>
+    
+        <!-- Jquery DataTable Plugin Js -->
+        <script src="{% static 'plugins/jquery-datatable/jquery.dataTables.js' %}"></script>
+        <script src="{% static 'plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js' %}"></script>
+        <script src="{% static 'plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js' %}"></script>
+        <script src="{% static 'plugins/jquery-datatable/extensions/export/buttons.flash.min.js' %}"></script>
+        <script src="{% static 'plugins/jquery-datatable/extensions/export/jszip.min.js' %}"></script>
+        <script src="{% static 'plugins/jquery-datatable/extensions/export/pdfmake.min.js' %}"></script>
+        <script src="{% static 'plugins/jquery-datatable/extensions/export/vfs_fonts.js' %}"></script>
+        <script src="{% static 'plugins/jquery-datatable/extensions/export/buttons.html5.min.js' %}"></script>
+        <script src="{% static 'plugins/jquery-datatable/extensions/export/buttons.print.min.js' %}"></script>
+    
+        <!-- Custom Js -->
+        <script src="{% static 'js/admin.js' %}"></script>
+   	<script src="{% static ' js/pages/index.js' %}"></script> 
 </body>
 
 </html>

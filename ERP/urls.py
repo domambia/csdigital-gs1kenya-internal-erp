@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^accounts/', include('accounts.urls')),
     url(r'^targets/', include('targets.urls')),
     url(r'^crm/', include('CRM.urls')),
+    url(r'^ACCOUNTS/', include('ACCNTS.urls')),
 ]
 
 if settings.DEBUG: 

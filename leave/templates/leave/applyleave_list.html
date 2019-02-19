@@ -25,6 +25,7 @@
                                 <th>Ending Date</th>
                                 <th>Resumption Date</th>
                                 <th style="text-align:center;">Status</th>
+                                <th style="text-align:center;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,27 +39,45 @@
                                         <td>{{ leave.start_date }}</td>
                                         <td>{{ leave.end_date }}</td>
                                         <td>{{ leave.resume_date }}</td>
-                                        <td style=" margin: 40px auto; text-align:center;"> 
+                                        
                                             {% if employee.position.initials == "HRM" or employee.position.initials == "GM" or employee.position.initials == "CCM" %}
                                                 {% if leave.status  == 1 %}
-                                                    <span class="label btn bg-green" >Approved</span>
+                                                <td style=" margin: 40px auto; text-align:center;"> 
+                                                    <span class="label btn bg-green" >Approved</span> 
+                                                </td>
+                                                <td style=" margin: 40px auto; text-align:center;"> 
                                                     <span> <a target="_blank" href = "{% url 'leave:download_leave' pk=leave.pk %}" class="btn label bg-orange">print</a> </span>
+                                                </td>
                                                     <!-- <span> <a href = "{% url 'leave:applied_lv_edit' pk=leave.pk %}"><i class="material-icons">edit</i></a> </span> -->
                                                 {% else %}
+                                                <td style=" margin: 40px auto; text-align:center;"> 
                                                     <span  class = "btn label bg-yellow">Pending</span>
+                                                </td>
+                                                <td style=" margin: 40px auto; text-align:center;"> 
                                                     <span> <a href = "{% url 'leave:approve' pk=leave.pk %}" class="btn label bg-orange">approve</a> </span>
+                                                </td>
                                                     <!-- <span> <a href = "{% url 'leave:applied_lv_edit' pk=leave.pk %}"><i class="material-icons">edit</i></a> </span> -->
                                                 {% endif %}
                                             {% else %}
                                                 {% if leave.status  == 1 %}
-                                                <span class="label btn bg-green" >Approved</span>
-                                                <span> <a target="_blank" href = "{% url 'leave:download_leave' pk=leave.pk %}" class="btn label bg-orange">print</a> </span>
+                                                <td style=" margin: 40px auto; text-align:center;"> 
+                                                    <span class="label btn bg-green" >Approved</span> 
+                                                </td>
+                                                <td style=" margin: 40px auto; text-align:center;"> 
+                                                    <span> <a target="_blank" href = "{% url 'leave:download_leave' pk=leave.pk %}" class="btn label bg-orange">print</a> </span>
+                                                </td>
                                                 <!-- <span> <a href = "{% url 'leave:applied_lv_edit' pk=leave.pk %}"><i class="material-icons">edit</i></a> </span> -->
                                                 {% else %}
-                                                    <span  class = "btn label bg-yellow">Pending</span>
+                                                <td style=" margin: 40px auto; text-align:center;"> 
+                                                    <span  class = "btn label bg-yellow">Pending...</span>
+                                                </td>
+                                                <td style=" margin: 40px auto; text-align:center;">
+                                                    <span  class = "btn label bg-orange">no action</span>
+                                                </td>
                                                 {% endif %}
                                             {% endif%}
-                                        </td> 
+                                        
+                                        
                                  </tr>
                               {% endfor %}
                             {% else %}
@@ -76,16 +95,25 @@
                                     <td>{{ leave.start_date }}</td>
                                     <td>{{ leave.end_date }}</td>
                                     <td>{{ leave.resume_date }}</td>
-                                    <td style=" margin: 40px auto; text-align:center;"> 
+                                    
                                        
                                         {% if leave.status  == 1 %}
+                                            <td style=" margin: 40px auto; text-align:center;"> 
                                             <span class="label btn bg-green" >Approved</span>
-                                            <span> <a target="_blank" href = "{% url 'leave:download_leave' pk=leave.pk %}" class="btn label bg-orange">print</a> </span>
+                                            </td>
+                                            <td style=" margin: 40px auto; text-align:center;"> 
+                                                <span> <a target="_blank" href = "{% url 'leave:download_leave' pk=leave.pk %}" class="btn label bg-orange">print</a> </span>
+                                            </td>
                                             <!-- <span> <a href = "{% url 'leave:applied_lv_edit' pk=leave.pk %}"><i class="material-icons">edit</i></a> </span> -->
                                         {% else %}
-                                                <span  class = "btn label bg-yellow">Pending</span>
+                                                <td style=" margin: 40px auto; text-align:center;"> 
+                                                    <span  class = "btn label bg-yellow">Pending....</span>
+                                                </td>
+                                                <td style=" margin: 40px auto; text-align:center;">
+                                                    <span  class = "btn label bg-orange">no action</span>
+                                                </td>
                                         {% endif %}  
-                                    </td> 
+                             
                             </tr>
                                 {% endfor %}
                             {% else %}
