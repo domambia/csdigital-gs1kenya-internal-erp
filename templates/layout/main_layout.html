@@ -160,9 +160,15 @@
                   </li>
                   {% else %}
                   <li class="active">
-                        <a href="{% url 'accounts:profile' pk=employee.id %}">
+                        <a href="{% url 'accounts:profile' employee.id %}">
                             <i class="material-icons">people</i>
                             <span>Profile</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="{% url 'leave:applyleave_list' %}">
+                            <i class="material-icons">people</i>
+                            <span>APPLY LEAVE</span>
                         </a>
                     </li>
                   {% endif %}

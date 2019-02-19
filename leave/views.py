@@ -18,23 +18,51 @@ from easy_pdf.rendering import render_to_pdf_response
 class LeaveListView(ListView):
     context_object_name = "leaves"
     model = Leave
+    def get_context_data(self, **kwargs):
+        context = super(LeaveListView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(id = user.id)
+        return context
+
 
 class LeaveDetailView(DetailView):
     context_object_name = 'leave'
     model = Leave
+    def get_context_data(self, **kwargs):
+        context = super(LeaveDetailView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(id = user.id)
+        return context
 
 
 class LeaveCreateView(CreateView):
     fields = ('name', 'description',)
     model = Leave
+    context_object_name = "form"
+    def get_context_data(self, **kwargs):
+        context = super(LeaveCreateView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(id = user.id)
+        return context
 
 class LeaveUpdateView(UpdateView):
     fields = ('name', 'description',)
     model = Leave
+    context_object_name = "form"
+    def get_context_data(self, **kwargs):
+        context = super(LeaveUpdateView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(id = user.id)
+        return context
 
 class LeaveDeleteView(DeleteView):
     model = Leave
     success_url = reverse_lazy("leave:leave_list")
+    def get_context_data(self, **kwargs):
+        context = super(LeaveDeleteView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(id = user.id)
+        return context
 
 
 # class CreateApplyLeaveView(CreateView):
@@ -47,22 +75,27 @@ class LeaveDeleteView(DeleteView):
 
 def applyleave(request):
     form = ApplyForm(request.POST or None)
-    user_name  = request.session['username']
-    user = User.objects.get(username = user_name)
-    emp = Employee.objects.get(id = user.id)
-    phone_number = emp.alt_phone_number
-    # print(employee_user)
+    employee = Employee.objects.get(user = request.user.id)
+    current_user = User.objects.get(username = request.user)
+    phone_number = employee.alt_phone_number
     if form.is_valid():
         user_data = form.save()
         return HttpResponseRedirect(reverse('leave:applyleave_list'))
     
+    return render(request,"leave/applyleave_form.html", {'current_user': current_user, 'phone_number': phone_number, 'form': form, "employee": employee})
 
-    return render(request,"leave/applyleave_form.html", {'current_user': user_name, 'phone_number': phone_number, 'form': form})
-class ApplyLeaveListView(ListView):
-    context_object_name = "applied_leaves"
-    model = ApplyLeave
-    template_name = "leave/applyleave_list.html"
+# class ApplyLeaveListView(ListView):
+#     context_object_name = "applied_leaves"
+#     model = ApplyLeave
+#     template_name = "leave/applyleave_list.html"
 
+
+def list_applyleave(request):
+    leaves = ApplyLeave.objects.all()
+    current_user = User.objects.get(username = request.session['username'])
+    employee = Employee.objects.get(user = current_user.id)
+
+    return render(request, "leave/applyleave_list.html", {"leaves": leaves, "employee": employee})
 
 class ApplyLeaveUpdateView(UpdateView):
     model = ApplyLeave 
@@ -71,6 +104,11 @@ class ApplyLeaveUpdateView(UpdateView):
             'end_date'
         )
     template_name = "leave/applyleave_form.html"
+    def get_context_data(self, **kwargs):
+        context = super(ApplyLeaveUpdateView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(id = user.id)
+        return context
 
 
 # approve the leave
