@@ -93,9 +93,10 @@ def applyleave(request):
 def list_applyleave(request):
     leaves = ApplyLeave.objects.all()
     current_user = User.objects.get(username = request.session['username'])
+    user_leaves = ApplyLeave.objects.filter(employee = request.session['username'])
     employee = Employee.objects.get(user = current_user.id)
 
-    return render(request, "leave/applyleave_list.html", {"leaves": leaves, "employee": employee})
+    return render(request, "leave/applyleave_list.html", {"leaves": leaves, "employee": employee, "user_leaves": user_leaves})
 
 class ApplyLeaveUpdateView(UpdateView):
     model = ApplyLeave 
