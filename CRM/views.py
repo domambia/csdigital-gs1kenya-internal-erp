@@ -52,31 +52,37 @@ def all_clients(request):
     user = User.objects.get(username = request.session['username'])
     employee = Employee.objects.get(user = user.id)
     clients = Client.objects.all()
-    return render(request, "client/client_list.html", {"clients": clients})
+    return render(request, "client/client_list.html", {"clients": clients, "employee":employee})
+
 class ClientUpdateView(UpdateView):
     model = Client
     fields = ('company_name', 'company_phone', 'company_phone_alt', 'company_email','certificate_of_incorporation','copy_of_id', 'copy_of_blank_cheque',
             'copy_of_trade_licence', 'list_of_product_barcoded', 'director_pin_number', 'company_certificate_pin', 'copy_of_kebs_certicate',
              'company_email_alt', 'post_address', 'physical_location', 'director_info','sector', 'category', 'date_of_issue', 'nature_of_business')
     template_name = "client/client_form.html"
+    def get_context_data(self, **kwargs):
+        context = super(ClientUpdateView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(id = user.id)
+        return context
 
 
-# class ClientDetailView(DetailView):
-#     model = Client
-#     context_object_name = 'client'
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         self.user = 
-#     template_name = "client/client_detail.html"
+class ClientDetailView(DetailView):
+    model = Client
+    context_object_name = 'client'
+    template_name = "client/client_detail.html"
+    def get_context_data(self, **kwargs):
+        context = super(ClientDetailView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(id = user.id)
+        return context
+    
 
 
 def clients(request, pk):
     client = Client.objects.get(id = pk)
     user = User.objects.get(username = request.session['username'])
     employee = Employee.objects.get(user = user.id)
-    # print(employee.position.initials)
-    # print(employee.phone)
-    
     return render(request, "client/client_detail.html", {"client": client, "employee": employee})
 
 '''Approving Clients 
