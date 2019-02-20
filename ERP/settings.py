@@ -144,7 +144,7 @@ MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 
 # login url
-LOGIN_URL = 'accounts/user_login'
+LOGIN_URL = 'users/user_login'
 
 
 #Bootstrap

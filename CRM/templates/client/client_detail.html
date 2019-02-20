@@ -91,262 +91,256 @@
                                 </tr>
                             </tbody>
                         </table>
-
-                        <div class="col-md-10 col-md-offset-1">
-                            
-                                {% if employee.position.initials == "ME1" %}
-                                        {% if client.is_ccm == 0%}
-                                            <span class="btn label bg-orange"> CCM pending...</span>
-                                        {% else %}
-                                            <span class="btn label bg-green"> CCM approved</span>
-                                        {% endif %}
-
-                                        {% if client.is_cacc == 0%}
-                                            <span class="btn label bg-orange"> CACC pending...</span>
-                                        {% else %}
-                                            <span class="btn label bg-green"> CACC approved</span>
-                                        {% endif %}
-                                        {% if client.is_accm == 0%}
-                                            <span class="btn label bg-orange"> ACCM pending...</span>
-                                        {% else %}
-                                            <span class="btn label bg-green"> ACCM approved</span>
-                                        {% endif %}
-
-                                        {% if client.is_tm == 0%}
-                                            <span class="btn label bg-orange"> TM pending...</span>
-                                        {% else %}
-                                            <span class="btn label bg-green"> TM approved</span>
-                                        {% endif %}
-                                        <div class="form-group">
-                                        {% if client.is_gm == 0%}
-                                            <span class="btn label bg-orange"> GM pending...</span>
-                                        {% else %}
-                                            <span class="btn label bg-green"> GM approved</span>
-                                        {% endif %}
-                                    {% if client.is_me1 == 0 %}
-                                        <span > <a href="{% url 'CRM:me' client.id %}" class="label btn bg-orange" > approve </a></span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> approved</span>
-                                    {% endif %}
-                                    </div>
-
-
-                                {% elif employee.position.initials == "CCM" %}
-                                    {% if client.is_me1 == 0%}
-                                        <span class="btn label bg-orange"> ME pending...</span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> ME approved</span>
-                                    {% endif %}
-                                    {% if client.is_cacc == 0%}
-                                        <span class="btn label bg-orange"> CACC pending...</span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> CACC approved</span>
-                                    {% endif %}
-                                    {% if client.is_accm == 0%}
-                                        <span class="btn label bg-orange"> ACCM pending...</span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> ACCM approved</span>
-                                    {% endif %}
-
-                                    {% if client.is_tm == 0%}
-                                        <span class="btn label bg-orange"> TM pending...</span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> TM approved</span>
-                                    {% endif %}
-                                    <br>
-                                    {% if client.is_gm == 0%}
-                                        <span class="btn label bg-orange"> GM pending...</span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> GM approved</span>
-                                    {% endif %}
-                                    {% if client.is_ccm == 0 %}
-                                        <span> <a href="{% url 'CRM:ccm' client.id %}" class="label btn bg-orange" > approve </a></span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> approved</span>
-                                    {% endif %}
-
-                                {% elif employee.position.initials == "CACC" %}
-                                    {% if client.is_me1 == 0%}
-                                        <span class="btn label bg-orange"> ME pending...</span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> ME approved</span>
-                                    {% endif %}
-
-                                    {% if client.is_ccm == 0%}
-                                        <span class="btn label bg-orange"> CCM pending...</span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> CCM approved</span>
-                                    {% endif %}
-                                    {% if client.is_accm == 0%}
-                                        <span class="btn label bg-orange"> ACCM pending...</span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> ACCM approved</span>
-                                    {% endif %}
-
-                                    {% if client.is_tm == 0%}
-                                        <span class="btn label bg-orange"> TM pending...</span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> TM approved</span>
-                                    {% endif %}
-                                    <br>
-                                    {% if client.is_gm == 0%}
-                                        <span class="btn label bg-orange"> GM pending...</span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> GM approved</span>
-                                    {% endif %}
-                                    {% if client.is_cacc == 0 %}
-                                        <span> <a href="{% url 'CRM:cacc' client.id %}" class="label btn bg-orange" > approve </a></span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> approved</span>
-                                    {% endif %}
-
-                                {% elif employee.position.initials == "ACCM" %}
-                                    {% if client.is_me1 == 0%}
-                                        <span class="btn label bg-orange"> ME pending...</span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> ME approved</span>
-                                    {% endif %}
-
-                                    {% if client.is_ccm == 0%}
-                                        <span class="btn label bg-orange"> CCM pending...</span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> CCM approved</span>
-                                    {% endif %}
-
-                                    {% if client.is_cacc == 0%}
-                                        <span class="btn label bg-orange"> CACC pending...</span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> CACC approved</span>
-                                    {% endif %}
-                                    {% if client.is_tm == 0%}
-                                        <span class="btn label bg-orange"> TM pending...</span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> TM approved</span>
-                                    {% endif %}  
-                                    <br>
-                                    {% if client.is_gm == 0%}
-                                        <span class="btn label bg-orange"> GM pending...</span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> GM approved</span>
-                                    {% endif %}
-                                    {% if client.is_accm == 0 %}
-                                        <span> <a href="{% url 'CRM:accm' client.id %}" class="label btn bg-orange" > approve </a></span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> approved</span>
-                                    {% endif %}
-
-                                {% elif employee.position.initials == "TM" %}
-
-                                    {% if client.is_me1 == 0%}
-                                        <span class="btn label bg-orange"> ME pending...</span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> ME approved</span>
-                                    {% endif %}
-
-                                    {% if client.is_ccm == 0%}
-                                        <span class="btn label bg-orange"> CCM pending...</span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> CCM approved</span>
-                                    {% endif %}
-
-                                    {% if client.is_cacc == 0%}
-                                        <span class="btn label bg-orange"> CACC pending...</span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> CACC approved</span>
-                                    {% endif %}
-                                    {% if client.is_accm == 0%}
-                                        <span class="btn label bg-orange"> ACCM pending...</span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> ACCM approved</span>
-                                    {% endif %}
-                                   
-                                    {% if client.is_gm == 0%}
-                                        <span class="btn label bg-orange"> GM pending...</span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> GM approved</span>
-                                    {% endif %}
-                                    <br>
-                                    {% if client.is_tm == 0 %}
-                                        <span> <a href="{% url 'CRM:tm' client.id %}" class="label btn bg-orange" > approve </a></span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> approved</span>
-                                    {% endif %}
-                                    
-                                {% elif employee.position.initials == "GM" %}
-                                    {% if client.is_me1 == 0%}
-                                        <span class="btn label bg-orange"> ME pending...</span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> ME approved</span>
-                                    {% endif %}
-
-                                    {% if client.is_ccm == 0%}
-                                        <span class="btn label bg-orange"> CCM pending...</span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> CCM approved</span>
-                                    {% endif %}
-
-                                    {% if client.is_cacc == 0%}
-                                        <span class="btn label bg-orange"> CACC pending...</span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> CACC approved</span>
-                                    {% endif %}
-                                   
-                                    {% if client.is_accm == 0%}
-                                        <span class="btn label bg-orange"> ACCM pending...</span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> ACCM approved</span>
-                                    {% endif %}
-                                    <br>
-                                    {% if client.is_tm == 0%}
-                                        <span class="btn label bg-orange"> TM pending...</span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> TM approved</span>
-                                    {% endif %}
-                                    
-                                    {% if client.is_gm == 0 %}
-                                        <span> <a href="{% url 'CRM:gm'  client.id %}" class="label btn bg-orange" > approve </a></span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> approved</span>
-                                    {% endif %}
-
-                                {% else %}
-                                    {% if client.is_me1 == 0%}
-                                        <span class="btn label bg-orange"> ME pending...</span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> ME approved</span>
-                                    {% endif %}
-                                    {% if client.is_ccm == 0%}
-                                        <span class="btn label bg-orange"> CCM pending...</span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> CCM approved</span>
-                                    {% endif %}
-
-                                    {% if client.is_cacc == 0%}
-                                        <span class="btn label bg-orange"> CACC pending...</span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> CACC approved</span>
-                                    {% endif %}
-                                    {% if client.is_accm == 0%}
-                                        <span class="btn label bg-orange"> ACCM pending...</span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> ACCM approved</span>
-                                    {% endif %}
-
-                                    {% if client.is_tm == 0%}
-                                        <span class="btn label bg-orange"> TM pending...</span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> TM approved</span>
-                                    {% endif %}
-                                    {% if client.is_gm == 0%}
-                                        <span class="btn label bg-orange"> GM pending...</span>
-                                    {% else %}
-                                        <span class="btn label bg-green"> GM approved</span>
-                                    {% endif %}
-
-                                {% endif %}
-                        </div>
             </div>
+            <div class="col-md-10 col-md-offset-2">
+                    {% if employee.position.initials == "ME1" %}
+                    {% if client.is_ccm == 0%}
+                        <span class="btn label bg-orange"> CCM pending...</span>
+                    {% else %}
+                        <span class="btn label bg-green"> CCM approved</span>
+                    {% endif %}
 
+                    {% if client.is_cacc == 0%}
+                        <span class="btn label bg-orange"> CACC pending...</span>
+                    {% else %}
+                        <span class="btn label bg-green"> CACC approved</span>
+                    {% endif %}
+                    {% if client.is_accm == 0%}
+                        <span class="btn label bg-orange"> ACCM pending...</span>
+                    {% else %}
+                        <span class="btn label bg-green"> ACCM approved</span>
+                    {% endif %}
+
+                    {% if client.is_tm == 0%}
+                        <span class="btn label bg-orange"> TM pending...</span>
+                    {% else %}
+                        <span class="btn label bg-green"> TM approved</span>
+                    {% endif %}
+                   
+                    {% if client.is_gm == 0%}
+                        <span class="btn label bg-orange"> GM pending...</span>
+                    {% else %}
+                        <span class="btn label bg-green"> GM approved</span>
+                    {% endif %}
+                {% if client.is_me1 == 0 %}
+                    <span > <a href="{% url 'CRM:me' client.id %}" class="label btn bg-orange" > approve </a></span>
+                {% else %}
+                    <span class="btn label bg-green"> approved</span>
+                {% endif %}
+
+
+            {% elif employee.position.initials == "CCM" %}
+                {% if client.is_me1 == 0%}
+                    <span class="btn label bg-orange"> ME pending...</span>
+                {% else %}
+                    <span class="btn label bg-green"> ME approved</span>
+                {% endif %}
+                {% if client.is_cacc == 0%}
+                    <span class="btn label bg-orange"> CACC pending...</span>
+                {% else %}
+                    <span class="btn label bg-green"> CACC approved</span>
+                {% endif %}
+                {% if client.is_accm == 0%}
+                    <span class="btn label bg-orange"> ACCM pending...</span>
+                {% else %}
+                    <span class="btn label bg-green"> ACCM approved</span>
+                {% endif %}
+
+                {% if client.is_tm == 0%}
+                    <span class="btn label bg-orange"> TM pending...</span>
+                {% else %}
+                    <span class="btn label bg-green"> TM approved</span>
+                {% endif %}
+               
+                {% if client.is_gm == 0%}
+                    <span class="btn label bg-orange"> GM pending...</span>
+                {% else %}
+                    <span class="btn label bg-green"> GM approved</span>
+                {% endif %}
+                {% if client.is_ccm == 0 %}
+                    <span> <a href="{% url 'CRM:ccm' client.id %}" class="label btn bg-orange" > approve </a></span>
+                {% else %}
+                    <span class="btn label bg-green"> approved</span>
+                {% endif %}
+
+            {% elif employee.position.initials == "CACC" %}
+                {% if client.is_me1 == 0%}
+                    <span class="btn label bg-orange"> ME pending...</span>
+                {% else %}
+                    <span class="btn label bg-green"> ME approved</span>
+                {% endif %}
+
+                {% if client.is_ccm == 0%}
+                    <span class="btn label bg-orange"> CCM pending...</span>
+                {% else %}
+                    <span class="btn label bg-green"> CCM approved</span>
+                {% endif %}
+                {% if client.is_accm == 0%}
+                    <span class="btn label bg-orange"> ACCM pending...</span>
+                {% else %}
+                    <span class="btn label bg-green"> ACCM approved</span>
+                {% endif %}
+
+                {% if client.is_tm == 0%}
+                    <span class="btn label bg-orange"> TM pending...</span>
+                {% else %}
+                    <span class="btn label bg-green"> TM approved</span>
+                {% endif %}
+                {% if client.is_gm == 0%}
+                    <span class="btn label bg-orange"> GM pending...</span>
+                {% else %}
+                    <span class="btn label bg-green"> GM approved</span>
+                {% endif %}
+                {% if client.is_cacc == 0 %}
+                    <span> <a href="{% url 'CRM:cacc' client.id %}" class="label btn bg-orange" > approve </a></span>
+                {% else %}
+                    <span class="btn label bg-green"> approved</span>
+                {% endif %}
+
+            {% elif employee.position.initials == "ACCM" %}
+                {% if client.is_me1 == 0%}
+                    <span class="btn label bg-orange"> ME pending...</span>
+                {% else %}
+                    <span class="btn label bg-green"> ME approved</span>
+                {% endif %}
+
+                {% if client.is_ccm == 0%}
+                    <span class="btn label bg-orange"> CCM pending...</span>
+                {% else %}
+                    <span class="btn label bg-green"> CCM approved</span>
+                {% endif %}
+
+                {% if client.is_cacc == 0%}
+                    <span class="btn label bg-orange"> CACC pending...</span>
+                {% else %}
+                    <span class="btn label bg-green"> CACC approved</span>
+                {% endif %}
+                {% if client.is_tm == 0%}
+                    <span class="btn label bg-orange"> TM pending...</span>
+                {% else %}
+                    <span class="btn label bg-green"> TM approved</span>
+                {% endif %}  
+                {% if client.is_gm == 0%}
+                    <span class="btn label bg-orange"> GM pending...</span>
+                {% else %}
+                    <span class="btn label bg-green"> GM approved</span>
+                {% endif %}
+                {% if client.is_accm == 0 %}
+                    <span> <a href="{% url 'CRM:accm' client.id %}" class="label btn bg-orange" > approve </a></span>
+                {% else %}
+                    <span class="btn label bg-green"> approved</span>
+                {% endif %}
+
+            {% elif employee.position.initials == "TM" %}
+
+                {% if client.is_me1 == 0%}
+                    <span class="btn label bg-orange"> ME pending...</span>
+                {% else %}
+                    <span class="btn label bg-green"> ME approved</span>
+                {% endif %}
+
+                {% if client.is_ccm == 0%}
+                    <span class="btn label bg-orange"> CCM pending...</span>
+                {% else %}
+                    <span class="btn label bg-green"> CCM approved</span>
+                {% endif %}
+
+                {% if client.is_cacc == 0%}
+                    <span class="btn label bg-orange"> CACC pending...</span>
+                {% else %}
+                    <span class="btn label bg-green"> CACC approved</span>
+                {% endif %}
+                {% if client.is_accm == 0%}
+                    <span class="btn label bg-orange"> ACCM pending...</span>
+                {% else %}
+                    <span class="btn label bg-green"> ACCM approved</span>
+                {% endif %}
+               
+                {% if client.is_gm == 0%}
+                    <span class="btn label bg-orange"> GM pending...</span>
+                {% else %}
+                    <span class="btn label bg-green"> GM approved</span>
+                {% endif %}
+                <br>
+                {% if client.is_tm == 0 %}
+                    <span> <a href="{% url 'CRM:tm' client.id %}" class="label btn bg-orange" > approve </a></span>
+                {% else %}
+                    <span class="btn label bg-green"> approved</span>
+                {% endif %}
+                
+            {% elif employee.position.initials == "GM" %}
+                {% if client.is_me1 == 0%}
+                    <span class="btn label bg-orange"> ME pending...</span>
+                {% else %}
+                    <span class="btn label bg-green"> ME approved</span>
+                {% endif %}
+
+                {% if client.is_ccm == 0%}
+                    <span class="btn label bg-orange"> CCM pending...</span>
+                {% else %}
+                    <span class="btn label bg-green"> CCM approved</span>
+                {% endif %}
+
+                {% if client.is_cacc == 0%}
+                    <span class="btn label bg-orange"> CACC pending...</span>
+                {% else %}
+                    <span class="btn label bg-green"> CACC approved</span>
+                {% endif %}
+               
+                {% if client.is_accm == 0%}
+                    <span class="btn label bg-orange"> ACCM pending...</span>
+                {% else %}
+                    <span class="btn label bg-green"> ACCM approved</span>
+                {% endif %}
+                <br>
+                {% if client.is_tm == 0%}
+                    <span class="btn label bg-orange"> TM pending...</span>
+                {% else %}
+                    <span class="btn label bg-green"> TM approved</span>
+                {% endif %}
+                
+                {% if client.is_gm == 0 %}
+                    <span> <a href="{% url 'CRM:gm'  client.id %}" class="label btn bg-orange" > approve </a></span>
+                {% else %}
+                    <span class="btn label bg-green"> approved</span>
+                {% endif %}
+
+            {% else %}
+                {% if client.is_me1 == 0%}
+                    <span class="btn label bg-orange"> ME pending...</span>
+                {% else %}
+                    <span class="btn label bg-green"> ME approved</span>
+                {% endif %}
+                {% if client.is_ccm == 0%}
+                    <span class="btn label bg-orange"> CCM pending...</span>
+                {% else %}
+                    <span class="btn label bg-green"> CCM approved</span>
+                {% endif %}
+
+                {% if client.is_cacc == 0%}
+                    <span class="btn label bg-orange"> CACC pending...</span>
+                {% else %}
+                    <span class="btn label bg-green"> CACC approved</span>
+                {% endif %}
+                {% if client.is_accm == 0%}
+                    <span class="btn label bg-orange"> ACCM pending...</span>
+                {% else %}
+                    <span class="btn label bg-green"> ACCM approved</span>
+                {% endif %}
+
+                {% if client.is_tm == 0%}
+                    <span class="btn label bg-orange"> TM pending...</span>
+                {% else %}
+                    <span class="btn label bg-green"> TM approved</span>
+                {% endif %}
+                {% if client.is_gm == 0%}
+                    <span class="btn label bg-orange"> GM pending...</span>
+                {% else %}
+                    <span class="btn label bg-green"> GM approved</span>
+                {% endif %}
+
+            {% endif %}
+            </div>
         </div>
       </div>
 
