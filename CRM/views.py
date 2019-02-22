@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from accounts.models import Employee 
-from django.contrib.auth.models import User 
+from accounts.models import Employee
+from django.contrib.auth.models import User
 from departments.models import Position
-from django.urls import reverse_lazy 
-from CRM.models import Client, Supplier, Feedback, Training, Barcode
+from django.urls import reverse_lazy
+from CRM.models import Client, Supplier, Feedback, Training, Barcode, Event
 from helpers.help import get_country, get_sectors
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
 from helpers.sendSMS import SMS
@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from datetime import datetime
-from helpers.sendSMS import SMS 
+from helpers.sendSMS import SMS
 from CRM.forms import TrainForm
 # Create your views here.
 
@@ -26,7 +26,7 @@ def index(request):
     trainings = Training.objects.count()
     # sms = SMS()
     # sms.send("+254708067459", "Welcome omambia")
-    return render(request, "home/index.html", 
+    return render(request, "home/index.html",
                         {'clients': clients, 'suppliers': suppliers, 'feedbacks': feedbacks, 'trainings': trainings})
 
 
@@ -39,7 +39,7 @@ class ClientCreateView(CreateView):
     fields = ('company_name', 'company_phone', 'company_phone_alt', 'company_email','certificate_of_incorporation','copy_of_id', 'copy_of_blank_cheque',
             'copy_of_trade_licence', 'list_of_product_barcoded', 'director_pin_number', 'company_certificate_pin', 'copy_of_kebs_certicate',
              'company_email_alt', 'post_address', 'physical_location', 'director_info','sector', 'category', 'date_of_issue', 'nature_of_business')
-    model = Client 
+    model = Client
     template_name = "client/client_form.html"
 
 # class ClientListView(ListView):
@@ -76,7 +76,7 @@ class ClientDetailView(DetailView):
         user = self.request.user
         context['employee'] = Employee.objects.get(id = user.id)
         return context
-    
+
 
 
 def clients(request, pk):
@@ -85,7 +85,7 @@ def clients(request, pk):
     employee = Employee.objects.get(user = user.id)
     return render(request, "client/client_detail.html", {"client": client, "employee": employee})
 
-'''Approving Clients 
+'''Approving Clients
 
 '''
 
@@ -94,8 +94,8 @@ def notify(phone, first_name, last_name, company_name, when):
                 Dear {}  {},
                 You have been requested to aprove our esteemed member[ {} ].
                 Thank you,
-                
-                CEO, GS1 Kenya 
+
+                CEO, GS1 Kenya
                 Date: {}
                """
     msg = message.format(first_name, last_name, company_name, when)
@@ -169,7 +169,7 @@ def general_manager(request, pk):
 
 
 '''
-End of Approval 
+End of Approval
 '''
 class ClientDeleteView(DeleteView):
     model = Client
@@ -179,7 +179,7 @@ class ClientDeleteView(DeleteView):
 
 
 '''
-The supplier views 
+The supplier views
 
 '''
 class SupplierCreateView(CreateView):
@@ -198,27 +198,27 @@ class SupplierUpdateView(UpdateView):
     template_name = "supplier/supplier_form.html"
 
 class SupplierDetailView(DetailView):
-    model = Supplier 
+    model = Supplier
     context_object_name = "supplier"
     template_name = "supplier/supplier_detail.html"
 
 class SupplierDeleteView(DeleteView):
-    model = Supplier 
+    model = Supplier
     template_name = "supplier/supplier_delete_confirm.html"
     success_url = reverse_lazy("CRM:list_supplier")
 
 '''
-The Feedback Views 
+The Feedback Views
 '''
 
 class FeedbackCreateView(CreateView):
-    model = Feedback 
+    model = Feedback
     fields = ('client_name', 'feedback', 'status')
     template_name  = "feedback/feedback_form.html"
 
 
 class FeedbackUpdateView(UpdateView):
-    model = Feedback 
+    model = Feedback
     fields = ('client_name', 'feedback', 'status')
     template_name  = "feedback/feedback_form.html"
 
@@ -230,13 +230,13 @@ class FeedbackListView(ListView):
 
 
 class FeedbackDeleteView(DeleteView):
-    model = Feedback 
+    model = Feedback
     template_name = "feedback/feedback_delete_confirm.html"
     success_url = reverse_lazy("CRM:list_feedback")
 
 
 class FeedbackDetailView(DetailView):
-    model = Feedback 
+    model = Feedback
     context_object_name = "feedback"
     template_name = "feedback/feedback_detail.html"
 
@@ -259,12 +259,12 @@ def close(request, pk):
 
 
 '''
-The Training Feedback 
+The Training Feedback
 '''
 
 
 class TrainingCreateView(CreateView):
-    model = Training 
+    model = Training
     fields = ('trainer', 'number_of_trainee', 'happened_on','all_trainee')
     template_name  = "training/training_form.html"
 
@@ -276,16 +276,22 @@ def get_clients():
         clients.append((cl.id, cl.company_name ,))
     return tuple(clients)
 
-@login_required
-def create_train(request):
-    form_train = TrainForm(request.POST or None)
-    if form_train.is_valid():
-        print(form_train.data)
-
-    return render(request, "training/training_form.html", {"form": form_train, "clients": len(get_clients())})
-class TrainingUpdateView(UpdateView):
+class TrainingCreateView(CreateView):
     model = Training 
-    fields = ('trainer', 'number_of_trainee', 'happened_on', 'all_trainee')
+    fields = ('trainer', 'number_of_trainee', 'happened_on', 'all_trainee', 'description')
+    template_name  = "training/training_form.html"
+
+    
+# @login_required
+# def create_train(request):
+#     form_train = TrainForm(request.POST or None)
+#     if form_train.is_valid():
+#         print(form_train.data)
+
+#     return render(request, "training/training_form.html", {"form": form_train, "clients": len(get_clients())})
+class TrainingUpdateView(UpdateView):
+    model = Training
+    fields = ('trainer', 'number_of_trainee', 'happened_on', 'all_trainee', 'description')
     template_name  = "training/training_form.html"
 
 
@@ -296,22 +302,51 @@ class TrainingListView(ListView):
 
 
 class TrainingDeleteView(DeleteView):
-    model = Training 
+    model = Training
     template_name = "training/training_confirm_delete.html"
     success_url = reverse_lazy("CRM:list_training")
 
 
 class TrainingDetailView(DetailView):
-    model = Training 
+    model = Training
     context_object_name = "training"
     template_name = "training/training_detail.html"
 
+'''
+Create the Event View
+'''
+class CreateEventView(CreateView):
+    model = Event
+    fields = ('event_name', 'training')
+    template_name = "event/event_form.html"
+
+
+class ListEventView(ListView):
+    model = Event
+    context_object_name = "events"
+    template_name = "event/event_list.html"
+
+class UpdateEventView(UpdateView):
+    model = Event
+    fields = ('event_name', 'training')
+    template_name = "event/event_form.html"
+
+class DetailEventView(DetailView):
+    model = Event
+    content_object_name = "event"
+    template_name = "event/event_detail.html"
+
+class DeleteEventView(DeleteView):
+    model = Event
+    success_url = ""
+    template_name = "event_confirm_delete.html"
+
 
 '''
-Barcode Details 
+Barcode Details
 '''
 class BarcodeListView(ListView):
-    model = Barcode 
+    model = Barcode
     context_object_name = "barcodes"
     template_name = "barcode/barcode_list.html"
 
@@ -329,11 +364,12 @@ class BarcodeUpdateView(UpdateView):
 
 
 class BarcodeDeleteView(DeleteView):
-    model = Barcode 
+    model = Barcode
     template_name  = "barcode/barcode_confirm_delete.html"
     success_url = reverse_lazy("CRM:list_barcode")
-    
+
 class BarcodeDetailView(DetailView):
-    model = Barcode 
+    model = Barcode
     context_object_name  = 'barcode'
     template_name = "barcode/barcode_detail.html"
+

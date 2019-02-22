@@ -81,8 +81,6 @@ class Supplier(models.Model):
         return reverse("CRM:list_supplier")
 
 
-
-
 class Feedback(models.Model):
     STATUS = (
         (1, "close"),
@@ -110,18 +108,33 @@ def get_clients():
         clients.append((cl.id, cl.company_name ,))
     return tuple(clients)
 
+'''
+Coding from spacemacs
+'''
+class Event(models.Model):
+    event_name = models.CharField(max_length=300)
+    training = models.ForeignKey("Training", related_name ="trian", on_delete=models.CASCADE)
+    date_time = models.DateField(default = datetime.datetime.now)
+    status = models.IntegerField(default = 0)
+
+    def __str__(self):
+        return self.event_name
+    def get_absolute_url(self):
+        return reverse("CRM:list_event")
+
+
 
 class Training(models.Model):
     trainer = models.ForeignKey(Employee, on_delete = models.CASCADE)
     number_of_trainee = models.PositiveIntegerField()
-
-    all_trainee = MultiSelectField(choices=get_clients(), max_choices= 3, max_length=3, default = "1,2")
+    all_trainee = MultiSelectField(choices=get_clients(), max_length=3, blank=True, null=True)
     happened_on  = models.DateField(default = datetime.datetime.now)
-
+    description = models.CharField(max_length= 2000)
+    def __str__(self):
+        return self.trainer.user.username
     def get_absolute_url(self):
         return reverse("CRM:list_training")
-    
-        
+
 class Barcode(models.Model):
     GTIN = models.CharField(max_length = 40, unique = True)
     client = models.ForeignKey("Client", on_delete=models.CASCADE)
@@ -141,4 +154,4 @@ class Barcode(models.Model):
 
     def get_absolute_url(self):
         return reverse("CRM:detail_barcode", kwargs={"pk": self.pk})
-    
+
