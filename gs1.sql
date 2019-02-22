@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 15, 2019 at 01:19 PM
+-- Generation Time: Feb 22, 2019 at 12:38 PM
 -- Server version: 10.3.12-MariaDB
 -- PHP Version: 7.3.2
 
@@ -177,7 +177,11 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (73, 'Can add client approval', 19, 'add_clientapproval'),
 (74, 'Can change client approval', 19, 'change_clientapproval'),
 (75, 'Can delete client approval', 19, 'delete_clientapproval'),
-(76, 'Can view client approval', 19, 'view_clientapproval');
+(76, 'Can view client approval', 19, 'view_clientapproval'),
+(77, 'Can add event', 20, 'add_event'),
+(78, 'Can change event', 20, 'change_event'),
+(79, 'Can delete event', 20, 'delete_event'),
+(80, 'Can view event', 20, 'view_event');
 
 -- --------------------------------------------------------
 
@@ -204,10 +208,11 @@ CREATE TABLE `auth_user` (
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(1, 'argon2$argon2i$v=19$m=512,t=2,p=2$ekZJcGRjeWxscEZZ$o8sU42ChUu8MUMSRLkP19Q', '2019-02-15 08:40:15.816578', 0, 'omambia', 'Omambia', 'Dauglous', 'omambiadauglous@gmail.com', 0, 1, '2019-01-28 17:59:33.409242'),
-(2, 'argon2$argon2i$v=19$m=512,t=2,p=2$aU5LVG10akkxV0wx$46lMhUxTyG6KVGgL0c9+ww', NULL, 0, 'domambia', 'Omambia', 'Joshua', 'omambiadauglous1@gmail.com', 0, 1, '2019-02-07 05:13:05.951886'),
-(10, 'argon2$argon2i$v=19$m=512,t=2,p=2$Y3hYSTUyMzRIU2l0$vl8X38hhBC8os4fsJlTrig', '2019-02-15 12:21:23.405619', 0, 'Faiza', 'Faiza', 'Gs1', 'faiza@gmail.com', 0, 1, '2019-02-15 12:18:28.757029'),
-(11, 'argon2$argon2i$v=19$m=512,t=2,p=2$SFJFZWJUZmJ2MGVy$WL9bJtQ7kxHrecceEdXwtQ', NULL, 0, 'eva', 'Eva12', 'Cherry', 'eva@gmail.com', 0, 1, '2019-02-15 12:20:39.250800');
+(1, 'argon2$argon2i$v=19$m=512,t=2,p=2$ekZJcGRjeWxscEZZ$o8sU42ChUu8MUMSRLkP19Q', '2019-02-22 07:32:15.901786', 0, 'omambia', 'Omambia', 'Dauglous', 'omambiadauglous@gmail.com', 0, 1, '2019-01-28 17:59:33.409242'),
+(2, 'argon2$argon2i$v=19$m=512,t=2,p=2$aU5LVG10akkxV0wx$46lMhUxTyG6KVGgL0c9+ww', NULL, 1, 'domambia', 'Omambia', 'Joshua', 'omambiadauglous1@gmail.com', 0, 1, '2019-02-07 05:13:05.951886'),
+(10, 'argon2$argon2i$v=19$m=512,t=2,p=2$Y3hYSTUyMzRIU2l0$vl8X38hhBC8os4fsJlTrig', '2019-02-20 09:43:58.142663', 0, 'Faiza', 'Faiza', 'Gs1', 'faiza@gmail.com', 0, 1, '2019-02-15 12:18:28.757029'),
+(11, 'argon2$argon2i$v=19$m=512,t=2,p=2$SFJFZWJUZmJ2MGVy$WL9bJtQ7kxHrecceEdXwtQ', '2019-02-20 08:55:39.030851', 0, 'eva', 'Eva12', 'Cherry', 'eva@gmail.com', 0, 1, '2019-02-15 12:20:39.250800'),
+(12, 'argon2$argon2i$v=19$m=512,t=2,p=2$UXBQUHZwanczeDBw$8xXBgsnl+vdaqEY7LOP4Og', '2019-02-22 08:25:05.345396', 1, 'hackert', '', '', 'hackert@gmail.com', 1, 1, '2019-02-22 08:24:49.657945');
 
 -- --------------------------------------------------------
 
@@ -255,6 +260,13 @@ CREATE TABLE `CRM_barcode` (
   `client_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `CRM_barcode`
+--
+
+INSERT INTO `CRM_barcode` (`id`, `GTIN`, `product_description`, `brand_name`, `name_packaging`, `type`, `depth`, `width`, `height`, `gross_weight`, `net_weight`, `size`, `client_id`) VALUES
+(1, '6255154201', 'lkhjjkg', 'Maize Flour', 'new Pack', 'category', '12', '16', '20', '45', '12', 140, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -299,7 +311,29 @@ CREATE TABLE `CRM_client` (
 
 INSERT INTO `CRM_client` (`id`, `company_name`, `company_phone`, `company_phone_alt`, `company_email`, `company_email_alt`, `post_address`, `physical_location`, `director_info`, `sector`, `category`, `date_of_issue`, `nature_of_business`, `certificate_of_incorporation`, `copy_of_id`, `copy_of_blank_cheque`, `copy_of_trade_licence`, `list_of_product_barcoded`, `director_pin_number`, `company_certificate_pin`, `copy_of_kebs_certicate`, `is_accm`, `is_cacc`, `is_ccm`, `is_gm`, `is_me1`, `is_me2`, `is_tm`, `status`) VALUES
 (1, 'BrugKe', 701246475, 701246475, 'kafomombia@gmail.com', 'kafomambia@gmial.com', '01004', 'Nairobi', 'GS1Kenya. 07050424525', 'HELATHCARE', 'CATEGORY B', '2019-01-16', 'Large', 'documents/clients/ef5a3c4f6348421c8e37afd32dc04fc7.pdf', 'documents/clients/29c47c7760ba483eab11f417296c0716.pdf', 'documents/clients/89426bfc37af4b9a97252767b913af86.pdf', 'documents/clients/faa1a83216d9480b9b8bbaee9476f20e.pdf', 'documents/clients/03de7a21ec994665bfc19d737867188f.pdf', 'documents/clients/0967531a25464e3e805282a150988d46.pdf', 'documents/clients/ef561cd4d42343378af77ca19422e153.pdf', 'documents/clients/0bb35ead1b744cc2b40e72a04996109b.pdf', 0, 0, 0, 0, 1, 0, 0, 0),
-(2, 'gs1', 1117144527, 1117144519, 'kaf@gmail.com', 'kafomambia@gmial.com', '0012', '00124', 'dr. 01117144527', 'MANUFACTURER,TRADING &FINANCIAL INSTITUTIONS', 'CATEGORY B', '2019-02-21', 'Large', 'documents/clients/415843e43d4d423e8dfe1fe3addd6854.jpg', 'documents/clients/86528d7b37fb4d168ccd81d90bebbf3c.pdf', 'documents/clients/4cb90ddf3a544fd58d63dd9a5b7eb1b4.pdf', 'documents/clients/3a94036317914eab966085bb4348a168.pdf', 'documents/clients/41dc2871d460464ab50c0bf9407e5231.pdf', 'documents/clients/bfe71405e51444c98bb496471d958b1d.pdf', 'documents/clients/4cfb9d94b7ae4d2281cf278c32c3713e.pdf', 'documents/clients/9f3d09e11a9b4f4c8a9c0b4842af70a2.pdf', 0, 0, 0, 0, 0, 0, 0, 0);
+(2, 'gs1', 1117144527, 1117144519, 'kaf@gmail.com', 'kafomambia@gmial.com', '0012', '00124', 'dr. 01117144527', 'MANUFACTURER,TRADING &FINANCIAL INSTITUTIONS', 'CATEGORY B', '2019-02-21', 'Large', 'documents/clients/415843e43d4d423e8dfe1fe3addd6854.jpg', 'documents/clients/86528d7b37fb4d168ccd81d90bebbf3c.pdf', 'documents/clients/4cb90ddf3a544fd58d63dd9a5b7eb1b4.pdf', 'documents/clients/3a94036317914eab966085bb4348a168.pdf', 'documents/clients/41dc2871d460464ab50c0bf9407e5231.pdf', 'documents/clients/bfe71405e51444c98bb496471d958b1d.pdf', 'documents/clients/4cfb9d94b7ae4d2281cf278c32c3713e.pdf', 'documents/clients/9f3d09e11a9b4f4c8a9c0b4842af70a2.pdf', 0, 0, 0, 0, 1, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `CRM_event`
+--
+
+CREATE TABLE `CRM_event` (
+  `id` int(11) NOT NULL,
+  `event_name` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date_time` date NOT NULL,
+  `status` int(11) NOT NULL,
+  `training_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `CRM_event`
+--
+
+INSERT INTO `CRM_event` (`id`, `event_name`, `date_time`, `status`, `training_id`) VALUES
+(1, 'Cyber Security Awareness', '2019-02-21', 1, 1),
+(2, 'Elixir Meeting', '2019-02-22', 0, 2);
 
 -- --------------------------------------------------------
 
@@ -314,6 +348,13 @@ CREATE TABLE `CRM_feedback` (
   `status` int(11) NOT NULL,
   `client_name_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `CRM_feedback`
+--
+
+INSERT INTO `CRM_feedback` (`id`, `feedback`, `created_on`, `status`, `client_name_id`) VALUES
+(1, 'we can find new changes', '2019-02-17', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -341,8 +382,17 @@ CREATE TABLE `CRM_training` (
   `number_of_trainee` int(10) UNSIGNED NOT NULL,
   `all_trainee` varchar(3) COLLATE utf8mb4_unicode_ci NOT NULL,
   `happened_on` date NOT NULL,
-  `trainer_id` int(11) NOT NULL
+  `trainer_id` int(11) NOT NULL,
+  `description` varchar(2000) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `CRM_training`
+--
+
+INSERT INTO `CRM_training` (`id`, `number_of_trainee`, `all_trainee`, `happened_on`, `trainer_id`, `description`) VALUES
+(1, 12, '1,2', '2019-02-18', 2, 'omambia'),
+(2, 13, '1', '2019-02-22', 4, 'Joy kemunto, Joseph Mohmed, Joss Kwach, Omambia Dauglous,..... and many more');
 
 -- --------------------------------------------------------
 
@@ -412,6 +462,15 @@ CREATE TABLE `django_admin_log` (
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `django_admin_log`
+--
+
+INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`, `action_flag`, `change_message`, `content_type_id`, `user_id`) VALUES
+(2, '2019-02-22 08:25:25.627255', '1', 'Omambia', 2, '[{\"changed\": {\"fields\": [\"all_trainee\"]}}]', 16, 12),
+(3, '2019-02-22 08:41:02.817259', '1', 'domambia', 2, '[]', 16, 12),
+(4, '2019-02-22 08:41:22.836255', '2', 'Faiza', 1, '[{\"added\": {}}]', 16, 12);
+
 -- --------------------------------------------------------
 
 --
@@ -438,6 +497,7 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (18, 'CRM', 'barcode'),
 (13, 'CRM', 'client'),
 (19, 'CRM', 'clientapproval'),
+(20, 'CRM', 'event'),
 (14, 'CRM', 'feedback'),
 (15, 'CRM', 'supplier'),
 (16, 'CRM', 'training'),
@@ -514,7 +574,11 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (45, 'CRM', '0002_clientapproval', '2019-02-15 08:49:35.429101'),
 (46, 'CRM', '0003_clientapproval_status', '2019-02-15 08:50:25.619679'),
 (47, 'CRM', '0004_auto_20190215_0937', '2019-02-15 09:37:38.367180'),
-(48, 'CRM', '0005_barcode_feedback_supplier_training', '2019-02-15 09:39:12.920962');
+(48, 'CRM', '0005_barcode_feedback_supplier_training', '2019-02-15 09:39:12.920962'),
+(49, 'CRM', '0006_auto_20190218_0739', '2019-02-18 07:39:15.475155'),
+(50, 'CRM', '0007_event', '2019-02-21 14:09:18.603738'),
+(51, 'CRM', '0008_auto_20190221_1447', '2019-02-21 14:47:46.402003'),
+(52, 'CRM', '0009_remove_training_name', '2019-02-22 08:32:32.465060');
 
 -- --------------------------------------------------------
 
@@ -533,8 +597,9 @@ CREATE TABLE `django_session` (
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
+('0iqqxanie2vcv0k8snumh77lidqqrm7e', 'MjBkZDIyZGQ4OWQ2MjkxNWVkOWU5ODFmYjZkYTgyZjNlODhkODgwZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkZWUxNmIxOWRjOTZiYThlODBjNDdlNmJiZmRjY2EzNmFkYmJkZmVhIiwidXNlcm5hbWUiOiJvbWFtYmlhIn0=', '2019-03-04 12:59:28.816629'),
+('21sg8bdd9ge4ebfmz35u2nczx14qrpm1', 'MDc0MGQ2MjdkM2M3MzViODlkYWQwODE1OWMxZTZiNTdiMjdhNzQ4ODp7Il9hdXRoX3VzZXJfaWQiOiIxMiIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiODdlNjYwZmRhZTgxNzY2MzJmYTM3MDRiMTRlODIyNzZjZWQ3ZWU4MyJ9', '2019-03-08 08:25:05.381332'),
 ('4qoegj2dle3j7zuhywc1xpgbgvq1ta4i', 'MjBkZDIyZGQ4OWQ2MjkxNWVkOWU5ODFmYjZkYTgyZjNlODhkODgwZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkZWUxNmIxOWRjOTZiYThlODBjNDdlNmJiZmRjY2EzNmFkYmJkZmVhIiwidXNlcm5hbWUiOiJvbWFtYmlhIn0=', '2019-02-21 06:37:38.299883'),
-('sy5hsq0yqx9djwt9ttysglrtkm4hgx79', 'NTEyNDQyYTUyYmQ1ZGRjOWFhZTc3ZjlhMGY0NTBiNGNkNTFkOWU4OTp7Il9hdXRoX3VzZXJfaWQiOiIxMCIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiMDg4MDcwM2E2YWQ1OTNmOWJkMmJhODc0MDhhZDYxOWVkNmJjNWU5MyIsInVzZXJuYW1lIjoiRmFpemEifQ==', '2019-03-01 12:21:23.473412'),
 ('vqyxl3hpqiar7vudllni1tdt8joyu8ta', 'MjBkZDIyZGQ4OWQ2MjkxNWVkOWU5ODFmYjZkYTgyZjNlODhkODgwZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkZWUxNmIxOWRjOTZiYThlODBjNDdlNmJiZmRjY2EzNmFkYmJkZmVhIiwidXNlcm5hbWUiOiJvbWFtYmlhIn0=', '2019-02-11 18:00:04.248476'),
 ('x0onayibalndacehynr5dgn3yszcjs83', 'MjBkZDIyZGQ4OWQ2MjkxNWVkOWU5ODFmYjZkYTgyZjNlODhkODgwZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkZWUxNmIxOWRjOTZiYThlODBjNDdlNmJiZmRjY2EzNmFkYmJkZmVhIiwidXNlcm5hbWUiOiJvbWFtYmlhIn0=', '2019-02-14 17:48:16.157073');
 
@@ -562,7 +627,8 @@ CREATE TABLE `leave_applyleave` (
 --
 
 INSERT INTO `leave_applyleave` (`id`, `start_date`, `status`, `end_date`, `resume_date`, `home_phone`, `employee`, `leave_id`, `person_taking_charge_id`, `period`) VALUES
-(9, '2019-02-01', 1, '2019-02-07', '2019-02-05', '0708067459', 'omambia', 1, 1, 3);
+(9, '2019-02-01', 1, '2019-02-07', '2019-02-05', '0708067459', 'omambia', 1, 1, 3),
+(10, '2019-04-14', 0, '2019-03-16', '2019-03-17', '708067459', 'Faiza', 1, 5, 3);
 
 -- --------------------------------------------------------
 
@@ -695,6 +761,13 @@ ALTER TABLE `CRM_client`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `CRM_event`
+--
+ALTER TABLE `CRM_event`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `CRM_event_training_id_e835b166_fk_CRM_training_id` (`training_id`);
+
+--
 -- Indexes for table `CRM_feedback`
 --
 ALTER TABLE `CRM_feedback`
@@ -809,13 +882,13 @@ ALTER TABLE `auth_group_permissions`
 -- AUTO_INCREMENT for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT for table `auth_user`
 --
 ALTER TABLE `auth_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `auth_user_groups`
@@ -833,7 +906,7 @@ ALTER TABLE `auth_user_user_permissions`
 -- AUTO_INCREMENT for table `CRM_barcode`
 --
 ALTER TABLE `CRM_barcode`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `CRM_client`
@@ -842,10 +915,16 @@ ALTER TABLE `CRM_client`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `CRM_event`
+--
+ALTER TABLE `CRM_event`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `CRM_feedback`
 --
 ALTER TABLE `CRM_feedback`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `CRM_supplier`
@@ -857,7 +936,7 @@ ALTER TABLE `CRM_supplier`
 -- AUTO_INCREMENT for table `CRM_training`
 --
 ALTER TABLE `CRM_training`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `departments_department`
@@ -875,25 +954,25 @@ ALTER TABLE `departments_position`
 -- AUTO_INCREMENT for table `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `leave_applyleave`
 --
 ALTER TABLE `leave_applyleave`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `leave_leave`
@@ -957,6 +1036,12 @@ ALTER TABLE `auth_user_user_permissions`
 --
 ALTER TABLE `CRM_barcode`
   ADD CONSTRAINT `CRM_barcode_client_id_0615af36_fk_CRM_client_id` FOREIGN KEY (`client_id`) REFERENCES `CRM_client` (`id`);
+
+--
+-- Constraints for table `CRM_event`
+--
+ALTER TABLE `CRM_event`
+  ADD CONSTRAINT `CRM_event_training_id_e835b166_fk_CRM_training_id` FOREIGN KEY (`training_id`) REFERENCES `CRM_training` (`id`);
 
 --
 -- Constraints for table `CRM_feedback`
