@@ -57,12 +57,12 @@
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
                                                 <div class="form-group form-float">
-                                                    {% for value, text in form.all_trainee.field.choices %}
-                                                    <div class="ui slider checkbox">
-                                                        <input id="id_providers_{{ forloop.counter0 }}" name="{{ form.all_trainee.name }}" type="checkbox" value="{{ value }}"{% if value in checked_providers %} checked="checked"{% endif %}>
-                                                        <label>{{ text }}</label>
-                                                    </div>
-                                                    {% endfor %}
+                                                  <p>Select all Represented Members</p>
+                                                    <select name="{{form.all_trainee.name}}" class="multiselect col-md-12" multiple="multiple" style="height:20rem;">
+                                                        {% for value, text in form.all_trainee.field.choices %}
+                                                            <option value="{{value}}">{{text}}</option>
+                                                        {% endfor %}
+                                                    </select>
                                                 </div>
                                             </div>
                                          <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">

@@ -2981,7 +2981,8 @@ section.content {
       font-size: 18px;
       font-weight: normal;
       color: #111;
-    border:none; !important; }
+    border:none !important; }
+
       .card .header h2 small {
         display: block;
         font-size: 12px;
@@ -8265,3 +8266,4 @@ html.ie11 .bs-searchbox .form-control {
 
 
 /* Profile pcitures */
+

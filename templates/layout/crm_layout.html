@@ -24,8 +24,31 @@
     <link href="{% static 'plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css' %}" rel="stylesheet">
     <!-- Animation Css -->
     <link href="{% static 'plugins/animate-css/animate.css' %}" rel="stylesheet" />
-    
-  
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/redmond/jquery-ui.css" />
+    <style type="text/css">
+        .multiselect { border: solid 1px #333; font-size: 1em;  overflow:scroll; height: 20rem;}
+        .ui-multiselect ul { -moz-user-select: none; }
+        
+        .ui-multiselect div.selected { position: relative; padding: 0; margin: 0; border: 0; float:left; }
+        .ui-multiselect ul.selected { position: relative; padding: 0; overflow: auto; overflow-x: hidden; background: #fff; margin: 0; list-style: none; border: 0; position: relative; width: 100%; }
+
+        .ui-multiselect div.available { position: relative; padding: 0; margin: 0; border: 0; float:left; border-left: 1px solid; }
+        .ui-multiselect ul.available { position: relative; padding: 0; overflow: auto; overflow-x: hidden; background: #fff; margin: 0; list-style: none; border: 0; width: 100%; }
+        .ui-multiselect ul.available li { padding-left: 10px; }
+        
+        .ui-multiselect .ui-state-default { border: none; margin-bottom: 1px; position: relative; padding-left: 20px;}
+        .ui-multiselect .ui-state-hover { border: none; }
+        .ui-multiselect .ui-widget-header {border: none; font-size: 11px; margin-bottom: 1px;}
+        .actions a{
+            display: none;
+            opacity: 0;
+        }
+        .multiselect .search { opacity: 0;}
+        .ui-multiselect .count { float: left; padding: 7px;}
+        .ui-multiselect li a.action { position: absolute; right: 2px; top: 2px; height: 20px; }
+        
+        .ui-multiselect input.search { height: 20px; padding: 4px; margin: 4px; width: 96%; }
+    </style>
     <!-- Custom Css -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
 
@@ -70,7 +93,7 @@
           <div class="navbar-header">
               <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
               <a href="javascript:void(0);" class="bars"></a>
-              <div class="navbar-brand" >    <img style="float:left;display:inline-block;margin-top: -15px;" src="{% static 'images/gs1ea.png' %}" width="80" height="50" alt="User" /> ONLINE ERP</div>
+              <div class="navbar-brand" >    <img style="display:inline-block;margin-top: -15px;" src="{% static 'images/gs1ea.png' %}" width="80" height="50" alt="User" /> ONLINE ERP</div>
           </div>
           <div class="collapse navbar-collapse" id="navbar-collapse">
               <ul class="nav navbar-nav navbar-right">
@@ -185,10 +208,15 @@
     <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'plugins/bootstrap/js/bootstrap.js' %}"></script>
     <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'js/ui-multiselect.js' %}"></script> 
     <script>
         $( function() {
             $( ".datepicker" ).datepicker();
         } );
+        $(function(){
+        // choose either the full version
+        $(".multiselect").multiselect();
+        });
     </script>
     <script src="{% static 'plugins/node-waves/waves.js' %}"></script>
     <script src="{% static 'js/admin.js' %}"></script> 
