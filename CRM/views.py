@@ -16,6 +16,7 @@ from CRM.forms import TrainForm
 # Create your views here.
 
 '''
+The views for the CRM part of the ERP 
 The dashboard page
 '''
 
@@ -24,10 +25,12 @@ def index(request):
     suppliers =  Supplier.objects.count()
     feedbacks = Feedback.objects.count()
     trainings = Training.objects.count()
+    employee = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
+
     # sms = SMS()
     # sms.send("+254708067459", "Welcome omambia")
     return render(request, "home/index.html",
-                        {'clients': clients, 'suppliers': suppliers, 'feedbacks': feedbacks, 'trainings': trainings})
+                        {'clients': clients, 'suppliers': suppliers, 'feedbacks': feedbacks, 'trainings': trainings, "employee": employee})
 
 
 '''
@@ -41,6 +44,11 @@ class ClientCreateView(CreateView):
              'company_email_alt', 'post_address', 'physical_location', 'director_info','sector', 'category', 'date_of_issue', 'nature_of_business')
     model = Client
     template_name = "client/client_form.html"
+    def get_context_data(self, **kwargs):
+        context = super(ClientCreateView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(user=user)
+        return context
 
 # class ClientListView(ListView):
 #     model = Client
@@ -63,7 +71,7 @@ class ClientUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(ClientUpdateView, self).get_context_data(**kwargs)
         user = self.request.user
-        context['employee'] = Employee.objects.get(id = user.id)
+        context['employee'] = Employee.objects.get(user=user)
         return context
 
 
@@ -74,7 +82,7 @@ class ClientDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(ClientDetailView, self).get_context_data(**kwargs)
         user = self.request.user
-        context['employee'] = Employee.objects.get(id = user.id)
+        context['employee'] = Employee.objects.get(user=user)
         return context
 
 
@@ -186,26 +194,52 @@ class SupplierCreateView(CreateView):
     model = Supplier
     fields = ('name', 'phone', 'country', 'website', 'description')
     template_name = "supplier/supplier_form.html"
+    def get_context_data(self, **kwargs):
+        context = super(SupplierCreateView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get( user= user)
+        return context
 
 class SupplierListView(ListView):
     model = Supplier
     context_object_name = "suppliers"
     template_name = "supplier/supplier_list.html"
+    def get_context_data(self, **kwargs):
+        context = super(SupplierListView, self).get_context_data(**kwargs)
+        user = self.request.user
+        print(user)
+        context['employee'] = Employee.objects.get(user = user)
+        return context
 
 class SupplierUpdateView(UpdateView):
     model = Supplier
     fields = ('name', 'phone', 'country', 'website', 'description')
     template_name = "supplier/supplier_form.html"
+    def get_context_data(self, **kwargs):
+        context = super(SupplierUpdateView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(user=user)
+        return context
 
 class SupplierDetailView(DetailView):
     model = Supplier
     context_object_name = "supplier"
     template_name = "supplier/supplier_detail.html"
+    def get_context_data(self, **kwargs):
+        context = super(SupplierDetailView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(user=user)
+        return context
 
 class SupplierDeleteView(DeleteView):
     model = Supplier
     template_name = "supplier/supplier_delete_confirm.html"
     success_url = reverse_lazy("CRM:list_supplier")
+    def get_context_data(self, **kwargs):
+        context = super(SupplierDeleteView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(user=user)
+        return context
 
 '''
 The Feedback Views
@@ -215,30 +249,56 @@ class FeedbackCreateView(CreateView):
     model = Feedback
     fields = ('client_name', 'feedback', 'status')
     template_name  = "feedback/feedback_form.html"
+    def get_context_data(self, **kwargs):
+        context = super(FeedbackCreateView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(user=user)
+        return context
+
 
 
 class FeedbackUpdateView(UpdateView):
     model = Feedback
     fields = ('client_name', 'feedback', 'status')
     template_name  = "feedback/feedback_form.html"
+    def get_context_data(self, **kwargs):
+        context = super(FeedbackUpdateView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(user=user)
+        return context
 
 
 class FeedbackListView(ListView):
     model = Feedback
     context_object_name  = "feedbacks"
     template_name = "feedback/feedback_list.html"
+    def get_context_data(self, **kwargs):
+        context = super(FeedbackListView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(user=user)
+        return context
 
 
 class FeedbackDeleteView(DeleteView):
     model = Feedback
     template_name = "feedback/feedback_delete_confirm.html"
     success_url = reverse_lazy("CRM:list_feedback")
+    def get_context_data(self, **kwargs):
+        context = super(FeedbackDeleteView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(user=user)
+        return context
 
 
 class FeedbackDetailView(DetailView):
     model = Feedback
     context_object_name = "feedback"
     template_name = "feedback/feedback_detail.html"
+    def get_context_data(self, **kwargs):
+        context = super(FeedbackDetailView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(user=user)
+        return context
 
 ''' Status ACTIVATIONS '''
 @login_required
@@ -263,10 +323,16 @@ The Training Feedback
 '''
 
 
-class TrainingCreateView(CreateView):
-    model = Training
-    fields = ('trainer', 'number_of_trainee', 'happened_on','all_trainee')
-    template_name  = "training/training_form.html"
+# class TrainingCreateView(CreateView):
+#     model = Training
+#     fields = ('trainer', 'number_of_trainee', 'happened_on','all_trainee')
+#     template_name  = "training/training_form.html"
+#     def get_context_data(self, **kwargs):
+#         context = super(TrainingCreateView, self).get_context_data(**kwargs)
+#         user = self.request.user
+#         context['employee'] = Employee.objects.get(user=user)
+#         return context
+
 
 
 def get_clients():
@@ -280,6 +346,11 @@ class TrainingCreateView(CreateView):
     model = Training 
     fields = ('trainer', 'number_of_trainee', 'happened_on', 'all_trainee', 'description')
     template_name  = "training/training_form.html"
+    def get_context_data(self, **kwargs):
+        context = super(TrainingCreateView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(user=user)
+        return context
 
     
 # @login_required
@@ -293,24 +364,44 @@ class TrainingUpdateView(UpdateView):
     model = Training
     fields = ('trainer', 'number_of_trainee', 'happened_on', 'all_trainee', 'description')
     template_name  = "training/training_form.html"
+    def get_context_data(self, **kwargs):
+        context = super(TrainingUpdateView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(user=user)
+        return context
 
 
 class TrainingListView(ListView):
     model = Training
     context_object_name  = "trainings"
     template_name = "training/training_list.html"
+    def get_context_data(self, **kwargs):
+        context = super(TrainingListView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(user=user)
+        return context
 
 
 class TrainingDeleteView(DeleteView):
     model = Training
     template_name = "training/training_confirm_delete.html"
     success_url = reverse_lazy("CRM:list_training")
+    def get_context_data(self, **kwargs):
+        context = super(TrainingDeleteView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(user=user)
+        return context
 
 
 class TrainingDetailView(DetailView):
     model = Training
     context_object_name = "training"
     template_name = "training/training_detail.html"
+    def get_context_data(self, **kwargs):
+        context = super(TrainingDetailView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(user=user)
+        return context
 
 '''
 Create the Event View
@@ -319,27 +410,52 @@ class CreateEventView(CreateView):
     model = Event
     fields = ('event_name', 'training')
     template_name = "event/event_form.html"
+    def get_context_data(self, **kwargs):
+        context = super(CreateEventView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(user=user)
+        return context
 
 
 class ListEventView(ListView):
     model = Event
     context_object_name = "events"
     template_name = "event/event_list.html"
+    def get_context_data(self, **kwargs):
+        context = super(ListEventView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(user=user)
+        return context
 
 class UpdateEventView(UpdateView):
     model = Event
     fields = ('event_name', 'training')
     template_name = "event/event_form.html"
+    def get_context_data(self, **kwargs):
+        context = super(UpdateEventView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(user=user)
+        return context
 
 class DetailEventView(DetailView):
     model = Event
     content_object_name = "event"
     template_name = "event/event_detail.html"
+    def get_context_data(self, **kwargs):
+        context = super(DetailEventView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(user=user)
+        return context
 
 class DeleteEventView(DeleteView):
     model = Event
     success_url = ""
     template_name = "event_confirm_delete.html"
+    def get_context_data(self, **kwargs):
+        context = super(DeleteEventView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(user=user)
+        return context
 
 
 '''
@@ -349,27 +465,52 @@ class BarcodeListView(ListView):
     model = Barcode
     context_object_name = "barcodes"
     template_name = "barcode/barcode_list.html"
+    def get_context_data(self, **kwargs):
+        context = super(BarcodeListView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(user = user)
+        return context
 
 class BarcodeCreateView(CreateView):
     fields = ('GTIN', 'client', 'product_description', 'brand_name', 'name_packaging', 'type',
                 'depth', 'width', 'height', 'gross_weight', 'net_weight', 'size')
     model = Barcode
     template_name  = "barcode/barcode_form.html"
+    def get_context_data(self, **kwargs):
+        context = super(BarcodeCreateView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(user = user)
+        return context
 
 class BarcodeUpdateView(UpdateView):
     fields = ('GTIN', 'client', 'product_description', 'brand_name', 'name_packaging', 'type',
                 'depth', 'width', 'height', 'gross_weight', 'net_weight', 'size')
     model = Barcode
     template_name  = "barcode/barcode_form.html"
+    def get_context_data(self, **kwargs):
+        context = super(BarcodeUpdateView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(user = user)
+        return context
 
 
 class BarcodeDeleteView(DeleteView):
     model = Barcode
     template_name  = "barcode/barcode_confirm_delete.html"
     success_url = reverse_lazy("CRM:list_barcode")
+    def get_context_data(self, **kwargs):
+        context = super(BarcodeDeleteView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(user = user)
+        return context
 
 class BarcodeDetailView(DetailView):
     model = Barcode
     context_object_name  = 'barcode'
     template_name = "barcode/barcode_detail.html"
+    def get_context_data(self, **kwargs):
+        context = super(BarcodeDetailView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get( user= user)
+        return context
 

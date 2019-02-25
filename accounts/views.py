@@ -30,6 +30,7 @@ def add_employee(request):
     countries = get_country()
     user_form = UserForm(request.POST or None)
     employee_form = EmployeeForm(request.POST or None)
+    emp = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
     if request.method == 'POST':
 
         if user_form.is_valid() and employee_form.is_valid():
@@ -72,10 +73,10 @@ def add_employee(request):
             return HttpResponseRedirect(reverse('accounts:employees'))
         else:
             return render(request, "accounts/register.html",
-                                {'user_form': user_form, 'employee_form': employee_form, "countries": countries,})
+                                {'user_form': user_form, 'employee_form': employee_form, "countries": countries,"employee":emp,})
 
     return render(request, "accounts/register.html",
-                        {'user_form': user_form, 'employee_form': employee_form, "countries": countries,})
+                        {'user_form': user_form, 'employee_form': employee_form, "countries": countries,"employee":emp,})
 
 
 """LOGIN: All User
@@ -117,10 +118,11 @@ def user_logout(request):
 
 def employee_delete(request, pk):
     employee = get_object_or_404(Employee, pk=pk)
+    emp = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
     if request.method == "POST":
         employee.delete()
         return redirect('accounts:index')
-    return render(request, "accounts/delete.html", {'employee': employee})
+    return render(request, "accounts/delete.html", {'emp': emp, "emp": employee})
 
 
 """Update View

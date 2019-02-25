@@ -1,4 +1,4 @@
-{% extends 'employee/layout.html' %}
+{% extends 'layout/main_layout.html' %}
 {% load widget_tweaks %}
 {% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
 {% bootstrap_css %}         {# Embed Bootstrap CSS #}
@@ -13,8 +13,8 @@
   <div class="jumbotron center-container card">
       <form method="POST">
         {% csrf_token %}
-        Are you sure you want delete an empoyee by the name <span style = "color: #f1c000; ">"{{ employee.user.username }}"</span>  ?
-      </br> </br> </br> <input class="btn btn-danger" type="submit" value="YES" /> OR <a href="{% url 'hrm:hrm_index'%}" class="btn btn-primary">NO</a>
+        Are you sure you want delete an empoyee by the name <span style = "color: #f1c000; ">"{{ emp.user.username }}"</span>  ?
+      </br> </br> </br> <input class="btn btn-danger" type="submit" value="YES" /> OR <a href="{% url 'accounts:employees'%}" class="btn btn-primary">NO</a>
       </form>
   </div>
 

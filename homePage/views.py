@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, permission_required
 # Create your views here.
 
-@login_required
 def index(request):
     user = request.session['username']
     current_user = User.objects.get(username = user)
