@@ -14,7 +14,7 @@
     <div class="body">
       <h2 class="header"><a class="btn btn-primary" href = "{% url 'accounts:employees'%}">BACK</a></h2>
 
-      <form class="form" action="" method="POST" enctype="multipart/form-data">
+      <form class="form" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="row clearfix">
           <div class="header">
@@ -24,7 +24,7 @@
               <div class="form-group">
                   <div class="form-line">
                       <label for="{{ employee_form.date_of_birth.id_for_label }}">Birth Date</label>
-                      {{ form.date_of_birth|add_class:"form-control"|attr:"type:date" }}
+                      {{ form.date_of_birth|add_class:"form-control" }}
                       <ul>
                         {% for error in form.date_of_birth.errors%}
                           <li class="alert alert-danger">{{ error }}</li>
