@@ -14,4 +14,4 @@ class TrainForm(forms.ModelForm):
                                              choices=get_clients())
     class Meta:
         model = Training
-        fields = ('trainer', 'number_of_trainee', 'happened_on','all_trainee', 'description')
+        fields = ('trainer', 'happened_on','all_trainee', 'description')

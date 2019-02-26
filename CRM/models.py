@@ -126,7 +126,6 @@ class Event(models.Model):
 
 class Training(models.Model):
     trainer = models.ForeignKey(Employee, on_delete = models.CASCADE)
-    number_of_trainee = models.PositiveIntegerField()
     all_trainee = MultiSelectField(choices=get_clients(), max_length=3, blank=True, null=True)
     happened_on  = models.DateField(default = datetime.datetime.now)
     description = models.CharField(max_length= 2000)

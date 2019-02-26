@@ -26,38 +26,25 @@
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane fade in active" id="home_with_icon_title">
                                 <form action="" method="POST" enctype="multipart/form-data">   
-                                        {% csrf_token %}                              
-                                    <div class="row ">
-                                        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
-                                            <div class="form-group form-float">
-                                               <div class="form-line">
-                                                    {{ form.trainer | add_class:"form-control"}}
-                                                    <label class="form-label">Trainer's Name</label>
-                                                     <ul>
-                                                        {% for error in form.trainer.errors%}
-                                                        <li class="alert alert-danger">{{ error }}</li>
-                                                        {% endfor %}
-                                                    </ul>
-                                                </div>
-                                        </div>
-                                    </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
-                                            <div class="form-group form-float">
-                                                <div class="form-line">
-                                                    
-                                                    {{ form.number_of_trainee | add_class:"form-control"}}
-                                                    <label class="form-label"> Number of Trainees </label>
-                                                     <ul>
-                                                        {% for error in form.number_of_trainee.errors%}
-                                                        <li class="alert alert-danger">{{ error }}</li>
-                                                        {% endfor %}
-                                                    </ul>
+                                        {% csrf_token %}    
+                                        <!-- Start 1 -->
+                                        <div class="row clearfix">
+                                            <div class="col-lg-6 col-md-6 col-sm-10 col-xs-10">
+                                                <div class="form-group form-float">
+                                                    <div class="form-line">
+                                                        {{ form.trainer | add_class:"form-control"}}
+                                                        <label class="form-label">Trainer's Name</label>
+                                                            <ul>
+                                                            {% for error in form.trainer.errors%}
+                                                            <li class="alert alert-danger">{{ error }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
+                                            <div class="col-lg-6 col-md-6">
                                                 <div class="form-group form-float">
-                                                  <p>Select all Represented Members</p>
+                                                    <p>Select all Represented Members</p>
                                                     <select name="{{form.all_trainee.name}}" class="multiselect col-md-12" multiple="multiple" style="height:20rem;">
                                                         {% for value, text in form.all_trainee.field.choices %}
                                                             <option value="{{value}}">{{text}}</option>
@@ -65,35 +52,37 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                         <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
-                                            <div class="form-group form-float">
-                                                <div class="form-line">
-                                                    {{ form.happened_on |add_class:"form-control datepicker"}}
-                                                    <label class="form-label">When it happened</label>
-                                                    {% for error in form.happened_on.errors%}
-                                                        <li class="alert alert-danger">{{ error }}</li>
-                                                    {% endfor %}
-                                                </div>
-                                            </div>
-                                        </div>   
-                                        <div class="col-lg-6 col-md-6">
+                                        </div>
+
+                                        <!-- Row 2 -->
+                                        <div class="row clearfix">
+                                            <div class="col-lg-6 col-md-6">
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
-                                                        <label >List All members attending(Seperated with comma)</label>
+                                                        {{ form.happened_on |add_class:"form-control datepicker"}}
+                                                        <label class="form-label">When it happened</label>
+                                                        {% for error in form.happened_on.errors%}
+                                                            <li class="alert alert-danger">{{ error }}</li>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6">
+                                                <div class="form-group form-float">
+                                                    <div class="form-line">
+                                                        <label >Extra Description</label>
                                                         <textarea name="{{form.description.name}}" rows="5" class="form-control"></textarea>
                                                     </div>
                                                 </div>
-                                            </div>               
-                                    </div>
+                                            </div> 
+                                        </div>
+                                        <!--  end -->
                                 <div class="col-lg-6 col-md-3 col-sm-6 col-xs-12 pull-left">
                                         <input type="submit" class="btn btn-primary btn-lg m-l-15 waves-effect" value = "SUBMIT">
-                                </div>
-                                <br><br>
-                                </div>
-                                
+                                </div>                
                                 
                                 </form>
-                               
+                               <br> <br>
                             </div>
                         </div>
                     </div>

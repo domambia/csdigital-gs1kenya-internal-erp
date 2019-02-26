@@ -31,7 +31,7 @@
                               {% for training in trainings %}
                                   <tr>
                                       <td>{{ training.trainer }}</td>
-                                      <td>{{ training.number_of_trainee }}</td>
+                                      <td>{{ training.all_trainee|length }}</td>
                                       <td>{{ training.happened_on }}</td>
                                       <td>
                                           <span> <a href = "{% url 'CRM:detail_training' training.id %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>

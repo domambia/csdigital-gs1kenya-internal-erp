@@ -344,7 +344,7 @@ def get_clients():
 
 class TrainingCreateView(CreateView):
     model = Training 
-    fields = ('trainer', 'number_of_trainee', 'happened_on', 'all_trainee', 'description')
+    fields = ('trainer', 'happened_on', 'all_trainee', 'description')
     template_name  = "training/training_form.html"
     def get_context_data(self, **kwargs):
         context = super(TrainingCreateView, self).get_context_data(**kwargs)
@@ -362,7 +362,7 @@ class TrainingCreateView(CreateView):
 #     return render(request, "training/training_form.html", {"form": form_train, "clients": len(get_clients())})
 class TrainingUpdateView(UpdateView):
     model = Training
-    fields = ('trainer', 'number_of_trainee', 'happened_on', 'all_trainee', 'description')
+    fields = ('trainer','happened_on', 'all_trainee', 'description')
     template_name  = "training/training_form.html"
     def get_context_data(self, **kwargs):
         context = super(TrainingUpdateView, self).get_context_data(**kwargs)
