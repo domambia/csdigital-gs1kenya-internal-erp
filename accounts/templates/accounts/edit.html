@@ -206,7 +206,12 @@
                 <div class="form-group">
                     <div class="form-line">
                         <label for="{{ form.company_benifits.id_for_label }}">Company Benefits </label> <br>
-                        <textarea name="{{ form.company_benifits.name }}" class="form-control"></textarea>
+                        {{ form.company_benifits|add_class:"form-control" }}
+                        <ul>
+                            {% for error in form.company_benifits.errors%}
+                            <li class="alert alert-danger">{{ error }}</li>
+                            {% endfor %}
+                        </ul>
                     </div>
                 </div>
             </div>
