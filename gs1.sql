@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 22, 2019 at 12:38 PM
+-- Generation Time: Feb 27, 2019 at 08:40 AM
 -- Server version: 10.3.12-MariaDB
 -- PHP Version: 7.3.2
 
@@ -31,7 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `accounts_employee` (
   `id` int(11) NOT NULL,
   `address` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(14) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` int(11) NOT NULL,
   `date_of_birth` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `next_of_kin_name` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
   `kin_email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -56,10 +56,37 @@ CREATE TABLE `accounts_employee` (
 --
 
 INSERT INTO `accounts_employee` (`id`, `address`, `phone`, `date_of_birth`, `next_of_kin_name`, `kin_email`, `county`, `next_of_kin_phone`, `dependant_name`, `dependant_relationship`, `dependant_contact`, `salary`, `department_id`, `position_id`, `user_id`, `alt_phone_number`, `profile_pic`, `leave_balance`, `leave_bal`, `company_benifits`) VALUES
-(1, 'Kisumu-K', '708067459', '2019-01-16', '', 'junior@gmail.com', '', '', 'Omambia Daug', 'Son', '074404509', '20000', 1, 1, 1, 751545121, 'profile_pics/download_1_NNb0dsd.jpeg', 0, 0, ''),
-(2, 'Masaku', '705045453', '1993-02-06', '', 'juni1@gmail.com', 'Kenya', '', 'Omambia Daug', 'Son', '0705045453', '12500', 1, 2, 2, 705045453, 'profile_pics/IMGP8617.JPG', 0, 0, ''),
-(4, 'Nairobi', '0705530574', '1993-02-06', '', 'faizajnr@gmail.com', 'Kenya', '', 'Omambia Daug', 'Son', '0705045453', '20000', 4, 3, 10, 708067459, 'profile_pics/woman_Uep2nI9.jpeg', 30, 4, 'NHIF'),
-(5, 'Masaku', '0708067459', '1993-02-06', '', 'evajr@gmail.com', 'Kenya', '', 'Omambia Eva', 'Son', '0705045453', '10000', 4, 4, 11, 708067452, 'profile_pics/woman_qfVWo63.jpeg', 30, 4, 'NSSF');
+(1, 'Kisumu-K', 708067459, '2019-01-16', '', 'junior@gmail.com', '', '', 'Omambia Daug', 'Son', '074404509', '20000', 1, 1, 1, 751545121, 'profile_pics/download_1_NNb0dsd.jpeg', 0, 0, ''),
+(4, 'Nairobi', 705530574, '1993-02-06', '', 'faizajnr@gmail.com', 'Kenya', '', 'Omambia Daug', 'Son', '0705045453', '20000', 4, 3, 10, 708067459, 'profile_pics/woman_Uep2nI9.jpeg', 30, 4, 'NHIF'),
+(5, 'Masaku', 708067459, '1993-02-06', '', 'evajr@gmail.com', 'Kenya', '', 'Omambia Eva', 'Son', '0705045453', '10000', 4, 4, 11, 708067452, 'profile_pics/woman_qfVWo63.jpeg', 30, 4, 'NSSF');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `account_emailaddress`
+--
+
+CREATE TABLE `account_emailaddress` (
+  `id` int(11) NOT NULL,
+  `email` varchar(254) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `verified` tinyint(1) NOT NULL,
+  `primary` tinyint(1) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `account_emailconfirmation`
+--
+
+CREATE TABLE `account_emailconfirmation` (
+  `id` int(11) NOT NULL,
+  `created` datetime(6) NOT NULL,
+  `sent` datetime(6) DEFAULT NULL,
+  `key` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_address_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -181,7 +208,19 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (77, 'Can add event', 20, 'add_event'),
 (78, 'Can change event', 20, 'change_event'),
 (79, 'Can delete event', 20, 'delete_event'),
-(80, 'Can view event', 20, 'view_event');
+(80, 'Can view event', 20, 'view_event'),
+(81, 'Can add site', 21, 'add_site'),
+(82, 'Can change site', 21, 'change_site'),
+(83, 'Can delete site', 21, 'delete_site'),
+(84, 'Can view site', 21, 'view_site'),
+(85, 'Can add email address', 22, 'add_emailaddress'),
+(86, 'Can change email address', 22, 'change_emailaddress'),
+(87, 'Can delete email address', 22, 'delete_emailaddress'),
+(88, 'Can view email address', 22, 'view_emailaddress'),
+(89, 'Can add email confirmation', 23, 'add_emailconfirmation'),
+(90, 'Can change email confirmation', 23, 'change_emailconfirmation'),
+(91, 'Can delete email confirmation', 23, 'delete_emailconfirmation'),
+(92, 'Can view email confirmation', 23, 'view_emailconfirmation');
 
 -- --------------------------------------------------------
 
@@ -208,9 +247,9 @@ CREATE TABLE `auth_user` (
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(1, 'argon2$argon2i$v=19$m=512,t=2,p=2$ekZJcGRjeWxscEZZ$o8sU42ChUu8MUMSRLkP19Q', '2019-02-22 07:32:15.901786', 0, 'omambia', 'Omambia', 'Dauglous', 'omambiadauglous@gmail.com', 0, 1, '2019-01-28 17:59:33.409242'),
+(1, 'argon2$argon2i$v=19$m=512,t=2,p=2$ekZJcGRjeWxscEZZ$o8sU42ChUu8MUMSRLkP19Q', '2019-02-27 07:23:31.458573', 0, 'omambia', 'Omambia', 'Dauglous', 'omambiadauglous@gmail.com', 0, 1, '2019-01-28 17:59:33.409242'),
 (2, 'argon2$argon2i$v=19$m=512,t=2,p=2$aU5LVG10akkxV0wx$46lMhUxTyG6KVGgL0c9+ww', NULL, 1, 'domambia', 'Omambia', 'Joshua', 'omambiadauglous1@gmail.com', 0, 1, '2019-02-07 05:13:05.951886'),
-(10, 'argon2$argon2i$v=19$m=512,t=2,p=2$Y3hYSTUyMzRIU2l0$vl8X38hhBC8os4fsJlTrig', '2019-02-20 09:43:58.142663', 0, 'Faiza', 'Faiza', 'Gs1', 'faiza@gmail.com', 0, 1, '2019-02-15 12:18:28.757029'),
+(10, 'argon2$argon2i$v=19$m=512,t=2,p=2$Y3hYSTUyMzRIU2l0$vl8X38hhBC8os4fsJlTrig', '2019-02-25 10:09:16.281315', 0, 'Faiza', 'Faiza', 'Gs1', 'faiza@gmail.com', 0, 1, '2019-02-15 12:18:28.757029'),
 (11, 'argon2$argon2i$v=19$m=512,t=2,p=2$SFJFZWJUZmJ2MGVy$WL9bJtQ7kxHrecceEdXwtQ', '2019-02-20 08:55:39.030851', 0, 'eva', 'Eva12', 'Cherry', 'eva@gmail.com', 0, 1, '2019-02-15 12:20:39.250800'),
 (12, 'argon2$argon2i$v=19$m=512,t=2,p=2$UXBQUHZwanczeDBw$8xXBgsnl+vdaqEY7LOP4Og', '2019-02-22 08:25:05.345396', 1, 'hackert', '', '', 'hackert@gmail.com', 1, 1, '2019-02-22 08:24:49.657945');
 
@@ -332,8 +371,8 @@ CREATE TABLE `CRM_event` (
 --
 
 INSERT INTO `CRM_event` (`id`, `event_name`, `date_time`, `status`, `training_id`) VALUES
-(1, 'Cyber Security Awareness', '2019-02-21', 1, 1),
-(2, 'Elixir Meeting', '2019-02-22', 0, 2);
+(2, 'Elixir Meeting', '2019-02-22', 0, 2),
+(4, 'Elixir Meeting Two', '2019-02-25', 0, 7);
 
 -- --------------------------------------------------------
 
@@ -379,8 +418,7 @@ CREATE TABLE `CRM_supplier` (
 
 CREATE TABLE `CRM_training` (
   `id` int(11) NOT NULL,
-  `number_of_trainee` int(10) UNSIGNED NOT NULL,
-  `all_trainee` varchar(3) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `all_trainee` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `happened_on` date NOT NULL,
   `trainer_id` int(11) NOT NULL,
   `description` varchar(2000) COLLATE utf8mb4_unicode_ci NOT NULL
@@ -390,9 +428,11 @@ CREATE TABLE `CRM_training` (
 -- Dumping data for table `CRM_training`
 --
 
-INSERT INTO `CRM_training` (`id`, `number_of_trainee`, `all_trainee`, `happened_on`, `trainer_id`, `description`) VALUES
-(1, 12, '1,2', '2019-02-18', 2, 'omambia'),
-(2, 13, '1', '2019-02-22', 4, 'Joy kemunto, Joseph Mohmed, Joss Kwach, Omambia Dauglous,..... and many more');
+INSERT INTO `CRM_training` (`id`, `all_trainee`, `happened_on`, `trainer_id`, `description`) VALUES
+(2, '1', '2019-02-22', 4, 'Joy kemunto, Joseph Mohmed, Joss Kwach, Omambia Dauglous,..... and many more'),
+(6, '2', '2019-02-25', 5, 'Omambia, Anord, Joshua, Cherry, Berry, Kerry'),
+(7, '1', '2019-02-25', 4, 'delly, dan, Vennah'),
+(8, '1,2', '2019-02-26', 4, 'More Descriptions');
 
 -- --------------------------------------------------------
 
@@ -488,6 +528,8 @@ CREATE TABLE `django_content_type` (
 --
 
 INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
+(22, 'account', 'emailaddress'),
+(23, 'account', 'emailconfirmation'),
 (7, 'accounts', 'employee'),
 (1, 'admin', 'logentry'),
 (3, 'auth', 'group'),
@@ -507,6 +549,7 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (9, 'leave', 'leave'),
 (17, 'payroll', 'payroll'),
 (6, 'sessions', 'session'),
+(21, 'sites', 'site'),
 (12, 'targets', 'target');
 
 -- --------------------------------------------------------
@@ -578,7 +621,17 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (49, 'CRM', '0006_auto_20190218_0739', '2019-02-18 07:39:15.475155'),
 (50, 'CRM', '0007_event', '2019-02-21 14:09:18.603738'),
 (51, 'CRM', '0008_auto_20190221_1447', '2019-02-21 14:47:46.402003'),
-(52, 'CRM', '0009_remove_training_name', '2019-02-22 08:32:32.465060');
+(52, 'CRM', '0009_remove_training_name', '2019-02-22 08:32:32.465060'),
+(53, 'CRM', '0010_auto_20190226_1205', '2019-02-26 12:06:40.788434'),
+(54, 'accounts', '0011_auto_20190226_1347', '2019-02-26 13:47:23.503585'),
+(55, 'accounts', '0012_auto_20190226_1555', '2019-02-26 15:55:39.221793'),
+(56, 'account', '0001_initial', '2019-02-27 07:02:54.714212'),
+(57, 'account', '0002_email_max_length', '2019-02-27 07:02:54.986852'),
+(58, 'sites', '0001_initial', '2019-02-27 07:02:55.214547'),
+(59, 'sites', '0002_alter_domain_unique', '2019-02-27 07:02:55.390363'),
+(60, 'accounts', '0013_auto_20190227_0754', '2019-02-27 08:29:39.267720'),
+(61, 'departments', '0003_auto_20190227_0754', '2019-02-27 08:29:39.325161'),
+(62, 'leave', '0005_auto_20190227_0754', '2019-02-27 08:29:39.356363');
 
 -- --------------------------------------------------------
 
@@ -597,11 +650,31 @@ CREATE TABLE `django_session` (
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
-('0iqqxanie2vcv0k8snumh77lidqqrm7e', 'MjBkZDIyZGQ4OWQ2MjkxNWVkOWU5ODFmYjZkYTgyZjNlODhkODgwZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkZWUxNmIxOWRjOTZiYThlODBjNDdlNmJiZmRjY2EzNmFkYmJkZmVhIiwidXNlcm5hbWUiOiJvbWFtYmlhIn0=', '2019-03-04 12:59:28.816629'),
 ('21sg8bdd9ge4ebfmz35u2nczx14qrpm1', 'MDc0MGQ2MjdkM2M3MzViODlkYWQwODE1OWMxZTZiNTdiMjdhNzQ4ODp7Il9hdXRoX3VzZXJfaWQiOiIxMiIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiODdlNjYwZmRhZTgxNzY2MzJmYTM3MDRiMTRlODIyNzZjZWQ3ZWU4MyJ9', '2019-03-08 08:25:05.381332'),
 ('4qoegj2dle3j7zuhywc1xpgbgvq1ta4i', 'MjBkZDIyZGQ4OWQ2MjkxNWVkOWU5ODFmYjZkYTgyZjNlODhkODgwZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkZWUxNmIxOWRjOTZiYThlODBjNDdlNmJiZmRjY2EzNmFkYmJkZmVhIiwidXNlcm5hbWUiOiJvbWFtYmlhIn0=', '2019-02-21 06:37:38.299883'),
+('62it5biusmu7ugqj5cc4s540m5bu1o2u', 'MjBkZDIyZGQ4OWQ2MjkxNWVkOWU5ODFmYjZkYTgyZjNlODhkODgwZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkZWUxNmIxOWRjOTZiYThlODBjNDdlNmJiZmRjY2EzNmFkYmJkZmVhIiwidXNlcm5hbWUiOiJvbWFtYmlhIn0=', '2019-03-11 10:39:53.725173'),
+('k0yndoaz10sj7kb9uaed1dsk9wprytts', 'Y2ZiMmNkMGRkOWRkNDY3NWJkOWYwODYyOWMyZjhhOTQyYThhNWIwYzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiZGVlMTZiMTlkYzk2YmE4ZTgwYzQ3ZTZiYmZkY2NhMzZhZGJiZGZlYSIsInVzZXJuYW1lIjoib21hbWJpYSJ9', '2019-03-13 07:23:31.507224'),
 ('vqyxl3hpqiar7vudllni1tdt8joyu8ta', 'MjBkZDIyZGQ4OWQ2MjkxNWVkOWU5ODFmYjZkYTgyZjNlODhkODgwZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkZWUxNmIxOWRjOTZiYThlODBjNDdlNmJiZmRjY2EzNmFkYmJkZmVhIiwidXNlcm5hbWUiOiJvbWFtYmlhIn0=', '2019-02-11 18:00:04.248476'),
 ('x0onayibalndacehynr5dgn3yszcjs83', 'MjBkZDIyZGQ4OWQ2MjkxNWVkOWU5ODFmYjZkYTgyZjNlODhkODgwZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkZWUxNmIxOWRjOTZiYThlODBjNDdlNmJiZmRjY2EzNmFkYmJkZmVhIiwidXNlcm5hbWUiOiJvbWFtYmlhIn0=', '2019-02-14 17:48:16.157073');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `django_site`
+--
+
+CREATE TABLE `django_site` (
+  `id` int(11) NOT NULL,
+  `domain` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `django_site`
+--
+
+INSERT INTO `django_site` (`id`, `domain`, `name`) VALUES
+(1, 'example.com', 'example.com');
 
 -- --------------------------------------------------------
 
@@ -698,8 +771,24 @@ CREATE TABLE `targets_target` (
 ALTER TABLE `accounts_employee`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `user_id` (`user_id`),
-  ADD KEY `accounts_employee_department_id_28acdfd0_fk_departmen` (`department_id`),
-  ADD KEY `accounts_employee_position_id_3f7cd7b7_fk_departmen` (`position_id`);
+  ADD UNIQUE KEY `accounts_employee_position_id_3f7cd7b7_uniq` (`position_id`),
+  ADD KEY `accounts_employee_department_id_28acdfd0_fk_departmen` (`department_id`);
+
+--
+-- Indexes for table `account_emailaddress`
+--
+ALTER TABLE `account_emailaddress`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD KEY `account_emailaddress_user_id_2c513194_fk_auth_user_id` (`user_id`);
+
+--
+-- Indexes for table `account_emailconfirmation`
+--
+ALTER TABLE `account_emailconfirmation`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `key` (`key`),
+  ADD KEY `account_emailconfirm_email_address_id_5b7f8c58_fk_account_e` (`email_address_id`);
 
 --
 -- Indexes for table `auth_group`
@@ -829,6 +918,13 @@ ALTER TABLE `django_session`
   ADD KEY `django_session_expire_date_a5c62663` (`expire_date`);
 
 --
+-- Indexes for table `django_site`
+--
+ALTER TABLE `django_site`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `django_site_domain_a2e37b91_uniq` (`domain`);
+
+--
 -- Indexes for table `leave_applyleave`
 --
 ALTER TABLE `leave_applyleave`
@@ -867,6 +963,18 @@ ALTER TABLE `accounts_employee`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `account_emailaddress`
+--
+ALTER TABLE `account_emailaddress`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `account_emailconfirmation`
+--
+ALTER TABLE `account_emailconfirmation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `auth_group`
 --
 ALTER TABLE `auth_group`
@@ -882,7 +990,7 @@ ALTER TABLE `auth_group_permissions`
 -- AUTO_INCREMENT for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- AUTO_INCREMENT for table `auth_user`
@@ -918,7 +1026,7 @@ ALTER TABLE `CRM_client`
 -- AUTO_INCREMENT for table `CRM_event`
 --
 ALTER TABLE `CRM_event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `CRM_feedback`
@@ -936,7 +1044,7 @@ ALTER TABLE `CRM_supplier`
 -- AUTO_INCREMENT for table `CRM_training`
 --
 ALTER TABLE `CRM_training`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `departments_department`
@@ -960,13 +1068,19 @@ ALTER TABLE `django_admin_log`
 -- AUTO_INCREMENT for table `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+
+--
+-- AUTO_INCREMENT for table `django_site`
+--
+ALTER TABLE `django_site`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `leave_applyleave`
@@ -1005,6 +1119,18 @@ ALTER TABLE `accounts_employee`
   ADD CONSTRAINT `accounts_employee_user_id_593173d8_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
 
 --
+-- Constraints for table `account_emailaddress`
+--
+ALTER TABLE `account_emailaddress`
+  ADD CONSTRAINT `account_emailaddress_user_id_2c513194_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
+
+--
+-- Constraints for table `account_emailconfirmation`
+--
+ALTER TABLE `account_emailconfirmation`
+  ADD CONSTRAINT `account_emailconfirm_email_address_id_5b7f8c58_fk_account_e` FOREIGN KEY (`email_address_id`) REFERENCES `account_emailaddress` (`id`);
+
+--
 -- Constraints for table `auth_group_permissions`
 --
 ALTER TABLE `auth_group_permissions`
@@ -1030,12 +1156,6 @@ ALTER TABLE `auth_user_groups`
 ALTER TABLE `auth_user_user_permissions`
   ADD CONSTRAINT `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
   ADD CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
-
---
--- Constraints for table `CRM_barcode`
---
-ALTER TABLE `CRM_barcode`
-  ADD CONSTRAINT `CRM_barcode_client_id_0615af36_fk_CRM_client_id` FOREIGN KEY (`client_id`) REFERENCES `CRM_client` (`id`);
 
 --
 -- Constraints for table `CRM_event`
