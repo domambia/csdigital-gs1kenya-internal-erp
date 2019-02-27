@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from departments.models import Position, Department
 from helpers.help import get_country
 from django.urls import reverse
-from django.core.validators import MaxValueValidator, MinValueValidator, EmailValidator
+from django.core.validators import  MinValueValidator, EmailValidator
 
 
 
@@ -11,10 +11,10 @@ class Employee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     # additional attributes for the employee
     address = models.CharField(max_length=50)
-    phone = models.IntegerField(validators=[MaxValueValidator(14),MinValueValidator(9)])
+    phone = models.IntegerField(validators=[MinValueValidator(9)])
     date_of_birth = models.CharField(max_length=20)
     next_of_kin_name = models.CharField(max_length=60, blank=True)
-    alt_phone_number = models.IntegerField(validators=[MaxValueValidator(14), MinValueValidator(9)])
+    alt_phone_number = models.IntegerField(validators=[ MinValueValidator(9)])
     # more
     kin_email = models.CharField(max_length=100, blank=True, unique = True, validators=[ EmailValidator("Enter a valid email address")])
     county = models.CharField(max_length=100,  blank=True, choices = get_country(), default = "Kenya")
@@ -36,7 +36,7 @@ class Employee(models.Model):
         return (self.user.first_name + " " +self.user.last_name)
 
     def get_absolute_url(self):
-    
+
         return reverse("accounts:employees")
 
 

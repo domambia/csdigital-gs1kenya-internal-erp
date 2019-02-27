@@ -1,4 +1,3 @@
-{% extends 'layout/main_layout.html' %}
 {% load widget_tweaks %}
 {% block header %}
   <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
@@ -48,7 +47,7 @@
               <div class="form-group">
                   <div class="form-line">
                       <label for="">Email Address</label>
-                      {{ user_form.email|add_class:"form-control" }}
+                      {{ user_form.email|add_class:"form-control" |attr:"type:email" }}
                       <ul>
                         {% for error in user_form.email.errors%}
                           <li class="alert alert-danger">{{ error }}</li>
@@ -197,7 +196,7 @@
               <div class="form-group">
                   <div class="form-line">
                       <label for="{{ employee_form.dependant_relationship.id_for_label }}">Email Address</label>
-                      {{ employee_form.kin_email|add_class:"form-control" }}
+                      {{ employee_form.kin_email|add_class:"form-control"|attr:"type:email" }}
                       <ul>
                         {% for error in  employee_form.kin_email.errors%}
                           <li class="alert alert-danger">{{ error }}</li>
