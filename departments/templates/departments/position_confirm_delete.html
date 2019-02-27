@@ -9,8 +9,8 @@
   <div class="jumbotron card">
       <form method="POST">
         {% csrf_token %}
-        Are you sure you want delete <b class="card body">{{position.name }} </b> ?
-        <input class="btn btn-danger" type="submit" value="YES" /> OR <a href="{% url 'departments:list_department'%}" class="btn btn-primary">NO</a>
+        Are you sure you want delete <b>{{position.name }} </b> ?
+        <input class="btn btn-danger" type="submit" value="YES" /> OR <a href="{% url 'departments:list_position'%}" class="btn btn-primary">NO</a>
       </form>
   </div>
 
