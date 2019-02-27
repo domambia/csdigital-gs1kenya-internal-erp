@@ -163,7 +163,7 @@ def employee_update(request, pk):
 """
 
 class EmployeeDetailView(DetailView):
-    context_object_name = "employee"
+    context_object_name = "user"
     model = Employee
     template_name = "accounts/employee_detail.html"
     def get_context_data(self, **kwargs):

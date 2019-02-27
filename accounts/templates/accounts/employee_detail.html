@@ -6,23 +6,23 @@
 {% endblock%}
 {% block content %}
   <div>
-   
+
       <div class="body card ">
           <div class="helper-cls body">
-              {% if employee.position.initials == "HRM" or employee.position.initials == "GM" or employee.position.initials == "CCM" %} 
+              {% if employee.position.initials == "HRM" or employee.position.initials == "GM" or employee.position.initials == "CCM" %}
               <a href="{% url 'accounts:employees' %}" class="btn btn-primary"><span style="color: orangered;">&larr;</span> BACK</a>
               {% else %}
               <a href="{% url 'hrm:hrm_index' %}" class="btn btn-primary"><span style="color: orangered;">&larr;</span> BACK</a>
               {% endif %}
-              
-              {% if employee.position.initials == "HRM" or employee.position.initials == "GM" or employee.position.initials == "CCM" %} 
-                <a href="{% url 'accounts:employee_update' employee.id %}" class="btn btn-success">EDIT</a> 
+
+              {% if employee.position.initials == "HRM" or employee.position.initials == "GM" or employee.position.initials == "CCM" %}
+                <a href="{% url 'accounts:employee_update' employee.id %}" class="btn btn-success">EDIT</a>
               {% endif %}
           </div>
           <div class="row body">
             {% if employee.profile_pic %}
             <div class="profile" style="display:flex; justify-content: center; align-items: center; padding: 3rem;">
-              <img src="{{ employee.profile_pic.url }}" class="profile__img" style="height: 8rem; width: 8rem; border-radius: .4rem;">
+              <img src="{{ user.profile_pic.url }}" class="profile__img" style="height: 8rem; width: 8rem; border-radius: .4rem;">
             </div>
             {% else %}
               <div class="profile" style=" width: 8rem; height: 8rem; display:flex; justify-content: center; align-items: center; padding: 3rem; background-color: #eee;">
@@ -33,29 +33,29 @@
                 <table class="table">
                     <tr>
                       <td>Username</td>
-                      <td>{{ employee.user.username }}</td>
+                      <td>{{ user.user.username }}</td>
                     </tr>
                     <tr>
                       <td>Email Address</td>
-                      <td>{{ employee.user.email }}</td>
+                      <td>{{ user.user.email }}</td>
                     </tr>
                     <tr>
                       <td>First Name</td>
-                      <td>{{ employee.user.first_name }}</td>
+                      <td>{{ user.user.first_name }}</td>
                     </tr>
                     <tr>
                       <td>Last Name</td>
-                      <td>{{ employee.user.last_name }}</td>
+                      <td>{{ user.user.last_name }}</td>
                     </tr>
                     <tr>
                       <td>Address</td>
-                      <td>{{ employee.address }}</td>
+                      <td>{{ user.address }}</td>
                     </tr>
                     <tr>
                       <td>Phone Number</td>
-                      <td>{{ employee.phone }}</td>
+                      <td>{{ user.phone }}</td>
                     </tr>
-    
+
                   </table>
             </div>
             <div class="col-md-6">
@@ -63,31 +63,31 @@
                 <table class="table table-responsive">
                     <tr>
                       <td>Country</td>
-                      <td>{{ employee.county }}</td>
+                      <td>{{ user.county }}</td>
                     </tr>
                     <tr>
                       <td>Current Job Position</td>
-                      <td>{{ employee.position.name }}</td>
+                      <td>{{ user.position.name }}</td>
                     </tr>
                     <tr>
                       <td>Department</td>
-                      <td>{{employee.position.department.name}}</td>
+                      <td>{{user.position.department.name}}</td>
                     </tr>
                     <tr>
                       <td>Dependent/ Emergency Phone</td>
-                      <td>{{ employee.dependant_contact }}</td>
+                      <td>{{ user.dependant_contact }}</td>
                     </tr>
                     <tr>
                       <td>Dependent / Emergency Email Address </td>
-                      <td>{{ employee.kin_email }}</td>
+                      <td>{{ user.kin_email }}</td>
                     </tr>
                     <tr>
                       <td>Salary</td>
-                      <td>{{ employee.salary }}</td>
+                      <td>{{ user.salary }}</td>
                     </tr>
                     <tr>
                       <td>Your Benefits</td>
-                      <td>{{ employee.company_benifits }}</td>
+                      <td>{{ user.company_benifits }}</td>
                     </tr>
                 </table>
             </div>
