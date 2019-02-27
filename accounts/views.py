@@ -168,6 +168,5 @@ class EmployeeDetailView(DetailView):
     template_name = "accounts/employee_detail.html"
     def get_context_data(self, **kwargs):
         context = super(EmployeeDetailView, self).get_context_data(**kwargs)
-        user = self.request.user
-        context['employee'] = Employee.objects.get(id = user.id)
+        context['employee'] = Employee.objects.get(id = self.request.user.id)
         return context

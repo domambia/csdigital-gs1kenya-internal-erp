@@ -27,7 +27,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
    <!-- Custom Css -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
-    <style type="text/css"> 
+    <style type="text/css">
         .form-ine{
             background-color: red;
         }
@@ -108,8 +108,8 @@
                   <div class="btn-group user-helper-dropdown">
                       <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                       <ul class="dropdown-menu pull-right">
-                          
-                          <li><a href="{% url 'accounts:profile' pk=employee.id %}"><i class="material-icons">person</i>Profile</a></li>
+
+                          <li><a href="{% url 'accounts:profile' employee.id %}"><i class="material-icons">person</i>Profile</a></li>
                           <li role="separator" class="divider"></li>
                           <li><a href="{% url 'accounts:logout'%}"><i class="material-icons">input</i>Sign Out</a></li>
                       </ul>
@@ -177,7 +177,7 @@
                         </a>
                     </li>
                   {% endif %}
-                  
+
                 <li class="active">
                     <a href="{% url 'index' %}">
                         <i class="material-icons">keyboard_return</i>
@@ -213,7 +213,7 @@
         } );
     </script>
     <script src="{% static 'plugins/node-waves/waves.js' %}"></script>
-    <script src="{% static 'js/admin.js' %}"></script> 
+    <script src="{% static 'js/admin.js' %}"></script>
     <script src="{% static 'plugins/jquery-datatable/jquery.dataTables.js' %}"></script>
     <script src="{% static 'js/pages/tables/jquery-datatable.js' %}"></script>
     <script src="{% static 'plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js' %}"></script>
@@ -223,7 +223,7 @@
     <script src="{% static 'plugins/jquery-datatable/extensions/export/vfs_fonts.js' %}"></script>
     <script src="{% static 'plugins/jquery-datatable/extensions/export/buttons.html5.min.js' %}"></script>
     <script src="{% static 'plugins/jquery-datatable/extensions/export/buttons.print.min.js' %}"></script>
-        
+
 </body>
 
 </html>
