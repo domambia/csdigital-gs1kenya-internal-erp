@@ -46,7 +46,7 @@ def add_employee(request):
                 employee.profile_pic = request.FILES['profile_pic']
             employee.save()
 
-            # ''' Sending an email to our new employees: 
+            # ''' Sending an email to our new employees:
             #     This includes the user login credentials such as username or email and his/her password
             # '''
             # from_email = "hr@gs1kenya.org"
@@ -54,7 +54,7 @@ def add_employee(request):
             # subject = "Welcome to GS1Kenya Organization"
             # message = """
             #         Dear {}.
-            #         We warmly welcome to GS1Kenya oraganization. You has a power to work with us. With this email find your login 
+            #         We warmly welcome to GS1Kenya oraganization. You has a power to work with us. With this email find your login
             #         inforamtion to allow you access any information through our ERP system.
 
             #             Username: {},
@@ -84,7 +84,7 @@ def add_employee(request):
 def user_login(request):
     if request.method == "POST":
         username = request.POST.get('username')
-        
+
         password = request.POST.get('password')
 
         user = authenticate(username=username, password=password)
@@ -92,13 +92,15 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
-                request.session.session_key 
+                request.session.session_key
                 if '@' in username:
                     print("Yes Omambia")
                     request.session['username'] = User.objects.get(email = username).username
                 else:
                     request.session['username'] = username
                 return HttpResponseRedirect(reverse('index'))
+            elif request.user.is_authenticated():
+                HttpResponseRedirect(reverse('index'))
             else:
                 return HttpResponse("Your account is not activated. Please check your email account")
         else:
@@ -137,14 +139,14 @@ class EmployeeUpdateView(UpdateView):
     fields = ('address', 'phone', 'date_of_birth',
         'county', 'dependant_name', 'dependant_contact', 'dependant_relationship',
         'position', 'salary', 'kin_email', 'alt_phone_number', 'profile_pic', 'company_benifits')
-    model = Employee 
+    model = Employee
     template_name  = "accounts/edit.html"
 
 def employee_update(request, pk):
     employee_form = EmployeeForm(request.POST or None,
                     instance = get_object_or_404(Employee, pk=pk))
     if request.method == "POST":
-        
+
         if employee_form.is_valid():
             employee = employee_form.save(commit = False)
             if 'profile_pic' in request.FILES['profile_pic']:

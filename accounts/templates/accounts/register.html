@@ -35,7 +35,7 @@
             <div class="form-group">
                 <div class="form-line">
                     <label for="{{ employee_form.date_of_birth.id_for_label }}">Birth Date</label>
-                    {{ employee_form.date_of_birth|add_class:"form-control" }}
+                    {{ employee_form.date_of_birth|add_class:"form-control datepicker" }}
                     <ul>
                         {% for error in employee_form.date_of_birth.errors%}
                         <li class="alert alert-danger">{{ error }}</li>
@@ -90,7 +90,7 @@
               <div class="col-md-4">
                   <div class="form-group">
                       <div class="form-line">
-                       <label for="">County</label>     
+                       <label for="">County</label>
                           {{ employee_form.county |add_class:"form-control" }}
                           <ul>
                             {% for error in employee_form.county.errors%}
