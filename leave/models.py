@@ -22,12 +22,12 @@ class ApplyLeave(models.Model):
     end_date = models.DateField()
     resume_date = models.DateField()
     person_taking_charge = models.ForeignKey(Employee, related_name = "person_taking",
-                                        on_delete = models.CASCADE
+                                        on_delete = models.CASCADE, default=1
                                 )
     period = models.PositiveIntegerField(default = 3)
     employee = models.CharField(max_length =200)
     home_phone = models.CharField(max_length = 20)
-    leave = models.ForeignKey(Leave, related_name = "leave", on_delete = models.CASCADE)
+    leave = models.ForeignKey(Leave, related_name = "leave", on_delete = models.CASCADE, default=1)
 
     # def get_absolute_url (self):
     #     return reverse("leave:applyleave_list")

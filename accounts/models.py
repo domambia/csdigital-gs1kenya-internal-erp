@@ -17,7 +17,7 @@ class Employee(models.Model):
     alt_phone_number = models.IntegerField(validators=[MaxValueValidator(14), MinValueValidator(9)])
     # more
     kin_email = models.CharField(max_length=100, blank=True, unique = True, validators=[ EmailValidator("Enter a valid email address")])
-    county = models.CharField(max_length=100,  blank=True, choices = get_country(), default = "No country")
+    county = models.CharField(max_length=100,  blank=True, choices = get_country(), default = "Kenya")
     next_of_kin_phone = models.CharField(max_length=20, blank=True)
     # Dependants info
     dependant_name = models.CharField(max_length=100, blank=True)
@@ -28,7 +28,7 @@ class Employee(models.Model):
     profile_pic = models.ImageField(upload_to = 'profile_pics', blank = True)
     company_benifits = models.CharField(max_length = 1000, default = "Pay NHIF, NSSF")
     # Job Information
-    position = models.ForeignKey(Position, on_delete =models.CASCADE, unique = True)
+    position = models.OneToOneField(Position, on_delete =models.CASCADE, default= 1)
 
     # Salary Information
     salary = models.CharField(max_length=100, blank=True)

@@ -73,7 +73,7 @@
                   </div>
               </div>
 
-              <div class="col-md-3">
+              <div class="col-md-4">
                   <div class="form-group">
                       <div class="form-line">
                           <label for="{{ user_form.last_name.id_for_label }}">Last Name</label>
@@ -87,11 +87,11 @@
                   </div>
               </div>
 
-              <div class="col-md-5">
+              <div class="col-md-4">
                   <div class="form-group">
-                      <div class="">
+                      <div class="form-line">
                        <label for="">County</label>     
-                          {{ employee_form.county }}
+                          {{ employee_form.county |add_class:"form-control" }}
                           <ul>
                             {% for error in employee_form.county.errors%}
                               <li class="alert alert-danger">{{ error }}</li>
@@ -216,7 +216,7 @@
 
               <div class="col-md-6">
                   <div class="form-group">
-                      <div class="">
+                      <div class="form-line">
                           <label for="{{ employee_form.current_position.id_for_label }}">Current Position</label>
                           {{ employee_form.position | add_class:"form-control"}}
                           <ul>

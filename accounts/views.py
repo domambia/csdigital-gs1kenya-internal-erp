@@ -92,8 +92,12 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
-                request.session.session_key
-                request.session['username'] = username
+                request.session.session_key 
+                if '@' in username:
+                    print("Yes Omambia")
+                    request.session['username'] = User.objects.get(email = username).username
+                else:
+                    request.session['username'] = username
                 return HttpResponseRedirect(reverse('index'))
             else:
                 return HttpResponse("Your account is not activated. Please check your email account")
@@ -121,8 +125,8 @@ def employee_delete(request, pk):
     emp = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
     if request.method == "POST":
         employee.delete()
-        return redirect('accounts:index')
-    return render(request, "accounts/delete.html", {'emp': emp, "emp": employee})
+        return redirect('accounts:employees')
+    return render(request, "accounts/delete.html", {'emp': emp, "employee": employee})
 
 
 """Update View
@@ -160,3 +164,8 @@ class EmployeeDetailView(DetailView):
     context_object_name = "employee"
     model = Employee
     template_name = "accounts/employee_detail.html"
+    def get_context_data(self, **kwargs):
+        context = super(EmployeeDetailView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(id = user.id)
+        return context

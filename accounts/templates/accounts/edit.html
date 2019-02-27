@@ -163,7 +163,7 @@
                   <div class="form-group">
                       <div class="form-line">
                           <label for="{{ form.position.id_for_label }}">Current Position</label>
-                          {{ form.position }}
+                          {{ form.position |add_class:"form-control show-tick"}}
                           <ul>
                             {% for error in form.position.errors%}
                               <li class="alert alert-danger">{{ error }}</li>

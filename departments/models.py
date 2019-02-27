@@ -18,7 +18,7 @@ class Department(models.Model):
 
 class Position(models.Model):
     name = models.CharField(max_length = 256)
-    department = models.ForeignKey("Department", related_name = "depart", on_delete=models.CASCADE)
+    department = models.ForeignKey("Department", related_name = "depart", on_delete=models.CASCADE, default=3)
     initials = models.CharField(max_length =20)
     def get_absolute_url(self):
         return reverse("departments:list_position")

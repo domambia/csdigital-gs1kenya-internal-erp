@@ -87,7 +87,7 @@ class Feedback(models.Model):
         (11, "open"),
         (0, "pending")
     )
-    client_name = models.ForeignKey(Client, on_delete = models.CASCADE)
+    client_name = models.ForeignKey(Client, on_delete = models.CASCADE, default=1)
     feedback  = models.CharField(max_length = 1000)
     status = models.BooleanField(default = False)
     created_on = models.DateField(default = datetime.datetime.now)
@@ -113,7 +113,7 @@ Coding from spacemacs
 '''
 class Event(models.Model):
     event_name = models.CharField(max_length=300)
-    training = models.ForeignKey("Training", related_name ="trian", on_delete=models.CASCADE)
+    training = models.ForeignKey("Training", related_name ="trian", on_delete=models.CASCADE, default=1)
     date_time = models.DateField(default = datetime.datetime.now)
     status = models.IntegerField(default = 0)
 
@@ -125,7 +125,7 @@ class Event(models.Model):
 
 
 class Training(models.Model):
-    trainer = models.ForeignKey(Employee, on_delete = models.CASCADE)
+    trainer = models.ForeignKey(Employee, on_delete = models.CASCADE, default =1)
     all_trainee = MultiSelectField(choices=get_clients(), max_length=3, blank=True, null=True)
     happened_on  = models.DateField(default = datetime.datetime.now)
     description = models.CharField(max_length= 2000)
@@ -136,7 +136,7 @@ class Training(models.Model):
 
 class Barcode(models.Model):
     GTIN = models.CharField(max_length = 40, unique = True)
-    client = models.ForeignKey("Client", on_delete=models.CASCADE)
+    client = models.ForeignKey("Client", on_delete=models.CASCADE, default=1)
     product_description = models.CharField(max_length = 100)
     brand_name = models.CharField(max_length = 100)
     name_packaging = models.CharField(max_length = 100, blank = True)

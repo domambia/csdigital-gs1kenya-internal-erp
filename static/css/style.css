@@ -8264,6 +8264,11 @@ html.ie11 .bs-searchbox .form-control {
   padding: .4rem .5rem;
 }
 
-
+.form-line a{
+  opacity: 0;
+}
 /* Profile pcitures */
 
+select option:first-child{
+  color:red;
+}

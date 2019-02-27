@@ -28,6 +28,18 @@
                         <td>Feedback Message</td>
                         <td>{{ feedback.feedback }}</td>
                     </tr>
+                    <tr>
+                        <td>Status</td>
+                        <td>
+                            {% if feedback.status == 0%}
+                                  <span class="btn lable bg-orange"> pending</span>
+                            {% elif feedback.status == 11 %}
+                                  <span class="btn lable bg-yellow">opened</span>
+                            {%elif feedback.status == 1%}
+                                  <span> <a href = "" class="btn lable bg-green">closed</a></span>
+                            {% endif %}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>

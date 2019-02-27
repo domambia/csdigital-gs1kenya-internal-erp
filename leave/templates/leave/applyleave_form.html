@@ -21,20 +21,20 @@
       <form class="form" action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
           <div class="row clearfix">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="form-group">
                     <div class="form-line">
                         <label for="{{ form.period.id_for_label }}">Your Username</label> <br>
-                        <input type="text" name="{{ form.employee.name }}" value="{{ current_user }}" class="form-control">
+                        <input type="text" name="{{ form.employee.name }}" value="{{ current_user }}" class="form-control" disabled>
                     </div>
                 </div>
             </div>
            
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="form-group">
                     <div class="form-line">
                         <label for="{{ form.leave.id_for_label }}">Which Type of Leave</label>
-                        {{ form.leave }}
+                        {{ form.leave|add_class:"form-control" }}
                         <ul>
                           {% for error in form.leave.errors%}
                             <li class="alert alert-danger">{{ error }}</li>
@@ -92,7 +92,7 @@
                 <div class="form-group">
                     <div class="form-line">
                         <label for="{{ form.home_phone.id_for_label }}">Phone Number</label> <br>
-                        <input type="text" name="{{ form.home_phone.name }}" value="{{ phone_number }}" class="form-control">
+                        <input type="number" name="{{ form.home_phone.name }}" value="{{ phone_number }}" class="form-control" disabled>
                     </div>
                 </div>
             </div>

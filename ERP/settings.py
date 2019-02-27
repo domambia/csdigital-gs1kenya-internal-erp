@@ -5,6 +5,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")
 STATIC_DIR = os.path.join(BASE_DIR, "static")
 MEDIA_DIR = os.path.join(BASE_DIR, "media")
+USER_AUTH = os.path.join(BASE_DIR, "Auth")
 
 
 #SECURITY WARNING: keep the secret key used in production secret!
@@ -24,13 +25,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     #helper apps
+    # 3rd party
+    'allauth', # new
+    'allauth.account', # new
     'widget_tweaks',
+    'reset_migrations',
     'bootstrap_datepicker_plus',
     'bootstrap4',
     'multiselectfield',
     # Usable apps
     'accounts',
+
     'hrm',
     'homePage',
     'leave',
@@ -41,6 +48,21 @@ INSTALLED_APPS = [
     'helpers',
     'easy_pdf',
 ]
+# Authentication
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
+SITE_ID = 1
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
+ACCOUNT_SESSION_REMEMBER = True
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_UNIQUE_EMAIL = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
