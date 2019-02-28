@@ -36,7 +36,6 @@ class Employee(models.Model):
         return (self.user.first_name + " " +self.user.last_name)
 
     def get_absolute_url(self):
-
         return reverse("accounts:employees")
 
 

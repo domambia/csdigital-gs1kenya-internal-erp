@@ -170,3 +170,18 @@ class EmployeeDetailView(DetailView):
         context = super(EmployeeDetailView, self).get_context_data(**kwargs)
         context['employee'] = Employee.objects.get(id = self.request.user.id)
         return context
+
+'''
+=======================================================================================================================
+Editing Authtiction Informations 
+=======================================================================================================================
+'''
+
+class EmployeeUpdateAuthView(UpdateView):
+    model = User 
+    fields = ('username', 'email', 'first_name', 'last_name', 'password')
+    template_name = "accounts/authentication.html"
+    def get_context_data(self, **kwargs):
+        context = super(EmployeeUpdateAuthView, self).get_context_data(**kwargs)
+        context['employee'] = Employee.objects.get(id = self.request.user.id)
+        return context
