@@ -27,7 +27,6 @@
                                     <th>Start Date</th>
                                     <th>Salary (KSH)</th>
                                     <th>Actions</th>
-                                    <th>Login info</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -51,7 +50,6 @@
                                                 {% endif %}
                                           </td>
                                           <td>
-                                            <span> <a href = "{% url 'accounts:employee_auth' user.user.id %}"><i class="material-icons">edit</i></a> </span>
                                           </td>
                                       </tr>
                                   {% endfor %}

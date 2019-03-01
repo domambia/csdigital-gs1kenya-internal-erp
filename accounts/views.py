@@ -142,19 +142,27 @@ class EmployeeUpdateView(UpdateView):
     model = Employee
     template_name  = "accounts/edit.html"
 
+@login_required
 def employee_update(request, pk):
     employee_form = EmployeeForm(request.POST or None,
                     instance = get_object_or_404(Employee, pk=pk))
+    user_form = UserForm(request.POST or None,
+                    instance = get_object_or_404(User, id=Employee.objects.get(id = pk).user.id))
+    employee = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
     if request.method == "POST":
+        if employee_form.is_valid() and user_form.is_valid():
 
-        if employee_form.is_valid():
+            user_data = user_form.save(commit = False)
+            password = user_form.cleaned_data['password']
+            user_data.set_password(password)
+            user_data.save()
             employee = employee_form.save(commit = False)
             if 'profile_pic' in request.FILES['profile_pic']:
                 employee.profile_pic = request.FILES['profile_pic']
             employee.save()
             return HttpResponseRedirect(reverse('accounts:employees'))
     return render(request, "accounts/edit.html",
-                    {'employee_form': employee_form,})
+                    {'form': employee_form, "employee": employee, 'user_form': user_form})
 
 
 """ EMPLOYEES PROFILE
@@ -190,12 +198,3 @@ def user_update(request, pk):
             return HttpResponseRedirect(reverse('accounts:employees'))
     return render(request, "accounts/authentication.html",
                     {'form':form, "employee": employee})
-
-# class EmployeeUpdateAuthView(UpdateView):
-#     model = User 
-#     fields = ('username', 'email', 'first_name', 'last_name', 'password')
-#     template_name = "accounts/authentication.html"
-#     def get_context_data(self, **kwargs):
-#         context = super(EmployeeUpdateAuthView, self).get_context_data(**kwargs)
-#         context['employee'] = Employee.objects.get(id = self.request.user.id)
-#         return context
