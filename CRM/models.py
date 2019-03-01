@@ -115,7 +115,7 @@ class Event(models.Model):
     event_name = models.CharField(max_length=300)
     training = models.ForeignKey("Training", related_name ="trian", on_delete=models.CASCADE, default=1)
     date_time = models.DateField(default = datetime.datetime.now)
-    status = models.IntegerField(default = 0)
+    status = models.IntegerField(default = 1)
 
     def __str__(self):
         return self.event_name
