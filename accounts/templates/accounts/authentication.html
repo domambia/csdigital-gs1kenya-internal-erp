@@ -11,12 +11,12 @@
 {% endblock%}
 {% block content %}
   <div class="card">
-    <div class="body">
+    <div class="body" >
       <h2 class="header"><a class="btn btn-primary" href = "{% url 'accounts:employees'%}">BACK</a></h2>
 
       <form class="form" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="row clearfix">
+        <div class="row clearfix col-md-offset-2">
           <div class="header">
               <h2>EMPLOYEE LOGIN INFORMATION</h2>
           </div>
@@ -46,7 +46,7 @@
                   </div>
               </div>
           </div>
-          <div class="col-md-4">
+          <!-- <div class="col-md-4">
             <div class="form-group">
                 <div class="form-line">
                     <label for="{{ user_form.password.id_for_label }}">Password</label>
@@ -58,10 +58,10 @@
                     </ul>
                 </div>
             </div>
-        </div>
+             </div> -->
         </div>
         <!--  -->
-        <div class="row clearfix">
+        <div class="row clearfix col-md-offset-2">
             <div class="header">
                 <h2>EMPLOYEE LOGIN INFORMATION</h2>
             </div>
