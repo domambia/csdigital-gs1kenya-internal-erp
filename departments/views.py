@@ -16,7 +16,7 @@ class CreateDepartmentView(CreateView):
     def get_context_data(self, **kwargs):
         context = super(CreateDepartmentView, self).get_context_data(**kwargs)
         user = self.request.user
-        context['employee'] = Employee.objects.get(id = user.id)
+        context['employee'] = Employee.objects.get(user = user.id)
         return context
 
 
@@ -27,7 +27,7 @@ class ListDepartmentsView(ListView):
     def get_context_data(self, **kwargs):
         context = super(ListDepartmentsView, self).get_context_data(**kwargs)
         user = self.request.user
-        context['employee'] = Employee.objects.get(id = user.id)
+        context['employee'] = Employee.objects.get(user = user.id)
         return context
 
 class DetailDepartmentView(DetailView):
@@ -36,7 +36,7 @@ class DetailDepartmentView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(DetailDepartmentView, self).get_context_data(**kwargs)
         user = self.request.user
-        context['employee'] = Employee.objects.get(id = user.id)
+        context['employee'] = Employee.objects.get(user = user.id)
         return context
 
 class UpdateDepartmentView(UpdateView):
@@ -45,7 +45,7 @@ class UpdateDepartmentView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(UpdateDepartmentView, self).get_context_data(**kwargs)
         user = self.request.user
-        context['employee'] = Employee.objects.get(id = user.id)
+        context['employee'] = Employee.objects.get(user = user.id)
         return context
 
 
@@ -55,7 +55,7 @@ class DeleteDepartmentView(DeleteView):
     def get_context_data(self, **kwargs):
         context = super(DeleteDepartmentView, self).get_context_data(**kwargs)
         user = self.request.user
-        context['employee'] = Employee.objects.get(id = user.id)
+        context['employee'] = Employee.objects.get(user = user.id)
         return context
 
 
@@ -74,7 +74,7 @@ class CreatePositionView(CreateView):
     def get_context_data(self, **kwargs):
         context = super(CreatePositionView, self).get_context_data(**kwargs)
         user = self.request.user
-        context['employee'] = Employee.objects.get(id = user.id)
+        context['employee'] = Employee.objects.get(user = user.id)
         return context
 
 class DetailPositionView(DetailView):
@@ -84,7 +84,7 @@ class DetailPositionView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(DetailPositionView, self).get_context_data(**kwargs)
         user = self.request.user
-        context['employee'] = Employee.objects.get(id = user.id)
+        context['employee'] = Employee.objects.get(user = user.id)
         return context
 
 class UpdatePositionView(UpdateView):
@@ -94,7 +94,7 @@ class UpdatePositionView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(UpdatePositionView, self).get_context_data(**kwargs)
         user = self.request.user
-        context['employee'] = Employee.objects.get(id = user.id)
+        context['employee'] = Employee.objects.get(user = user.id)
         return context
 
 class ListPositionView(ListView):
@@ -104,7 +104,7 @@ class ListPositionView(ListView):
     def get_context_data(self, **kwargs):
         context = super(ListPositionView, self).get_context_data(**kwargs)
         user = self.request.user
-        context['employee'] = Employee.objects.get(id = user.id)
+        context['employee'] = Employee.objects.get(user = user.id)
         return context
 
 class DeletePositionView(DeleteView):
@@ -113,5 +113,5 @@ class DeletePositionView(DeleteView):
     def get_context_data(self, **kwargs):
         context = super(DeletePositionView, self).get_context_data(**kwargs)
         user = self.request.user
-        context['employee'] = Employee.objects.get(id = user.id)
+        context['employee'] = Employee.objects.get(user = user.id)
         return context

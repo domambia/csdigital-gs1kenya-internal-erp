@@ -21,7 +21,7 @@ class LeaveListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(LeaveListView, self).get_context_data(**kwargs)
         user = self.request.user
-        context['employee'] = Employee.objects.get(id = user.id)
+        context['employee'] = Employee.objects.get(user = user.id)
         return context
 
 
@@ -31,7 +31,7 @@ class LeaveDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(LeaveDetailView, self).get_context_data(**kwargs)
         user = self.request.user
-        context['employee'] = Employee.objects.get(id = user.id)
+        context['employee'] = Employee.objects.get(user = user.id)
         return context
 
 
@@ -42,7 +42,7 @@ class LeaveCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super(LeaveCreateView, self).get_context_data(**kwargs)
         user = self.request.user
-        context['employee'] = Employee.objects.get(id = user.id)
+        context['employee'] = Employee.objects.get(user = user.id)
         return context
 
 class LeaveUpdateView(UpdateView):
@@ -52,7 +52,7 @@ class LeaveUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(LeaveUpdateView, self).get_context_data(**kwargs)
         user = self.request.user
-        context['employee'] = Employee.objects.get(id = user.id)
+        context['employee'] = Employee.objects.get(user = user.id)
         return context
 
 class LeaveDeleteView(DeleteView):
@@ -61,7 +61,7 @@ class LeaveDeleteView(DeleteView):
     def get_context_data(self, **kwargs):
         context = super(LeaveDeleteView, self).get_context_data(**kwargs)
         user = self.request.user
-        context['employee'] = Employee.objects.get(id = user.id)
+        context['employee'] = Employee.objects.get(user = user.id)
         return context
 
 
@@ -108,7 +108,7 @@ class ApplyLeaveUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(ApplyLeaveUpdateView, self).get_context_data(**kwargs)
         user = self.request.user
-        context['employee'] = Employee.objects.get(id = user.id)
+        context['employee'] = Employee.objects.get(user = user.id)
         return context
 
 

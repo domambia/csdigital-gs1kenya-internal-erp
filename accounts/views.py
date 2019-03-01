@@ -168,7 +168,7 @@ class EmployeeDetailView(DetailView):
     template_name = "accounts/employee_detail.html"
     def get_context_data(self, **kwargs):
         context = super(EmployeeDetailView, self).get_context_data(**kwargs)
-        context['employee'] = Employee.objects.get(id = self.request.user.id)
+        context['employee'] = Employee.objects.get(user = self.request.user.id)
         return context
 
 '''
@@ -177,11 +177,25 @@ Editing Authtiction Informations
 =======================================================================================================================
 '''
 
-class EmployeeUpdateAuthView(UpdateView):
-    model = User 
-    fields = ('username', 'email', 'first_name', 'last_name', 'password')
-    template_name = "accounts/authentication.html"
-    def get_context_data(self, **kwargs):
-        context = super(EmployeeUpdateAuthView, self).get_context_data(**kwargs)
-        context['employee'] = Employee.objects.get(id = self.request.user.id)
-        return context
+def user_update(request, pk):
+    form = UserForm(request.POST or None,
+                    instance = get_object_or_404(User, pk=pk))
+    user = User.objects.get(username = request.session['username'])
+    employee = Employee.objects.get(user = user.id)
+    if request.method == "POST":
+        if form.is_valid():
+            user = form.save(commit = False)
+            user.set_password(user.password)
+            user.save()
+            return HttpResponseRedirect(reverse('accounts:employees'))
+    return render(request, "accounts/authentication.html",
+                    {'form':form, "employee": employee})
+
+# class EmployeeUpdateAuthView(UpdateView):
+#     model = User 
+#     fields = ('username', 'email', 'first_name', 'last_name', 'password')
+#     template_name = "accounts/authentication.html"
+#     def get_context_data(self, **kwargs):
+#         context = super(EmployeeUpdateAuthView, self).get_context_data(**kwargs)
+#         context['employee'] = Employee.objects.get(id = self.request.user.id)
+#         return context
