@@ -2,7 +2,7 @@
 {% load widget_tweaks %}
 {% block header %}
   <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
-      <h2 class="header pull-left">CRM | DELETE EVENT </h2>
+      <h2 class="header pull-left">CRM | DELETE FEEDBACK </h2>
   </div>
 {% endblock%}
 {% block content %}
@@ -10,7 +10,7 @@
      
       <form method="POST">
         {% csrf_token %}
-        Are you sure you want delete Event ( {{event.event_name }} )?
+        Are you sure you want delete feedback by( {{feedback.client_name }} )?
         <input class="btn btn-danger" type="submit" value="YES" /> OR <a href="{% url 'CRM:list_feedback'%}" class="btn btn-primary">NO</a>
       </form>
   </div>

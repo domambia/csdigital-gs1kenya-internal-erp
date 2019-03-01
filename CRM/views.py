@@ -447,7 +447,7 @@ class DetailEventView(DetailView):
 class DeleteEventView(DeleteView):
     model = Event
     success_url = "CRM:list_event"
-    template_name = "event_confirm_delete.html"
+    template_name = "event/event_confirm_delete.html"
     def get_context_data(self, **kwargs):
         context = super(DeleteEventView, self).get_context_data(**kwargs)
         user = self.request.user
