@@ -116,13 +116,13 @@
           <!-- User Info -->
           <div class="user-info">
               <div class="image">
-                  <img src="{% static 'images/user.png' %}" width="48" height="48" alt="User" />
+                  <img src="{{ employee.profile_pic.url }}" width="48" height="48" alt="User" />
               </div>
               <span>
               <div class="info-container btn-primary">
                 {% if user.is_authenticated %}
                   <div class="name " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          {{user.username }}
+                        {{user.first_name }} &nbsp; &nbsp; {{user.last_name}}
                   </div>
                   <div class="email">{{ user.email }}</div>
                   <div class="btn-group user-helper-dropdown">

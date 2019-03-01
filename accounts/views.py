@@ -151,15 +151,12 @@ def employee_update(request, pk):
     employee = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
     if request.method == "POST":
         if employee_form.is_valid() and user_form.is_valid():
-
-            user_data = user_form.save(commit = False)
-            password = user_form.cleaned_data['password']
-            user_data.set_password(password)
-            user_data.save()
-            employee = employee_form.save(commit = False)
-            if 'profile_pic' in request.FILES['profile_pic']:
-                employee.profile_pic = request.FILES['profile_pic']
-            employee.save()
+            user = user_form.save(commit=False)
+            user.set_password(user_form.cleaned_data['password'])
+            user.save()
+            employee_form.save()
+            if (user_form.cleaned_data['username'] == User.objects.get(username = request.session['username']).username) or (user_form.cleaned_data['email'] == User.objects.get(username = request.session['username']).email):
+                logout(request)
             return HttpResponseRedirect(reverse('accounts:employees'))
     return render(request, "accounts/edit.html",
                     {'form': employee_form, "employee": employee, 'user_form': user_form})
@@ -171,30 +168,10 @@ def employee_update(request, pk):
 """
 
 class EmployeeDetailView(DetailView):
-    context_object_name = "user"
+    context_object_name = "user_info"
     model = Employee
     template_name = "accounts/employee_detail.html"
     def get_context_data(self, **kwargs):
         context = super(EmployeeDetailView, self).get_context_data(**kwargs)
         context['employee'] = Employee.objects.get(user = self.request.user.id)
         return context
-
-'''
-=======================================================================================================================
-Editing Authtiction Informations 
-=======================================================================================================================
-'''
-
-def user_update(request, pk):
-    form = UserForm(request.POST or None,
-                    instance = get_object_or_404(User, pk=pk))
-    user = User.objects.get(username = request.session['username'])
-    employee = Employee.objects.get(user = user.id)
-    if request.method == "POST":
-        if form.is_valid():
-            user = form.save(commit = False)
-            user.set_password(user.password)
-            user.save()
-            return HttpResponseRedirect(reverse('accounts:employees'))
-    return render(request, "accounts/authentication.html",
-                    {'form':form, "employee": employee})

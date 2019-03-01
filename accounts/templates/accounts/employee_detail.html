@@ -22,7 +22,7 @@
           <div class="row body">
             {% if user.profile_pic %}
             <div class="profile" style="display:flex; justify-content: center; align-items: center; padding: 3rem;">
-              <img src="{{ user.profile_pic.url }}" class="profile__img" style="height: 8rem; width: 8rem; border-radius: .4rem;">
+              <img src="{{ user_info.profile_pic.url }}" class="profile__img" style="height: 8rem; width: 8rem; border-radius: .4rem;">
             </div>
             {% else %}
               <div class="profile" style=" width: 8rem; height: 8rem; display:flex; justify-content: center; align-items: center; padding: 3rem; background-color: #eee;">
@@ -33,27 +33,27 @@
                 <table class="table">
                     <tr>
                       <td>Username</td>
-                      <td>{{ user.user.username }}</td>
+                      <td>{{ user_info.user.username }}</td>
                     </tr>
                     <tr>
                       <td>Email Address</td>
-                      <td>{{ user.user.email }}</td>
+                      <td>{{ user_info.user.email }}</td>
                     </tr>
                     <tr>
                       <td>First Name</td>
-                      <td>{{ user.user.first_name }}</td>
+                      <td>{{ user_info.user.first_name }}</td>
                     </tr>
                     <tr>
                       <td>Last Name</td>
-                      <td>{{ user.user.last_name }}</td>
+                      <td>{{ user_info.user.last_name }}</td>
                     </tr>
                     <tr>
                       <td>Address</td>
-                      <td>{{ user.address }}</td>
+                      <td>{{ user_info.address }}</td>
                     </tr>
                     <tr>
                       <td>Phone Number</td>
-                      <td>{{ user.phone }}</td>
+                      <td>{{ user_info.phone }}</td>
                     </tr>
 
                   </table>
@@ -63,31 +63,31 @@
                 <table class="table table-responsive">
                     <tr>
                       <td>Country</td>
-                      <td>{{ user.county }}</td>
+                      <td>{{ user_info.county }}</td>
                     </tr>
                     <tr>
                       <td>Current Job Position</td>
-                      <td>{{ user.position.name }}</td>
+                      <td>{{ user_info.position.name }}</td>
                     </tr>
                     <tr>
                       <td>Department</td>
-                      <td>{{user.position.department.name}}</td>
+                      <td>{{user_info.position.department.name}}</td>
                     </tr>
                     <tr>
                       <td>Dependent/ Emergency Phone</td>
-                      <td>{{ user.dependant_contact }}</td>
+                      <td>{{ user_info.dependant_contact }}</td>
                     </tr>
                     <tr>
                       <td>Dependent / Emergency Email Address </td>
-                      <td>{{ user.kin_email }}</td>
+                      <td>{{ user_info.kin_email }}</td>
                     </tr>
                     <tr>
                       <td>Salary</td>
-                      <td>{{ user.salary }}</td>
+                      <td>{{ user_info.salary }}</td>
                     </tr>
                     <tr>
                       <td>Your Benefits</td>
-                      <td>{{ user.company_benifits }}</td>
+                      <td>{{ user_info.company_benifits }}</td>
                     </tr>
                 </table>
             </div>

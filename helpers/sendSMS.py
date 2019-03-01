@@ -12,7 +12,7 @@ class SMS:
     def send(self, phone, message):
         print(message)
         try:
-            response = self.sms.send(str(message), ["+254"+phone])
+            response = self.sms.send(str(message), ["+254"+str(phone)])
             print (response)
         except Exception as e:
             message = """

@@ -91,7 +91,7 @@
                   <div class="form-group">
                       <div class="form-line">
                        <label for="">County</label>
-                          {{ form.county |add_class:"form-control" }}
+                          {{ form.county|add_class:"form-control" }}
                           <ul>
                             {% for error in form.county.errors%}
                               <li class="alert alert-danger">{{ error }}</li>
@@ -247,12 +247,12 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <div class="form-line">
-                        <label for="{{ user_form.password.id_for_label }}">Password</label>
-                        {{ user_form.password|add_class:"form-control" }}
+                        <label for="{{ form.profile_pic.id_for_label }}">Profile Picture</label>
+                        {{ form.profile_pic|add_class:"form-control" }}
                         <ul>
-                          {% for error in user_form.password.errors%}
+                            {% for error in form.profile_pic.errors%}
                             <li class="alert alert-danger">{{ error }}</li>
-                          {% endfor %}
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
@@ -260,10 +260,10 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <div class="form-line">
-                        <label for="{{ form.profile_pic.id_for_label }}">Profile Picture</label>
-                        {{ form.profile_pic|add_class:"form-control" }}
+                        <label for="{{ form.profile_pic.id_for_label }}">Password</label>
+                        {{ user_form.password|add_class:"form-control" }}
                         <ul>
-                            {% for error in form.profile_pic.errors%}
+                            {% for error in user_form.password.errors%}
                             <li class="alert alert-danger">{{ error }}</li>
                             {% endfor %}
                         </ul>

@@ -99,10 +99,7 @@ def clients(request, pk):
 
 def notify(phone, first_name, last_name, company_name, when):
     message  = """
-                Dear {}  {},
-                You have been requested to aprove our esteemed member[ {} ].
-                Thank you,
-
+                Dear {}  {},You have been requested to aprove our esteemed member[ {} ].
                 CEO, GS1 Kenya
                 Date: {}
                """
