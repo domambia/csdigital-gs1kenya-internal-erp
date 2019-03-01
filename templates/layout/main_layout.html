@@ -96,7 +96,11 @@
           <!-- User Info -->
           <div class="user-info">
               <div class="image">
+                  {% if employee.profile_pic.url %}
                   <img src="{{ employee.profile_pic.url }}" width="48" height="48" alt="User" />
+                  {% else %}
+                  <img src="{% static 'images/user.png' %} width="48" height="48" alt="User" />
+                  {% endif %}
               </div>
               <span>
               <div class="info-container btn-primary">
