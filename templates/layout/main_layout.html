@@ -99,7 +99,7 @@
                   {% if employee.profile_pic %}
                   <img src="{{ employee.profile_pic.url }}" width="48" height="48" alt="User" />
                   {% elif employee.profile_pic == "" %}
-                  <img src="{% static 'images/user.png' %} width="48" height="48" alt="User" />
+                  <img src="{% static 'images/user.png' %}" width="48" height="48" alt="User" />
                   {% endif %}
               </div>
               <span>
