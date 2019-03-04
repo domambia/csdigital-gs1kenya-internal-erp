@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User 
+from django.urls import reverse_lazy
 from accounts.models import Employee
 from ACCNTS.models import Invoice
 from django.views.generic import (ListView,
@@ -45,7 +46,7 @@ class UpdateInvoiceView(UpdateView):
 class DeleteInvoiceView(DeleteView):
     model = Invoice
     template_name = "accnts/invoice/invoice_delete.html"
-    success_url = "ACCNTS:list_profoma"
+    success_url = reverse_lazy("ACCNTS:list_profoma")
     def get_context_data(self, **kwargs):
         context = super(DeleteInvoiceView, self).get_context_data(**kwargs)
         context['employee'] = Employee.objects.get(user=self.request.user.id)
