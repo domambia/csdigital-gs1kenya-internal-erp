@@ -121,14 +121,16 @@ def membership_2(request, pk):
 def communication(request, pk):
     employee = Employee.objects.get(position = Position.objects.get(initials = "ACCM"))
     client = Client.objects.get(id = pk)
+    message  = "Dear {} {},You have been requested to generate profoma invoice for [ {} ],GS1 Kenya,({})"
+    msg = message.format(employee.user.first_name, employee.user.last_name, client.company_name, datetime.now())
     client.is_ccm = 1
     client.save()
     print("CCM -Approved")
-    notify(employee.phone , employee.user.first_name, employee.user.last_name, client.company_name, datetime.now().date())
+    SMS().send(employee.phone, msg)
     return HttpResponseRedirect(reverse('CRM:list_client'))
 
 def accounts_manager(request, pk):
-    employee = Employee.objects.get(position = Position.objects.get(initials = "CACC"))
+    employee = Employee.objects.get(position = Position.objects.get(initials = "TM"))
     client = Client.objects.get(id = pk)
     client.is_accm = 1
     client.save()
@@ -138,7 +140,7 @@ def accounts_manager(request, pk):
     return HttpResponseRedirect(reverse('CRM:list_client'))
 
 def accounts(request, pk):
-    employee = Employee.objects.get(position = Position.objects.get(initials = "TM"))
+    employee = Employee.objects.get(position = Position.objects.get(initials = "GM"))
     client = Client.objects.get(id = pk)
     client.is_cacc = 1
     client.save()
@@ -160,7 +162,7 @@ class AssignMemberNumber(UpdateView):
 
 
 def technical(request, pk):
-    employee = Employee.objects.get(position = Position.objects.get(initials = "GM"))
+    employee = Employee.objects.get(position = Position.objects.get(initials = "CACC"))
     employee_2 = Employee.objects.get(position = Position.objects.get(initials = "ME1"))
     client = Client.objects.get(id = pk)
     message  = "Dear {} {},You have been requested to generate barcodes for [ {} ],GS1 Kenya,({})"
@@ -177,12 +179,10 @@ def technical(request, pk):
         return HttpResponseRedirect(reverse('CRM:assign', args=(pk,)))
 
 def general_manager(request, pk):
-    # employee = Employee.objects.get(position = Position.objects.get(initials = "CCM"))
     client = Client.objects.get(id = pk)
     client.is_gm = 1
     client.status = 1
     client.save()
-    # notify(employee.phone , employee.user.first_name, employee.user.last_name, client.company_name, datetime.now)
     print("GM -Approved")
     return HttpResponseRedirect(reverse('CRM:list_client'))
 
@@ -194,8 +194,6 @@ class ClientDeleteView(DeleteView):
     model = Client
     template_name = "client/client_delete_confirm.html"
     success_url = reverse_lazy("CRM:delete_client")
-
-
 
 '''
 The supplier views
