@@ -9,4 +9,5 @@ urlpatterns = [
     url('^invoice/profoma/edit/(?P<pk>\d)/$', views.UpdateInvoiceView.as_view(), name ="edit_profoma"),
     url('^invoice/profoma/detail/(?P<pk>\d)/$', views.DetailInvoiceView.as_view(), name ="detail_profoma"),
     url('^invoice/profoma/delete/(?P<pk>\d)/$', views.DeleteInvoiceView.as_view(), name = "delete_profoma"),
+    url('^invoice/profoma/print/(?P<pk>\d)/$',views.print_profoma, name = "print_profoma" ),
 ]

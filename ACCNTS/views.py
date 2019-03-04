@@ -8,7 +8,9 @@ from django.views.generic import (ListView,
                                   UpdateView,
                                   CreateView,
                                   DetailView)
-#Create your views here.
+from easy_pdf.rendering import render_to_pdf_response
+
+
 
 def dashboard(request):
     current = User.objects.get(username = request.session['username'])
@@ -60,3 +62,7 @@ class DetailInvoiceView(DetailView):
         context = super(DetailInvoiceView, self).get_context_data(**kwargs)
         context['employee'] = Employee.objects.get(user=self.request.user.id)
         return context
+
+def print_profoma(request, pk):
+    return render_to_pdf_response(request, "accnts/invoice/profoma.html",{'name': "omambia"})
+

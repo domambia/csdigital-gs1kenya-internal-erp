@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+{% load staticfiles %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+	<title>Profoma Invoice</title>
+	<link rel='stylesheet' type='text/css' href="{% static 'css/invoice.css' %}" />
+	<script type='text/javascript' src="{% static 'js/jquery_invoice.js' %}></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script type='text/javascript' src="{% static 'js/invoice_example.js' %}"></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <table>
+            <tr style ="height:100px;">
+                <td colspan="6" style="text-align:left; padding-left:5px; color:#0066cc;">
+                    <span style="font-size:25px;">NAIROBI, KENYA </span> <br>
+                    <span style="font-size:25px;">Allbid House, 2<sup>nd</sup> Floor, Wing-C</span><br>
+                    <span style="font-size:25px;"> Mombasa Road</span>
+                </td>
+                <td colspan="6" style="text-align:right;">
+                    <span style="text-align:right; font-size:100px; color:#333399;">00121</span><br>
+                    <span style="font-size:30px;">The Global Language of Business</span><br><br>
+                    <span style="color:#333399; font-size:60px;">PROFOMA INVOICE</span><br>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <br>
+        <table>
+            <tr>
+                <td style="margin-right:30px;">
+                    <table style="border:1px solid #999;">
+                        <tr><th style="text-align:left; padding:4px;">Profoma Invoice To</th></tr>
+                        <td style="height:100px;"></td>
+                    </table>
+                </td>
+                <td>
+                    <table style="border:1px solid #999;">
+                        <tr style="text-align:center; padding:4px;"><th>Company VAT</th>
+                            <th>Tax Date</th>
+                            <th>Invoice No</th>
+                        </tr>
+                        <tr style="height:40px; text-align:center;">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+        </table> <br><br><br><br>
+    </div>
+    <!-- The Main Table  -->
+
+    <table>
+        <thead>
+            <tr style="border:1px solid #999; padding:5px;">
+                <th colspan="2"> P.O. No</th>
+                <th colspan="2">  Due Date</th>
+                <th colspan="2">Terms</th>
+                <th colspan="2"> Member No.</th>
+                <th colspan="2"> CO. Prefix</th>
+                <th colspan="2"> Customer Vat Reg.</th>
+            </tr>
+        </thead>
+
+            <!-- First row data -->
+            <tr style="border:1px solid #999; padding:5px; text-align:center;">
+                <td colspan="2"> 12100</td>
+                <td colspan="2"> </td>
+                <td colspan="2"> </td>
+                <td colspan="2"> </td>
+                <td colspan="2"> </td>
+                <td colspan="2"> </td>
+            </tr>
+            <!-- Row two -->
+            <tr style="border:1px solid #666; padding:5px; text-align:center;">
+                <td colspan="4"> Description</td>
+                <td colspan="2"> Qty</td>
+                <td colspan="2"> Rate</td>
+                <td colspan="2"> VAT</td>
+                <td colspan="2">Amount</td>
+            </tr>
+            <!-- Row three -->
+            <tr style="border:1px solid #999; padding:5px; height:130px; text-align:left;">
+                <td colspan="4"></td>
+                <td colspan="2"> </td>
+                <td colspan="2"> </td>
+                <td colspan="2"> </td>
+                <td colspan="2"> </td>
+            </tr>
+       </table>
+       <table>
+           <thead>
+               <tr style="border:1px solid #999; padding:5px;">
+                   <th colspan="8">VAT Summary</th>
+                   <th colspan="2">Subtotal.</th>
+                   <th colspan="2"> KSH. 100,000</th>
+               </tr>
+
+           </thead>
+            <!-- Row four -->
+            <tr style="border:1px solid #999; padding:5px; text-align:left;">
+                <td colspan="8">
+                    <table>
+                        <tr style="text-align:center;">
+                            <th> Rate</th>
+                            <th> ksh VAT</th>
+                            <th> ksh NET</th>
+                        </tr>
+                        <tr style="text-align:center">
+                            <td>kenyan</td>
+                            <td>1,200</td>
+                            <td>230</td>
+                        </tr>
+                    </table>
+                </td>
+                <td colspan="2">VAT Total</td>
+                <td colspan="2" style="text-align:center;">1,430</td>
+            </tr>
+            <tr style="border:1px solid #999; padding:5px; text-align:left;">
+                <td colspan="8">ALL CHEQUES TO BE DONE IN THE NAME OF <span style="color:blue;">GS1 KENYA</span></td>
+                <td colspan="2"> Total </td>
+                <td colspan="2" style="text-align:center;">ksh. 300,000 </td>
+            </tr>
+            <tr style="border:1px solid #999; padding:5px; text-align:left;">
+                <td colspan="8">
+                    <table>
+                        <tr style="padding:5px; text-align:left;">
+                            <th> Prepared by</th>
+                            <th> Approved by</th>
+                            <th> verified by</th>
+                        </tr>
+                        <tr style="text-align:center; padding:5px">
+                            <td>Stephen </td>
+                            <td>General Manager</td>
+                            <td>Company Accountant</td>
+                        </tr>
+                    </table>
+
+                </td>
+                <td colspan="2">
+                    <table>
+                        <tr style="border-bottom:1px solid #999;"> <td>Payment/Credits<td></tr>
+                        <tr> <td>Balance Due<td></tr>
+                    </table>
+                </td>
+                <td colspan="2">
+                    <table>
+                    <tr style="border-bottom:1px solid #999;">
+                        <td>0.0</td>
+                    </tr>
+                    <tr>
+                        <td>0.0</td>
+                    </tr>
+                    </table>
+                </td>
+            </tr>
+       </table>
+       <table>
+           <tr>
+               <th>
+                   <tr style="border:1px solid #999; padding:5px; text-align:left;">
+                       <th> Phone No.</th>
+                       <th> Fax No.</th>
+                       <th> Email Address</th>
+                       <th> Website</th>
+                   </tr>
+                   <tr style="text-align:center; border:1px solid #999; padding:5px;">
+                       <td>+25708033232</td>
+                       <td>fax number</td>
+                       <td> gskeny.org</td>
+                   </tr>
+               </th>
+           </tr>
+       </table>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
