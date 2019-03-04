@@ -38,6 +38,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('company_name', models.CharField(max_length=100)),
+                ('member_number', models.CharField(max_length=100, blank=True)),
                 ('company_phone', models.IntegerField()),
                 ('company_phone_alt', models.IntegerField()),
                 ('company_email', models.CharField(max_length=128)),

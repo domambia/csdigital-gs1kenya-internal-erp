@@ -27,6 +27,7 @@ file_upload = UploadFolder("documents/clients")
 
 class Client(models.Model):
     company_name = models.CharField(max_length = 100)
+    member_number = models.CharField(max_length = 100, blank=True)
     company_phone = models.IntegerField()
     company_phone_alt = models.IntegerField()
     company_email = models.CharField(max_length = 128)

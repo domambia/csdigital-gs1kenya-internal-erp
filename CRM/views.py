@@ -98,11 +98,7 @@ def clients(request, pk):
 '''
 
 def notify(phone, first_name, last_name, company_name, when):
-    message  = """
-                Dear {}  {},You have been requested to aprove our esteemed member[ {} ].
-                CEO, GS1 Kenya
-                Date: {}
-               """
+    message  = "Dear {} {},You have been requested to aprove our esteemed member[ {} ].GS1 Kenya,({})"
     msg = message.format(first_name, last_name, company_name, when)
     SMS().send(phone, msg)
 
@@ -113,6 +109,13 @@ def membership(request, pk):
     client.save()
     print("ME1 -Approved")
     notify(employee.phone , employee.user.first_name, employee.user.last_name, client.company_name, datetime.now().date())
+    return HttpResponseRedirect(reverse('CRM:list_client'))
+    # Membership two
+def membership_2(request, pk):
+    client = Client.objects.get(id = pk)
+    client.is_me2 = 1
+    client.save()
+    print("ME2 -Approved")
     return HttpResponseRedirect(reverse('CRM:list_client'))
 
 def communication(request, pk):
@@ -143,24 +146,35 @@ def accounts(request, pk):
     notify(employee.phone , employee.user.first_name, employee.user.last_name, client.company_name, datetime.now().date())
     return HttpResponseRedirect(reverse('CRM:list_client'))
 
+'''
+Assign Member Number:
+'''
+class AssignMemberNumber(UpdateView):
+    model = Client 
+    fields = ('member_number',)
+    template_name = "client/member_form.html"
+    def get_context_data(self, **kwargs):
+        context = super(AssignMemberNumber, self).get_context_data(**kwargs)
+        context['employee'] = Employee.objects.get(user = self.request.user.id)
+        return context
+
+
 def technical(request, pk):
     employee = Employee.objects.get(position = Position.objects.get(initials = "GM"))
+    employee_2 = Employee.objects.get(position = Position.objects.get(initials = "ME1"))
     client = Client.objects.get(id = pk)
-    client.is_tm = 1
-    client.save()
-    notify(employee.phone , employee.user.first_name, employee.user.last_name, client.company_name, datetime.now().date())
-    print("TM -Approved")
-    return HttpResponseRedirect(reverse('CRM:list_client'))
-
-# def membership(request, pk):
-#     employee = Employee.objects.get(position = Position.objects.get(initials = "GM"))
-#     client = Client.objects.get(id = pk)
-#     client.is_me2 = 1
-#     client.save()
-#     notify(employee.phone , employee.user.first_name, employee.user.last_name, client.company_name, datetime.now())
-#     print("ME2 -Approved")
-#     return HttpResponseRedirect(reverse('CRM:list_client'))
-
+    message  = "Dear {} {},You have been requested to generate barcodes for [ {} ],GS1 Kenya,({})"
+    msg = message.format(employee.user.first_name, employee.user.last_name, client.company_name, datetime.now())
+    message_1  = "Dear {} {},You have been requested to generate reciepts & invoice for [ {} ],GS1 Kenya,({})"
+    msg_1 = message.format(employee_2.user.first_name, employee_2.user.last_name, client.company_name, datetime.now())
+    
+    tm = client.is_tm = 1
+    if tm:    
+        client.save()
+        SMS().send(employee.phone, msg)
+        SMS().send(employee_2.phone, msg_1)
+        print("TM -Approved")
+        return HttpResponseRedirect(reverse('CRM:assign', args=(pk,)))
 
 def general_manager(request, pk):
     # employee = Employee.objects.get(position = Position.objects.get(initials = "CCM"))
@@ -319,19 +333,6 @@ def close(request, pk):
 The Training Feedback
 '''
 
-
-# class TrainingCreateView(CreateView):
-#     model = Training
-#     fields = ('trainer', 'number_of_trainee', 'happened_on','all_trainee')
-#     template_name  = "training/training_form.html"
-#     def get_context_data(self, **kwargs):
-#         context = super(TrainingCreateView, self).get_context_data(**kwargs)
-#         user = self.request.user
-#         context['employee'] = Employee.objects.get(user=user)
-#         return context
-
-
-
 def get_clients():
     list_clients = Client.objects.all()
     clients = []
@@ -350,13 +351,6 @@ class TrainingCreateView(CreateView):
         return context
 
     
-# @login_required
-# def create_train(request):
-#     form_train = TrainForm(request.POST or None)
-#     if form_train.is_valid():
-#         print(form_train.data)
-
-#     return render(request, "training/training_form.html", {"form": form_train, "clients": len(get_clients())})
 class TrainingUpdateView(UpdateView):
     model = Training
     fields = ('trainer','happened_on', 'all_trainee', 'description')

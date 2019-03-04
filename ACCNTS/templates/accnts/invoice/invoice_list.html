@@ -19,6 +19,7 @@
                         <thead>
                             <tr>
                                 <th>Member Name</th>
+                                <th>Member Number</th>
                                 <th>Category Amount</th>
                                 <th> Date of Generations</th>
                                 <th style="text-align:center;">VAT</th>
@@ -30,6 +31,7 @@
                               {% for profoma in profomas %}
                                   <tr>
                                       <td>{{ profoma.member.company_name }}</td>
+                                      <td>{{ profoma.member.member_number }}</td>
                                       <td>{{ profoma.member.category }}</td>
                                       <td>{{ profoma.date_of_generate }}</td>
                                       <td style="text-align: center;">
