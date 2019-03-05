@@ -87,8 +87,10 @@ def make_payment(request, pk):
     balance = invoice.balance
     if request.method == "POST":
         if form.is_valid():
-            amount = form.cleaned_data['amount']
             form.save()
+            amount = form.cleaned_data['amount']
+            invoice.amount = amount
+            print("Amount:" + str(amount))
             invoice.balance = (int(invoice.member.category) - int(invoice.amount))
             invoice.save()
             print("new balance: " + str(invoice.balance))
