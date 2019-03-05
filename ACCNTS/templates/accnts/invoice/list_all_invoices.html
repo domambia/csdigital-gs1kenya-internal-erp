@@ -29,7 +29,7 @@
                         <tbody>
                             {% if invoices%}
                             {% for invoice in invoices %}
-                            {% if invoice.amount > 0%}
+                            {% if invoice.amount != 0 %}
                                   <tr>
                                       <td>{{ invoice.member.company_name }}</td>
                                       <td>{{ invoice.member.member_number }}</td>
