@@ -1,0 +1,55 @@
+{% extends 'layout/accnts_layout.html' %}
+{% load widget_tweaks %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+{{ form.media }}            {# Adds date-picker required JS and CSS #}
+{% block header %}
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
+      <h2 class="header pull-left">ACCOUNTS | PAYMENT</h2>
+  </div>
+{% endblock%}
+{% block content %}
+    <section>
+        <div class="container-fluid">
+             <!-- Tabs With Icon Title -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card custom-h">
+                        <div class="header">
+                            <h2> 
+                            </h2>
+                        </div>
+                        <span class="body" style="padding-left: 2rem;"><a class="btn btn-primary" href = "{% url 'ACCNTS:list_profoma' %}" >BACK</a></span>
+                        <div class="body">
+                            <!-- Nav tabs -->
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade in active" id="home_with_icon_title">
+                                <form method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
+                                            <p>Your balance is: ksh.{{balance}}</p>
+                                            <div class="form-group form-float">
+                                               <div class="form-line">
+                                                    {{ form.amount | add_class:"form-control"}}
+                                                    <label class="form-label">Choose Member</label>
+                                                     <ul>
+                                                        {% for error in form.amount.errors%}
+                                                        <li class="alert alert-danger">{{ error }}</li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-3 col-sm-6 col-xs-12">
+                                            <input type="submit" class="btn btn-primary btn-lg m-l-15 waves-effect" value = "SUBMIT">
+                                        </div>
+                                </div>
+                </div>
+            </div>
+            <!-- #END# Tabs With Icon Title -->
+        </div>
+    </section>
+{% endblock %}

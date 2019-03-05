@@ -3,7 +3,7 @@
 
 <head>
 	<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-	<title>Profoma Invoice</title>
+	<title>Invoice</title>
 </head>
 
 <body>
@@ -18,7 +18,7 @@
                 <td colspan="6" style="text-align:right;">
                     <span style="text-align:right; font-size:20px; color:#333399;">00121</span><br>
                     <span style="font-size:15px;">The Global Language of Business</span><br><br>
-                    <span style="color:#333399; font-size:20px;">PROFOMA INVOICE</span><br>
+                    <span style="color:#333399; font-size:20px;">INVOICE</span><br>
                 </td>
             </tr>
         </table>
@@ -158,10 +158,10 @@
                 <td colspan="2">
                     <table>
                     <tr style="border-bottom:1px solid #999;">
-                        <td style="text-align:center; color:blue;">ksh. 0.0</td>
+                        <td style="text-align:center; color:blue;">ksh. {{ total_paid }}</td>
                     </tr>
                     <tr>
-                        <td style="text-align:center; color:blue;">ksh. {{balance}}</td>
+                        <td style="text-align:center; color:blue;">ksh. {{total_balance}}</td>
                     </tr>
                     </table>
                 </td>

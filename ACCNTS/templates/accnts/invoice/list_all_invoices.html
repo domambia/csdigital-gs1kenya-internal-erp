@@ -10,7 +10,6 @@
         <div class="card body">
             <div class="">
                 <h2 class="body">
-                  <span><a class="btn btn-primary" href = "{% url 'ACCNTS:create_profoma' %}" >ADD PROFOMA INVOICE</a></span>
                 </h2>
             </div>
             <div class="body">
@@ -21,34 +20,32 @@
                                 <th>Member Name</th>
                                 <th>Member Number</th>
                                 <th>Category Amount</th>
+                                <th>Balance</th>
                                 <th> Date of Generations</th>
                                 <th style="text-align:center;">VAT</th>
                                 <th style="text-align:center;">Actions</th>
-                                <th style="text-align:center;">Payment</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% if profomas %}
-                              {% for profoma in profomas %}
+                            {% if invoices%}
+                            {% for invoice in invoices %}
+                            {% if invoice.amount > 0%}
                                   <tr>
-                                      <td>{{ profoma.member.company_name }}</td>
-                                      <td>{{ profoma.member.member_number }}</td>
-                                      <td>{{ profoma.member.category }}</td>
-                                      <td>{{ profoma.date_of_generate }}</td>
+                                      <td>{{ invoice.member.company_name }}</td>
+                                      <td>{{ invoice.member.member_number }}</td>
+                                      <td>{{ invoice.member.category }}</td>
+                                      <td>{{ invoice.balance}}</td>
+                                      <td>{{ invoice.date_of_generate }}</td>
                                       <td style="text-align: center;">
-                                         {% if  profoma.VAT == "Yes"%}
+                                         {% if  invoice.VAT == "Yes"%}
                                          <span > 16% </span>
                                          {% else %}
                                          <span > 0% </span>
                                          {% endif %}
                                       </td>
-                                      <td>
-                                          <span> <a href = "{% url 'ACCNTS:detail_profoma' pk=profoma.id %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>
-                                          <span> <a href = "{% url 'ACCNTS:edit_profoma' pk=profoma.id %}"><i class="material-icons">edit</i></a> </span>
-                                          <span> <a href = "{% url 'ACCNTS:delete_profoma' pk=profoma.id %}"><i class="material-icons" style = "color:#cc0000;">delete</i></a> </span>
-                                      </td>
-                                      <td style="text-align:center;"><a href="{% url 'ACCNTS:payment' pk=profoma.id %}" class="btn label bg-orange">pay</td>
+                                      <td style="text-align:center;"><a href="{% url 'ACCNTS:print_invoice' pk=invoice.id %}" class="btn label bg-orange">print</td>
                                   </tr>
+                              {% endif %}
                               {% endfor %}
                             {% else %}
 

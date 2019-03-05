@@ -19,10 +19,10 @@ def get_sectors():
 
 
 def get_categs():
-    list_categs = ['Category A', 'Category B', 'Category B', 'Category C', 'Category D', 
-                    'Category E']
+    list_categs = ['150000', '200000', '30000' 
+                    '50000','20000']
     categs = []
     for categ in list_categs:
-        categs.append((categ.capitalize(), categ ,))
+        categs.append((int(categ), categ ,))
     return tuple(categs)
 

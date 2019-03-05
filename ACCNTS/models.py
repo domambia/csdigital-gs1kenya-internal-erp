@@ -13,6 +13,8 @@ class Invoice(models.Model):
     date_of_generate = models.DateField(default = datetime.datetime.now)
     description = models.CharField(max_length=2000)
     VAT = models.CharField(max_length = 5, choices = OPTIONS, default = "No")
+    amount = models.PositiveIntegerField(blank=True, default=0)
+    balance = models.PositiveIntegerField(blank=True, default=0) 
     def __str__(self):
         return self.member.company_name
 

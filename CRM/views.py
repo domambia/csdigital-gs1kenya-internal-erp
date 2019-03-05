@@ -153,7 +153,7 @@ Assign Member Number:
 '''
 class AssignMemberNumber(UpdateView):
     model = Client 
-    fields = ('member_number',)
+    fields = ('member_number','member_prefix')
     template_name = "client/member_form.html"
     def get_context_data(self, **kwargs):
         context = super(AssignMemberNumber, self).get_context_data(**kwargs)
@@ -169,14 +169,13 @@ def technical(request, pk):
     msg = message.format(employee.user.first_name, employee.user.last_name, client.company_name, datetime.now())
     message_1  = "Dear {} {},You have been requested to generate reciepts & invoice for [ {} ],GS1 Kenya,({})"
     msg_1 = message.format(employee_2.user.first_name, employee_2.user.last_name, client.company_name, datetime.now())
-    
     tm = client.is_tm = 1
-    if tm:    
+    if tm:
         client.save()
         SMS().send(employee.phone, msg)
         SMS().send(employee_2.phone, msg_1)
         print("TM -Approved")
-        return HttpResponseRedirect(reverse('CRM:assign', args=(pk,)))
+        return HttpResponseRedirect(reverse('CRM:list_client'))
 
 def general_manager(request, pk):
     client = Client.objects.get(id = pk)
