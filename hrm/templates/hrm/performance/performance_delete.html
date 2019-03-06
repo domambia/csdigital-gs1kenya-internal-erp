@@ -1,0 +1,17 @@
+{% extends 'layout/main_layout.html' %}
+{% load widget_tweaks %}
+{% block header %}
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
+      <h2 class="header pull-left">HRM | DELETE PERFORMANCE</h2>
+  </div>
+{% endblock%}
+{% block content %}
+  <div class="jumbotron card">
+      <form method="POST">
+        {% csrf_token %}
+        Are you sure you want delete the performance of  {{perform.employee.user.username }} ?
+        <input class="btn btn-danger" type="submit" value="YES" /> OR <a href="{% url 'hrm:perfom_list'%}" class="btn btn-primary">NO</a>
+      </form>
+  </div>
+
+{% endblock %}

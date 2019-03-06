@@ -1,0 +1,63 @@
+{% extends "layout/main_layout.html" %}
+{% block header %}
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
+      <h2 class="header pull-left">HRM  | PERFORMANCE</h2>
+  </div>
+{% endblock%}
+{% block content %}
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card body ">
+            <div>
+                <h2 class="body">
+                  <span><a class="btn btn-primary" href = "{% url 'hrm:perfom_add' %}" >ADD PERFORMANCE</a></span>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr>
+                                <th>Employee</th>
+                                <th>Start Date</th>
+                                <th>Finishing Date</th>
+                                <th>Objective</th>
+                                <th>Status</th>
+                                <th style="text-align:center;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if performances %}
+                              {% for performance in performances %}
+                                  <tr>
+                                      <td>{{ performance.employee }}</td>
+                                      <td>{{ performance.start_date }}</td>
+                                      <td>{{ performance.finish_date }}</td>
+                                      <td>{{ performance.objective }}</td>
+                                      <td>
+                                        {% if performance.status  == 1%}
+                                        <span class="label btn btn-lg bg-yellow">Done ..</span>
+                                        {% else %}
+                                        <span class="label btn btn-lg bg-yellow">in progress ..</span>
+                                        {% endif %}
+                                     </td>
+                                      <td>
+                                          <span> <a href = "{% url 'hrm:perfom_detail' pk=performance.id %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>
+                                          <span> <a href = "{% url 'hrm:perfom_edit' pk=1 %}"><i class="material-icons">edit</i></a> </span>
+                                          <span> <a href = "{% url 'hrm:perfom_delete' pk=performance.id %}"><i class="material-icons" style = "color:#cc0000;">delete</i></a> </span>
+                                      </td>
+                                  </tr>
+                              {% endfor %}
+                            {% else %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Exportable Table -->
+
+{% endblock %}

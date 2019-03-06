@@ -1,0 +1,37 @@
+{% extends 'layout/main_layout.html' %}
+{% load widget_tweaks %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+{{ form.media }}            {# Adds date-picker required JS and CSS #}
+{% block header %}
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
+      <h2 class="header pull-left">HRM | ADD PERFORMANCE</h2>
+  </div>
+{% endblock%}
+{% block content %}
+  <div class="card">
+    <div class="body">
+      <h2 ><a class="btn btn-primary" href = "{% url 'hrm:perfom_employee'%}">BACK</a></h2>
+      <form class="form" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row clearfix">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="form-line">
+                        <label for="{{ user_form.notes.id_for_label }}">Provide Your Notes on this Objective</label>
+                        <textarea name="{{form.notes.name}}" class="form-control" required="true" cols="30" rows="10"></textarea> 
+                    </div>
+                </div>
+            </div>
+        </div>
+          <div class="clearfix">
+            <div class="col-md-4 pull-left">
+                <input type="submit" class="btn btn-primary btn-lg m-l-15 waves-effect" value="submit">
+            </div>
+          </div>
+          </form>
+      </div>
+
+
+{% endblock %}

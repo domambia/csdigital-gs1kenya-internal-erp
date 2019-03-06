@@ -1,0 +1,73 @@
+{% extends 'layout/main_layout.html' %}
+{% load widget_tweaks %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+{{ employee_form.media }}            {# Adds date-picker required JS and CSS #}
+{% block header %}
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
+      <h2 class="header pull-left">HRM | PERFORMANCE</h2>
+  </div>
+{% endblock%}
+{% block content %}
+  <div class="card body" >
+      <div class="helper-cls body">
+        <a href="{% url 'hrm:perfom_list' %}" class="btn btn-primary">BACK</a>
+      </div> <br> <br>
+      <div class="body ">
+          <div class="row clearfix">
+            <div class="col-md-6 col-lg-6">
+                <table class="table table-responsive"> 
+                    <tbody>
+                        <tr>
+                            <td>Empoyee</td>
+                            <td>{{ performance.employee.user.first_name }} &nbsp; {{ performance.employee.user.last_name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Start Date</td>
+                            <td>{{ performance.start_date }}</td>
+                        </tr>
+                        <tr>
+                            <td>Finish Date</td>
+                            <td>{{ performance.finish_date }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div><div class="col-md-6 col-lg-6">
+                <table class="table table-responsive"> 
+                    <tbody>
+                       
+                        <tr>
+                            <td>Objective</td>
+                            <td>{{ performance.objective }}</td>
+                        </tr>
+                        <tr>
+                            <td>Employee Notes</td>
+                            <td>
+                                {% if employee.notes %}
+                                <span>{{performance.notes}}</span>
+                                {% else %}
+                                <span> {{performance.employee}} has note written any notes</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Status</td>
+                            <td>
+                                {% if performance.status  == 1%}
+                                <span class="label btn btn-lg bg-yellow">Done ..</span>
+                                {% else %}
+                                <span class="label btn btn-lg bg-yellow">in progress ..</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+          </div>
+      </div>
+
+
+  </div>
+
+{% endblock %}
