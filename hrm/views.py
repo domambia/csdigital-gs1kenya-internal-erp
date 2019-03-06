@@ -61,7 +61,7 @@ class UpdatePerformanceView(UpdateView):
 
 class DetailPerformanceView(DetailView):
     model = Performance 
-    context_object_name = "perfomance"
+    context_object_name = "performance"
     template_name = "hrm/performance/performance_details.html"
     def get_context_data(self, **kwargs):
         context = super(DetailPerformanceView, self).get_context_data(**kwargs)

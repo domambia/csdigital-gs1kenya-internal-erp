@@ -50,7 +50,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <div class="form-line">
-                        <label for="{{ user_form.first_name.id_for_label }}">Choose Employee</label>
+                        <label for="{{ user_form.first_name.id_for_label }}">Finishing Date</label>
                         {{ form.finish_date|add_class:"form-control datepicker"}}
                         <ul>
                             {% for error in form.finish_date.errors%}
@@ -64,7 +64,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <div class="form-line">
-                        <label for="{{ user_form.first_name.id_for_label }}">Assign Objective</label>
+                        <label for="{{ user_form.first_name.id_for_label }}">Assign objective</label>
                         {{ form.objective|add_class:"form-control" }}
                         <ul>
                         {% for error in form.objective.errors%}
