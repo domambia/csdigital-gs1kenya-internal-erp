@@ -15,3 +15,8 @@ class TrainForm(forms.ModelForm):
     class Meta:
         model = Training
         fields = ('trainer', 'happened_on','all_trainee', 'description')
+
+class EditClient(forms.ModelForm):
+    class Meta:
+        model = Client
+        fields = ('member_number', 'member_prefix')

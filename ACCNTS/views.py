@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse_lazy, reverse
 from accounts.models import Employee
 from ACCNTS.models import Invoice
+from ERP import settings
 from django.views.generic import (ListView,
                                   DeleteView,
                                   UpdateView,
@@ -102,6 +103,7 @@ def make_payment(request, pk):
 
 
 def print_invoice(request, pk):
+    base_url = "file://" + settings.STATIC_URL
     invoice = Invoice.objects.get(id = pk)
     category = int(invoice.member.category)
     tax = 0;
@@ -113,6 +115,7 @@ def print_invoice(request, pk):
     total_balance = ((total_tax + category) - total_paid)
     return render_to_pdf_response(request, "accnts/invoice/invoice.html",
                                   {'invoice': invoice,
+                                   'base_url':base_url,
                                    'total_tax': total_tax,
                                    'tax':tax,
                                    'balance': balance,

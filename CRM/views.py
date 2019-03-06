@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from accounts.models import Employee
 from django.contrib.auth.models import User
 from departments.models import Position
@@ -12,7 +12,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from datetime import datetime
 from helpers.sendSMS import SMS
-from CRM.forms import TrainForm
+from CRM.forms import TrainForm, EditClient
 # Create your views here.
 
 '''
@@ -160,6 +160,24 @@ class AssignMemberNumber(UpdateView):
         context['employee'] = Employee.objects.get(user = self.request.user.id)
         return context
 
+def assign_member_details(request, pk):
+    form = EditClient(request.POST or None,
+                    instance = get_object_or_404(Client, pk=pk))
+    client = Client.objects.get(id = pk)
+    phone = client.company_phone
+    company_name = client.company_name 
+    employee = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
+    if request.method == "POST":
+        if form.is_valid():
+            member_number = form.cleaned_data['member_number']
+            member_prefix = form.cleaned_data['member_prefix']
+            message = "Dear {} you have been assigned {} as member and {} as prefix number.GS1 KENYA"
+            form.save()
+            SMS().send(phone, message.format(company_name, member_number, member_prefix))
+            return HttpResponseRedirect(reverse('CRM:list_client'))
+    return render(request, 'client/member_form.html', {'form': form, 
+                                            'employee': employee})
+
 
 def technical(request, pk):
     employee = Employee.objects.get(position = Position.objects.get(initials = "CACC"))
@@ -182,9 +200,10 @@ def general_manager(request, pk):
     client.is_gm = 1
     client.status = 1
     client.save()
+    message = "Dear {} your membership has been approved with member number  [{}] by GS1 KENYA"
+    SMS().send(client.company_phone, message.format(client.company_name, client.member_number))
     print("GM -Approved")
     return HttpResponseRedirect(reverse('CRM:list_client'))
-
 
 '''
 End of Approval

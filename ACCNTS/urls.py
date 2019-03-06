@@ -1,5 +1,7 @@
 from django.conf.urls import url
 from ACCNTS import views
+from ERP import settings
+from django.conf.urls.static import static
 app_name  = "ACCNTS"
 
 urlpatterns = [
@@ -13,4 +15,4 @@ urlpatterns = [
     url('^invoice/profoma/payement/(?P<pk>\d)/$',views.make_payment, name = "payment" ),
     url('^invoice/invoices/list/',views.list_invoices, name = "invoices" ),
     url('^invoice/profoma/print/invoice/(?P<pk>\d)/$',views.print_invoice, name = "print_invoice" ),
-]
+]+static(settings.STATIC_URL, document_root=settings.STATIC_DIR)
