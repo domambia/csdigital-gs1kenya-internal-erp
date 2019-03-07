@@ -15,18 +15,18 @@
       <h2 ><a class="btn btn-primary" href = "{% url 'hrm:perfom_employee'%}">BACK</a></h2>
       <form class="form" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="row clearfix">
-            <div class="col-md-6">
+        <div class="row clearfix col-md-8 col-md-offset-1">
+            <div class="col-md-10">
                 <div class="form-group">
                     <div class="form-line">
                         <label for="{{ user_form.notes.id_for_label }}">Provide Your Notes on this Objective</label>
-                        <textarea name="{{form.notes.name}}" class="form-control" required="true" cols="30" rows="10"></textarea> 
+                        <textarea name="{{form.notes.name}}" class="form-control" required="true" cols="30" rows="10" style="border-bottom: 1px solid;"></textarea> 
                     </div>
                 </div>
             </div>
         </div>
-          <div class="clearfix">
-            <div class="col-md-4 pull-left">
+          <div class="row clearfix">
+            <div class="col-md-10 pull-left">
                 <input type="submit" class="btn btn-primary btn-lg m-l-15 waves-effect" value="submit">
             </div>
           </div>

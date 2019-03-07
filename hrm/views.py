@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_list_or_404
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from accounts.models import Employee
 from leave.models import ApplyLeave 
@@ -71,7 +71,7 @@ class DetailPerformanceView(DetailView):
 
 class DeletePerformanceView(DeleteView):
     model = Performance 
-    success_url = reverse_lazy("hrm:perform_ist")
+    success_url = reverse_lazy("hrm:perfom_list")
     template_name = "hrm/performance/performance_delete.html"
     def get_context_data(self, **kwargs):
         context = super(DeletePerformanceView, self).get_context_data(**kwargs)
@@ -83,12 +83,11 @@ Showing an employees perfomance control
 '''
 def show_employee_perfomance_control(request):
     employee = Employee.objects.get(user= User.objects.get(username = request.session['username']).id)
-    print("employee: "+ str(employee.id))
-    perform = Performance.objects.get(employee = employee.id)
-    print(perform.employee)
-    if perform  == False:
-        return HttpResponseRedirect(reverse("hrm:index"))
-    return render(request, "hrm/performance/employee_performance.html", {'employee': employee, 'performance': perform})
+    perform = Performance.objects.filter(employee = employee.id)
+    print(perform)
+    if perform is None:
+        return HttpResponseRedirect(reverse("hrm:hrm_index"))
+    return render(request, "hrm/performance/employee_performance.html", {'employee': employee, 'performances': perform})
 
 
 '''
@@ -99,10 +98,11 @@ def perfomance_notes(request, pk):
     form = PerformanceForm(request.POST or None,instance = get_object_or_404(Performance, pk=pk))
     perfom = Performance.objects.get(id =pk)
     employee = Employee.objects.get(user= User.objects.get(username = request.session['username']).id)
-    if form.is_valid():
-        form.save()
-        perfom.status = 1
-        perfom.save()
-        return "show your perform list"
-    return render(request, "hrm/performance/performance_notes.html")
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            perfom.status = 1
+            perfom.save()
+            return HttpResponseRedirect(reverse('hrm:perfom_employee'))
+    return render(request, "hrm/performance/performance_notes.html", {'form': form, 'employee': employee})
 

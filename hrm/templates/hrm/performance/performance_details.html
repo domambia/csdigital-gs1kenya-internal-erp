@@ -55,9 +55,19 @@
                             <td>Status</td>
                             <td>
                                 {% if performance.status  == 1%}
-                                <span class="label btn btn-lg bg-yellow">Done ..</span>
+                                <span class="label btn btn-lg bg-orange">Done ..</span>
                                 {% else %}
                                 <span class="label btn btn-lg bg-yellow">in progress ..</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Employee Notes</td>
+                            <td>
+                                {% if performance.notes %}
+                                <span>{{performance.notes}}</span>
+                                {% else %}
+                                <span>No notes given..</span>
                                 {% endif %}
                             </td>
                         </tr>

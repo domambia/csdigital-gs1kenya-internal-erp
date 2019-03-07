@@ -1,7 +1,7 @@
 {% extends "layout/main_layout.html" %}
 {% block header %}
   <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
-      <h2 class="header pull-left">HRM  | PERFORMANCE</h2>
+      <h2 class="header pull-left">HRM  | OWN PERFORMANCE</h2>
   </div>
 {% endblock%}
 {% block content %}
@@ -21,12 +21,11 @@
                                 <th>Start Date</th>
                                 <th>Finishing Date</th>
                                 <th> Objective</th>
-                                <th> Status</th>
+                                <th style="text-align: center;"> Status</th>
                                 <th style="text-align:center;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                                
                             {% if performances %}
                               {% for performance in performances %}
                                   <tr>
@@ -34,14 +33,14 @@
                                       <td>{{ performance.start_date }}</td>
                                       <td>{{ performance.finish_date }}</td>
                                       <td>{{ performance.objective }}</td>
-                                      <td>
+                                      <td style="text-align: center;">
                                         {% if performance.status  == 1%}
-                                        <span class="label btn btn-lg bg-yellow">Done ..</span>
+                                        <span class="label btn btn-lg bg-orange">Done ..</span>
                                         {% else %}
                                         <span class="label btn btn-lg bg-yellow">in progress ..</span>
                                         {% endif %}
                                      </td>
-                                      <td>
+                                      <td style="text-align:center;">
                                           <span> <a href = "{% url 'hrm:perfom_note' pk=performance.id %}"><i class="material-icons">edit</i></a> </span>
                                       </td>
                                   </tr>
