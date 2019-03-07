@@ -129,9 +129,9 @@
                   </li>
                   {% if employee.position.initials == "HRM" or employee.position.initials == "GM" or employee.position.initials == "CCM" or employee.position.initials == "CACC" or employee.position.initials == "ACCM"  %}
                   <li class="active">
-                        <a href="">
+                        <a href="{% url 'ACCNTS:list_payroll' %}">
                             <i class="material-icons">people</i>
-                            <span>MORE ACCOUNTS</span>
+                            <span>PAYROLL</span>
                         </a>
                     </li>
                     <li>

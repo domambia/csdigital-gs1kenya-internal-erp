@@ -1,0 +1,61 @@
+{% extends "layout/accnts_layout.html" %}
+{% block header %}
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
+      <h2 class="header pull-left">ACCOUNTS | PROFOMA INVOICES</h2>
+  </div>
+{% endblock%}
+{% block content %}
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card body">
+            <div class="">
+                <h2 class="body">
+                  <span><a class="btn btn-primary" href = "{% url 'ACCNTS:create_payroll' %}" >ADD PAYROLL</a></span>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr>
+                                <th>Employee Name</th>
+                                <th>House Allowance</th>
+                                <th>Transport Allowance</th>
+                                <th>Leave Allowance</th>
+                                <th>Loan Amount</th>
+                                <th>Other Deductions</th>
+                                <th>Date</th>
+                                <th style="text-align:center;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if payrolls %}
+                              {% for payroll in payrolls %}
+                                  <tr>
+                                      <td>{{ payroll.employee.user.first_name }} &nbsp; {{ payroll.employee.user.last_name }}</td>
+                                      <td>ksh.{{ payroll.hse_allowance }}</td>
+                                      <td>ksh.{{ payroll.transport_allowance }}</td>
+                                      <td>ksh.{{ payroll.leave_allowance }}</td>
+                                      <td>ksh.{{ payroll.loans }}</td>
+                                      <td>ksh.{{ payroll.other_deductions }}</td>
+                                      <td>{{ payroll.month }}</td>
+                                      <td>
+                                          <span> <a href = "{% url 'ACCNTS:detail_payroll' pk=payroll.id %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>
+                                          <span> <a href = "{% url 'ACCNTS:edit_payroll' pk=payroll.id %}"><i class="material-icons">edit</i></a> </span>
+                                      </td>
+                                  </tr>
+                              {% endfor %}
+                            {% else %}
+
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Exportable Table -->
+
+{% endblock %}

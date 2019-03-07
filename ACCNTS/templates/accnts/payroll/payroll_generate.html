@@ -1,0 +1,80 @@
+{% extends 'layout/accnts_layout.html' %}
+{% load widget_tweaks %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+{{ form.media }}            {# Adds date-picker required JS and CSS #}
+{% block header %}
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
+      <h2 class="header pull-left">ACCOUNTS | PROFOMA INVOICE DETAILS</h2>
+  </div>
+{% endblock%}
+
+{% block content %}
+
+      <div class="body card">
+            <div class="helper_cls body">
+                    <a href="{% url 'ACCNTS:list_payroll' %}" class="btn btn-primary">BACK</a>
+                    <a href="{% url 'ACCNTS:edit_payroll' pk=payroll.pk %}" class="btn btn-success">EDIT</a>
+            </div>
+            <div class="row clearfix body">
+                <div class="col-md-10 ">
+                    <table class="table table-responsive">
+                        <tr>
+                            <td>Employee Name</td>
+                            <td>{{payroll.employee.user.first_name}} &nbsp; {{payroll.employee.user.first_name}} </td>
+                        </tr>
+                        <tr>
+                            <td>Payroll for Month</td>
+                            <td>{{payroll.month }}</td>
+                        </tr>
+                        <tr>
+                            <td>Allowances</td>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td>House llowances</td>
+                                        <td>ksh. {{payroll.hse_allowance}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Transport allowances</td>
+                                        <td>ksh. {{payroll.transport_allowance}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Leave allowances</td>
+                                        <td>ksh. {{payroll.leave_allowance}}</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Total allowances</td>
+                            <td>ksh. {{ total_allowance }}</td>
+                        </tr>
+                        <tr>
+                            <td>Loan</td>
+                            <td>ksh. {{ payroll.loans }}</td>
+                        </tr>
+                        <tr>
+                            <td>Other Deductions</td>
+                            <td>ksh. {{ payroll.other_deductions }}</td>
+                        </tr>
+                        <tr>
+                            <td>Taxable Income</td>
+                            <td>ksh. {{ taxable_income }}</td>
+                        </tr>
+                        <tr>
+                            <td>Tax</td>
+                            <td>ksh. {{ tax }}</td>
+                        </tr>
+                        <tr>
+                            <td>Net Pay</td>
+                            <td>ksh. {{net_income}}</td>
+                        </tr>
+                       
+                    </table>
+                </div>
+            </div>
+          </div>
+        </div>
+{% endblock %}
