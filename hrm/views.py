@@ -96,13 +96,15 @@ Employee Provide Notes for his perfomance
 
 def perfomance_notes(request, pk):
     form = PerformanceForm(request.POST or None,instance = get_object_or_404(Performance, pk=pk))
-    perfom = Performance.objects.get(id =pk)
     employee = Employee.objects.get(user= User.objects.get(username = request.session['username']).id)
     if request.method == "POST":
         if form.is_valid():
             form.save()
-            perfom.status = 1
-            perfom.save()
             return HttpResponseRedirect(reverse('hrm:perfom_employee'))
     return render(request, "hrm/performance/performance_notes.html", {'form': form, 'employee': employee})
 
+def appraisal(request, pk):
+    perform = Performance.objects.get(id = pk)
+    perform.status = 1
+    perform.save()
+    return HttpResponseRedirect(reverse('hrm:perfom_list'))

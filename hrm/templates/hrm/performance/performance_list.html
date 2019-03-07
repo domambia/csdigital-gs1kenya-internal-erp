@@ -22,7 +22,7 @@
                                 <th>Start Date</th>
                                 <th>Finishing Date</th>
                                 <th>Objective</th>
-                                <th>Status</th>
+                                <th style="text-align:center;" >Status</th>
                                 <th style="text-align:center;">Actions</th>
                             </tr>
                         </thead>
@@ -34,16 +34,16 @@
                                       <td>{{ performance.start_date }}</td>
                                       <td>{{ performance.finish_date }}</td>
                                       <td>{{ performance.objective }}</td>
-                                      <td>
+                                      <td style="text-align:center;">
                                         {% if performance.status  == 1%}
-                                        <span class="label btn btn-lg bg-orange">Done ..</span>
+                                        <span class="label btn btn-lg btn-success">Done</span>
                                         {% else %}
-                                        <span class="label btn btn-lg bg-yellow">in progress ..</span>
+                                        <span class="label btn btn-lg bg-orange">in progress ..</span>
                                         {% endif %}
                                      </td>
                                       <td>
                                           <span> <a href = "{% url 'hrm:perfom_detail' pk=performance.id %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>
-                                          <span> <a href = "{% url 'hrm:perfom_edit' pk=1 %}"><i class="material-icons">edit</i></a> </span>
+                                          <span> <a href = "{% url 'hrm:perfom_edit' pk=performance.id %}"><i class="material-icons">edit</i></a> </span>
                                           <span> <a href = "{% url 'hrm:perfom_delete' pk=performance.id %}"><i class="material-icons" style = "color:#cc0000;">delete</i></a> </span>
                                       </td>
                                   </tr>

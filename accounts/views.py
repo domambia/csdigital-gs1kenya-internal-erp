@@ -83,9 +83,9 @@ def add_employee(request):
 """
 def user_login(request):
     if request.method == "POST":
-        username = request.POST.get('username')
+        username = request.POST.get('username').lower()
 
-        password = request.POST.get('password')
+        password = request.POST.get('password').lower()
 
         user = authenticate(username=username, password=password)
         print(user)
@@ -142,24 +142,24 @@ class EmployeeUpdateView(UpdateView):
     model = Employee
     template_name  = "accounts/edit.html"
 
-@login_required
-def employee_update(request, pk):
-    employee_form = EmployeeForm(request.POST or None,
-                    instance = get_object_or_404(Employee, pk=pk))
-    user_form = UserForm(request.POST or None,
-                    instance = get_object_or_404(User, id=Employee.objects.get(id = pk).user.id))
-    employee = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
-    if request.method == "POST":
-        if employee_form.is_valid() and user_form.is_valid():
-            user = user_form.save(commit=False)
-            user.set_password(user_form.cleaned_data['password'])
-            user.save()
-            employee_form.save()
-            if (user_form.cleaned_data['username'] == User.objects.get(username = request.session['username']).username) or (user_form.cleaned_data['email'] == User.objects.get(username = request.session['username']).email):
-                logout(request)
-            return HttpResponseRedirect(reverse('accounts:employees'))
-    return render(request, "accounts/edit.html",
-                    {'form': employee_form, "employee": employee, 'user_form': user_form})
+# @login_required
+# def employee_update(request, pk):
+#     employee_form = EmployeeForm(request.POST or None,
+#                     instance = get_object_or_404(Employee, pk=pk))
+#     user_form = UserForm(request.POST or None,
+#                     instance = get_object_or_404(User, id=Employee.objects.get(id = pk).user.id))
+#     employee = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
+#     if request.method == "POST":
+#         if employee_form.is_valid() and user_form.is_valid():
+#             user = user_form.save(commit=False)
+#             user.set_password(user_form.cleaned_data['password'])
+#             user.save()
+#             employee_form.save()
+#             if (user_form.cleaned_data['username'] == User.objects.get(username = request.session['username']).username) or (user_form.cleaned_data['email'] == User.objects.get(username = request.session['username']).email):
+#                 logout(request)
+#             return HttpResponseRedirect(reverse('accounts:employees'))
+#     return render(request, "accounts/edit.html",
+#                     {'form': employee_form, "employee": employee, 'user_form': user_form})
 
 
 """ EMPLOYEES PROFILE
@@ -175,3 +175,22 @@ class EmployeeDetailView(DetailView):
         context = super(EmployeeDetailView, self).get_context_data(**kwargs)
         context['employee'] = Employee.objects.get(user = self.request.user.id)
         return context
+'''
+Edit User authentications information
+'''
+def edit_authentications(request, pk):
+    form = UserForm(request.POST or None, instance=get_object_or_404(User, pk=pk))
+    current_user = User.objects.get(id = pk)
+    employee = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
+    if request.method == "POST":
+        if form.is_valid():
+            user = form.save()
+            user.username  = form.cleaned_data['username'].lower()
+            user.email  = form.cleaned_data['email'].lower()
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            logout(request)
+            return HttpResponseRedirect(reverse('index'))
+    return render(request, "accounts/auth.html", {'employee': employee, 'form': form})
+
+

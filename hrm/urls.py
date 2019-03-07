@@ -13,4 +13,5 @@ urlpatterns = [
         url(r'^performance/edit/(?P<pk>\d+)/$', login_required(views.UpdatePerformanceView.as_view()), name='perfom_edit'),
         url(r'^own/performance/list/$', login_required(views.show_employee_perfomance_control), name='perfom_employee'),
         url(r'^performance/notes/(?P<pk>\d+)/$', login_required(views.perfomance_notes), name='perfom_note'),
+        url(r'^performance/appraise/(?P<pk>\d+)/$', login_required(views.appraisal), name='appraise'),
     ]

@@ -12,81 +12,20 @@
 
       <form class="form"  method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="row clearfix">
-          <div class="header">
-              <h2>DEMOGRAPHIC INFORMATION</h2>
-          </div>
-
-          <div class="col-md-4">
-              <div class="form-group">
-                  <div class="form-line">
-                      <label for="{{ user_form.first_name.id_for_label }}">Username</label>
-                      {{ user_form.username|add_class:"form-control" }}
-                      <ul>
-                        {% for error in user_form.username.errors%}
-                          <li class="alert alert-danger">{{ error }}</li>
-                        {% endfor %}
-                      </ul>
-
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-                <div class="form-line">
-                    <label for="{{ form.date_of_birth.id_for_label }}">Birth Date</label>
-                    {{ form.date_of_birth|add_class:"form-control datepicker" }}
-                    <ul>
-                        {% for error in form.date_of_birth.errors%}
-                        <li class="alert alert-danger">{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-              <div class="form-group">
-                  <div class="form-line">
-                      <label for="">Email Address</label>
-                      {{ user_form.email|add_class:"form-control" |attr:"type:email" }}
-                      <ul>
-                        {% for error in user_form.email.errors%}
-                          <li class="alert alert-danger">{{ error }}</li>
-                        {% endfor %}
-                      </ul>
-                  </div>
-              </div>
-          </div>
-        </div>
           <div class="row clearfix">
-              <div class="col-md-4">
-                  <div class="form-group">
-                      <div class="form-line">
-                          <label for="{{ user_form.first_name.id_for_label }}">First Name</label>
-                          {{ user_form.first_name|add_class:"form-control" }}
-                          <ul>
-                            {% for error in user_form.first_name.errors%}
-                              <li class="alert alert-danger">{{ error }}</li>
-                            {% endfor %}
-                          </ul>
-                      </div>
-                  </div>
-              </div>
-
-              <div class="col-md-4">
-                  <div class="form-group">
-                      <div class="form-line">
-                          <label for="{{ user_form.last_name.id_for_label }}">Last Name</label>
-                          {{ user_form.last_name|add_class:"form-control" }}
-                          <ul>
-                            {% for error in user_form.last_name.errors%}
-                              <li class="alert alert-danger">{{ error }}</li>
-                            {% endfor %}
-                          </ul>
-                      </div>
-                  </div>
-              </div>
-
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label for="{{ form.date_of_birth.id_for_label }}">Birth Date</label>
+                            {{ form.date_of_birth|add_class:"form-control datepicker" }}
+                            <ul>
+                                {% for error in form.date_of_birth.errors%}
+                                <li class="alert alert-danger">{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
               <div class="col-md-4">
                   <div class="form-group">
                       <div class="form-line">
@@ -100,21 +39,22 @@
                       </div>
                   </div>
               </div>
-          </div>
-          <div class="row clearfix">
-            <div class="col-md-4">
+              <div class="col-md-4">
                 <div class="form-group">
                     <div class="form-line">
                         <label for="{{ form.address.id_for_label }}">Address</label>
                         {{ form.address|add_class:"form-control" }}
                         <ul>
-                          {% for error in form.address.errors%}
+                            {% for error in form.address.errors%}
                             <li class="alert alert-danger">{{ error }}</li>
-                          {% endfor %}
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
             </div>
+          </div>
+          <div class="row clearfix">
+           
             <div class="col-md-4">
                 <div class="form-group">
                     <div class="form-line">
@@ -257,19 +197,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <div class="form-line">
-                        <label for="{{ form.profile_pic.id_for_label }}">Password</label>
-                        {{ user_form.password|add_class:"form-control" }}
-                        <ul>
-                            {% for error in user_form.password.errors%}
-                            <li class="alert alert-danger">{{ error }}</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </div>
-            </div><br>
+          <br>
             <div class="row clearfix">
                 <div class="col-md-10 col-md-offset-1">
                     <div class="form-group">
