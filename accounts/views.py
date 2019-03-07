@@ -141,6 +141,10 @@ class EmployeeUpdateView(UpdateView):
         'position', 'salary', 'kin_email', 'alt_phone_number', 'profile_pic', 'company_benifits')
     model = Employee
     template_name  = "accounts/edit.html"
+    def get_context_data(self, **kwargs):
+        context = super(EmployeeUpdateView, self).get_context_data(**kwargs)
+        context['employee'] = Employee.objects.get(user = self.request.user.id)
+        return context
 
 # @login_required
 # def employee_update(request, pk):

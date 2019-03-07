@@ -15,7 +15,7 @@
         {% if employee.position.initials == "HRM" or employee.position.initials == "GM" or employee.position.initials == "CCM" %}
           <span><a class="btn btn-primary" href = "{% url 'leave:applyleave_list' %}">BACK</a></span>
         {% else %}
-        <span><a class="btn btn-primary" href = "{% url 'hrm:hrm_index' %}">BACK</a></span>
+        <span><a class="btn btn-primary" href = "{% url 'leave:applyleave_list' %}">BACK</a></span>
         {% endif %}
       <p> </p>
       <form class="form" action="" method="POST" enctype="multipart/form-data">

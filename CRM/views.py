@@ -32,12 +32,6 @@ def index(request):
     return render(request, "home/index.html",
                         {'clients': clients, 'suppliers': suppliers, 'feedbacks': feedbacks, 'trainings': trainings, "employee": employee})
 
-
-'''
-
-
-'''
-
 class ClientCreateView(CreateView):
     fields = ('company_name', 'company_phone', 'company_phone_alt', 'company_email','certificate_of_incorporation','copy_of_id', 'copy_of_blank_cheque',
             'copy_of_trade_licence', 'list_of_product_barcoded', 'director_pin_number', 'company_certificate_pin', 'copy_of_kebs_certicate',
@@ -212,6 +206,11 @@ class ClientDeleteView(DeleteView):
     model = Client
     template_name = "client/client_delete_confirm.html"
     success_url = reverse_lazy("CRM:delete_client")
+    def get_context_data(self, **kwargs):
+        context = super(ClientDeleteView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get( user= user)
+        return context
 
 '''
 The supplier views
