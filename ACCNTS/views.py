@@ -267,6 +267,7 @@ def generate_payroll(request, pk):
                                                                'gross_salary': gross_salary,
                                                                'taxable_income': taxable_income,
                                                                'tax': tax,
+                                                               'total_allowances':total_allowances,
                                                                'net_income':net_income})
 
 
