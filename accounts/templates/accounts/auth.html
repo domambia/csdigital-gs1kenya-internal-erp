@@ -1,0 +1,95 @@
+{% extends "layout/main_layout.html" %}
+{% load widget_tweaks %}
+{% block header %}
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
+      <h2 class="header pull-left">HRM | EMPLOYEE AUTHENITCATION INFORMATION</h2>
+  </div>
+{% endblock%}
+{% block content %}
+  <div class="card">
+    <div class="body">
+      <h2 class="header"><a class="btn btn-primary" href = "{% url 'accounts:employees'%}">BACK</a></h2>
+
+      <form class="form"  method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row clearfix">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="form-line">
+                        <label for="{{ form.profile_pic.id_for_label }}">First Name</label>
+                        {{ form.first_name|add_class:"form-control" }}
+                        <ul>
+                            {% for error in form.first_name.errors%}
+                            <li class="alert alert-danger">{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="form-line">
+                        <label for="{{ form.profile_pic.id_for_label }}">Last Name</label>
+                        {{ form.last_name|add_class:"form-control" }}
+                        <ul>
+                            {% for error in form.last_name.errors%}
+                            <li class="alert alert-danger">{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+          <div class="row clearfix">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="form-line">
+                        <label for="{{ form.profile_pic.id_for_label }}">Email Address</label>
+                        {{ form.email|add_class:"form-control" }}
+                        <ul>
+                            {% for error in form.email.errors%}
+                            <li class="alert alert-danger">{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="form-line">
+                        <label for="{{ form.profile_pic.id_for_label }}">Username</label>
+                        {{ form.username|add_class:"form-control" }}
+                        <ul>
+                            {% for error in form.username.errors%}
+                            <li class="alert alert-danger">{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="row clearfix">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label for="{{ form.profile_pic.id_for_label }}">Password</label>
+                            {{ form.password|add_class:"form-control" }}
+                            <ul>
+                                {% for error in form.password.errors%}
+                                <li class="alert alert-danger">{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 pull-right">
+                    <input type="submit" class="btn btn-primary btn-lg m-l-15 waves-effect" value="SUBMIT">
+                </div>
+              </div>
+
+        </div>
+      </div>
+
+
+{% endblock %}
