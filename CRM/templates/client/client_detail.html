@@ -193,8 +193,7 @@
                     {% else %}
                         <span class="btn label bg-green"> GM approved</span>
                     {% endif %}
-                </div> 
-               
+                </div>
             {% elif employee.position.initials == "CACC" %} 
                 <div class="col-md-2">
                     {% if client.is_me1 == 0%}
@@ -275,13 +274,12 @@
                         <span class="btn label bg-green"> ACC.Ex approved</span>
                     {% endif %}
                 </div> -->
-                
                 <div class="col-md-2">
                     {% if client.is_tm == 0%}
                         <span class="btn label bg-orange"> TM pending...</span>
                     {% else %}
                         <span class="btn label bg-green"> TM approved</span>
-                    {% endif %}  
+                    {% endif %}
                 </div>
                 <div class="col-md-2">
                     {% if client.is_cacc == 0%}
@@ -381,10 +379,14 @@
                     {% endif %}
                 </div> -->
                 <div class="col-md-2">
-                    {% if client.is_tm == 0 %}
-                        <span> <a href="{% url 'CRM:tm' client.id %}" class="label btn bg-orange" > approve </a></span>
+                    {% if client.member_number == "0" or client.member_prefix == "0" %}
+                    <span><a href="{% url 'CRM:assign' pk=client.pk %}" class="btn label bg-blue">Assign Member </a></span>
                     {% else %}
-                        <span class="btn label bg-green"> approved</span>
+                        {% if client.is_tm == 0 %}
+                            <span><a href="{% url 'CRM:tm'  client.id %}" class="label btn bg-orange" > approve </a></span>
+                        {% else %}
+                            <span class="btn label bg-green"> approved</span>
+                        {% endif %}
                     {% endif %}
                 </div>
 
@@ -402,9 +404,6 @@
                         <span class="btn label bg-green"> GM approved</span>
                     {% endif %}
                 </div>
-                
-                
-                
             {% elif employee.position.initials == "GM" %}
                 <div class="col-md-2">
                     {% if client.is_me1 == 0%}
@@ -426,7 +425,7 @@
                     {% else %}
                         <span class="btn label bg-green"> ACCM approved</span>
                     {% endif %}
-                </div> 
+                </div>
                 <!-- <div class="col-md-2">
                     {% if client.is_cacc_x == 0%}
                         <span class="btn label bg-orange"> ACC.Ex pending</span>

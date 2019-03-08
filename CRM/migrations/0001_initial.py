@@ -38,8 +38,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('company_name', models.CharField(max_length=100)),
-                ('member_number', models.CharField(max_length=100, blank=True)),
-                ('member_prefix', models.CharField(max_length=20, blank=True)),
+                ('member_number', models.CharField(max_length=100, default=0)),
+                ('member_prefix', models.CharField(max_length=20, default=0)),
                 ('company_phone', models.IntegerField()),
                 ('company_phone_alt', models.IntegerField()),
                 ('company_email', models.CharField(max_length=128)),

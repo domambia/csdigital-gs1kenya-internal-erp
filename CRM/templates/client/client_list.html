@@ -48,9 +48,6 @@
                                             <span> <a href = "{% url 'CRM:detail_client' pk=client.pk %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>
                                           {% else %}
                                             <span> <a href = "{% url 'CRM:detail_client' pk=client.pk %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>
-                                            {% if employee.position.initials == "TM"%}
-                                            <span><a href="{% url 'CRM:assign' pk=client.pk %}"><i class="material-icons">edit</i> </a></span>
-                                            {% endif %}
                                           {% endif %}
                                       </td>
                                   </tr>
