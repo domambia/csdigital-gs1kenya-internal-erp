@@ -2,7 +2,6 @@ from django import forms
 from leave.models import ApplyLeave
 
 class ApplyForm(forms.ModelForm):
-
     class Meta:
         model = ApplyLeave
         fields = (

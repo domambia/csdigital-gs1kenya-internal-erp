@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^members/approve/GM/(?P<pk>\d+)/$', login_required(views.general_manager), name = 'gm'),
     url(r'^members/approve/ACCM/(?P<pk>\d+)/$', login_required(views.accounts_manager), name = 'accm'),
     url(r'^members/approve/CACC/(?P<pk>\d+)/$', login_required(views.accounts), name = 'cacc'),
+    url(r'^members/approve/accounts/Executive/(?P<pk>\d+)/$', login_required(views.accounts_ex), name = 'acc_x'),
     url(r'^members/approve/CCM/(?P<pk>\d+)/$', login_required(views.communication), name = 'ccm'),
     url(r'^members/member_number/(?P<pk>\d+)/$', login_required(views.AssignMemberNumber.as_view()), name = 'assign'),
     #suppliers urlpattern

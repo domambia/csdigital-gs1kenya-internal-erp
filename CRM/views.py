@@ -142,6 +142,15 @@ def accounts(request, pk):
     notify(employee.phone , employee.user.first_name, employee.user.last_name, client.company_name, datetime.now().date())
     return HttpResponseRedirect(reverse('CRM:list_client'))
 
+def accounts_ex(request, pk):
+    employee = Employee.objects.get(position = Position.objects.get(initials = "TM"))
+    client = Client.objects.get(id = pk)
+    client.is_cacc_x = 1
+    client.save()
+    print("CACC_ex -Approved")
+    notify(employee.phone , employee.user.first_name, employee.user.last_name, client.company_name, datetime.now().date())
+    return HttpResponseRedirect(reverse('CRM:list_client'))
+
 '''
 Assign Member Number:
 '''
@@ -365,7 +374,6 @@ class TrainingCreateView(CreateView):
         context['employee'] = Employee.objects.get(user=user)
         return context
 
-    
 class TrainingUpdateView(UpdateView):
     model = Training
     fields = ('trainer','happened_on', 'all_trainee', 'description')

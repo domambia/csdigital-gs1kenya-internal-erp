@@ -65,24 +65,33 @@ class LeaveDeleteView(DeleteView):
         return context
 
 
-# class CreateApplyLeaveView(CreateView):
-#     fields = (
-#             'start_date', 'resume_date', 'home_phone','person_taking_charge', 'leave', 'employee',
-#             'end_date', 'period'
-#         )
-#     model = ApplyLeave
-#     template_name = "leave/applyleave_form.html"
+class CreateApplyLeaveView(CreateView):
+    model = ApplyLeave
+    fields = ('start_date', 'resume_date', 'home_phone','person_taking_charge', 'leave', 'employee', 'end_date')
+    context_object_name = 'form'
+    template_name = "leave/applyleave_form.html"
+    def get_context_data(self, **kwargs):
+        context = super(CreateApplyLeaveView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['employee'] = Employee.objects.get(user = user.id)
+        context['current_user'] = User.objects.get(username = self.request.user)
+        context['phone_number'] = context['employee'].alt_phone_number
+        print(context)
+        return context 
 
-def applyleave(request):
-    form = ApplyForm(request.POST or None)
-    employee = Employee.objects.get(user = request.user.id)
-    current_user = User.objects.get(username = request.user)
-    phone_number = employee.alt_phone_number
-    if form.is_valid():
-        user_data = form.save()
-        return HttpResponseRedirect(reverse('leave:applyleave_list'))
-    
-    return render(request,"leave/applyleave_form.html", {'current_user': current_user, 'phone_number': phone_number, 'form': form, "employee": employee})
+# def applyleave(request):
+#     form = ApplyForm(request.POST or None)
+#     employee = Employee.objects.get(user = request.user.id)
+#     current_user = User.objects.get(username = request.user)
+#     phone_number = employee.alt_phone_number
+#     print("calling this method")
+#     if request.method == "POST":    
+#         if form.is_valid():
+#             print(form.changed_data['employee'])
+#             form.save()
+#             return HttpResponseRedirect(reverse('leave:applyleave_list'))
+#     print("Omambia is Angry")  
+#     return render(request,"leave/applyleave_form.html", {'current_user': current_user, 'phone_number': phone_number, 'form': form, "employee": employee})
 
 # class ApplyLeaveListView(ListView):
 #     context_object_name = "applied_leaves"

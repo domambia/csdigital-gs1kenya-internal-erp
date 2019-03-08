@@ -62,6 +62,7 @@ class Migration(migrations.Migration):
                 ('is_me1', models.IntegerField(default=0)),
                 ('is_me2', models.IntegerField(default=0)),
                 ('is_ccm', models.IntegerField(default=0)),
+                ('is_cacc_x', models.IntegerField(default=0)),
                 ('is_accm', models.IntegerField(default=0)),
                 ('is_cacc', models.IntegerField(default=0)),
                 ('is_tm', models.IntegerField(default=0)),

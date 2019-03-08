@@ -50,6 +50,7 @@ class Client(models.Model):
     copy_of_kebs_certicate = models.FileField(upload_to=file_upload,)
     is_me1 = models.IntegerField(default=0)
     is_me2 = models.IntegerField(default=0)
+    is_cacc_x = models.IntegerField(default=0)
     is_ccm = models.IntegerField(default=0)
     is_accm = models.IntegerField(default=0) 
     is_cacc = models.IntegerField(default=0)

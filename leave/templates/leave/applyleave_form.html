@@ -18,18 +18,17 @@
         <span><a class="btn btn-primary" href = "{% url 'leave:applyleave_list' %}">BACK</a></span>
         {% endif %}
       <p> </p>
-      <form class="form" action="" method="POST" enctype="multipart/form-data">
+      <form method="POST">
         {% csrf_token %}
           <div class="row clearfix">
             <div class="col-md-6">
                 <div class="form-group">
                     <div class="form-line">
-                        <label for="{{ form.period.id_for_label }}">Your Username</label> <br>
-                        <input type="text" name="{{ form.employee.name }}" value="{{ current_user }}" class="form-control" disabled>
+                        <label for="{{ form.employee.id_for_label }}">Your Username</label> <br>
+                        <input type="text" name="{{ form.employee.name }}" value="{{ current_user }}" class="form-control">
                     </div>
                 </div>
             </div>
-           
             <div class="col-md-6">
                 <div class="form-group">
                     <div class="form-line">
@@ -49,7 +48,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <div class="form-line">
-                        <label for="{{ user_form.first_name.id_for_label }}">Start Date</label>
+                        <label for="{{ form.first_name.id_for_label }}">Start Date</label>
                         {{ form.start_date|add_class:"form-control datepicker"}}
                         <ul>
                           {% for error in form.start_date.errors%}
@@ -63,7 +62,7 @@
               <div class="col-md-4">
                   <div class="form-group">
                       <div class="form-line">
-                          <label for="{{ user_form.resume_date.id_for_label }}">End Date(Inclusive)</label>
+                          <label for="{{ form.end_date.id_for_label }}">End Date(Inclusive)</label>
                           {{ form.end_date|add_class:"form-control datepicker"  }}
                           <ul>
                             {% for error in form.resume_date.errors%}
@@ -76,7 +75,7 @@
               <div class="col-md-4">
                   <div class="form-group">
                       <div class="form-line">
-                          <label for="{{ user_form.first_name.id_for_label }}">Resume Date(Inclusive)</label>
+                          <label for="{{form.resume_date.id_for_label }}">Resume Date(Inclusive)</label>
                           {{ form.resume_date|add_class:"form-control datepicker"  }}
                           <ul>
                             {% for error in form.resume_date.errors%}
@@ -92,7 +91,7 @@
                 <div class="form-group">
                     <div class="form-line">
                         <label for="{{ form.home_phone.id_for_label }}">Phone Number</label> <br>
-                        <input type="number" name="{{ form.home_phone.name }}" value="{{ phone_number }}" class="form-control" disabled>
+                        <input type="number" name="{{ form.home_phone.name }}" value="{{ phone_number }}" class="form-control">
                     </div>
                 </div>
             </div>
@@ -112,7 +111,6 @@
                 </div>
             </div>
           </div>
-        
           <div class="row clearfix">
             <div class="col-md-4 pull-right">
                 <input type="submit" class="btn btn-primary btn-lg m-l-15 waves-effect" value="submit">
