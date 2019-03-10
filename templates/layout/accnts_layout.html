@@ -101,13 +101,12 @@
               <div class="info-container btn-primary">
                 {% if user.is_authenticated %}
                   <div class="name " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{user.first_name }} &nbsp; &nbsp; {{user.first_name }}
+                        {{user.first_name }} &nbsp;{{user.last_name }}
                   </div>
                   <div class="email">{{ user.email }}</div>
                   <div class="btn-group user-helper-dropdown">
                       <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                       <ul class="dropdown-menu pull-right">
-                          
                           <li><a href="{% url 'accounts:profile' pk=employee.id %}"><i class="material-icons">person</i>Profile</a></li>
                           <li role="separator" class="divider"></li>
                           <li><a href="{% url 'accounts:logout'%}"><i class="material-icons">input</i>Sign Out</a></li>

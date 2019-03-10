@@ -37,7 +37,19 @@
                                       <td>{{ client.company_phone }}</td>
                                       <td>{{ client.physical_location }}</td>
                                       <td>{{ client.director_info }}</td>
-                                      <td>{{ client.category }}</td>
+                                      <td>
+                                          {% if client.category == 22200 %}
+                                          <span> Category A</span>
+                                          {% elif client.category == 62000 %}
+                                          <span> Category B</span>
+                                          {% elif client.category == 154000 %}
+                                          <span> Category C</span>
+                                          {% elif client.category == 300000 %}
+                                          <span> Category D</span>
+                                          {% else %}
+                                          <span class="label bg-orange">out of range</span>
+                                          {% endif %}
+                                      </td>
                                       <td>{{ client.sector }}</td>
                                       <td>{{ client.nature_of_business }}</td>
                                       <td>{{ client.date_of_issue }}</td>

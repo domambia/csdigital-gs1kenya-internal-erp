@@ -34,14 +34,13 @@
                                         <i class="material-icons">face</i> Scanned Documents
                                     </a>
                                 </li>
-                               
                             </ul>
 
                             <!-- Tab panes -->
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane fade in active" id="home_with_icon_title">
-                                <form  method="POST" enctype="multipart/form-data">   
-                                        {% csrf_token %}                              
+                                <form  method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
                                     <div class="row ">
                                         <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
                                             <div class="form-group form-float">
@@ -68,11 +67,10 @@
                                                     </ul>
                                                 </div>
                                             </div>
-                                        </div> 
+                                        </div>
                                         <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    
                                                     {{ form.physical_location | add_class:"form-control"}}
                                                     <label class="form-label">Physical Address Address</label>
                                                      <ul>
@@ -124,10 +122,9 @@
                                                     {% for errror in form.company_email_alt.errors %}
                                                         <li class = "alert alert-danger"> {{ error }}</li>
                                                     {% endfor %}
-                                                </div> 
+                                                </div>
                                             </div>
                                         </div>
-                                         
                                          <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
@@ -136,15 +133,19 @@
                                                     {% for errror in form.sector.errors %}
                                                         <li class = "alert alert-danger"> {{ error }}</li>
                                                     {% endfor %}
-                                                   
                                                 </div>
                                             </div>
                                         </div>
                                          <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                        {{ form.category|add_class:"form-control" }}
-                                                        <label class="form-label">Choose Category </label>  
+                                                    <select name ="{{form.category.name}}" class="form-control">
+                                                        <option value="22200">Category A</option>
+                                                        <option value="62000">Category B</option>
+                                                        <option value="154000">Category C</option>
+                                                        <option value="300000">Category D</option>
+                                                    </select>
+                                                        <label class="form-label">Choose Category </label>
                                                         {% for errror in form.category.errors %}
                                                         <li class = "alert alert-danger"> {{ error }}</li>
                                                     {% endfor %}
@@ -155,7 +156,7 @@
                                             <div class="form-group form-float">
                                                 <div class="form-line">
                                                     {{ form.director_info|add_class:"form-control" }}
-                                                    <label class="form-label">Directors and their phone numbers </label> 
+                                                    <label class="form-label">Directors and their phone numbers </label>
                                                     {% for errror in form.director_info.errors %}
                                                         <li class = "alert alert-danger"> {{ error }}</li>
                                                     {% endfor %}

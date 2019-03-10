@@ -8,7 +8,7 @@
 {% block content %}
   <div class="card">
     <div class="body">
-      <h2 class="header"><a class="btn btn-primary" href = "{% url 'accounts:employees'%}">BACK</a></h2>
+      <h2 class="header"><a class="btn btn-primary" href = "{% url 'hrm:hrm_index'%}">BACK</a></h2>
 
       <form class="form"  method="POST" enctype="multipart/form-data">
         {% csrf_token %}

@@ -37,7 +37,7 @@ class Client(models.Model):
     physical_location = models.CharField(max_length = 60)
     director_info = models.CharField(max_length = 1000)
     sector = models.CharField(max_length = 200, choices = get_sectors(), default = "No sector")
-    category = models.PositiveIntegerField(choices = get_categs(), default = 20000)
+    category = models.IntegerField( default = 0)
     date_of_issue = models.DateField()
     nature_of_business = models.CharField(max_length =100)
     certificate_of_incorporation = models.FileField(upload_to=file_upload,)
@@ -52,12 +52,11 @@ class Client(models.Model):
     is_me2 = models.IntegerField(default=0)
     is_cacc_x = models.IntegerField(default=0)
     is_ccm = models.IntegerField(default=0)
-    is_accm = models.IntegerField(default=0) 
+    is_accm = models.IntegerField(default=0)
     is_cacc = models.IntegerField(default=0)
     is_tm = models.IntegerField(default=0)
     is_gm = models.IntegerField(default=0)
     status = models.IntegerField(default=0)
-    
     def get_absolute_url(self):
         return reverse("CRM:list_client")
 
