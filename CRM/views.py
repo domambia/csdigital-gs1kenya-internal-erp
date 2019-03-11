@@ -35,7 +35,7 @@ def index(request):
 class ClientCreateView(CreateView):
     fields = ('company_name', 'company_phone', 'company_phone_alt', 'company_email','certificate_of_incorporation','copy_of_id', 'copy_of_blank_cheque',
             'copy_of_trade_licence', 'list_of_product_barcoded', 'director_pin_number', 'company_certificate_pin', 'copy_of_kebs_certicate',
-             'company_email_alt', 'post_address', 'physical_location', 'director_info','sector', 'category', 'date_of_issue', 'nature_of_business')
+             'company_email_alt', 'post_address', 'physical_location', 'director_info','sector','date_of_issue', 'nature_of_business')
     model = Client
     template_name = "client/client_form.html"
     def get_context_data(self, **kwargs):
@@ -60,7 +60,7 @@ class ClientUpdateView(UpdateView):
     model = Client
     fields = ('company_name', 'company_phone', 'company_phone_alt', 'company_email','certificate_of_incorporation','copy_of_id', 'copy_of_blank_cheque',
             'copy_of_trade_licence', 'list_of_product_barcoded', 'director_pin_number', 'company_certificate_pin', 'copy_of_kebs_certicate',
-             'company_email_alt', 'post_address', 'physical_location', 'director_info','sector', 'category', 'date_of_issue', 'nature_of_business')
+             'company_email_alt', 'post_address', 'physical_location', 'director_info','sector','date_of_issue', 'nature_of_business')
     template_name = "client/client_form.html"
     def get_context_data(self, **kwargs):
         context = super(ClientUpdateView, self).get_context_data(**kwargs)
@@ -162,6 +162,17 @@ class AssignMemberNumber(UpdateView):
         context = super(AssignMemberNumber, self).get_context_data(**kwargs)
         context['employee'] = Employee.objects.get(user = self.request.user.id)
         return context
+#choose category for the member
+class AddCategoryNumber(UpdateView):
+    model = Client 
+    fields = ('category',)
+    template_name = "client/category_form.html"
+    def get_context_data(self, **kwargs):
+        context = super(AddCategoryNumber, self).get_context_data(**kwargs)
+        context['employee'] = Employee.objects.get(user = self.request.user.id)
+        return context
+
+
 
 def assign_member_details(request, pk):
     form = EditClient(request.POST or None,

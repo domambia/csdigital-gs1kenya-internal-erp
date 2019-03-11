@@ -34,7 +34,7 @@
                               {% for client in clients %}
                                   <tr>
                                       <td>{{ client.company_name }}</td>
-                                      <td>{{ client.company_phone }}</td>
+                                      <td>0{{ client.company_phone }}</td>
                                       <td>{{ client.physical_location }}</td>
                                       <td>{{ client.director_info }}</td>
                                       <td>
@@ -47,11 +47,11 @@
                                           {% elif client.category == 300000 %}
                                           <span> Category D</span>
                                           {% else %}
-                                          <span class="label bg-orange">out of range</span>
+                                          <span class="label bg-orange">Not added</span>
                                           {% endif %}
                                       </td>
                                       <td>{{ client.sector }}</td>
-                                      <td>{{ client.nature_of_business }}</td>
+                                      <td style="text-align:center;">{{ client.nature_of_business }}</td>
                                       <td>{{ client.date_of_issue }}</td>
                                       <td style="text-align: center;">
                                           {% if employee.position.initials == "HRM" or employee.position.initials == "GM" %}

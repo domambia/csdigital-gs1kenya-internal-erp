@@ -1,0 +1,75 @@
+{% extends "layout/accnts_layout.html" %}
+{% block header %}
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
+      <h2 class="header pull-left">ACCOUNTS | INVOICES</h2>
+  </div>
+{% endblock%}
+{% block content %}
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card body">
+            <div class="">
+                <h2 class="body">
+                  <span><a class="btn btn-primary" href = "{% url 'ACCNTS:payment_create' %}" >ADD INVOICE</a></span>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr>
+                                <th>Member Name</th>
+                                <th>Member Number</th>
+                                <th>Category Amount</th>
+                                <th>Date</th>
+                                <th style="text-align:center;">VAT</th>
+                                <th style="text-align:center;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if payments %}
+                              {% for payment in payments %}
+                                  <tr>
+                                      <td>{{ payment.member.company_name }}</td>
+                                      <td>{{ payment.member.member_number }}</td>
+                                      <td>
+                                          {% if payment.member.category == 22200 %}
+                                          <span> Category A (ksh.22,200)</span>
+                                          {% elif payment.member.category == 62000 %}
+                                          <span> Category B (ksh.62,000)</span>
+                                          {% elif payment.member.category == 154000 %}
+                                          <span> Category C (ksh.154,000)</span>
+                                          {% elif payment.member.category == 300000 %}
+                                          <span> Category D (ksh.300,000)</span>
+                                          {% endif %}
+                                      </td>
+
+                                      <td>{{ payment.date_of_generate }}</td>
+                                      <td style="text-align: center;">
+                                         {% if  profoma.VAT == "Yes"%}
+                                         <span > 16% </span>
+                                         {% else %}
+                                         <span > 0% </span>
+                                         {% endif %}
+                                      </td>
+                                      <td>
+                                          <span> <a href = "{% url 'ACCNTS:payment_detail' pk=payment.id %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>
+                                          <span> <a href = "{% url 'ACCNTS:payment_edit' pk=payment.id %}"><i class="material-icons">edit</i></a> </span>
+                                          <span> <a href = "{% url 'ACCNTS:payment_delete' pk=payment.id %}"><i class="material-icons" style = "color:#cc0000;">delete</i></a> </span>
+                                      </td>
+                                  </tr>
+                              {% endfor %}
+                            {% else %}
+
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Exportable Table -->
+
+{% endblock %}

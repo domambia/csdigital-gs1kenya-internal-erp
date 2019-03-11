@@ -1,0 +1,78 @@
+{% extends 'layout/accnts_layout.html' %}
+{% load widget_tweaks %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+{{ form.media }}            {# Adds date-picker required JS and CSS #}
+{% block header %}
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
+      <h2 class="header pull-left">ACCOUNTS | INVOICE DETAILS</h2>
+  </div>
+{% endblock%}
+
+{% block content %}
+
+      <div class="body card">
+            <div class="helper_cls body">
+                    <a href="{% url 'ACCNTS:payment_list' %}" class="btn btn-primary">BACK</a>
+                    <a href="{% url 'ACCNTS:payment_edit' pk=payment.pk %}" class="btn btn-success">EDIT</a>
+            </div>
+            <div class="row clearfix body">
+                <div class="col-md-6 ">
+                    <table class="table table-responsive">
+                        <tr>
+                            <td>Member Name</td>
+                            <td>{{payment.member.company_name}}</td>
+                        </tr>
+                        <tr>
+                            <td>Date of generation</td>
+                            <td>{{ payment.date_of_generate }}</td>
+                        </tr>
+                        <tr>
+                            <td>Category Name</td>
+
+                            <td>
+                                {% if payment.member.category == 22200 %}
+                                <span> Category A (ksh.22,200)</span>
+                                {% elif payment.member.category == 62000 %}
+                                <span> Category B (ksh.62,000)</span>
+                                {% elif payment.member.category == 154000 %}
+                                <span> Category C (ksh.154,000)</span>
+                                {% elif payment.member.category == 300000 %}
+                                <span> Category D (ksh.300,000)</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>VAT</td>
+                            <td>
+                                {% if payment.VAT == 'No'%}
+                                    <span class="btn label bg-orange">No</span>
+                                {% elif payment.VAT == 'Yes' %}
+                                    <span class="btn label bg-green">Yes</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="col-md-6 ">
+                    <table class="table table-responsive">
+                        <tr>
+                            <td>Member Number</td>
+                            <td>{{payment.member.member_number }}</td>
+                        </tr>
+                        <tr>
+                            <td>Descriptions</td>
+                            <td>{{payment.description }}</td>
+                        </tr> 
+                    </table>
+                    <div class ="body" style="display: flex; justify-content:center; align-content: center; margin-top:20px;">
+                        <a href="{% url 'ACCNTS:print_invoice' payment.id %}" target="_blank
+                        " class="btn label bg-orange btn-lg ">print</a>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+{% endblock %}

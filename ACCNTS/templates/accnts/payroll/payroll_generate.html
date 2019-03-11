@@ -13,9 +13,13 @@
 {% block content %}
 
       <div class="body card">
-            <div class="helper_cls body">
+          <div class="helper_cls body">
+              {% if employee.position.initials == "HRM" or employee.position.initials == "GM" or employee.position.initials == "CCM" or employee.position.initials == "CACC" or employee.position.initials == "ACCM"  %}
                     <a href="{% url 'ACCNTS:list_payroll' %}" class="btn btn-primary">BACK</a>
                     <a href="{% url 'ACCNTS:edit_payroll' pk=payroll.pk %}" class="btn btn-success">EDIT</a>
+                    {% else %}
+                    <a href="{% url 'ACCNTS:dashboard' %}" class="btn btn-primary">BACK</a>
+                    {% endif %}
             </div>
             <div class="row clearfix body">
                 <div class="col-md-10 ">

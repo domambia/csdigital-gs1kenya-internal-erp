@@ -1,0 +1,59 @@
+{% extends "layout/accnts_layout.html" %}
+{% block header %}
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
+      <h2 class="header pull-left">ACCOUNTS | PAYSLIP</h2>
+  </div>
+{% endblock%}
+{% block content %}
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card body">
+            <div class="">
+                <h2 class="body">
+                </h2>
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr>
+                                <th>Employee Name</th>
+                                <th>House Allowance</th>
+                                <th>Transport Allowance</th>
+                                <th>Leave Allowance</th>
+                                <th>Loan Amount</th>
+                                <th>Other Deductions</th>
+                                <th>Date</th>
+                                <th style="text-align:center;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if payslip %}
+                              {% for payslip in payslip %}
+                                  <tr>
+                                      <td>{{ payslip.employee.user.first_name }} &nbsp; {{ payroll.employee.user.last_name }}</td>
+                                      <td>ksh.{{ payslip.hse_allowance }}</td>
+                                      <td>ksh.{{ payslip.transport_allowance }}</td>
+                                      <td>ksh.{{ payslip.leave_allowance }}</td>
+                                      <td>ksh.{{ payslip.loans }}</td>
+                                      <td>ksh.{{ payslip.other_deductions }}</td>
+                                      <td>{{ payslip.month }}</td>
+                                      <td>
+                                          <span> <a href = "{% url 'ACCNTS:detail_payroll' pk=payslip.id %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>
+                                      </td>
+                                  </tr>
+                              {% endfor %}
+                            {% else %}
+
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Exportable Table -->
+
+{% endblock %}

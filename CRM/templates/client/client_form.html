@@ -135,23 +135,7 @@
                                                     {% endfor %}
                                                 </div>
                                             </div>
-                                        </div>
-                                         <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
-                                            <div class="form-group form-float">
-                                                <div class="form-line">
-                                                    <select name ="{{form.category.name}}" class="form-control">
-                                                        <option value="22200">Category A (ksh. 22,200)</option>
-                                                        <option value="62000">Category B (ksh. 62,000)</option>
-                                                        <option value="154000">Category C (ksh. 154,000)</option>
-                                                        <option value="300000">Category D (ksh. 300,000)</option>
-                                                    </select>
-                                                        <label class="form-label">Choose Category </label>
-                                                        {% for errror in form.category.errors %}
-                                                        <li class = "alert alert-danger"> {{ error }}</li>
-                                                    {% endfor %}
-                                                </div>
-                                            </div>
-                                        </div>
+                                         </div>
                                           <div class="col-lg-12 col-md-12 col-sm-3 col-xs-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
@@ -168,7 +152,6 @@
                                             <div class="form-group form-float">
                                                 <div class="form-line">
                                                     {{ form.nature_of_business|add_class:"form-control"}}
-                                                    
                                                     <label class="form-label">Nature of Business </label>
                                                     {% for errror in form.nature_of_business.errors %}
                                                         <li class = "alert alert-danger"> {{ error }}</li>

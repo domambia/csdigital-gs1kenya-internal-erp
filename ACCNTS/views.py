@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User 
 from django.urls import reverse_lazy, reverse
 from accounts.models import Employee
-from ACCNTS.models import Invoice, PayRoll
+from ACCNTS.models import Invoice, PayRoll, Payment
 from ERP import settings
 from django.views.generic import (ListView,
                                   DeleteView,
@@ -104,7 +104,7 @@ def make_payment(request, pk):
 
 def print_invoice(request, pk):
     base_url = "file://" + settings.STATIC_URL
-    invoice = Invoice.objects.get(id = pk)
+    invoice = Payment.objects.get(id = pk)
     category = int(invoice.member.category)
     tax = 0;
     if invoice.VAT == "Yes":tax = 0.16
@@ -243,6 +243,13 @@ class UpdatePayrollView(UpdateView):
         context = super(UpdatePayrollView, self).get_context_data(**kwargs)
         context['employee'] = Employee.objects.get(user = self.request.user.id)
         return context
+# list employee payslip
+
+def payslip(request):
+    employee = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
+    payslip = PayRoll.objects.filter(employee = employee.id)
+
+    return render(request, "accnts/payroll/payslip.html", {'employee': employee, 'payslip': payslip})
 
 def generate_payroll(request, pk):
     employee  = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
@@ -271,11 +278,61 @@ def generate_payroll(request, pk):
                                                                'net_income':net_income})
 
 
+# payment via invoice to users using using Payment model
+
+# Creating invoice
+
+class CreatePaymentView(CreateView):
+    model = Payment
+    template_name  = "accnts/invoice/payment_form.html"
+    fields = ('member', 'description', 'VAT', 'amount', 'payment_for',)
+    def get_context_data(self, **kwargs):
+        context = super(CreatePaymentView, self).get_context_data(**kwargs)
+        context['employee'] = Employee.objects.get(user = self.request.user.id)
+        return context
 
 
 
+class ListPaymentView(ListView):
+    model = Payment
+    context_object_name  = "payments"
+    template_name = "accnts/invoice/payment_list.html"
+    def get_context_data(self, **kwargs):
+        context = super(ListPaymentView, self).get_context_data(**kwargs)
+        context['employee'] = Employee.objects.get(user = self.request.user.id)
+        return context
 
 
+class DetailPaymentView(DetailView):
+    model = Payment
+    context_object_name  = "payment"
+    template_name  = "accnts/invoice/payment_detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(DetailPaymentView, self).get_context_data(**kwargs)
+        context['employee'] = Employee.objects.get(user = self.request.user.id)
+        return context
+
+
+class UpdatePaymentView(UpdateView):
+    model = Payment
+    fields = ('member', 'description', 'VAT', 'amount', 'payment_for',)
+    template_name  = "accnts/invoice/payment_form.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(UpdatePaymentView, self).get_context_data(**kwargs)
+        context['employee'] = Employee.objects.get(user = self.request.user.id)
+        return context
+
+
+class DeletePaymentView(DeleteView):
+    model = Payment
+    template_name  = "accnts/invoice/payment_delete.html"
+    success_url = reverse_lazy('ACCNTS:payment_list')
+    def get_context_data(self, **kwargs):
+        context = super(DeletePaymentView, self).get_context_data(**kwargs)
+        context['employee'] = Employee.objects.get(user = self.request.user.id)
+        return context
 
 
 

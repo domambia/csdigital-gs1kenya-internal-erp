@@ -143,20 +143,18 @@
                                 <a href="{% url 'ACCNTS:list_profoma'%}"> PROFOMA INVOICE</a>
                             </li>
                             <li>
-                                <a href="{% url 'ACCNTS:invoices' %}">INVOICE</a>
+                                <a href="{% url 'ACCNTS:payment_list' %}">INVOICE</a>
                             </li>
                         </ul>
                   </li>
-                   
                   {% else %}
                     <li class="active">
-                        <a href="">
+                        <a href="{% url 'ACCNTS:payslip'%}">
                         <i class="material-icons">people</i>
-                            <span>PAYROLL</span>
+                            <span>PAYSLIP</span>
                         </a>
                     </li>
                   {% endif %}
-                  
                 <li class="active">
                     <a href="{% url 'index' %}">
                         <i class="material-icons">keyboard_return</i>

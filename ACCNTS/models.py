@@ -22,8 +22,25 @@ class Invoice(models.Model):
 
     def get_absolute_url(self):
         return reverse("ACCNTS:list_profoma")
+class Payment(models.Model):
+    OPTIONS = (
+        ("Yes", "Yes"),
+        ("No", "No"),
+    )
+    PAYMENT = (
+        ("Membership", "Membership"),
+        ("Renewal", "Renewal"),
+        ("Others", "Others"),
+    )
+    member = models.ForeignKey(Client, on_delete = models.CASCADE, default = 1)
+    description = models.CharField(max_length = 1000)
+    payment_for = models.CharField(max_length = 100, choices = PAYMENT, default = "Membership")
+    date_of_generate = models.DateField(default = datetime.datetime.now)
+    VAT = models.CharField(max_length = 5, choices = OPTIONS, default = "No")
+    amount = models.PositiveIntegerField(blank = True, default = 0)
 
-
+    def get_absolute_url(self):
+        return reverse("ACCNTS:payment_list")
 
 '''
 PayRoll Model

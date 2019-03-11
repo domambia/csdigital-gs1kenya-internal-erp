@@ -20,6 +20,7 @@ urlpatterns = [
     url(r'^members/approve/accounts/Executive/(?P<pk>\d+)/$', login_required(views.accounts_ex), name = 'acc_x'),
     url(r'^members/approve/CCM/(?P<pk>\d+)/$', login_required(views.communication), name = 'ccm'),
     url(r'^members/member_number/(?P<pk>\d+)/$', login_required(views.AssignMemberNumber.as_view()), name = 'assign'),
+    url(r'^members/choose_category/(?P<pk>\d+)/$', login_required(views.AddCategoryNumber.as_view()), name="add_category"),
     #suppliers urlpattern
     url(r'^supplier/list/', login_required(views.SupplierListView.as_view()), name = "list_supplier"),
     url(r'^supplier/add/', login_required(views.SupplierCreateView.as_view()), name = 'create_supplier'),
