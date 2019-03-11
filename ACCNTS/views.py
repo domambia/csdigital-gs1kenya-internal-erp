@@ -279,7 +279,6 @@ def generate_payroll(request, pk):
 
 
 # payment via invoice to users using using Payment model
-
 # Creating invoice
 
 class CreatePaymentView(CreateView):

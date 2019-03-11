@@ -14,7 +14,6 @@ class UserForm(forms.ModelForm):
         return self.username
 
 
-
 class EmployeeForm(forms.ModelForm):
     phone = forms.CharField(widget = forms.NumberInput())
     date_of_birth = forms.DateField(
@@ -26,3 +25,8 @@ class EmployeeForm(forms.ModelForm):
         fields = ('address', 'phone', 'date_of_birth',
         'county', 'dependant_name', 'dependant_contact', 'dependant_relationship',
         'position', 'salary', 'kin_email', 'alt_phone_number', 'profile_pic', 'company_benifits')
+
+class DependentForm(forms.ModelForm):
+    class Meta:
+        model = Employee
+        fields = ('dependant_contact', 'dependant_name', 'dependant_relationship', 'profile_pic',)

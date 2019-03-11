@@ -45,31 +45,6 @@ def add_employee(request):
             if 'profile_pic' in request.FILES:
                 employee.profile_pic = request.FILES['profile_pic']
             employee.save()
-
-            # ''' Sending an email to our new employees:
-            #     This includes the user login credentials such as username or email and his/her password
-            # '''
-            # from_email = "hr@gs1kenya.org"
-            # to_email = user_form.cleaned_data['email']
-            # subject = "Welcome to GS1Kenya Organization"
-            # message = """
-            #         Dear {}.
-            #         We warmly welcome to GS1Kenya oraganization. You has a power to work with us. With this email find your login
-            #         inforamtion to allow you access any information through our ERP system.
-
-            #             Username: {},
-            #             Password: {}
-            #         If your have any concern please contact our Human  Resource at NextGen Mall 4th floor.
-            #         Thank you,
-            #         GS1Kenya Hiring Team.
-            # """
-
-            # send = send_mail(subject, message.format(user_form.cleaned_data['username'], user_form.cleaned_data['username'],user_form.cleaned_data['password'], from_email, [to_email]))
-            # if send:
-            #     print("Recruited a new Employee!!!!! Send the Email")
-            # else:
-            #     print("Email Not Sent")
-
             return HttpResponseRedirect(reverse('accounts:employees'))
         else:
             return render(request, "accounts/register.html",
@@ -134,7 +109,6 @@ def employee_delete(request, pk):
 """Update View
 """
 
-
 class EmployeeUpdateView(UpdateView):
     fields = ('address', 'phone', 'date_of_birth',
         'county', 'dependant_name', 'dependant_contact', 'dependant_relationship',
@@ -145,26 +119,6 @@ class EmployeeUpdateView(UpdateView):
         context = super(EmployeeUpdateView, self).get_context_data(**kwargs)
         context['employee'] = Employee.objects.get(user = self.request.user.id)
         return context
-
-# @login_required
-# def employee_update(request, pk):
-#     employee_form = EmployeeForm(request.POST or None,
-#                     instance = get_object_or_404(Employee, pk=pk))
-#     user_form = UserForm(request.POST or None,
-#                     instance = get_object_or_404(User, id=Employee.objects.get(id = pk).user.id))
-#     employee = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
-#     if request.method == "POST":
-#         if employee_form.is_valid() and user_form.is_valid():
-#             user = user_form.save(commit=False)
-#             user.set_password(user_form.cleaned_data['password'])
-#             user.save()
-#             employee_form.save()
-#             if (user_form.cleaned_data['username'] == User.objects.get(username = request.session['username']).username) or (user_form.cleaned_data['email'] == User.objects.get(username = request.session['username']).email):
-#                 logout(request)
-#             return HttpResponseRedirect(reverse('accounts:employees'))
-#     return render(request, "accounts/edit.html",
-#                     {'form': employee_form, "employee": employee, 'user_form': user_form})
-
 
 """ EMPLOYEES PROFILE
     This enables one to access his or her own profile details
@@ -188,7 +142,7 @@ def edit_authentications(request, pk):
     employee = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
     if request.method == "POST":
         if form.is_valid():
-            user = form.save()
+            user = form.save(commit = False)
             user.username  = form.cleaned_data['username'].lower()
             user.email  = form.cleaned_data['email'].lower()
             user.set_password(form.cleaned_data['password'])
