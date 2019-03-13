@@ -13,7 +13,7 @@
       <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="row clearfix">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     <div class="form-line">
                         <label for="{{ form.profile_pic.id_for_label }}">Dependent Name</label>
@@ -26,13 +26,26 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     <div class="form-line">
                         <label for="{{ form.profile_pic.id_for_label }}">Dependent Contact</label>
                         {{ form.dependant_contact|add_class:"form-control" }}
                         <ul>
                             {% for error in form.dependant_contact.errors%}
+                            <li class="alert alert-danger">{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <div class="form-line">
+                        <label for="{{ form.profile_pic.id_for_label }}">Address Name</label>
+                        {{ form.address|add_class:"form-control" }}
+                        <ul>
+                            {% for error in form.address.errors%}
                             <li class="alert alert-danger">{{ error }}</li>
                             {% endfor %}
                         </ul>
@@ -54,21 +67,21 @@
                     </div>
                 </div>
             </div>
-          </div>
-          <div class="row clearfix">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <div class="form-line">
-                            <label for="{{ form.profile_pic.id_for_label }}">Profile Picture</label>
-                            {{ form.profile_pic|add_class:"form-control" }}
-                            <ul>
-                                {% for error in form.profile_pic.errors%}
-                                <li class="alert alert-danger">{{ error }}</li>
-                                {% endfor %}
-                            </ul>
-                        </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="form-line">
+                        <label for="{{ form.profile_pic.id_for_label }}">Profile Picture</label>
+                        {{ form.profile_pic|add_class:"form-control" }}
+                        <ul>
+                            {% for error in form.profile_pic.errors%}
+                            <li class="alert alert-danger">{{ error }}</li>
+                            {% endfor %}
+                        </ul>
                     </div>
                 </div>
+            </div>
+          </div>
+          <div class="row clearfix">
                 <div class="col-md-4 pull-right">
                     <input type="submit" class="btn btn-primary btn-lg m-l-15 waves-effect" value="SUBMIT">
                 </div>

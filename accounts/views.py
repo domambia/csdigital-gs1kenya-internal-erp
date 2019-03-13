@@ -110,7 +110,7 @@ def employee_delete(request, pk):
 """
 class EmployeeUdateDependentInfo(UpdateView):
     model = Employee 
-    fields = ('dependant_name', 'dependant_contact', 'dependant_relationship', 'profile_pic')
+    fields = ('dependant_name', 'dependant_contact', 'dependant_relationship', 'profile_pic', 'address')
     template_name = 'accounts/edit-otherinfo.html'
     def get_context_data(self, **kwargs):
         context = super(EmployeeUdateDependentInfo, self).get_context_data(**kwargs)
