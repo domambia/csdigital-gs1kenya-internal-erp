@@ -13,11 +13,9 @@
               <a href="{% url 'accounts:employees' %}" class="btn btn-primary"><span style="color: orangered;">&larr;</span> BACK</a>
               {% else %}
               <a href="{% url 'hrm:hrm_index' %}" class="btn btn-primary"><span style="color: orangered;">&larr;</span> BACK</a>
-              <a href="{% url 'accounts:authent' employee.user.id %}" class="btn btn-info">EDIT LOGIN INFO</a>
               {% endif %}
               {% if employee.position.initials == "HRM" or employee.position.initials == "GM" or employee.position.initials == "CCM" %}
-                <a href="{% url 'accounts:employee_update' employee.id %}" class="btn btn-success">EDIT</a>
-                <a href="{% url 'accounts:authent' employee.user.id %}" class="btn btn-info">EDIT LOGIN INFO</a>
+                <a href="{% url 'accounts:employee_update' employee.id %}" class="btn btn-success">EDIT</a> 
               {% endif %}
           </div>
           <div class="row body">

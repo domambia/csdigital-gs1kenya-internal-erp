@@ -133,6 +133,23 @@
                       </a>
                   </li>
                   {% if employee.position.initials == "HRM" or employee.position.initials == "GM" or employee.position.initials == "CCM" %}
+                  <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">assignment</i>
+                            <span>PROFILE &nbsp;</span>
+                        </a>
+                        <ul class="ml-menu" style="font-size: 14px;">
+                            <li>
+                                <a href="{% url 'accounts:profile' employee.id %}">PROFILE</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'accounts:authent' employee.user.id %}">EDIT LOGIN INFO</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'accounts:other' pk=employee.id %}">EDIT OTHER INFOR</a>
+                            </li>
+                        </ul>
+                  </li>
                   <li class="active">
                         <a href="{% url 'accounts:employees' %}">
                             <i class="material-icons">people</i>
@@ -182,12 +199,23 @@
                         </ul>
                   </li>
                   {% else %}
-                  <li class="active">
-                        <a href="{% url 'accounts:profile' employee.id %}">
-                            <i class="material-icons">person</i>
-                            <span>PROFILE</span>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">assignment</i>
+                            <span>PROFILE &nbsp;</span>
                         </a>
-                    </li>
+                        <ul class="ml-menu" style="font-size: 14px;">
+                            <li>
+                                <a href="{% url 'accounts:profile' employee.id %}">PROFILE</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'accounts:authent' employee.user.id %}">EDIT LOGIN INFO</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'accounts:other' pk=employee.id %}">EDIT OTHER INFOR</a>
+                            </li>
+                        </ul>
+                  </li>
                     <li class="active">
                         <a href="{% url 'leave:applyleave_list' %}">
                             <i class="material-icons">people</i>

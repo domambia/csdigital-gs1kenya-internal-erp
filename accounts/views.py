@@ -108,6 +108,14 @@ def employee_delete(request, pk):
 
 """Update View
 """
+class EmployeeUdateDependentInfo(UpdateView):
+    model = Employee 
+    fields = ('dependant_name', 'dependant_contact', 'dependant_relationship', 'profile_pic')
+    template_name = 'accounts/edit-otherinfo.html'
+    def get_context_data(self, **kwargs):
+        context = super(EmployeeUdateDependentInfo, self).get_context_data(**kwargs)
+        context['employee'] = Employee.objects.get(user = self.request.user.id)
+        return context
 
 class EmployeeUpdateView(UpdateView):
     fields = ('address', 'phone', 'date_of_birth',
