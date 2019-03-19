@@ -9,7 +9,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import DetailView, UpdateView
 from django.core.mail import send_mail
 from helpers.help import get_country
-
+from django.contrib import messages
 """List
 """
 
@@ -45,8 +45,10 @@ def add_employee(request):
             if 'profile_pic' in request.FILES:
                 employee.profile_pic = request.FILES['profile_pic']
             employee.save()
+            messages.success(request, 'You hav success added new employee!')
             return HttpResponseRedirect(reverse('accounts:employees'))
         else:
+            messages.warning(request, 'Some information missing!')
             return render(request, "accounts/register.html",
                                 {'user_form': user_form, 'employee_form': employee_form, "countries": countries,"employee":emp,})
 
@@ -73,12 +75,15 @@ def user_login(request):
                     request.session['username'] = User.objects.get(email = username).username
                 else:
                     request.session['username'] = username
+                messages.success(request, "Successully logged in!")
                 return HttpResponseRedirect(reverse('index'))
             elif request.user.is_authenticated():
+                messages.success(request, 'Successfully. Already logged in..')
                 HttpResponseRedirect(reverse('index'))
             else:
                 return HttpResponse("Your account is not activated. Please check your email account")
         else:
+            messages.success('Wrong username or password. User the required details or contact the administrator!')
             print("Somone tried To  login and Failed")
             print("Username: {} with a Password: {}".format(username, password))
             return HttpResponseRedirect(reverse('index'))
@@ -91,6 +96,7 @@ def user_login(request):
 @login_required
 def user_logout(request):
     logout(request)
+    messages.success(request, 'Successfully! Logged out, welcome back')
     return HttpResponseRedirect(reverse('index'))
 
 
@@ -102,6 +108,7 @@ def employee_delete(request, pk):
     emp = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
     if request.method == "POST":
         employee.delete()
+        messages.success(request, 'Successfully! Deleted an employee!')
         return redirect('accounts:employees')
     return render(request, "accounts/delete.html", {'emp': emp, "employee": employee})
 

@@ -225,7 +225,7 @@ End of Approval
 class ClientDeleteView(DeleteView):
     model = Client
     template_name = "client/client_delete_confirm.html"
-    success_url = reverse_lazy("CRM:delete_client")
+    success_url = reverse_lazy("CRM:list_client")
     def get_context_data(self, **kwargs):
         context = super(ClientDeleteView, self).get_context_data(**kwargs)
         user = self.request.user
