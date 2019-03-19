@@ -203,8 +203,8 @@ def technical(request, pk):
     tm = client.is_tm = 1
     if tm:
         client.save()
-        SMS().send(employee.phone, msg)
-        SMS().send(employee_2.phone, msg_1)
+        SMS().send(employee.phone, msg_1)
+        SMS().send(employee_2.phone, msg)
         print("TM -Approved")
         return HttpResponseRedirect(reverse('CRM:list_client'))
 

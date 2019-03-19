@@ -92,7 +92,7 @@
                         </table>
             </div>
             <div class="col-md-12">
-                    {% if employee.position.initials == "ME1" %}
+                    {% if employee.position.initials == "ME1" or employee.position.initials == 'ME2' or employee.position.initials == 'ME3' %}
                     <div class="col-md-2">
                         {% if client.is_me1 == 0 %}
                         <span > <a href="{% url 'CRM:me' client.id %}" class="label btn bg-orange" > approve </a></span>
