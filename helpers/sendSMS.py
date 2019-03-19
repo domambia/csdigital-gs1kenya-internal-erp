@@ -5,8 +5,8 @@ import africastalking
 
 class SMS:
     def __init__(self):
-        self.username = "omambia"
-        self.api_key = "4eb8662a2ecef1c54c1650179e397a3d18a591df35e00269fd48fadc3e837c1b"
+        self.username = "gs1kenya"
+        self.api_key = "0902d36a02514da9fa33a11586683f8d76e5207ea544363e7d41149e6c9a6718"
         africastalking.initialize(self.username, self.api_key)
         self.sms = africastalking.SMS
     def send(self, phone, message):
@@ -25,6 +25,5 @@ class SMS:
                             Humble Developer, Most adored,
                         GS1 Kenya
                         Date: {} .
-                      
                       """
             print (message.format(str(e), datetime.now))

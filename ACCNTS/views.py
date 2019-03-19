@@ -13,6 +13,9 @@ from easy_pdf.rendering import render_to_pdf_response
 from ACCNTS.forms import PaymentForm
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
+
+#imports for creating pdf
+
 def dashboard(request):
     current = User.objects.get(username = request.session['username'])
     employee = Employee.objects.get(user = current.id)
