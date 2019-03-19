@@ -13,6 +13,11 @@ class Employee(models.Model):
     address = models.CharField(max_length=50)
     phone = models.IntegerField(validators=[MinValueValidator(9)])
     date_of_birth = models.CharField(max_length=20)
+    id_no = models.IntegerField(default = 0)
+    nssf_no = models.CharField(default = "NSSF_NO", max_length = 50)
+    nhif_no = models.CharField(default = "NHIF_NO", max_length = 50)
+    KRA = models.CharField(default = "KRA_PIN", max_length = 50)
+    employee_no = models.CharField(default = 'GS1_NO', max_length=50)
     next_of_kin_name = models.CharField(max_length=60, blank=True)
     alt_phone_number = models.IntegerField(validators=[ MinValueValidator(9)])
     # more

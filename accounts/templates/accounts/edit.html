@@ -54,7 +54,6 @@
             </div>
           </div>
           <div class="row clearfix">
-           
             <div class="col-md-4">
                 <div class="form-group">
                     <div class="form-line">
@@ -79,6 +78,19 @@
                           {% for error in form.alt_phone_number.errors%}
                             <li class="alert alert-danger">{{ error }}</li>
                           {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <div class="form-line">
+                        <label for="{{ form.id_no.id_for_label }}">National ID</label>
+                        {{ form.id_no|add_class:"form-control" }}
+                        <ul>
+                            {% for error in form.id_no.errors%}
+                            <li class="alert alert-danger">{{ error }}</li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
@@ -154,7 +166,7 @@
                 <h2>WORK INFORMATION</h2>
             </div>
 
-              <div class="col-md-6">
+              <div class="col-md-4">
                   <div class="form-group">
                       <div class="form-line">
                           <label for="{{ form.current_position.id_for_label }}">Current Position</label>
@@ -167,7 +179,7 @@
                       </div>
                   </div>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-4">
                   <div class="form-group">
                       <div class="form-line">
                           <label for="{{ user_form.salary.id_for_label }}">Salary</label>
@@ -181,7 +193,61 @@
                   </div>
               </div>
 
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <div class="form-line">
+                          <label for="{{ form.nssf_no.id_for_label }}">NSSF Number</label>
+                          {{ form.nssf_no|add_class:"form-control" }}
+                          <ul>
+                              {% for error in form.nssf_no.errors%}
+                              <li class="alert alert-danger">{{ error }}</li>
+                              {% endfor %}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row clearfix">
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <div class="form-line">
+                          <label for="{{ form.KRA.id_for_label }}">KRA PIN</label>
+                          {{ form.KRA|add_class:"form-control" }}
+                          <ul>
+                              {% for error in form.KRA.errors%}
+                              <li class="alert alert-danger">{{ error }}</li>
+                              {% endfor %}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <div class="form-line">
+                          <label for="{{ form.nhif_no.id_for_label }}">NHIF Number</label>
+                          {{ form.nhif_no|add_class:"form-control" }}
+                          <ul>
+                              {% for error in form.nhif_no.errors%}
+                              <li class="alert alert-danger">{{ error }}</li>
+                              {% endfor %}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
 
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <div class="form-line">
+                          <label for="{{ form.employee_no.id_for_label }}">Employee Number</label>
+                          {{ form.employee_no|add_class:"form-control" }}
+                          <ul>
+                              {% for error in form.employee_no.errors%}
+                              <li class="alert alert-danger">{{ error }}</li>
+                              {% endfor %}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
           </div>
           <div class="row clearfix">
             <div class="col-md-6">
@@ -197,22 +263,20 @@
                     </div>
                 </div>
             </div>
-          <br>
-            <div class="row clearfix">
-                <div class="col-md-10 col-md-offset-1">
-                    <div class="form-group">
-                        <div class="form-line">
-                            <label for="{{ form.company_benifits.id_for_label }}">Company Benifits</label>
-                            {{ form.company_benifits|add_class:"form-control" }}
-                            <ul>
-                                {% for error in form.company_benifits.errors%}
-                                <li class="alert alert-danger">{{ error }}</li>
-                                {% endfor %}
-                            </ul>
-                        </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="form-line">
+                        <label for="{{ form.company_benifits.id_for_label }}">Company Benifits</label>
+                        {{ form.company_benifits|add_class:"form-control" }}
+                        <ul>
+                            {% for error in form.company_benifits.errors%}
+                            <li class="alert alert-danger">{{ error }}</li>
+                            {% endfor %}
+                        </ul>
                     </div>
                 </div>
-             </div>
+            </div>
+          <br>
             <div class="col-md-4 pull-right">
                 <input type="submit" class="btn btn-primary btn-lg m-l-15 waves-effect" value="SUBMIT">
             </div>

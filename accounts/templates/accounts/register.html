@@ -17,7 +17,7 @@
               <h2>DEMOGRAPHIC INFORMATION</h2>
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-3">
               <div class="form-group">
                   <div class="form-line">
                       <label for="{{ user_form.first_name.id_for_label }}">Username</label>
@@ -31,7 +31,7 @@
                   </div>
               </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div class="form-group">
                 <div class="form-line">
                     <label for="{{ employee_form.date_of_birth.id_for_label }}">Birth Date</label>
@@ -44,7 +44,7 @@
                 </div>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
               <div class="form-group">
                   <div class="form-line">
                       <label for="">Email Address</label>
@@ -53,6 +53,20 @@
                         {% for error in user_form.email.errors%}
                           <li class="alert alert-danger">{{ error }}</li>
                         {% endfor %}
+                      </ul>
+                  </div>
+              </div>
+          </div>
+
+          <div class="col-md-3">
+              <div class="form-group">
+                  <div class="form-line">
+                      <label for="{{ user_form.password.id_for_label }}">National ID</label>
+                      {{ employee_form.id_no|add_class:"form-control" }}
+                      <ul>
+                          {% for error in employee_form.id_no.errors%}
+                          <li class="alert alert-danger">{{ error }}</li>
+                          {% endfor %}
                       </ul>
                   </div>
               </div>
@@ -214,7 +228,7 @@
                 <h2>WORK INFORMATION</h2>
             </div>
 
-              <div class="col-md-6">
+              <div class="col-md-4">
                   <div class="form-group">
                       <div class="form-line">
                           <label for="{{ employee_form.current_position.id_for_label }}">Current Position</label>
@@ -227,7 +241,8 @@
                       </div>
                   </div>
               </div>
-              <div class="col-md-6">
+
+              <div class="col-md-4">
                   <div class="form-group">
                       <div class="form-line">
                           <label for="{{ user_form.password.id_for_label }}">Salary</label>
@@ -240,6 +255,73 @@
                       </div>
                   </div>
               </div>
+
+
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <div class="form-line">
+                          <label for="{{ user_form.password.id_for_label }}">NSSF Number</label>
+                          {{ employee_form.nssf_no|add_class:"form-control" }}
+                          <ul>
+                              {% for error in employee_form.nssf_no.errors%}
+                              <li class="alert alert-danger">{{ error }}</li>
+                              {% endfor %}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+
+
+
+          </div>
+          <div class="row clearfix">
+
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <div class="form-line">
+                          <label for="{{ user_form.password.id_for_label }}">NHIF Number</label>
+                          {{ employee_form.nhif_no|add_class:"form-control" }}
+                          <ul>
+                              {% for error in employee_form.nhif.errors%}
+                              <li class="alert alert-danger">{{ error }}</li>
+                              {% endfor %}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+
+
+
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <div class="form-line">
+                          <label for="{{ user_form.password.id_for_label }}">KRA PIN</label>
+                          {{ employee_form.KRA|add_class:"form-control" }}
+                          <ul>
+                              {% for error in employee_form.KRA.errors%}
+                              <li class="alert alert-danger">{{ error }}</li>
+                              {% endfor %}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+
+
+
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <div class="form-line">
+                          <label for="{{ user_form.password.id_for_label }}">Employee Number</label>
+                          {{ employee_form.employee_no|add_class:"form-control" }}
+                          <ul>
+                              {% for error in employee_form.employee_no.errors%}
+                              <li class="alert alert-danger">{{ error }}</li>
+                              {% endfor %}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+
 
 
           </div>

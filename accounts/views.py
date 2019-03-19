@@ -127,7 +127,8 @@ class EmployeeUdateDependentInfo(UpdateView):
 class EmployeeUpdateView(UpdateView):
     fields = ('address', 'phone', 'date_of_birth',
         'county', 'dependant_name', 'dependant_contact', 'dependant_relationship',
-        'position', 'salary', 'kin_email', 'alt_phone_number', 'profile_pic', 'company_benifits')
+        'position', 'salary', 'kin_email', 'alt_phone_number', 'profile_pic', 'company_benifits',
+              'KRA', 'id_no', 'nssf_no', 'nhif_no', 'employee_no',)
     model = Employee
     template_name  = "accounts/edit.html"
     def get_context_data(self, **kwargs):

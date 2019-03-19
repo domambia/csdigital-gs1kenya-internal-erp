@@ -14,9 +14,8 @@ from datetime import datetime
 from helpers.sendSMS import SMS
 from CRM.forms import TrainForm, EditClient
 # Create your views here.
-
 '''
-The views for the CRM part of the ERP 
+The views for the CRM part of the ERP
 The dashboard page
 '''
 
