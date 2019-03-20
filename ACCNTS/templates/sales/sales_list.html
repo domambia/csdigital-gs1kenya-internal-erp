@@ -1,0 +1,62 @@
+{% extends "layout/accnts_layout.html" %}
+{% block header %}
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
+      <h2 class="header pull-left">ACCOUNTS | ALL SALES</h2>
+  </div>
+{% endblock%}
+{% block content %}
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card body">
+            <div class="">
+                <h2 class="body">
+                  <span><a class="btn btn-primary" href = "{% url 'ACCNTS:sales_add' %}" >CREATE SALE</a></span>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr>
+                                <th>Member Name</th>
+                                <th>Member Number</th>
+                                <th>Address</th>
+                                <th>Payment Terms </th>
+                                <th>Date of Sale</th>
+                                <th>Payment Due</th>
+                                <th>Excl.Tax</th>
+                                <th style="text-align:center;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if sales %}
+                              {% for sale in sales %}
+                                  <tr>
+                                      <td>{{ sale.member.company_name }}</td>
+                                      <td>{{ sale.member.member_number }}</td>
+                                      <td>{{ sale.member.physical_location}}</td>
+                                      <td>{{ sale.payment_terms }}</td>
+                                      <td>{{ sale.date_of_sale }}</td>
+                                      <td>{{ sale.payment_due }}</td>
+                                      <td>ksh. {{ sale.amount_paid }}.00</td>
+                                      <td>
+                                          <span> <a href = "{% url 'ACCNTS:sales_detail' pk=sale.id %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>
+                                          <span> <a href = "{% url 'ACCNTS:sales_edit' pk=sale.id %}"><i class="material-icons">edit</i></a> </span>
+                                          <span> <a href = "{% url 'ACCNTS:sales_delete' pk=sale.id %}"><i class="material-icons" style = "color:#cc0000;">delete</i></a> </span>
+                                      </td>
+                                  </tr>
+                              {% endfor %}
+                            {% else %}
+
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Exportable Table -->
+
+{% endblock %}

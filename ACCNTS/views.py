@@ -381,6 +381,3 @@ class DeletePaymentView(SuccessMessageMixin, DeleteView):
 
 
 
-
-
-

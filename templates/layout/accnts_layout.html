@@ -146,7 +146,14 @@
                                 <a href="{% url 'ACCNTS:payment_list' %}">INVOICE</a>
                             </li>
                         </ul>
-                  </li>
+                    </li>
+                    <li class="active">
+                        <a href="{% url 'ACCNTS:sales_list'%}">
+                            <i class="material-icons">people</i>
+                            <span>SALES</span>
+                        </a>
+                    </li>
+
                   {% else %}
                     <li class="active">
                         <a href="{% url 'ACCNTS:payslip'%}">

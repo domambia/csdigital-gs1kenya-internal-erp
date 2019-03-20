@@ -16,7 +16,7 @@ class Invoice(models.Model):
     description = models.CharField(max_length=2000)
     VAT = models.CharField(max_length = 5, choices = OPTIONS, default = "No")
     amount = models.PositiveIntegerField(blank=True, default=0)
-    balance = models.PositiveIntegerField(blank=True, default=0) 
+    balance = models.PositiveIntegerField(blank=True, default=0)
     def __str__(self):
         return self.member.company_name
 
@@ -58,3 +58,22 @@ class PayRoll(models.Model):
 
     def get_absolute_url(self):
         return reverse("ACCNTS:list_payroll")
+'''
+Sales models
+'''
+
+class Sales(models.Model):
+    member = models.ForeignKey(Client, on_delete = models.CASCADE, default = 1)
+    invoice = models.ForeignKey(Invoice, on_delete = models.CASCADE, default = 1)
+    amount_paid = models.IntegerField(default = 0)
+    payment_due = models.DateField(default =datetime.datetime.now)
+    payment_terms = models.CharField(max_length = 200)
+    date_of_sale = models.DateField(default = datetime.datetime.now)
+
+    def __str__(self):
+        return member.company_name
+
+    def get_absolute_url(self):
+        return reverse("ACCNTS:sales_list")
+
+

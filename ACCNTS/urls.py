@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from ACCNTS import views
 from ERP import settings
+from ACCNTS import vsales
 from django.contrib.auth.decorators import login_required
 from django.conf.urls.static import static
 app_name  = "ACCNTS"
@@ -13,7 +14,7 @@ urlpatterns = [
     url('^invoice/profoma/detail/(?P<pk>\d)/$', login_required(views.DetailInvoiceView.as_view()), name ="detail_profoma"),
     url('^invoice/profoma/delete/(?P<pk>\d)/$', login_required(views.DeleteInvoiceView.as_view()), name = "delete_profoma"),
     url('^invoice/profoma/print/profomaInvoice(?P<pk>\d)/$',login_required(views.print_profoma), name = "print_profoma" ),
-    # not working 
+    # not working
     url('^invoice/profoma/payement/(?P<pk>\d)/$',login_required(views.make_payment), name = "payment" ),
     url('^invoice/invoices/list/',login_required(views.list_invoices), name = "invoices" ),
     url('^invoice/profoma/print/invoice/(?P<pk>\d)/$',views.print_invoice, name = "print_invoice" ),
@@ -30,4 +31,12 @@ urlpatterns = [
     url('^payroll/edit/(?P<pk>\d)/$', login_required(views.UpdatePayrollView.as_view()), name ="edit_payroll"),
     url('^payroll/generate/(?P<pk>\d)/$', login_required(views.generate_payroll), name ="detail_payroll"),
     url('^payslip/list/', login_required(views.payslip), name ="payslip"),
+    #sales
+
+    url('^sales/list/', login_required(vsales.ListSalesView.as_view()), name = 'sales_list'),
+    url('^sales/create/', login_required(vsales.CreateSalesView.as_view()), name = 'sales_add'),
+    url('^sales/edit/(?P<pk>\d+)/$', login_required(vsales.UpdateSalesView.as_view()), name = 'sales_edit'),
+    url('^sales/details/(?P<pk>\d+)/$', login_required(vsales.DetailSalesView.as_view()), name = 'sales_detail'),
+    url('^sales/delete/(?P<pk>\d+)/$', login_required(vsales.DeleteSalesView.as_view()), name = 'sales_delete'),
+
 ]+static(settings.STATIC_URL, document_root=settings.STATIC_DIR)
