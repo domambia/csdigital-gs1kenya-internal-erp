@@ -16,7 +16,7 @@ Adding a sale for  a specific invoice
 '''
 class CreateSalesView(SuccessMessageMixin, CreateView):
     model = Sales
-    fields = ('amount_paid', 'member', 'invoice', 'payment_due', 'payment_terms', 'amount_paid',)
+    fields = ('member', 'invoice', 'payment_due', 'payment_terms',)
     success_message = "Successfully! Created a sale"
     template_name = "sales/sales_form.html"
     def get_context_data(self, **kwargs):
@@ -31,7 +31,7 @@ Listing all the sales
 class ListSalesView(SuccessMessageMixin, ListView):
     model = Sales
     context_object_name  = "sales"
-    fields = ('member', 'invoice', 'payment_due', 'payment_terms', 'amount_paid',)
+    fields = ('member', 'invoice', 'payment_due', 'payment_terms',)
     template_name = "sales/sales_list.html"
     def get_context_data(self, **kwargs):
         context  = super(ListSalesView, self).get_context_data(**kwargs)

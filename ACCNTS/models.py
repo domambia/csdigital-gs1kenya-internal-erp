@@ -65,7 +65,6 @@ Sales models
 class Sales(models.Model):
     member = models.ForeignKey(Client, on_delete = models.CASCADE, default = 1)
     invoice = models.ForeignKey(Invoice, on_delete = models.CASCADE, default = 1)
-    amount_paid = models.IntegerField(default = 0)
     payment_due = models.DateField(default =datetime.datetime.now)
     payment_terms = models.CharField(max_length = 200)
     date_of_sale = models.DateField(default = datetime.datetime.now)

@@ -31,7 +31,7 @@
                                 <form method="POST" enctype="multipart/form-data">
                                         {% csrf_token %}
                                     <div class="row">
-                                        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
+                                        <div class="col-lg-6 col-md-4 col-sm-3 col-xs-6">
                                             <div class="form-group form-float">
                                                <div class="form-line">
                                                     {{ form.member | add_class:"form-control"}}
@@ -44,26 +44,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
+                                    <div class="col-lg-6 col-md-4 col-sm-3 col-xs-6">
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 {{ form.payment_terms | add_class:"form-control"}}
                                                 <label class="form-label">Terms Payment</label>
                                                     <ul>
                                                     {% for error in form.payment_terms.errors%}
-                                                    <li class="alert alert-danger">{{ error }}</li>
-                                                    {% endfor %}
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
-                                        <div class="form-group form-float">
-                                            <div class="form-line">
-                                                {{ form.invoice | add_class:"form-control"}}
-                                                <label class="form-label">Choice Invoice</label>
-                                                <ul>
-                                                    {% for error in form.invoice.errors%}
                                                     <li class="alert alert-danger">{{ error }}</li>
                                                     {% endfor %}
                                                 </ul>
@@ -77,10 +64,10 @@
                             <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        {{ form.amount_paid | add_class:"form-control"}}
-                                        <label class="form-label">Amount Paid</label>
+                                        {{ form.invoice | add_class:"form-control"}}
+                                        <label class="form-label">Choose Invoice</label>
                                         <ul>
-                                            {% for error in form.amount_paid.errors%}
+                                            {% for error in form.invoice.errors%}
                                             <li class="alert alert-danger">{{ error }}</li>
                                             {% endfor %}
                                         </ul>

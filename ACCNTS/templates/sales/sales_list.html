@@ -38,7 +38,7 @@
                                       <td>{{ sale.payment_terms }}</td>
                                       <td>{{ sale.date_of_sale }}</td>
                                       <td>{{ sale.payment_due }}</td>
-                                      <td>ksh. {{ sale.amount_paid }}.00</td>
+                                      <td>ksh. {{ sale.member.category }}.00</td>
                                       <td>
                                           <span> <a href = "{% url 'ACCNTS:sales_detail' pk=sale.id %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>
                                           <span> <a href = "{% url 'ACCNTS:sales_edit' pk=sale.id %}"><i class="material-icons">edit</i></a> </span>
