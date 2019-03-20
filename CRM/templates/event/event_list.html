@@ -31,7 +31,7 @@
                                   <tr>
                                       <td>{{ event.event_name }}</td>
                                       <td>{{ event.date_time }}</td>
-                                      <td>{{ event.training.number_of_trainee }}</td>
+                                      <td>{{ event.training|length }}</td>
                                       <td style="text-align:center;">
                                             {% if event.status == 0%}
                                                 <span class="btn label bg-orange">Coming Soon /Cancelled</span>
