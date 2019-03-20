@@ -250,7 +250,20 @@
               </div>
           </div>
           <div class="row clearfix">
-            <div class="col-md-6">
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <div class="form-line">
+                          <label for="{{ form.bank.id_for_label }}">Bank Account</label>
+                          {{ form.bank|add_class:"form-control" }}
+                          <ul>
+                              {% for error in form.bank.errors%}
+                              <li class="alert alert-danger">{{ error }}</li>
+                              {% endfor %}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+            <div class="col-md-4">
                 <div class="form-group">
                     <div class="form-line">
                         <label for="{{ form.profile_pic.id_for_label }}">Profile Picture</label>
@@ -263,7 +276,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     <div class="form-line">
                         <label for="{{ form.company_benifits.id_for_label }}">Company Benifits</label>

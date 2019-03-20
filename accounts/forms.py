@@ -25,7 +25,7 @@ class EmployeeForm(forms.ModelForm):
         fields = ('address', 'phone', 'date_of_birth',
         'county', 'dependant_name', 'dependant_contact', 'dependant_relationship',
                   'position', 'salary', 'kin_email', 'alt_phone_number', 'profile_pic',
-                  'company_benifits', 'nssf_no', 'nhif_no', 'employee_no', 'KRA', 'id_no',)
+                  'company_benifits', 'nssf_no', 'nhif_no', 'employee_no', 'KRA', 'id_no', 'bank')
 
 class DependentForm(forms.ModelForm):
     class Meta:

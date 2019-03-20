@@ -130,7 +130,7 @@ class EmployeeUpdateView(SuccessMessageMixin, UpdateView):
     fields = ('address', 'phone', 'date_of_birth',
         'county', 'dependant_name', 'dependant_contact', 'dependant_relationship',
         'position', 'salary', 'kin_email', 'alt_phone_number', 'profile_pic', 'company_benifits',
-              'KRA', 'id_no', 'nssf_no', 'nhif_no', 'employee_no',)
+              'KRA', 'id_no', 'nssf_no', 'nhif_no', 'employee_no', 'bank',)
     model = Employee
     success_message = "Successfully! Updated employee data."
     template_name  = "accounts/edit.html"
