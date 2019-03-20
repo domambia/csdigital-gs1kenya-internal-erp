@@ -13,6 +13,8 @@ from django.urls import reverse
 from datetime import datetime
 from helpers.sendSMS import SMS
 from CRM.forms import TrainForm, EditClient
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
 # Create your views here.
 '''
 The views for the CRM part of the ERP
@@ -31,11 +33,12 @@ def index(request):
     return render(request, "home/index.html",
                         {'clients': clients, 'suppliers': suppliers, 'feedbacks': feedbacks, 'trainings': trainings, "employee": employee})
 
-class ClientCreateView(CreateView):
+class ClientCreateView(SuccessMessageMixin, CreateView):
     fields = ('company_name', 'company_phone', 'company_phone_alt', 'company_email','certificate_of_incorporation','copy_of_id', 'copy_of_blank_cheque',
             'copy_of_trade_licence', 'list_of_product_barcoded', 'director_pin_number', 'company_certificate_pin', 'copy_of_kebs_certicate',
              'company_email_alt', 'post_address', 'physical_location', 'director_info','sector','date_of_issue', 'nature_of_business')
     model = Client
+    success_message = "Successfully! Created a member"
     template_name = "client/client_form.html"
     def get_context_data(self, **kwargs):
         context = super(ClientCreateView, self).get_context_data(**kwargs)
@@ -55,11 +58,12 @@ def all_clients(request):
     clients = Client.objects.all()
     return render(request, "client/client_list.html", {"clients": clients, "employee":employee})
 
-class ClientUpdateView(UpdateView):
+class ClientUpdateView(SuccessMessageMixin,UpdateView):
     model = Client
     fields = ('company_name', 'company_phone', 'company_phone_alt', 'company_email','certificate_of_incorporation','copy_of_id', 'copy_of_blank_cheque',
             'copy_of_trade_licence', 'list_of_product_barcoded', 'director_pin_number', 'company_certificate_pin', 'copy_of_kebs_certicate',
              'company_email_alt', 'post_address', 'physical_location', 'director_info','sector','date_of_issue', 'nature_of_business')
+    success_message = "Sucessfully! Updated member details"
     template_name = "client/client_form.html"
     def get_context_data(self, **kwargs):
         context = super(ClientUpdateView, self).get_context_data(**kwargs)
@@ -100,6 +104,7 @@ def membership(request, pk):
     client = Client.objects.get(id = pk)
     client.is_me1 = 1
     client.save()
+    messages.success(request, "Member Executive. Successfully! Approved member")
     print("ME1 -Approved")
     notify(employee.phone , employee.user.first_name, employee.user.last_name, client.company_name, datetime.now().date())
     return HttpResponseRedirect(reverse('CRM:list_client'))
@@ -108,6 +113,7 @@ def membership_2(request, pk):
     client = Client.objects.get(id = pk)
     client.is_me2 = 1
     client.save()
+    messages.success(request, "Member Executive. Successfully! Approved member")
     print("ME2 -Approved")
     return HttpResponseRedirect(reverse('CRM:list_client'))
 
@@ -120,6 +126,7 @@ def communication(request, pk):
     client.save()
     print("CCM -Approved")
     SMS().send(employee.phone, msg)
+    messages.success(request, "Corporate Communication. Successfully! Approved member")
     return HttpResponseRedirect(reverse('CRM:list_client'))
 
 def accounts_manager(request, pk):
@@ -127,6 +134,7 @@ def accounts_manager(request, pk):
     client = Client.objects.get(id = pk)
     client.is_accm = 1
     client.save()
+    messages.success(request, "Accounts Manager. Successfully! Approved member")
     print("ACCM -Approved")
     print("ME1 -Approved")
     notify(employee.phone , employee.user.first_name, employee.user.last_name, client.company_name, datetime.now().date())
@@ -139,6 +147,7 @@ def accounts(request, pk):
     client.save()
     print("CACC -Approved")
     notify(employee.phone , employee.user.first_name, employee.user.last_name, client.company_name, datetime.now().date())
+    messages.success(request, "Accounts Executive. Successfully! Approved member")
     return HttpResponseRedirect(reverse('CRM:list_client'))
 
 def accounts_ex(request, pk):
@@ -154,7 +163,7 @@ def accounts_ex(request, pk):
 Assign Member Number:
 '''
 class AssignMemberNumber(UpdateView):
-    model = Client 
+    model = Client
     fields = ('member_number','member_prefix')
     template_name = "client/member_form.html"
     def get_context_data(self, **kwargs):
@@ -163,7 +172,7 @@ class AssignMemberNumber(UpdateView):
         return context
 #choose category for the member
 class AddCategoryNumber(UpdateView):
-    model = Client 
+    model = Client
     fields = ('category',)
     template_name = "client/category_form.html"
     def get_context_data(self, **kwargs):
@@ -178,7 +187,7 @@ def assign_member_details(request, pk):
                     instance = get_object_or_404(Client, pk=pk))
     client = Client.objects.get(id = pk)
     phone = client.company_phone
-    company_name = client.company_name 
+    company_name = client.company_name
     employee = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
     if request.method == "POST":
         if form.is_valid():
@@ -188,7 +197,7 @@ def assign_member_details(request, pk):
             form.save()
             SMS().send(phone, message.format(company_name, member_number, member_prefix))
             return HttpResponseRedirect(reverse('CRM:list_client'))
-    return render(request, 'client/member_form.html', {'form': form, 
+    return render(request, 'client/member_form.html', {'form': form,
                                             'employee': employee})
 
 
@@ -206,6 +215,7 @@ def technical(request, pk):
         SMS().send(employee.phone, msg_1)
         SMS().send(employee_2.phone, msg)
         print("TM -Approved")
+        messages.success(request, "Technical Executive. Successfully! Approved member")
         return HttpResponseRedirect(reverse('CRM:list_client'))
 
 def general_manager(request, pk):
@@ -215,15 +225,17 @@ def general_manager(request, pk):
     client.save()
     message = "Dear {} your membership has been approved with member number  [{}] by GS1 KENYA"
     SMS().send(client.company_phone, message.format(client.company_name, client.member_number))
+    messages.success(request, "General Manager. Successfully! Approved member")
     print("GM -Approved")
     return HttpResponseRedirect(reverse('CRM:list_client'))
 
 '''
 End of Approval
 '''
-class ClientDeleteView(DeleteView):
+class ClientDeleteView(SuccessMessageMixin, DeleteView):
     model = Client
     template_name = "client/client_delete_confirm.html"
+    success_message = "Successfully! Deleted a member"
     success_url = reverse_lazy("CRM:list_client")
     def get_context_data(self, **kwargs):
         context = super(ClientDeleteView, self).get_context_data(**kwargs)
@@ -235,8 +247,9 @@ class ClientDeleteView(DeleteView):
 The supplier views
 
 '''
-class SupplierCreateView(CreateView):
+class SupplierCreateView(SuccessMessageMixin, CreateView):
     model = Supplier
+    success_message = "Successfully! add a supplier"
     fields = ('name', 'phone', 'country', 'website', 'description')
     template_name = "supplier/supplier_form.html"
     def get_context_data(self, **kwargs):
@@ -256,8 +269,9 @@ class SupplierListView(ListView):
         context['employee'] = Employee.objects.get(user = user)
         return context
 
-class SupplierUpdateView(UpdateView):
+class SupplierUpdateView(SuccessMessageMixin, UpdateView):
     model = Supplier
+    success_message = "Successfully! Updated a supplier"
     fields = ('name', 'phone', 'country', 'website', 'description')
     template_name = "supplier/supplier_form.html"
     def get_context_data(self, **kwargs):
@@ -276,8 +290,9 @@ class SupplierDetailView(DetailView):
         context['employee'] = Employee.objects.get(user=user)
         return context
 
-class SupplierDeleteView(DeleteView):
+class SupplierDeleteView(SuccessMessageMixin, DeleteView):
     model = Supplier
+    success_message = "Successfully! Deleted a supplier"
     template_name = "supplier/supplier_delete_confirm.html"
     success_url = reverse_lazy("CRM:list_supplier")
     def get_context_data(self, **kwargs):
@@ -290,8 +305,9 @@ class SupplierDeleteView(DeleteView):
 The Feedback Views
 '''
 
-class FeedbackCreateView(CreateView):
+class FeedbackCreateView(SuccessMessageMixin, CreateView):
     model = Feedback
+    success_message = "Successfully! add a feedback."
     fields = ('client_name', 'feedback', 'status')
     template_name  = "feedback/feedback_form.html"
     def get_context_data(self, **kwargs):
@@ -302,8 +318,9 @@ class FeedbackCreateView(CreateView):
 
 
 
-class FeedbackUpdateView(UpdateView):
+class FeedbackUpdateView(SuccessMessageMixin, UpdateView):
     model = Feedback
+    success_message = "Successfully! Updated a feedback"
     fields = ('client_name', 'feedback', 'status')
     template_name  = "feedback/feedback_form.html"
     def get_context_data(self, **kwargs):
@@ -324,8 +341,9 @@ class FeedbackListView(ListView):
         return context
 
 
-class FeedbackDeleteView(DeleteView):
+class FeedbackDeleteView(SuccessMessageMixin, DeleteView):
     model = Feedback
+    success_message  = "Successfully! Deleted a feedback"
     template_name = "feedback/feedback_delete_confirm.html"
     success_url = reverse_lazy("CRM:list_feedback")
     def get_context_data(self, **kwargs):
@@ -362,11 +380,9 @@ def close(request, pk):
     print(feedback.status)
     return HttpResponseRedirect(reverse('CRM:list_feedback'))
 
-
 '''
 The Training Feedback
 '''
-
 def get_clients():
     list_clients = Client.objects.all()
     clients = []
@@ -374,8 +390,9 @@ def get_clients():
         clients.append((cl.id, cl.company_name ,))
     return tuple(clients)
 
-class TrainingCreateView(CreateView):
-    model = Training 
+class TrainingCreateView(SuccessMessageMixin, CreateView):
+    model = Training
+    success_message = "Successfully! Created a training"
     fields = ('trainer', 'happened_on', 'all_trainee', 'description')
     template_name  = "training/training_form.html"
     def get_context_data(self, **kwargs):
@@ -384,8 +401,9 @@ class TrainingCreateView(CreateView):
         context['employee'] = Employee.objects.get(user=user)
         return context
 
-class TrainingUpdateView(UpdateView):
+class TrainingUpdateView(SuccessMessageMixin, UpdateView):
     model = Training
+    success_message = "Successfully! Updated a training .."
     fields = ('trainer','happened_on', 'all_trainee', 'description')
     template_name  = "training/training_form.html"
     def get_context_data(self, **kwargs):
@@ -406,8 +424,9 @@ class TrainingListView(ListView):
         return context
 
 
-class TrainingDeleteView(DeleteView):
+class TrainingDeleteView(SuccessMessageMixin, DeleteView):
     model = Training
+    success_message = "Successfully! Deleted a training"
     template_name = "training/training_confirm_delete.html"
     success_url = reverse_lazy("CRM:list_training")
     def get_context_data(self, **kwargs):
@@ -430,8 +449,9 @@ class TrainingDetailView(DetailView):
 '''
 Create the Event View
 '''
-class CreateEventView(CreateView):
+class CreateEventView(SuccessMessageMixin, CreateView):
     model = Event
+    success_message  = "Successfully! Created a training event"
     fields = ('event_name', 'training')
     template_name = "event/event_form.html"
     def get_context_data(self, **kwargs):
@@ -451,8 +471,9 @@ class ListEventView(ListView):
         context['employee'] = Employee.objects.get(user=user)
         return context
 
-class UpdateEventView(UpdateView):
+class UpdateEventView(SuccessMessageMixin, UpdateView):
     model = Event
+    success_message = "Successfully! Updated training event"
     fields = ('event_name', 'training')
     template_name = "event/event_form.html"
     def get_context_data(self, **kwargs):
@@ -471,8 +492,9 @@ class DetailEventView(DetailView):
         context['employee'] = Employee.objects.get(user=user)
         return context
 
-class DeleteEventView(DeleteView):
+class DeleteEventView(SuccessMessageMixin, DeleteView):
     model = Event
+    success_message  = "Successfully! Deleted a training event"
     success_url = "CRM:list_event"
     template_name = "event/event_confirm_delete.html"
     def get_context_data(self, **kwargs):
@@ -480,7 +502,6 @@ class DeleteEventView(DeleteView):
         user = self.request.user
         context['employee'] = Employee.objects.get(user=user)
         return context
-
 
 '''
 Barcode Details
@@ -495,10 +516,11 @@ class BarcodeListView(ListView):
         context['employee'] = Employee.objects.get(user = user)
         return context
 
-class BarcodeCreateView(CreateView):
+class BarcodeCreateView(SuccessMessageMixin, CreateView):
     fields = ('GTIN', 'client', 'product_description', 'brand_name', 'name_packaging', 'type',
                 'depth', 'width', 'height', 'gross_weight', 'net_weight', 'size')
     model = Barcode
+    success_message = "Successfully! Create a barcode and assigned it t a member"
     template_name  = "barcode/barcode_form.html"
     def get_context_data(self, **kwargs):
         context = super(BarcodeCreateView, self).get_context_data(**kwargs)
@@ -506,10 +528,11 @@ class BarcodeCreateView(CreateView):
         context['employee'] = Employee.objects.get(user = user)
         return context
 
-class BarcodeUpdateView(UpdateView):
+class BarcodeUpdateView(SuccessMessageMixin, UpdateView):
     fields = ('GTIN', 'client', 'product_description', 'brand_name', 'name_packaging', 'type',
                 'depth', 'width', 'height', 'gross_weight', 'net_weight', 'size')
     model = Barcode
+    success_message = "Successfully! Updated a barcode bank for a member"
     template_name  = "barcode/barcode_form.html"
     def get_context_data(self, **kwargs):
         context = super(BarcodeUpdateView, self).get_context_data(**kwargs)
@@ -518,8 +541,9 @@ class BarcodeUpdateView(UpdateView):
         return context
 
 
-class BarcodeDeleteView(DeleteView):
+class BarcodeDeleteView(SuccessMessageMixin, DeleteView):
     model = Barcode
+    success_message = "Sucessfully! Deleted a barcode for a member"
     template_name  = "barcode/barcode_confirm_delete.html"
     success_url = reverse_lazy("CRM:list_barcode")
     def get_context_data(self, **kwargs):
@@ -537,4 +561,3 @@ class BarcodeDetailView(DetailView):
         user = self.request.user
         context['employee'] = Employee.objects.get( user= user)
         return context
-

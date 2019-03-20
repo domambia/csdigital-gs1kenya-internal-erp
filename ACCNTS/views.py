@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.models import User 
+from django.contrib.auth.models import User
 from django.urls import reverse_lazy, reverse
 from accounts.models import Employee
 from ACCNTS.models import Invoice, PayRoll, Payment
@@ -13,6 +13,8 @@ from easy_pdf.rendering import render_to_pdf_response
 from ACCNTS.forms import PaymentForm
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 
 #imports for creating pdf
 
@@ -22,8 +24,9 @@ def dashboard(request):
     return render(request, "accnts/dashboard.html", {"employee": employee })
 
 # profoma invoice Views
-class CreateInvoiceView(CreateView):
+class CreateInvoiceView(SuccessMessageMixin, CreateView):
     model = Invoice
+    success_message  = "Sucessfully! Opened a profoma invoice"
     fields = ('member', 'description', 'VAT')
     template_name = "accnts/invoice/invoice_form.html"
     def get_context_data(self, **kwargs):
@@ -40,8 +43,9 @@ class ListInvoiceView(ListView):
         context['employee'] = Employee.objects.get(user=self.request.user.id)
         return context
 
-class UpdateInvoiceView(UpdateView):
+class UpdateInvoiceView(SuccessMessageMixin, UpdateView):
     model = Invoice
+    success_message = "Sucessfully! Updated a profoma invoice"
     fields = ('member', 'description', 'VAT')
     template_name = "accnts/invoice/invoice_form.html"
     def get_context_data(self, **kwargs):
@@ -49,8 +53,9 @@ class UpdateInvoiceView(UpdateView):
         context['employee'] = Employee.objects.get(user=self.request.user.id)
         return context
 
-class DeleteInvoiceView(DeleteView):
+class DeleteInvoiceView(SuccessMessageMixin, DeleteView):
     model = Invoice
+    sucess_message = "Successfully! Deleted a profoma invoice"
     template_name = "accnts/invoice/invoice_delete.html"
     success_url = reverse_lazy("ACCNTS:list_profoma")
     def get_context_data(self, **kwargs):
@@ -219,8 +224,9 @@ def get_nhif(basic_salary):
     return nhif
 
 
-class CreatePayrollView(CreateView):
+class CreatePayrollView(SuccessMessageMixin, CreateView):
     model = PayRoll
+    success_message = "Successfully! Created %(employee)s payslip"
     fields = ('employee', 'hse_allowance', 'transport_allowance', 'loans', 'other_deductions','leave_allowance', 'month')
     template_name  = 'accnts/payroll/payroll_form.html'
     def get_context_data(self, **kwargs):
@@ -238,8 +244,9 @@ class ListPayrollView(ListView):
         context['employee'] = Employee.objects.get(user = self.request.user.id)
         return context
 
-class UpdatePayrollView(UpdateView):
+class UpdatePayrollView(SuccessMessageMixin, UpdateView):
     model = PayRoll
+    success_message = "Sucessfully! Update  employee's payslip"
     fields = ('employee', 'hse_allowance', 'transport_allowance', 'loans', 'other_deductions','leave_allowance', 'month')
     template_name  = 'accnts/payroll/payroll_form.html'
     def get_context_data(self,**kwargs):
@@ -263,15 +270,11 @@ def generate_payroll(request, pk):
     basic_salary  = int(payroll.employee.salary)
     nhif = get_nhif(basic_salary)
     nssf = get_nssf(basic_salary)
-    print(nssf)
     gross_salary = basic_salary + total_allowances
-    print(gross_salary)
     taxable_income = (gross_salary - nssf)
-
     tax =  round((get_tax(taxable_income) - 1408),2)
-
     net_income = gross_salary - (loans + nhif + other_deductions + tax)
-
+    gen_payslip(employee, payroll, gross_salary, tax, total_allowances, net_income)
     return render(request, "accnts/payroll/payroll_generate.html",{'employee': employee,
                                                                'payroll':  payroll,
                                                                'gross_salary': gross_salary,
@@ -280,12 +283,46 @@ def generate_payroll(request, pk):
                                                                'total_allowances':total_allowances,
                                                                'net_income':net_income})
 
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter, landscape
+from reportlab.platypus import Image
+from reportlab.graphics.shapes import Line
+import os
+def gen_payslip(employee, payroll, gross_salary, tax, total_allowances, net_income):
+    base_dir = os.path.dirname(__file__)
+    logo = base_dir + '/logo.png'
+    c = canvas.Canvas(employee.user.first_name+"_"+employee.user.last_name+".pdf")
+    print("Printing Logo")
+    c.drawImage(logo, 60, 60, width = None, height = None)
+    c.setFont('Helvetica', 18)
+    c.drawString(30, 100, "Payslip for the month of{}".format(payroll.month))
+    c.drawString(30, 105, "Name:")
+    c.drawString(30, 107, "Employee No:")
+    c.drawString(30, 109, "Id No:")
+    c.drawString(30, 111, "PAYE No:")
+    c.drawString(30, 113, "NSSF No:")
+    c.drawString(30, 115, "NHIF No:")
+    c.drawString(30, 117, "Title")
+    c.setFont('Helvetica-Bold', 18)
+    c.drawString(70, 105, employee.user.first_name + " " + employee.user.last_name)
+    c.drawString(70, 107, employee.employee_no)
+    c.drawString(70, 109, str(employee.id_no))
+    c.drawString(70, 111, employee.KRA)
+    c.drawString(70, 113, employee.nssf_no)
+    c.drawString(70, 115, employee.nhif_no)
+    c.drawString(70, 117, employee.position.name)
+    print("Finished printing")
+    c.showPage()
+    c.save()
+
+
 
 # payment via invoice to users using using Payment model
 # Creating invoice
 
-class CreatePaymentView(CreateView):
+class CreatePaymentView(SuccessMessageMixin, CreateView):
     model = Payment
+    success_message  = "Successfully! Created and invoice for %(member)s"
     template_name  = "accnts/invoice/payment_form.html"
     fields = ('member', 'description', 'VAT', 'amount', 'payment_for',)
     def get_context_data(self, **kwargs):
@@ -316,8 +353,9 @@ class DetailPaymentView(DetailView):
         return context
 
 
-class UpdatePaymentView(UpdateView):
+class UpdatePaymentView(SuccessMessageMixin, UpdateView):
     model = Payment
+    success_message = "Successfully! Updated member invoice"
     fields = ('member', 'description', 'VAT', 'amount', 'payment_for',)
     template_name  = "accnts/invoice/payment_form.html"
 
@@ -327,8 +365,9 @@ class UpdatePaymentView(UpdateView):
         return context
 
 
-class DeletePaymentView(DeleteView):
+class DeletePaymentView(SuccessMessageMixin, DeleteView):
     model = Payment
+    success_message  = "Successfully! Deleted an invoice"
     template_name  = "accnts/invoice/payment_delete.html"
     success_url = reverse_lazy('ACCNTS:payment_list')
     def get_context_data(self, **kwargs):

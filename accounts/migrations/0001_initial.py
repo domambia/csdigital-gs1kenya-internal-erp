@@ -26,6 +26,7 @@ class Migration(migrations.Migration):
                 ('nhif_no', models.CharField(default = "NHIF_NO", max_length=50)),
                 ('KRA', models.CharField(default="KRA_PIN", max_length=30)),
                 ('employee_no', models.CharField(default = 'GS1_NO', max_length =50)),
+                ('bank', models.IntegerField( default = 123456)),
                 ('date_of_birth', models.CharField(max_length=20)),
                 ('next_of_kin_name', models.CharField(blank=True, max_length=60)),
                 ('kin_email', models.CharField(blank=True, max_length=100)),

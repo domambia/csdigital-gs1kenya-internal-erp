@@ -7,11 +7,13 @@ from django.views.generic import (DetailView,
                                  CreateView,
                                  UpdateView,
                                  DeleteView )
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
 
-
-class CreateDepartmentView(CreateView):
+class CreateDepartmentView(SuccessMessageMixin, CreateView):
     fields = ('name', 'initials')
     model = models.Department
+    success_message = "Successfully! Created %(name)s department"
     template_name = "departments/department_form.html"
     def get_context_data(self, **kwargs):
         context = super(CreateDepartmentView, self).get_context_data(**kwargs)
@@ -39,9 +41,10 @@ class DetailDepartmentView(DetailView):
         context['employee'] = Employee.objects.get(user = user.id)
         return context
 
-class UpdateDepartmentView(UpdateView):
+class UpdateDepartmentView(SuccessMessageMixin, UpdateView):
     fields = ('name', 'initials')
     model = models.Department
+    success_message = "Successfully! Update %(name)s department"
     def get_context_data(self, **kwargs):
         context = super(UpdateDepartmentView, self).get_context_data(**kwargs)
         user = self.request.user
@@ -49,8 +52,9 @@ class UpdateDepartmentView(UpdateView):
         return context
 
 
-class DeleteDepartmentView(DeleteView):
+class DeleteDepartmentView(SuccessMessageMixin, DeleteView):
     model = models.Department
+    success_message = "Successfully! Deleted a department"
     success_url = reverse_lazy("departments:list_department")
     def get_context_data(self, **kwargs):
         context = super(DeleteDepartmentView, self).get_context_data(**kwargs)
@@ -66,10 +70,11 @@ This helps in the manipulation of the Job Positons Part for
 the GS1 ERP systemself.
 """
 
-class CreatePositionView(CreateView):
+class CreatePositionView(SuccessMessageMixin, CreateView):
     fields = ('name', 'initials', 'department')
     model = models.Position
     context_object_name = "form"
+    success_message = "Sucessfully! Created a new job position"
     template_name = "departments/position_form.html"
     def get_context_data(self, **kwargs):
         context = super(CreatePositionView, self).get_context_data(**kwargs)
@@ -87,9 +92,10 @@ class DetailPositionView(DetailView):
         context['employee'] = Employee.objects.get(user = user.id)
         return context
 
-class UpdatePositionView(UpdateView):
+class UpdatePositionView(SuccessMessageMixin, UpdateView):
     fields = ('name', 'initials', 'department')
     model = models.Position
+    success_message = "Successfully! Update a job position"
     template_name = "departments/position_form.html"
     def get_context_data(self, **kwargs):
         context = super(UpdatePositionView, self).get_context_data(**kwargs)
@@ -107,8 +113,9 @@ class ListPositionView(ListView):
         context['employee'] = Employee.objects.get(user = user.id)
         return context
 
-class DeletePositionView(DeleteView):
+class DeletePositionView(SuccessMessageMixin, DeleteView):
     model = models.Position
+    success_message = "Successfully! Deleted a Job position"
     success_url = reverse_lazy("departments:list_position")
     def get_context_data(self, **kwargs):
         context = super(DeletePositionView, self).get_context_data(**kwargs)

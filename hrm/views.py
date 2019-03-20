@@ -8,6 +8,8 @@ from hrm.models import Performance
 from django.urls import reverse_lazy,  reverse
 from hrm.forms import PerformanceForm
 from django.http import HttpResponseRedirect
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
 # Create your views here.
 
 def index(request):
@@ -27,10 +29,10 @@ def index(request):
 Perfomance Control 
 '''
 
-class CreatePerformanceView(CreateView):
+class CreatePerformanceView(SuccessMessageMixin, CreateView):
     model = Performance 
     fields = ('employee', 'start_date', 'finish_date', 'objective')
-
+    success_message  = "Successfully! Created employee and appraisal..."
     template_name = "hrm/performance/performance_form.html"
     def get_context_data(self, **kwargs):
         context = super(CreatePerformanceView, self).get_context_data(**kwargs)
@@ -48,35 +50,37 @@ class ListPerformanceView(ListView):
         return context 
 
 
-class UpdatePerformanceView(UpdateView):
-    model = Performance 
+class UpdatePerformanceView(SuccessMessageMixin, UpdateView):
+    model = Performance
     fields = ('employee', 'start_date', 'finish_date', 'objective')
+    success_message = "Successfully! Updated an appraisal"
     context_object_name = "performance"
     template_name = "hrm/performance/performance_form.html"
     def get_context_data(self, **kwargs):
         context = super(UpdatePerformanceView, self).get_context_data(**kwargs)
         context['employee'] = Employee.objects.get(user = self.request.user.id)
-        return context 
+        return context
 
 
 class DetailPerformanceView(DetailView):
-    model = Performance 
+    model = Performance
     context_object_name = "performance"
     template_name = "hrm/performance/performance_details.html"
     def get_context_data(self, **kwargs):
         context = super(DetailPerformanceView, self).get_context_data(**kwargs)
         context['employee'] = Employee.objects.get(user = self.request.user.id)
-        return context 
+        return context
 
 
-class DeletePerformanceView(DeleteView):
-    model = Performance 
+class DeletePerformanceView(SuccessMessageMixin, DeleteView):
+    model = Performance
+    success_message = "Successfully! Deleted an appraisal."
     success_url = reverse_lazy("hrm:perfom_list")
     template_name = "hrm/performance/performance_delete.html"
     def get_context_data(self, **kwargs):
         context = super(DeletePerformanceView, self).get_context_data(**kwargs)
         context['employee'] = Employee.objects.get(user = self.request.user.id)
-        return context 
+        return context
 
 '''
 Showing an employees perfomance control
@@ -100,6 +104,7 @@ def perfomance_notes(request, pk):
     if request.method == "POST":
         if form.is_valid():
             form.save()
+            messages.success(request, "Successfully! Added notes on what you have done.")
             return HttpResponseRedirect(reverse('hrm:perfom_employee'))
     return render(request, "hrm/performance/performance_notes.html", {'form': form, 'employee': employee})
 
@@ -107,4 +112,5 @@ def appraisal(request, pk):
     perform = Performance.objects.get(id = pk)
     perform.status = 1
     perform.save()
+    messages.success(request, "Successfully! Appraised employee work....")
     return HttpResponseRedirect(reverse('hrm:perfom_list'))

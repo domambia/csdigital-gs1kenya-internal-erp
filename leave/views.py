@@ -13,7 +13,8 @@ from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
 from easy_pdf.rendering import render_to_pdf_response
-
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
 
 class LeaveListView(ListView):
     context_object_name = "leaves"
@@ -35,9 +36,10 @@ class LeaveDetailView(DetailView):
         return context
 
 
-class LeaveCreateView(CreateView):
+class LeaveCreateView(SuccessMessageMixin, CreateView):
     fields = ('name', 'description',)
     model = Leave
+    success_message = "Successfully! Created type of a leave"
     context_object_name = "form"
     def get_context_data(self, **kwargs):
         context = super(LeaveCreateView, self).get_context_data(**kwargs)
@@ -45,9 +47,10 @@ class LeaveCreateView(CreateView):
         context['employee'] = Employee.objects.get(user = user.id)
         return context
 
-class LeaveUpdateView(UpdateView):
+class LeaveUpdateView(SuccessMessageMixin, UpdateView):
     fields = ('name', 'description',)
     model = Leave
+    success_message = "Successfully! Update a leave type"
     context_object_name = "form"
     def get_context_data(self, **kwargs):
         context = super(LeaveUpdateView, self).get_context_data(**kwargs)
@@ -55,8 +58,9 @@ class LeaveUpdateView(UpdateView):
         context['employee'] = Employee.objects.get(user = user.id)
         return context
 
-class LeaveDeleteView(DeleteView):
+class LeaveDeleteView(SuccessMessageMixin, DeleteView):
     model = Leave
+    success_message = "Successfully! Deleted a leave type"
     success_url = reverse_lazy("leave:leave_list")
     def get_context_data(self, **kwargs):
         context = super(LeaveDeleteView, self).get_context_data(**kwargs)
@@ -65,10 +69,11 @@ class LeaveDeleteView(DeleteView):
         return context
 
 
-class CreateApplyLeaveView(CreateView):
+class CreateApplyLeaveView(SuccessMessageMixin, CreateView):
     model = ApplyLeave
     fields = ('start_date', 'resume_date', 'home_phone','person_taking_charge', 'leave', 'employee', 'end_date')
     context_object_name = 'form'
+    success_message = "Sucessfully! Applied for a leave"
     template_name = "leave/applyleave_form.html"
     def get_context_data(self, **kwargs):
         context = super(CreateApplyLeaveView, self).get_context_data(**kwargs)
@@ -77,28 +82,7 @@ class CreateApplyLeaveView(CreateView):
         context['current_user'] = User.objects.get(username = self.request.user)
         context['phone_number'] = context['employee'].alt_phone_number
         print(context)
-        return context 
-
-# def applyleave(request):
-#     form = ApplyForm(request.POST or None)
-#     employee = Employee.objects.get(user = request.user.id)
-#     current_user = User.objects.get(username = request.user)
-#     phone_number = employee.alt_phone_number
-#     print("calling this method")
-#     if request.method == "POST":    
-#         if form.is_valid():
-#             print(form.changed_data['employee'])
-#             form.save()
-#             return HttpResponseRedirect(reverse('leave:applyleave_list'))
-#     print("Omambia is Angry")  
-#     return render(request,"leave/applyleave_form.html", {'current_user': current_user, 'phone_number': phone_number, 'form': form, "employee": employee})
-
-# class ApplyLeaveListView(ListView):
-#     context_object_name = "applied_leaves"
-#     model = ApplyLeave
-#     template_name = "leave/applyleave_list.html"
-
-
+        return context
 def list_applyleave(request):
     leaves = ApplyLeave.objects.all()
     current_user = User.objects.get(username = request.session['username'])
@@ -107,12 +91,13 @@ def list_applyleave(request):
 
     return render(request, "leave/applyleave_list.html", {"leaves": leaves, "employee": employee, "user_leaves": user_leaves})
 
-class ApplyLeaveUpdateView(UpdateView):
-    model = ApplyLeave 
+class ApplyLeaveUpdateView(SuccessMessageMixin, UpdateView):
+    model = ApplyLeave
     fields = (
             'start_date', 'resume_date', 'home_phone','person_taking_charge', 'leave', 'employee',
             'end_date'
         )
+    success_message = "Successfully! Updated applied leave"
     template_name = "leave/applyleave_form.html"
     def get_context_data(self, **kwargs):
         context = super(ApplyLeaveUpdateView, self).get_context_data(**kwargs)
@@ -156,9 +141,10 @@ def approve_leave(request, pk):
             print("Send Email")
         else:
             print("Omambia Email not sent")
-
+        messages.success(request, "successfully! Approved a leave and sent and email to employee")
         return HttpResponseRedirect(reverse('leave:applyleave_list'))
     print("Not Updated Today")
+    messages.error("Leave not approved. Contact the administrator")
     return HttpResponseRedirect(reverse('leave:applyleave_list'))
 
 '''

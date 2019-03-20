@@ -18,8 +18,9 @@ class Employee(models.Model):
     nhif_no = models.CharField(default = "NHIF_NO", max_length = 50)
     KRA = models.CharField(default = "KRA_PIN", max_length = 50)
     employee_no = models.CharField(default = 'GS1_NO', max_length=50)
+    bank = models.IntegerField(default = 123456)
     next_of_kin_name = models.CharField(max_length=60, blank=True)
-    alt_phone_number = models.IntegerField(validators=[ MinValueValidator(9)])
+    alt_phone_number = models.IntegerField(validators=[ MinValueValidator(9)], blank = True)
     # more
     kin_email = models.CharField(max_length=100, blank=True, unique = True, validators=[ EmailValidator("Enter a valid email address")])
     county = models.CharField(max_length=100,  blank=True, choices = get_country(), default = "Kenya")
@@ -42,5 +43,4 @@ class Employee(models.Model):
 
     def get_absolute_url(self):
         return reverse("accounts:employees")
-
 

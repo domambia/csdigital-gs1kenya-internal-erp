@@ -10,6 +10,7 @@ from django.views.generic import DetailView, UpdateView
 from django.core.mail import send_mail
 from helpers.help import get_country
 from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 """List
 """
 
@@ -78,12 +79,12 @@ def user_login(request):
                 messages.success(request, "Successully logged in!")
                 return HttpResponseRedirect(reverse('index'))
             elif request.user.is_authenticated():
-                messages.success(request, 'Successfully. Already logged in..')
+                messages.success(request, 'Sucessfully.but already logged in..')
                 HttpResponseRedirect(reverse('index'))
             else:
                 return HttpResponse("Your account is not activated. Please check your email account")
         else:
-            messages.success('Wrong username or password. User the required details or contact the administrator!')
+            messages.warning(request, 'Wrong username or password. Use the required details or contact the administrator!')
             print("Somone tried To  login and Failed")
             print("Username: {} with a Password: {}".format(username, password))
             return HttpResponseRedirect(reverse('index'))
@@ -115,21 +116,23 @@ def employee_delete(request, pk):
 
 """Update View
 """
-class EmployeeUdateDependentInfo(UpdateView):
+class EmployeeUdateDependentInfo(SuccessMessageMixin,UpdateView):
     model = Employee 
     fields = ('dependant_name', 'dependant_contact', 'dependant_relationship', 'profile_pic', 'address')
     template_name = 'accounts/edit-otherinfo.html'
+    success_message = "Successfully, updated Your demographic information"
     def get_context_data(self, **kwargs):
         context = super(EmployeeUdateDependentInfo, self).get_context_data(**kwargs)
         context['employee'] = Employee.objects.get(user = self.request.user.id)
         return context
 
-class EmployeeUpdateView(UpdateView):
+class EmployeeUpdateView(SuccessMessageMixin, UpdateView):
     fields = ('address', 'phone', 'date_of_birth',
         'county', 'dependant_name', 'dependant_contact', 'dependant_relationship',
         'position', 'salary', 'kin_email', 'alt_phone_number', 'profile_pic', 'company_benifits',
               'KRA', 'id_no', 'nssf_no', 'nhif_no', 'employee_no',)
     model = Employee
+    success_message = "Successfully! Updated employee data."
     template_name  = "accounts/edit.html"
     def get_context_data(self, **kwargs):
         context = super(EmployeeUpdateView, self).get_context_data(**kwargs)
@@ -163,8 +166,7 @@ def edit_authentications(request, pk):
             user.email  = form.cleaned_data['email'].lower()
             user.set_password(form.cleaned_data['password'])
             user.save()
+            messages.success(request, "Successfully. Updated your log in information. Please log in")
             logout(request)
             return HttpResponseRedirect(reverse('index'))
     return render(request, "accounts/auth.html", {'employee': employee, 'form': form})
-
-
