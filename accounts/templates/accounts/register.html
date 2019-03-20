@@ -330,7 +330,7 @@
                   <div class="form-group">
                       <div class="form-line">
                           <label for="{{ form.bank.id_for_label }}">Bank Account</label>
-                          {{ form.bank|add_class:"form-control" }}
+                          {{ employee_form.bank|add_class:"form-control" }}
                           <ul>
                               {% for error in form.bank.errors%}
                               <li class="alert alert-danger">{{ error }}</li>
