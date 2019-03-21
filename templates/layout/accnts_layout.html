@@ -74,11 +74,8 @@
           <div class="collapse navbar-collapse" id="navbar-collapse">
               <ul class="nav navbar-nav navbar-right">
                     <!-- Notifications -->
-                  <li class="dropdown">
-                      <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                          <i class="material-icons" style="color: #E91E63;">notifications</i>
-                          <span class="label-count" style="color: #fff;  font-size: 1rem;">7</span>
-                      </a>
+                  <li>
+                      <a href="{% url 'accounts:logout' %}" style="color:black;">log out</a>
                   </li>
                   <!-- #END# Notifications -->
               </ul>
