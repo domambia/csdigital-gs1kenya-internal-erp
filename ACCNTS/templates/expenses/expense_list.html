@@ -1,0 +1,64 @@
+{% extends "layout/accnts_layout.html" %}
+{% block header %}
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
+      <h2 class="header pull-left">ACCOUNTS | ALL EXPENSES | BILLS</h2>
+  </div>
+{% endblock%}
+{% block content %}
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card body">
+            <div class="">
+                <h2 class="body">
+                  <span><a class="btn btn-primary" href = "{% url 'ACCNTS:expense_add' %}" >CREATE BILL</a></span>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr>
+                                <th>Vendor</th>
+                                <th>Date</th>
+                                <th>Ref. No</th>
+                                <th>Amount</th>
+                                <th>Payment status</th>
+                                <th style="text-align:center;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if expenses %}
+                              {% for expense in expenses %}
+                                  <tr>
+                                      <td>{{ expense.vendor.name }}</td>
+                                      <td>{{ expense.date_of_expense }}</td>
+                                      <td>{{ expense.ref_no }}</td>
+                                      <td>ksh.{{ expense.amount }}</td>
+                                      <td style="text-align:center;">
+                                          {% if expense.amount == 0 %}
+                                          <span class="btn btn-info">Unpaid</span>
+                                          {% else %}
+                                          <span class="btn btn-success">paid</span>
+                                          {% endif %}
+                                      </td>
+                                      <td>
+                                          <span> <a href = "{% url 'ACCNTS:expense_detail' pk=expense.id %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>
+                                          <span> <a href = "{% url 'ACCNTS:expense_edit' pk=expense.id %}"><i class="material-icons">edit</i></a> </span>
+                                          <span> <a href = "{% url 'ACCNTS:expense_delete' pk=expense.id %}"><i class="material-icons" style = "color:#cc0000;">delete</i></a> </span>
+                                      </td>
+                                  </tr>
+                              {% endfor %}
+                            {% else %}
+
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Exportable Table -->
+
+{% endblock %}

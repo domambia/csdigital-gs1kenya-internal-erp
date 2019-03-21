@@ -4,6 +4,7 @@ from ERP import settings
 from ACCNTS import vsales
 from django.contrib.auth.decorators import login_required
 from django.conf.urls.static import static
+from ACCNTS import vexpenses
 app_name  = "ACCNTS"
 
 urlpatterns = [
@@ -39,4 +40,10 @@ urlpatterns = [
     url('^sales/details/(?P<pk>\d+)/$', login_required(vsales.DetailSalesView.as_view()), name = 'sales_detail'),
     url('^sales/delete/(?P<pk>\d+)/$', login_required(vsales.DeleteSalesView.as_view()), name = 'sales_delete'),
 
+    # expenses
+    url(r'^purchases/list/', login_required(vexpenses.ListExpenseView.as_view()), name="expense_list"),
+    url(r'^purchases/create/', login_required(vexpenses.CreateExpenseView.as_view()), name="expense_add"),
+    url(r'^purchases/delete/(?P<pk>\d+)/$', login_required(vexpenses.DeleteExpenseView.as_view()), name="expense_delete"),
+    url(r'^purchases/detail/(?P<pk>\d+)/$', login_required(vexpenses.DetailExpenseView.as_view()), name="expense_detail"),
+    url(r'^purchases/edit/(?P<pk>\d+)/$', login_required(vexpenses.UpdateExpenseView.as_view()), name="expense_edit"),
 ]+static(settings.STATIC_URL, document_root=settings.STATIC_DIR)

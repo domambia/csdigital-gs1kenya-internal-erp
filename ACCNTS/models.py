@@ -84,7 +84,7 @@ def expenses_types():
     list_of_types = []
     for x in types:
         list_of_types.append((x.lower(), x.capitalize()),)
-        return tupe(list_of_types)
+        return tuple(list_of_types)
 '''
 Methods of payment'''
 def method_of_payment():
@@ -92,7 +92,7 @@ def method_of_payment():
     list_methods = []
     for method in methods:
         list_methods.append((method.lower(), method.capitalize()),)
-    return tupe(list_methods)
+    return tuple(list_methods)
 
 def VAT():
     vat = ['Yes', 'No']
@@ -117,13 +117,13 @@ class Expense(models.Model):
     payment_method = models.CharField(max_length = 200, choices = method_of_payment(), default = "Bank Cheque")
     VAT = models.CharField(max_length = 10, choices = VAT(), default = "yes")
     ref_no = models.CharField(max_length = 100, blank = True)
-    amount = models.PositiveInteger(default = 0)
-    expense_type = models.CharField(max_length = 100, choices = expense_type(), default = 'operational')
+    amount = models.PositiveIntegerField(default = 0)
+    expense_type = models.CharField(max_length = 100, choices = expenses_types(), default = 'operational')
 
     def __str__(self):
         self.vendor.name
 
     def get_absolute_url(self):
-        return reverse("")
+        return reverse("ACCNTS:expense_list")
 
 

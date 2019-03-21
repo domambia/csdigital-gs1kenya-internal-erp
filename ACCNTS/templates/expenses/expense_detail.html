@@ -1,0 +1,73 @@
+{% extends 'layout/accnts_layout.html' %}
+{% load widget_tweaks %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+{{ form.media }}            {# Adds date-picker required JS and CSS #}
+{% block header %}
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
+      <h2 class="header pull-left">ACCOUNTS | INVOICE DETAILS</h2>
+  </div>
+{% endblock%}
+
+{% block content %}
+
+      <div class="body card">
+            <div class="helper_cls body">
+                    <a href="{% url 'ACCNTS:expense_list' %}" class="btn btn-primary">BACK</a>
+                    <a href="{% url 'ACCNTS:expense_edit' pk=expense.pk %}" class="btn btn-success">EDIT</a>
+            </div>
+            <div class="row clearfix body">
+                <div class="col-md-6 ">
+                    <table class="table table-responsive">
+                        <tr>
+                            <td>Vendor</td>
+                            <td>{{expense.vendor.name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Payment Terms</td>
+                            <td>{{expense.terms_of_payment}}</td>
+                        </tr>
+                        <tr>
+                            <td>Payment Method</td>
+                            <td>{{expense.payment_method}}</td>
+                        </tr>
+                        <tr>
+                            <td>Bill due</td>
+                            <td>{{expense.bill_due}}</td>
+                        </tr>
+                        <tr>
+                            <td>Date of Payment</td>
+                            <td>{{expense.date_of_expense}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table class="table table-responsive">
+                        <tr>
+                            <td>Expense Type</td>
+                            <td>{{expense.expense_type}}</td>
+                        </tr>
+                        <tr>
+                            <td>Vendor</td>
+                            <td>{{expense.vendor.name}}</td>
+                        </tr>
+                        <tr>
+                            <td>Vendor Phone</td>
+                            <td>{{expense.vendor.phone}}</td>
+                        </tr>
+                        <tr>
+                            <td>Country </td>
+                            <td>{{expense.vendor.country}}</td>
+                        </tr>
+                        <tr>
+                            <td>Amount</td>
+                            <td>ksh.{{expense.amount}}.00</td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+          </div>
+        </div>
+{% endblock %}
