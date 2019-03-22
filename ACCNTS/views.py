@@ -315,8 +315,6 @@ def gen_payslip(employee, payroll, gross_salary, tax, total_allowances, net_inco
     c.showPage()
     c.save()
 
-
-
 # payment via invoice to users using using Payment model
 # Creating invoice
 
@@ -374,10 +372,3 @@ class DeletePaymentView(SuccessMessageMixin, DeleteView):
         context = super(DeletePaymentView, self).get_context_data(**kwargs)
         context['employee'] = Employee.objects.get(user = self.request.user.id)
         return context
-
-
-
-
-
-
-
