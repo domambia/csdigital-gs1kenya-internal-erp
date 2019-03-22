@@ -11,11 +11,11 @@ from django.views.generic import (ListView,
                                   DetailView)
 from easy_pdf.rendering import render_to_pdf_response
 from ACCNTS.forms import PaymentForm
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
-
+from helpers.utils import render_to_pdf
 #imports for creating pdf
 
 def dashboard(request):
@@ -80,11 +80,11 @@ def print_profoma(request, pk):
     else:tax = 0
     total_tax = (tax * category)
     balance = (category + total_tax)
-    return render_to_pdf_response(request, "accnts/invoice/profoma.html",
+    pdf = render_to_pdf("accnts/invoice/profoma.html",
                                   {'profoma': profoma,
                                    'total_tax': total_tax, 'tax':tax,
                                    'balance': balance,})
-
+    return HttpResponse(pdf, content_type = 'appliation/pdf')
 '''
 So
 '''
@@ -121,7 +121,7 @@ def print_invoice(request, pk):
     total_paid = invoice.amount
     balance = (total_tax + category)
     total_balance = ((total_tax + category) - total_paid)
-    return render_to_pdf_response(request, "accnts/invoice/invoice.html",
+    pdf = render_to_pdf("accnts/invoice/invoice.html",
                                   {'invoice': invoice,
                                    'base_url':base_url,
                                    'total_tax': total_tax,
@@ -129,7 +129,7 @@ def print_invoice(request, pk):
                                    'balance': balance,
                                    'total_balance': total_balance,
                                    'total_paid': total_paid, })
-
+    return HttpResponse(pdf, content_type = 'appliation/pdf')
 '''
 List All invoices
 '''

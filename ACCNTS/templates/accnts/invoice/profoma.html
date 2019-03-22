@@ -9,14 +9,20 @@
 <body>
     <div class="container">
         <table>
-            <tr style ="height:100px;"><br><br>
+            <tr style="height:30px;">
+                <td colspan="6" style="margin-left:20px;">
+                    <img src="http://gs1kenya.org/assets/images/logo.png" width="180" height="100">
+                    <td colspan="6" style="text-align:right">
+                        <span style="text-align:right; font-size:20px; color:#6A80B0;">PRO-INV-1{{invoice.id}}0{{invoice.id}}</span>
+                    </td>
+            </tr>
+            <tr style ="height:100px;">
                 <td colspan="6" style="text-align:left; padding-left:5px; color:#090936;">
                     <span style="font-size:10px;">NAIROBI, KENYA </span> <br>
                     <span style="font-size:10px;">NextGen Mall, 5<sup>th</sup> Floor, Room-39</span><br>
                     <span style="font-size:10px;"> Mombasa Road</span>
                 </td>
                 <td colspan="6" style="text-align:right;">
-                    <span style="text-align:right; font-size:20px; color:#090936;">00121</span><br>
                     <span style="font-size:15px;">The Global Language of Business</span><br><br>
                     <span style="color:#090936; font-size:20px;">PROFOMA INVOICE</span><br>
                 </td>
@@ -32,7 +38,7 @@
                         <td style="height:100px; text-align:left; padding-left:5px;">
                             <span style="color: blue;">
                                 {{profoma.member.company_name}} <br>
-                                {{profoma.member.company_phone}}<br>
+                                0{{profoma.member.company_phone}}<br>
                                 {{profoma.member.post_address}} &nbsp; {{profoma.member.physical_location}}
                             </span>
                         </td>
@@ -40,14 +46,14 @@
                 </td>
                 <td>
                     <table style="border:1px solid #999;">
-                        <tr style="text-align:center; padding:4px;"><th>Company VAT</th>
-                            <th>Tax Date</th>
+                        <tr style="text-align:center; padding:4px;"><th>Company PIN</th>
+                            <th>Date On</th>
                             <th>Invoice No</th>
                         </tr>
                         <tr style="height:40px; text-align:center; color:blue;">
-                            <td>{{ profoma.VAT }}</td>
+                            <td>P051307457J</td>
                             <td>{{profoma.date_of_generate }}</td>
-                            <td>INV-231</td>
+                            <td>PRO-INV-1{{invoice.id}}0{{invoice.id}}</td>
                         </tr>
                     </table>
                 </td>
@@ -64,7 +70,7 @@
                 <th colspan="2"> Terms</th>
                 <th colspan="2"> Member No.</th>
                 <th colspan="2"> CO. Prefix</th>
-                <th colspan="2"> Customer Vat Reg.</th>
+                <th colspan="2"></th>
             </tr>
         </thead>
 
@@ -103,7 +109,7 @@
        <table>
            <thead>
                <tr style="border:1px solid #999; padding:5px; text-align:center;">
-                   <th colspan="8">VAT Summary</th>
+                   <th colspan="8">VAT</th>
                    <th colspan="2">Subtotal.</th>
                    <th colspan="2" style="text-align:center; color:blue;"> KSH. {{total_tax}}</th>
                </tr>
@@ -112,18 +118,6 @@
             <!-- Row four -->
             <tr style="border:1px solid #999; padding:5px; text-align:left;">
                 <td colspan="8">
-                    <table>
-                        <tr style="text-align:center;">
-                            <th> Rate</th>
-                            <th> ksh VAT</th>
-                            <th> ksh NET</th>
-                        </tr>
-                        <tr style="text-align:center">
-                            <td><span style="color: blue; text-align:center;">{{ profoma.member.country }}</span></td>
-                            <td><span style="color: blue; text-align:center;">ksh. 0.00</span></td>
-                            <td><span style="color: blue; text-align:center;">ksh. 0.00</span></td>
-                        </tr>
-                    </table>
                 </td>
                 <td colspan="2">VAT Total</td>
                 <td colspan="2" style="text-align:center;"> <span style="color: blue;">ksh. 0.00</span></td>
@@ -172,13 +166,11 @@
                <th>
                    <tr style="border:1px solid #999; padding:5px; text-align:left;">
                        <th> Phone No</th>
-                       <th> Fax No.</th>
                        <th> Email Address</th>
                        <th> Website</th>
                    </tr>
                    <tr style="text-align:center; border:1px solid #999; padding:5px; color:blue;">
                        <td>+254 710 122252/735 965168</td>
-                       <td>No Fax.</td>
                        <td> account@gskenya.org</td>
                        <td> www.gs1kenya.org </td>
                    </tr>
