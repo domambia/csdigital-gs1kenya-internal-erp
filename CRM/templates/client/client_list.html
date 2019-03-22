@@ -54,7 +54,7 @@
                                       <td style="text-align:center;">{{ client.nature_of_business }}</td>
                                       <td>{{ client.date_of_issue }}</td>
                                       <td style="text-align: center;">
-                                          {% if employee.position.initials == "HRM" or employee.position.initials == "GM" %}
+                                          {% if employee.position.initials == "HRM" or employee.position.initials == "GM" or employee.position.initials == 'ME1' or employee.position.initials == 'ME2' or employee.position.initials == 'ME3' %}
                                             <span> <a href = "{% url 'CRM:edit_client' pk=client.pk %}"><i class="material-icons">edit</i></a> </span>
                                             <span> <a href = "{% url 'CRM:delete_client' pk=client.pk%}"><i class="material-icons" style = "color:#cc0000;">delete</i></a> </span>
                                             <span> <a href = "{% url 'CRM:detail_client' pk=client.pk %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>
