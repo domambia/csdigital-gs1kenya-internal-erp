@@ -96,15 +96,15 @@
             <tr style="border:1px solid #999; padding:5px; height:130px; text-align:left;">
                 <td colspan="4" style="color:blue;">{{invoice.description }}</td>
                 <td colspan="2" style="text-align:center; color:blue;"> 1 </td>
-                <td colspan="2">ksh. {{invoice.member.category}} </td>
+                <td colspan="2" style="text-align:center">ksh. {{invoice.member.category}}.00 </td>
                 <td colspan="2" style="text-align:center; color:blue;">
                     {% if invoice.VAT == "Yes" %}
-                    <span style="color: blue;">16% = {{total_tax}}</span>
+                    <span style="color: blue;">16% = {{total_tax}}0</span>
                     {% else %}
-                    <span style="color: blue;"> 0% = 0.0</span>
+                    <span style="color: blue;"> 0% = 0.00</span>
                     {% endif %}
                 </td>
-                <td colspan="2" style="text-align:center;"> <span style="color:blue;">ksh. {{balance}}</span> </td>
+                <td colspan="2" style="text-align:center;"> <span style="color:blue;">ksh. {{balance}}.00</span> </td>
             </tr>
        </table>
        <table>
@@ -112,7 +112,7 @@
                <tr style="border:1px solid #999; padding:5px; text-align:center;">
                    <th colspan="8">Total Amount</th>
                    <th colspan="2">Subtotal.</th>
-                   <th colspan="2" style="text-align:center; font-weight:lighter;"> KSH. {{invoice.member.category}}</th>
+                   <th colspan="2" style="text-align:center; font-weight:lighter;"> KSH. {{invoice.member.category}}.00</th>
                </tr>
 
            </thead>
@@ -154,10 +154,10 @@
                 <td colspan="2">
                     <table>
                     <tr style="border-bottom:1px solid #999;">
-                        <td style="text-align:center; color:blue;">ksh. {{ total_paid }}</td>
+                        <td style="text-align:center; color:blue;">ksh. {{ total_paid }}.00</td>
                     </tr>
                     <tr>
-                        <td style="text-align:center; color:blue;">ksh. {{total_balance}}</td>
+                        <td style="text-align:center; color:blue;">ksh. {{total_balance}}.00</td>
                     </tr>
                     </table>
                 </td>
