@@ -11,7 +11,7 @@
         <table>
             <tr style="height:30px;">
                 <td colspan="6" style="margin-left:25px;">
-                    <img src="http://gs1kenya.org/assets/images/logo.png" width="220" height="130">
+                    <img src="http://gs1kenya.org/assets/images/logo.png" width="300" height="150">
                     <td colspan="6" style="text-align:right">
                         <span style="text-align:right; font-size:20px; color:#6A80B0;">PRO-INV-1{{invoice.id}}0{{invoice.id}}</span>
                     </td>
@@ -109,18 +109,19 @@
        <table>
            <thead>
                <tr style="border:1px solid #999; padding:5px; text-align:center;">
-                   <th colspan="8">VAT</th>
+                   <th colspan="8">Total Amount</th>
                    <th colspan="2">Subtotal.</th>
-                   <th colspan="2" style="text-align:center; color:blue;"> KSH. {{total_tax}}</th>
+                   <th colspan="2" style="text-align:center; color:blue;"> KSH. {{profoma.member.category}}</th>
                </tr>
 
            </thead>
             <!-- Row four -->
             <tr style="border:1px solid #999; padding:5px; text-align:left;">
-                <td colspan="8">
+                <td colspan="8" style="text-align:center; font-weight:bold;">
+                    VAT Total Amount
                 </td>
-                <td colspan="2">VAT Total</td>
-                <td colspan="2" style="text-align:center;"> <span style="color: blue;">ksh. 0.00</span></td>
+                <td colspan="2" style="text-align:center;">VAT Total</td>
+                <td colspan="2" style="text-align:center;"> <span style="color: blue;">ksh. {{total_tax}}</span></td>
             </tr>
             <tr style="border:1px solid #999; padding:5px; text-align:left;">
                 <td colspan="8">ALL CHEQUES TO BE DONE IN THE NAME OF <span style="color:blue;">GS1 KENYA</span></td>
