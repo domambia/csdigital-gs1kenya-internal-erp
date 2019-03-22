@@ -24,7 +24,6 @@
                                 <th> Date of Generations</th>
                                 <th style="text-align:center;">VAT</th>
                                 <th style="text-align:center;">Actions</th>
-                                <th style="text-align:center;">Payment</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -47,7 +46,6 @@
                                           <span> <a href = "{% url 'ACCNTS:edit_profoma' pk=profoma.id %}"><i class="material-icons">edit</i></a> </span>
                                           <span> <a href = "{% url 'ACCNTS:delete_profoma' pk=profoma.id %}"><i class="material-icons" style = "color:#cc0000;">delete</i></a> </span>
                                       </td>
-                                      <td style="text-align:center;"><a href="{% url 'ACCNTS:payment' pk=profoma.id %}" class="btn label bg-orange">pay</td>
                                   </tr>
                               {% endfor %}
                             {% else %}
