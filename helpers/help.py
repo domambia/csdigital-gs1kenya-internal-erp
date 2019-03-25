@@ -1,4 +1,4 @@
-from pycountry import countries 
+from pycountry import countries
 
 def get_country():
     list_country = [x for x in countries]
@@ -19,7 +19,7 @@ def get_sectors():
 
 
 def get_categs():
-    list_categs = ['150000', '200000', '30000' 
+    list_categs = ['150000', '200000', '30000'
                     '50000','20000']
     categs = []
     for categ in list_categs:

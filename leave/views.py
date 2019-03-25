@@ -15,6 +15,7 @@ from django.core.mail import send_mail
 from easy_pdf.rendering import render_to_pdf_response
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
+from helpers.utils import render_to_pdf
 
 class LeaveListView(ListView):
     context_object_name = "leaves"
@@ -110,11 +111,11 @@ class ApplyLeaveUpdateView(SuccessMessageMixin, UpdateView):
 def approve_leave(request, pk):
 
     leave = ApplyLeave.objects.get(id = pk)
-    start_date = leave.start_date 
-    end_date = leave.end_date 
-    resume_date = leave.resume_date 
+    start_date = leave.start_date
+    end_date = leave.end_date
+    resume_date = leave.resume_date
     home_phone = leave.home_phone
-    leave_name = leave.leave.name 
+    leave_name = leave.leave.name
     if(leave):
         leave.status = 1
         leave.save()
@@ -148,7 +149,7 @@ def approve_leave(request, pk):
     return HttpResponseRedirect(reverse('leave:applyleave_list'))
 
 '''
-Create pdf 
+Create pdf
 '''
 
 
@@ -157,9 +158,9 @@ def render_pdf_docs(request, pk):
     leave = ApplyLeave.objects.get(pk=pk)
     user  = User.objects.get(username = leave.employee)
     employee = Employee.objects.get(user = user.id)
-    start_date = leave.start_date 
-    end_date = leave.end_date 
+    start_date = leave.start_date
+    end_date = leave.end_date
     days =  float((end_date - start_date).days)
-    return render_to_pdf_response(request, "leave/leave_pdf.html", {"leave": leave, 
+    return render_to_pdf("leave/leave_pdf.html", {"leave": leave,
                                     "employee": employee, "days": days, "user": user})
 

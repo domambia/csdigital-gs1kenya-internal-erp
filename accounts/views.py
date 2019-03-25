@@ -117,7 +117,7 @@ def employee_delete(request, pk):
 """Update View
 """
 class EmployeeUdateDependentInfo(SuccessMessageMixin,UpdateView):
-    model = Employee 
+    model = Employee
     fields = ('dependant_name', 'dependant_contact', 'dependant_relationship', 'profile_pic', 'address')
     template_name = 'accounts/edit-otherinfo.html'
     success_message = "Successfully, updated Your demographic information"

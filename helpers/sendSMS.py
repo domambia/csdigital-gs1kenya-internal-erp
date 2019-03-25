@@ -10,14 +10,12 @@ class SMS:
         africastalking.initialize(self.username, self.api_key)
         self.sms = africastalking.SMS
     def send(self, phone, message):
-        print(message)
         try:
             response = self.sms.send(str(message), ["+254"+str(phone)])
-            print (response)
         except Exception as e:
             message = """
-                        Dear Omambia Mogaka,
-                        Re: Message Notification
+                        Dear, Omambia Mogaka.
+                        Ref: Message Notification
                         ------------------------
                         There was an error in sending message to your other employee.
                         The Error is: {}

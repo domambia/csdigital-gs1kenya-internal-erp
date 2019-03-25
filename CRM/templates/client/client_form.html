@@ -13,13 +13,11 @@
 
     <section>
         <div class="container-fluid">
-             <!-- Tabs With Icon Title -->
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card custom-h">
                         <div class="body">
                         <span class="body" style="padding-left: 2rem;"><a class="btn btn-primary" href = "{% url 'CRM:list_client' %}" >BACK</a></span>
-
                         </div>
                         <div class="body">
                             <!-- Nav tabs -->
@@ -144,7 +142,6 @@
                                                     {% for errror in form.director_info.errors %}
                                                         <li class = "alert alert-danger"> {{ error }}</li>
                                                     {% endfor %}
-
                                                 </div>
                                             </div>
                                         </div>
@@ -170,18 +167,11 @@
                                             </div>
                                             </div>
                                         </div>
-
-                                        
-                                        
                                     </div>
-                               
-                                
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="profile_with_icon_title">
-                                    
                                      <div class="row ">
                                       <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
-                                        
                                              <div class="file-field">
                                                 <label class="form-label">Certificate of incorporation/business name </label>
                                         <a class="btn-floating peach-gradient mt-0 float-left">
@@ -190,13 +180,10 @@
                                           {% for errror in form.certificate_of_incorporation.errors %}
                                                 <li class = "alert alert-danger"> {{ error }}</li>
                                           {% endfor %}
-                                          
                                         </a>
-                                      
                                             </div>
                                          </div>
                                         <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
-                                        
                                              <div class="file-field">
                                                 <label class="form-label">Copy of ID </label>
                                         <a class="btn-floating peach-gradient mt-0 float-left">
@@ -205,13 +192,10 @@
                                           {% for errror in form.copy_of_id.errors %}
                                                 <li class = "alert alert-danger"> {{ error }}</li>
                                           {% endfor %}
-                                          
                                         </a>
-                                      
                                             </div>
                                          </div>
                                           <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
-                                        
                                              <div class="file-field">
                                                 <label class="form-label">Directors Pin Number </label>
                                         <a class="btn-floating peach-gradient mt-0 float-left">
@@ -220,13 +204,10 @@
                                           {% for errror in form.director_pin_number.errors %}
                                                 <li class = "alert alert-danger"> {{ error }}</li>
                                           {% endfor %}
-                                          
                                         </a>
-                                      
                                             </div>
                                          </div>
                                           <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
-                                        
                                              <div class="file-field">
                                                 <label class="form-label">Copy of Bank cheque or Utility Bill </label>
                                         <a class="btn-floating peach-gradient mt-0 float-left">
@@ -235,13 +216,10 @@
                                           {% for errror in form.copy_of_blank_cheque.errors %}
                                                 <li class = "alert alert-danger"> {{ error }}</li>
                                           {% endfor %}
-                                          
                                         </a>
-                                      
                                             </div>
                                          </div>
                                          <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
-                                        
                                              <div class="file-field">
                                                 <label class="form-label">Company's Pin Certificate </label>
                                         <a class="btn-floating peach-gradient mt-0 float-left">
@@ -250,13 +228,10 @@
                                           {% for errror in form.company_certificate_pin.errors %}
                                                 <li class = "alert alert-danger"> {{ error }}</li>
                                           {% endfor %}
-                                          
                                         </a>
-                                      
                                             </div>
                                          </div>
                                          <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
-                                        
                                              <div class="file-field">
                                                 <label class="form-label">Copy of trade licence </label>
                                         <a class="btn-floating peach-gradient mt-0 float-left">
@@ -265,13 +240,10 @@
                                           {% for errror in form.copy_of_trade_licence.errors %}
                                                 <li class = "alert alert-danger"> {{ error }}</li>
                                           {% endfor %}
-                                          
                                         </a>
-                                      
                                             </div>
                                          </div>
                                          <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
-                                        
                                              <div class="file-field">
                                                 <label class="form-label">Copy of Kebs certificate </label>
                                         <a class="btn-floating peach-gradient mt-0 float-left">
@@ -280,13 +252,10 @@
                                           {% for errror in form.copy_of_kebs_certicate.errors %}
                                                 <li class = "alert alert-danger"> {{ error }}</li>
                                           {% endfor %}
-                                          
                                         </a>
-                                      
                                             </div>
                                          </div>
                                          <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
-                                        
                                              <div class="file-field">
                                                 <label class="form-label">List of products to be barcoded </label>
                                         <a class="btn-floating peach-gradient mt-0 float-left">
@@ -295,9 +264,7 @@
                                           {% for errror in form.list_of_product_barcoded.errors %}
                                                 <li class = "alert alert-danger"> {{ error }}</li>
                                           {% endfor %}
-                                          
                                         </a>
-                                      
                                             </div>
                                          </div>
 
@@ -309,7 +276,6 @@
                                 </div>
                                 <br>
                                 </form>
-                               
                             </div>
                         </div>
                     </div>

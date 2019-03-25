@@ -26,20 +26,24 @@
         .dotted{
             border-bottom: 1px dotted #333;
         }
+        .logo{
+          }
         .value{
-                    
-            }
+        }
     </style>
 </head>
 <body style="margin:5rem;">
     <div class="header">
+        <center class="logo">
+            <img src="http://gs1kenya.org/assets/images/logo.png" height="120" width="220" alt="GS1Kenya">
+        </center>
         <h2 class="header__info">
-            <span class="header__main" style="font-size: 26px;">LEAVE REQUEST</span><br>
+            <span class="header__main" style="font-size: 26px;">LEAVE APPROVAL</span><br>
             <span class="header__sub" style="font-size: 20px;">LEAVE WILL NOT BE APPROVED IF ANY OF THE FIELDS IS MISSING</span>
         </h2>
     </div>
 
-    <div class="print_date">Date: <span class="dotted"> {{ leave.start_date }} </span></div>
+    <div class="print_date">Date: <span style="color:#03035a;"> {{ leave.start_date }} </span></div>
 
     <h2 class="office">
         <span  class="office__1">Finance & administration Mananger,</span> <br>
@@ -48,24 +52,27 @@
     </h2>
 
     <p class="paragraph">
-        I &nbsp; &nbsp; <em><span class="dotted"> {{ user.first_name}} &nbsp; {{ user.last_name}}</span> </em> &nbsp; &nbsp;(full names)
-        wish to apply for<b> <em class="value"> &nbsp; &nbsp; {{ leave.leave.name }} &nbsp; &nbsp;</em> </b> for a period of<b> <em class="value"> &nbsp; {{ days }} &nbsp; </em></b> days. 
-        With effect from<b><em class="value"> &nbsp; {{ leave.start_date }}</em> &nbsp; to &nbsp; <em> {{ leave.end_date }} &nbsp;</em></b>, i shall resume on <b><em class="value dotted">&nbsp; {{ leave.resume_date }} </em></b>
+        I &nbsp; &nbsp; <strong><span class="dotted" style="color:#03035a;"> {{ user.first_name}} &nbsp; {{ user.last_name}}</span> </strong> &nbsp; &nbsp;(full names)
+        wish to apply for<b> <strong class="value"  style="color:#03035a;"> &nbsp; &nbsp; {{ leave.leave.name }} &nbsp; &nbsp;</strong> </b> for a period of<b> <strong class="value"  style="color:#03035a;"> &nbsp; {{ days }} &nbsp; </strong></b> days.
+        With effect from<b><strong class="value"  style="color:#03035a;"> &nbsp; {{ leave.start_date }}</strong> &nbsp; to &nbsp; <strong style="color:#03035a;"> {{ leave.end_date }} &nbsp;</strong></b>, i shall resume on <b><strong class="value dotted"  style="color:#03035a;">&nbsp; {{ leave.resume_date }} </strong></b>
     </p>
 
     <br> <br>
     <div class="work">
-        <p> Work Station/ Department: &nbsp;  &nbsp;  &nbsp;  <em> <span class="dotted value"> {{ employee.position }} </span> </em> </p>
-        <p> Tel. No while away: &nbsp;  &nbsp;  &nbsp;  <em> <span class="dotted value"> 0{{ employee.alt_phone_number }} </span></em> </p>
-        <p> Person Taking Charge: &nbsp;  &nbsp;  &nbsp;  <em> <span class="dotted value">{{ leave.person_taking_charge.user.first_name}} &nbsp; &nbsp; {{ leave.person_taking_charge.user.last_name}} </span></em> </p>
-        <p> Person Taking Charge Tel. No: &nbsp;  &nbsp;  &nbsp;  <em>  <span class="dotted value"> {{ leave.person_taking_charge.phone}} </span></em> </p>
-        
+        <p> Work Station/ Department: &nbsp;  &nbsp;  &nbsp;  <strong> <span class="dotted value"  style="color:#03035a;"> {{ employee.position }} </span> </strong> </p>
+        <p> Tel. No while away: &nbsp;  &nbsp;  &nbsp;  <strong> <span class="dotted value" style="color:#03035a;"> 0{{ employee.alt_phone_number }} </span></strong> </p>
+        <p> Person Taking Charge: &nbsp;  &nbsp;  &nbsp;  <strong> <span class="dotted value"  style="color:#03035a;">{{ leave.person_taking_charge.user.first_name}} &nbsp; &nbsp; {{ leave.person_taking_charge.user.last_name}} </span></strong> </p>
+        <p> Person Taking Charge Tel. No: &nbsp;  &nbsp;  &nbsp;  <strong>  <span class="dotted value"  style="color:#03035a;"> {{ leave.person_taking_charge.phone}} </span></strong> </p>
     </div>
-    <br> <br>
-    <div class="yours__info">
-        <p>Thank You</p>
-        <p> GS1 KENYA</p>
+    <br>
+    <p>Head Of Department: Name: _______________________ Signature: __________________________ </p>
+    <p>Human Resource: Name: ___________________________ Signature: __________________________ </p
+    <p>General Manager: Name: __________________________ Signature: __________________________ </p
+    <br> <br><br>
+    <div style="border-bottom: 1px dotted #333;">
+    <center style="margin-top:40px">
+        <p  style="color:#03035a;"> &copy; All Rights Reserved by GS1Kenya</p>
+    </center>
     </div>
-    
 </body>
 </html>

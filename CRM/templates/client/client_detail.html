@@ -10,7 +10,7 @@
   </div>
 {% endblock%}
 {% block content %}
-  <div class="card"> 
+  <div class="card">
       <div class="body">
             <div class="helper_cls">
                 <a href="{% url 'CRM:list_client' %}" class="btn btn-primary">BACK</a>
@@ -30,9 +30,15 @@
                             <td>Phone</td>
                             <td>{{ client.company_phone }} or ( {{ client.company_phone_alt }} )</td>
                         </tr>
+
                         <tr>
                             <td>Location</td>
                             <td>{{ client.physical_location }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Post Address</td>
+                            <td>{{ client.post_address }}</td>
                         </tr>
                         <tr>
                             <td>Director</td>
@@ -184,7 +190,7 @@
                         <span class="btn label bg-green"> GM approved</span>
                     {% endif %}
                 </div>
-            {% elif employee.position.initials == "CACC" %} 
+            {% elif employee.position.initials == "CACC" %}
                 <div class="col-md-2">
                     {% if client.is_me1 == 0%}
                         <span class="btn label bg-orange"> ME pending...</span>
@@ -192,7 +198,7 @@
                         <span class="btn label bg-green"> ME approved</span>
                     {% endif %}
                 </div>
-                <div class="col-md-2"> 
+                <div class="col-md-2">
                     {% if client.is_ccm == 0%}
                         <span class="btn label bg-orange"> CCM pending...</span>
                     {% else %}
@@ -340,13 +346,6 @@
                         <span class="btn label bg-green"> ACCM approved</span>
                     {% endif %}
                 </div>
-                <!-- <div class="col-md-2">
-                    {% if client.is_cacc_x == 0%}
-                        <span class="btn label bg-orange"> ACC.Ex pending</span>
-                    {% else %}
-                        <span class="btn label bg-green"> ACC.Ex approved</span>
-                    {% endif %}
-                </div> -->
                 <div class="col-md-2">
                     {% if client.is_tm == 0%}
                         <span class="btn label bg-orange"> TM pending...</span>
@@ -390,14 +389,7 @@
                     {% else %}
                         <span class="btn label bg-green"> ACCM approved</span>
                     {% endif %}
-                </div> 
-                <!-- <div class="col-md-2">
-                    {% if client.is_cacc_x == 0%}
-                        <span class="btn label bg-orange"> ACC.Ex pending</span>
-                    {% else %}
-                        <span class="btn label bg-green"> ACC.Ex approved</span>
-                    {% endif %}
-                </div> -->
+                </div>
                 <div class="col-md-2">
                     {% if client.is_tm == 0%}
                         <span class="btn label bg-orange"> TM pending...</span>
