@@ -30,6 +30,10 @@
                 <!-- Employee Details -->
                 <table style="margin-bottom:5px;">
                     <tr>
+                        <td style="text-align:left;">Employee No: </td>
+                        <td style="text-align:right; font-weight:bold;">{{payroll.employee.employee_no}}</td>
+                    </tr>
+                    <tr>
                         <td style="text-align:left;">Name: </td>
                         <td style="text-align:right; font-weight:bold;">{{payroll.employee.user.first_name}} &nbsp;&nbsp; {{payroll.employee.user.last_name}}</td>
                     </tr>
@@ -38,7 +42,11 @@
                         <td style="text-align:right; font-weight:bold;">{{payroll.employee.id_no}}</td>
                     </tr>
                     <tr>
-                        <td style="text-align:left;">PAYE No:</td>
+                    <td style="text-align:left;">Huduma No:</td>
+                    <td style="text-align:right; font-weight:bold;">{{payroll.employee.huduma}}</td>
+                    </tr
+                    <tr>
+                        <td style="text-align:left;">PIN No:</td>
                         <td style="text-align:right; font-weight:bold;">{{payroll.employee.TAX}}</td>
                     </tr>
                     <tr>
@@ -57,91 +65,68 @@
                 <table>
                         <tr style="font-weight:bold;">
                             <th style=" text-align:left;">Description</th>
-                            <th>Taxation</th>
+                            <th></th>
                             <th style="text-align:right;">Pay</th>
                         </tr>
-                        <tr>
+                        <tr style="font-weight:bold;">
                             <td style="text-align:left; width:60%;">Basic Salary</td>
-                            <td  style="width:20%;">{{payroll.employee.salary}}</td>
-                            <td style="width:20%; text-align:right;">{{payroll.employee.salary}}</td>
+                            <td  style="width:20%;"></td>
+                            <td style="width:20%; text-align:right;">{{payroll.employee.salary}}.00</td>
                         </tr>
-                        <tr>
-                            <td style="width:60%; text-align:left;">Gross Salary</td>
-                            <td style="width:20%;">{{gross_salary}}</td>
-                            <td style="text-align:right; width:20%;">{{gross_salary}}</td>
-                        </tr>
-                        <br>
                         <tr>
                             <td style="width:60%;  text-align:left;">NSSF</td>
                             <td style="width:20%;"></td>
-                            <td style="text-align:right; width:20%;">{{nssf}}</td>
+                            <td style="text-align:right; width:20%;">{{nssf}}0</td>
                         </tr>
                         <tr>
                             <td style="width:60%;  text-align:left;">Pension</td>
                             <td style="width:60%;"></td>
-                            <td style="text-align:right; width:20%;">{{payroll.pension}}</td>
+                            <td style="text-align:right; width:20%;">{{payroll.pension}}0</td>
                         </tr>
                         <tr style="font-weight:bold;">
-                            <td style="width:75%;  text-align:left;">Deductions before Tax</td>
+                            <td style="width:75%;  text-align:left; font-size:10px;">Deductions before Tax</td>
                             <td style="width:5%;"></td>
-                            <td style="text-align:right; width:20%;">{{ded_before_tax}}</td>
+                            <td style="text-align:right; width:20%;">{{ded_before_tax}}0</td>
                         </tr>
-
                         <tr style="font-weight:bold;">
                             <td style="width:60%;  text-align:left;">Taxable Income</td>
-                            <td style="text-align:center; width:20%;">{{taxable_income}}</td>
+                            <td style="text-align:center; width:20%;">{{taxable_income}}0</td>
                             <td style="text-align:right; width:20%;"></td>
                         </tr>
-                        <tr style=" font-weight:bold;">
-                            <td style=" text-align: left;">PAYE</td>
-                            <td style="text-align:center">{{tax}}</td>
-                            <td style="text-align:right;"></td>
-                        </tr>
-                        <tr>
+                        <tr style="font-weight:bold;">
                             <td style="text-align:left;">Tax Relief</td>
-                            <td style="text-align:center;">1408</td>
+                            <td style="text-align:center;">1408.00</td>
                             <td style="text-align:right;"></td>
                         </tr>
                         <tr style="font-weight:bold;">
-                            <td style="text-align:left;">Tax Relief</td>
-                            <td style="text-align:center;">1408</td>
-                            <td style="text-align:right;"></td>
-                        </tr>
-                        <tr style="font-weight:bold;">
-                            <td style="text-align:left;">PAY Tax</td>
-                            <td>{{tax}}</td>
-                            <td style="text-align:right;">{{tax}}</td>
+                            <td style="text-align:left;">PAYE</td>
+                            <td>{{tax}}0</td>
+                            <td style="text-align:right;">{{tax}}0</td>
                         </tr>
                         <tr>
                             <td style="text-align:left;">NHIF</td>
                             <td></td>
-                            <td style="text-align:right;">{{nhif}}</td>
+                            <td style="text-align:right;">{{nhif}}.00</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">NHE Bond</td>
+                            <td></td>
+                            <td style="text-align:right;">{{nhebond}}0</td>
                         </tr>
                         <tr>
                             <td style="text-align:left;">Lunch</td>
                             <td></td>
-                            <td style="text-align:right;">{{payroll.lunch}}</td>
+                            <td style="text-align:right;">{{payroll.lunch}}.00</td>
                         </tr>
                         <tr style="font-weight:bold;">
-                            <td style="text-align:left; width:100%;">Total Deductions after Tax</td>
+                            <td style="text-align:left; width:100%; font-size:10px;">Deductions after Tax</td>
                             <td></td>
-                            <td style="text-align:right;">{{ded_after_tax}}</td>
-                        </tr>
-
-                        <tr>
-                            <td style="text-align:left;">NHIF</td>
-                            <td></td>
-                            <td style="text-align:right;">{{nhif}}</td>
-                        </tr>
-                        <tr style=" font-weight:bold;">
-                            <td  style="text-align:left;">Lunch</td>
-                            <td></td>
-                            <td style="text-align:right;">{{payroll.lunch}}</td>
+                            <td style="text-align:right;">{{ded_after_tax}}.00</td>
                         </tr>
                         <tr style=" solid #666; font-weight:bold;">
                             <td  style="text-align:left; width:60%;">Total Deductions</td>
                             <td></td>
-                            <td style="text-align:right;">{{total_ded}}0</td>
+                            <td style="text-align:right;">{{total_ded}}.0</td>
                         </tr>
                         <tr style="font-weight:bold;">
                             <td style="width:60%; text-align:left;">Net Pay</td>

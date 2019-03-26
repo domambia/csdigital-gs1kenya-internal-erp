@@ -8,23 +8,20 @@
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card body">
-                   
-                   
                 <div class="body">
                     {% if employee.position.initials == "HRM" or employee.position.initials == "GM"   or employee.position.initials == "CCM"%}
                         <h2><a class="btn btn-primary" href = "{% url 'accounts:add_employee'%}">ADD EMPLOYEE</a></h2>
                     {% endif %}
-                     
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                             <thead>
                                 <tr>
                                     <th>First Name</th>
                                     <th>Last Name </th>
+                                    <th>Huduma No.</th>
                                     <th>Department</th>
                                     <th>Job Position</th>
                                     <th>Email</th>
-                                    <th>Start Date</th>
                                     <th>Salary (KSH)</th>
                                     <th>Actions</th>
                                 </tr>
@@ -35,10 +32,10 @@
                                       <tr>
                                           <td>{{ user.user.first_name }}</td>
                                           <td>{{ user.user.last_name }}</td>
+                                          <td>{{user.huduma}}</td>
                                           <td>{{user.position.department.name}}</td>
                                           <td>{{ user.position }}</td>
                                           <td>{{ user.user.email }}</td>
-                                          <td>{{ user.user.date_joined }}</td>
                                           <td>{{ user.salary }}</td>
                                           <td style="text-align: center;">
                                                 {% if employee.position.initials == "HRM" or employee.position.initials == "GM" or employee.position.initials == "CCM"%}

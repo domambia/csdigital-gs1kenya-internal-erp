@@ -29,7 +29,7 @@
                               {% for payroll in payrolls %}
                                   <tr>
                                       <td>{{ payroll.employee.user.first_name }} &nbsp; {{ payroll.employee.user.last_name }}</td>
-                                      <td>ksh.{{ payroll.loans }}</td>
+                                      <td>ksh.{{ payroll.lunch }}</td>
                                       <td>{{ payroll.month }}</td>
                                       <td style="text-align:center;">
                                           <span> <a href = "{% url 'ACCNTS:detail_payroll' pk=payroll.id %}" class="btn label bg-orange" style="margin-right:10px;">print</a> </span>

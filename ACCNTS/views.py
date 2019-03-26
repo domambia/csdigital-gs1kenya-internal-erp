@@ -269,15 +269,23 @@ def generate_payroll(request, pk):
     nhif = get_nhif(basic_salary)
     nssf = get_nssf(basic_salary)
     gross_salary = basic_salary
+    nhe = 0
+    if (gross_salary * 0.015) > 5000: nhe = 2500
+    else: nhe = (gross_salary * 0.015)
+    nshe_contr = 0
+    if (nhe*2) > 5000:nshe_contr = 5000
+    else: nshe_contr = (nhe *2)
+    print(nshe_contr)
     taxable_income = (gross_salary - nssf - payroll.pension)
     tax =  round((get_tax(taxable_income) - 1408),2)
-    net_income = gross_salary - (lunch + nhif + tax)
+    net_income = gross_salary - (lunch + nhif + tax + nshe_contr)
     ded_before_tax = (nssf + payroll.pension)
     ded_after_tax = (nhif + payroll.lunch)
-    total_ded = (nssf + payroll.pension + nhif + lunch)
+    total_ded = (nssf + payroll.pension + nhif + lunch + round(get_tax(taxable_income), 2) + nshe_contr)
     pdf = render_to_pdf( "accnts/payroll/print.html",{'payroll':  payroll,'gross_salary': gross_salary,
                                                       'taxable_income': taxable_income,
                                                       'tax': tax,
+                                                      'nhebond': nhe,
                                                       'nhif': nhif,
                                                       'nssf': nssf,
                                                       'lunch': lunch,
@@ -287,40 +295,6 @@ def generate_payroll(request, pk):
                                                       'total_ded':total_ded})
     return  HttpResponse(pdf, content_type = "appliation/pdf")
 
-# this is not used
-from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import letter, landscape
-from reportlab.platypus import Image
-from reportlab.graphics.shapes import Line
-import os
-def gen_payslip(employee, payroll, gross_salary, tax, total_allowances, net_income):
-    base_dir = os.path.dirname(__file__)
-    logo = base_dir + '/logo.png'
-    c = canvas.Canvas(employee.user.first_name+"_"+employee.user.last_name+".pdf")
-    print("Printing Logo")
-    c.drawImage(logo, 60, 60, width = None, height = None)
-    c.setFont('Helvetica', 18)
-    c.drawString(30, 100, "Payslip for the month of{}".format(payroll.month))
-    c.drawString(30, 105, "Name:")
-    c.drawString(30, 107, "Employee No:")
-    c.drawString(30, 109, "Id No:")
-    c.drawString(30, 111, "PAYE No:")
-    c.drawString(30, 113, "NSSF No:")
-    c.drawString(30, 115, "NHIF No:")
-    c.drawString(30, 117, "Title")
-    c.setFont('Helvetica-Bold', 18)
-    c.drawString(70, 105, employee.user.first_name + " " + employee.user.last_name)
-    c.drawString(70, 107, employee.employee_no)
-    c.drawString(70, 109, str(employee.id_no))
-    c.drawString(70, 111, employee.KRA)
-    c.drawString(70, 113, employee.nssf_no)
-    c.drawString(70, 115, employee.nhif_no)
-    c.drawString(70, 117, employee.position.name)
-    print("Finished printing")
-    c.showPage()
-    c.save()
-
-# the end of unused
 # payment via invoice to users using using Payment model
 # Creating invoice
 

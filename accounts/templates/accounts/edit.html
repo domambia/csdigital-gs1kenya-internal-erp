@@ -96,6 +96,21 @@
                 </div>
             </div>
           </div>
+          <div class="row clearfix">
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <div class="form-line">
+                          <label for="{{ form.huduma.id_for_label }}">Huduma Number</label>
+                          {{ form.huduma|add_class:"form-control" }}
+                          <ul>
+                              {% for error in form.huduma.errors%}
+                              <li class="alert alert-danger">{{ error }}</li>
+                              {% endfor %}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </div>
           <!-- END OF Demographic INFORMATION  -->
           <!-- Start of Dependants INFORMATION -->
           <div class="row clearfix">

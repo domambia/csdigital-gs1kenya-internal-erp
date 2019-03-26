@@ -13,6 +13,7 @@ class Employee(models.Model):
     address = models.CharField(max_length=50)
     phone = models.IntegerField(validators=[MinValueValidator(9)])
     date_of_birth = models.CharField(max_length=20)
+    huduma = models.CharField(max_length =50, default = "HUD-001232")
     id_no = models.IntegerField(default = 0)
     nssf_no = models.CharField(default = "NSSF_NO", max_length = 50)
     nhif_no = models.CharField(default = "NHIF_NO", max_length = 50)

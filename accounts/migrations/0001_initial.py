@@ -21,6 +21,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('address', models.CharField(max_length=50)),
                 ('phone', models.CharField(max_length=14)),
+                ('huduma', models.CharField(max_length =50, default = "HUD-001232")),
                 ('id_no', models.IntegerField(default = 0)),
                 ('nssf_no',  models.CharField(default = "NSSF_NO", max_length=50)),
                 ('nhif_no', models.CharField(default = "NHIF_NO", max_length=50)),
