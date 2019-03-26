@@ -48,11 +48,8 @@ PayRoll Model
 '''
 class PayRoll(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, default=1)
-    transport_allowance = models.IntegerField(default=0)
-    leave_allowance = models.IntegerField(default=0)
-    hse_allowance = models.IntegerField(default=0)
-    loans = models.IntegerField(default=0)
-    other_deductions = models.IntegerField(default=0)
+    pension = models.IntegerField(default=0)
+    lunch = models.IntegerField(default=0)
     month = models.DateField(default = datetime.datetime.now)
     def __str__(self):
         return self.employee.user.username

@@ -227,7 +227,7 @@ def get_nhif(basic_salary):
 class CreatePayrollView(SuccessMessageMixin, CreateView):
     model = PayRoll
     success_message = "Successfully! Created %(employee)s payslip"
-    fields = ('employee', 'hse_allowance', 'transport_allowance', 'loans', 'other_deductions','leave_allowance', 'month')
+    fields = ('employee', 'pension' 'lunch', 'month')
     template_name  = 'accnts/payroll/payroll_form.html'
     def get_context_data(self, **kwargs):
         context = super(CreatePayrollView, self).get_context_data(**kwargs)
@@ -247,7 +247,7 @@ class ListPayrollView(ListView):
 class UpdatePayrollView(SuccessMessageMixin, UpdateView):
     model = PayRoll
     success_message = "Sucessfully! Update  employee's payslip"
-    fields = ('employee', 'hse_allowance', 'transport_allowance', 'loans', 'other_deductions','leave_allowance', 'month')
+    fields = ('employee', 'pension' 'lunch', 'month')
     template_name  = 'accnts/payroll/payroll_form.html'
     def get_context_data(self,**kwargs):
         context = super(UpdatePayrollView, self).get_context_data(**kwargs)
@@ -264,25 +264,30 @@ def payslip(request):
 def generate_payroll(request, pk):
     employee  = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
     payroll = PayRoll.objects.get(id = pk)
-    total_allowances = (payroll.transport_allowance + payroll.hse_allowance + payroll.leave_allowance)
-    loans = payroll.loans
-    other_deductions = payroll.other_deductions
+    lunch = payroll.lunch
     basic_salary  = int(payroll.employee.salary)
     nhif = get_nhif(basic_salary)
     nssf = get_nssf(basic_salary)
-    gross_salary = basic_salary + total_allowances
-    taxable_income = (gross_salary - nssf)
+    gross_salary = basic_salary
+    taxable_income = (gross_salary - nssf - payroll.pension)
     tax =  round((get_tax(taxable_income) - 1408),2)
-    net_income = gross_salary - (loans + nhif + other_deductions + tax)
-    gen_payslip(employee, payroll, gross_salary, tax, total_allowances, net_income)
-    return render(request, "accnts/payroll/payroll_generate.html",{'employee': employee,
-                                                               'payroll':  payroll,
-                                                               'gross_salary': gross_salary,
-                                                               'taxable_income': taxable_income,
-                                                               'tax': tax,
-                                                               'total_allowances':total_allowances,
-                                                               'net_income':net_income})
+    net_income = gross_salary - (lunch + nhif + tax)
+    ded_before_tax = (nssf + payroll.pension)
+    ded_after_tax = (nhif + payroll.lunch)
+    total_ded = (nssf + payroll.pension + nhif + lunch)
+    pdf = render_to_pdf( "accnts/payroll/print.html",{'payroll':  payroll,'gross_salary': gross_salary,
+                                                      'taxable_income': taxable_income,
+                                                      'tax': tax,
+                                                      'nhif': nhif,
+                                                      'nssf': nssf,
+                                                      'lunch': lunch,
+                                                      'ded_after_tax': ded_after_tax,
+                                                      'net_income':net_income,
+                                                      'ded_before_tax': ded_before_tax,
+                                                      'total_ded':total_ded})
+    return  HttpResponse(pdf, content_type = "appliation/pdf")
 
+# this is not used
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter, landscape
 from reportlab.platypus import Image
@@ -315,6 +320,7 @@ def gen_payslip(employee, payroll, gross_salary, tax, total_allowances, net_inco
     c.showPage()
     c.save()
 
+# the end of unused
 # payment via invoice to users using using Payment model
 # Creating invoice
 

@@ -19,11 +19,7 @@
                         <thead>
                             <tr>
                                 <th>Employee Name</th>
-                                <th>House Allowance</th>
-                                <th>Transport Allowance</th>
-                                <th>Leave Allowance</th>
-                                <th>Loan Amount</th>
-                                <th>Other Deductions</th>
+                                <th>Lunch Amount</th>
                                 <th>Date</th>
                                 <th style="text-align:center;">Actions</th>
                             </tr>
@@ -33,14 +29,10 @@
                               {% for payroll in payrolls %}
                                   <tr>
                                       <td>{{ payroll.employee.user.first_name }} &nbsp; {{ payroll.employee.user.last_name }}</td>
-                                      <td>ksh.{{ payroll.hse_allowance }}</td>
-                                      <td>ksh.{{ payroll.transport_allowance }}</td>
-                                      <td>ksh.{{ payroll.leave_allowance }}</td>
                                       <td>ksh.{{ payroll.loans }}</td>
-                                      <td>ksh.{{ payroll.other_deductions }}</td>
                                       <td>{{ payroll.month }}</td>
-                                      <td>
-                                          <span> <a href = "{% url 'ACCNTS:detail_payroll' pk=payroll.id %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>
+                                      <td style="text-align:center;">
+                                          <span> <a href = "{% url 'ACCNTS:detail_payroll' pk=payroll.id %}" class="btn label bg-orange" style="margin-right:10px;">print</a> </span>
                                           <span> <a href = "{% url 'ACCNTS:edit_payroll' pk=payroll.id %}"><i class="material-icons">edit</i></a> </span>
                                       </td>
                                   </tr>
