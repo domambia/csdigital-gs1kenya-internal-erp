@@ -18,11 +18,7 @@
                         <thead>
                             <tr>
                                 <th>Employee Name</th>
-                                <th>House Allowance</th>
-                                <th>Transport Allowance</th>
-                                <th>Leave Allowance</th>
-                                <th>Loan Amount</th>
-                                <th>Other Deductions</th>
+                                <th>lunch</th>
                                 <th>Date</th>
                                 <th style="text-align:center;">Actions</th>
                             </tr>
@@ -32,14 +28,10 @@
                               {% for payslip in payslip %}
                                   <tr>
                                       <td>{{ payslip.employee.user.first_name }} &nbsp; {{ payroll.employee.user.last_name }}</td>
-                                      <td>ksh.{{ payslip.hse_allowance }}</td>
-                                      <td>ksh.{{ payslip.transport_allowance }}</td>
-                                      <td>ksh.{{ payslip.leave_allowance }}</td>
-                                      <td>ksh.{{ payslip.loans }}</td>
-                                      <td>ksh.{{ payslip.other_deductions }}</td>
+                                      <td>ksh.{{ payslip.lunch }}</td>
                                       <td>{{ payslip.month }}</td>
                                       <td>
-                                          <span> <a href = "{% url 'ACCNTS:detail_payroll' pk=payslip.id %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>
+                                          <span> <a href = "{% url 'ACCNTS:detail_payroll' pk=payslip.id %}" class="btn label bg-orange">print</a> </span>
                                       </td>
                                   </tr>
                               {% endfor %}

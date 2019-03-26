@@ -25,13 +25,13 @@
 
                 <!-- The main Content -->
                 <div class="content">
-                    <p style="">Payslip for the month of {{payroll.month}}</p><hr>
+                    <p style="">Payslip for the month of {{payroll.month}}</p><hr/>
                 </div>
                 <!-- Employee Details -->
-                <table class="table table-responsive">
+                <table style="margin-bottom:5px;">
                     <tr>
                         <td style="text-align:left;">Name: </td>
-                        <td style="text-align:right; font-weight:bold;">{{payroll.employee.user.first_name}} &nbsp; >{{payroll.employee.user.last_name}}</td>
+                        <td style="text-align:right; font-weight:bold;">{{payroll.employee.user.first_name}} &nbsp;&nbsp; {{payroll.employee.user.last_name}}</td>
                     </tr>
                     <tr>
                         <td style="text-align:left;">ID No:</td>
@@ -54,15 +54,12 @@
                         <td style="text-align:right; font-weight:bold;">{{payroll.employee.position.name}}</td>
                     </tr>
                 </table>
-                <table style="table table-responsive">
-                    <thead>
+                <table>
                         <tr style="font-weight:bold;">
                             <th style=" text-align:left;">Description</th>
                             <th>Taxation</th>
                             <th style="text-align:right;">Pay</th>
                         </tr>
-                    </thead>
-                    <tbody>
                         <tr>
                             <td style="text-align:left; width:60%;">Basic Salary</td>
                             <td  style="width:20%;">{{payroll.employee.salary}}</td>
@@ -89,7 +86,7 @@
                             <td style="width:5%;"></td>
                             <td style="text-align:right; width:20%;">{{ded_before_tax}}</td>
                         </tr>
-                        <br><br>
+
                         <tr style="font-weight:bold;">
                             <td style="width:60%;  text-align:left;">Taxable Income</td>
                             <td style="text-align:center; width:20%;">{{taxable_income}}</td>
@@ -130,7 +127,7 @@
                             <td></td>
                             <td style="text-align:right;">{{ded_after_tax}}</td>
                         </tr>
-                        <br><br>
+
                         <tr>
                             <td style="text-align:left;">NHIF</td>
                             <td></td>
@@ -146,21 +143,16 @@
                             <td></td>
                             <td style="text-align:right;">{{total_ded}}0</td>
                         </tr>
-                        <br>
                         <tr style="font-weight:bold;">
                             <td style="width:60%; text-align:left;">Net Pay</td>
                             <td style=""></td>
                             <td style="text-align:right;">{{net_income}}0</td>
                         </tr>
-                    </tbody>
                 </table>
 
-                <br><br>
                 <p>Employee's Signature ________________________________ </p>
-                <hr>
-
+                <hr/>
                 <span style="font-size:16px; text-align:center;">GS1Kenya &copy; Copyright. All Rights Reseversed.</span>
-                <hr>
             </div>
         </div>
     </body>

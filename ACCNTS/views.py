@@ -227,7 +227,7 @@ def get_nhif(basic_salary):
 class CreatePayrollView(SuccessMessageMixin, CreateView):
     model = PayRoll
     success_message = "Successfully! Created %(employee)s payslip"
-    fields = ('employee', 'pension' 'lunch', 'month')
+    fields = ('employee', 'pension', 'lunch', 'month')
     template_name  = 'accnts/payroll/payroll_form.html'
     def get_context_data(self, **kwargs):
         context = super(CreatePayrollView, self).get_context_data(**kwargs)
@@ -247,7 +247,7 @@ class ListPayrollView(ListView):
 class UpdatePayrollView(SuccessMessageMixin, UpdateView):
     model = PayRoll
     success_message = "Sucessfully! Update  employee's payslip"
-    fields = ('employee', 'pension' 'lunch', 'month')
+    fields = ('employee', 'pension', 'lunch', 'month')
     template_name  = 'accnts/payroll/payroll_form.html'
     def get_context_data(self,**kwargs):
         context = super(UpdatePayrollView, self).get_context_data(**kwargs)
