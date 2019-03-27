@@ -148,14 +148,20 @@
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">equalizer</i>
-                            <span>EXPENSES</span>
+                            <span>ACCOUNTS</span>
                         </a>
                         <ul class="ml-menu" style="font-size: 14px;">
                             <li>
-                                <a href="{% url 'ACCNTS:expense_list'%}"> BILL</a>
+                                <a href="{% url 'ACCNTS:asset_list'%}">ASSETS</a>
                             </li>
                             <li>
-                                <a href="{% url 'ACCNTS:expense_list' %}">CREDITS</a>
+                                <a href="{% url 'ACCNTS:expense_list' %}">EXPENSES</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'ACCNTS:income_list' %}">INCOME</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'ACCNTS:liability_list' %}">LIABILITY</a>
                             </li>
                         </ul>
                     </li>

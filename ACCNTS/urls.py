@@ -63,11 +63,11 @@ urlpatterns = [
     url(r'^income/detail/(?P<pk>\d+)/$', login_required(accounts.IncomeDetailView.as_view()), name = "income_detail"),
 
     #liability
-    url(r'^liability/list/', login_required(accounts.LiabilityListView.as_view()), name = "income_list"),
-    url(r'^liability/create/', login_required(accounts.LiabilityCreateView.as_view()), name = "income_add"),
-    url(r'^income/edit/(?P<pk>\d+)/$', login_required(accounts.LiabilityUpdateView.as_view()), name = "income_edit"),
-    url(r'^income/delete/(?P<pk>\d+)/$', login_required(accounts.LiabilityDeleteView.as_view()), name = "income_delete"),
-    url(r'^income/detail/(?P<pk>\d+)/$', login_required(accounts.LiabilityDetailView.as_view()), name = "income_detail"),
+    url(r'^liability/list/', login_required(accounts.LiabilityListView.as_view()), name = "liability_list"),
+    url(r'^liability/create/', login_required(accounts.LiabilityCreateView.as_view()), name = "liability_add"),
+    url(r'^liability/edit/(?P<pk>\d+)/$', login_required(accounts.LiabilityUpdateView.as_view()), name = "liability_edit"),
+    url(r'^liability/delete/(?P<pk>\d+)/$', login_required(accounts.LiabilityDeleteView.as_view()), name = "liability_delete"),
+    url(r'^liability/detail/(?P<pk>\d+)/$', login_required(accounts.LiabilityDetailView.as_view()), name = "liability_detail"),
 ]+static(settings.STATIC_URL, document_root=settings.STATIC_DIR)
 
 
