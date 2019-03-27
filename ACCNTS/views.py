@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy, reverse
 from accounts.models import Employee
-from ACCNTS.models import Invoice, PayRoll, Payment
+from ACCNTS.models import Invoice, PayRoll, Payment, EmployeeTax
 from ERP import settings
 from django.views.generic import (ListView,
                                   DeleteView,
@@ -275,6 +275,8 @@ def generate_payroll(request, pk):
     nshe_contr = 0
     if (nhe*2) > 5000:nshe_contr = 5000
     else: nshe_contr = (nhe *2)
+    month = payroll.month.strftime('%B')
+    print(month)
     print(nshe_contr)
     taxable_income = (gross_salary - nssf - payroll.pension)
     tax =  round((get_tax(taxable_income) - 1408),2)
@@ -282,11 +284,13 @@ def generate_payroll(request, pk):
     ded_before_tax = (nssf + payroll.pension)
     ded_after_tax = (nhif + payroll.lunch)
     total_ded = (nssf + payroll.pension + nhif + lunch + round(get_tax(taxable_income), 2) + nshe_contr)
+
     pdf = render_to_pdf( "accnts/payroll/print.html",{'payroll':  payroll,'gross_salary': gross_salary,
                                                       'taxable_income': taxable_income,
                                                       'tax': tax,
                                                       'nhebond': nhe,
                                                       'nhif': nhif,
+                                                      'month':month,
                                                       'nssf': nssf,
                                                       'lunch': lunch,
                                                       'ded_after_tax': ded_after_tax,

@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from ACCNTS import views
 from ERP import settings
-from ACCNTS import vsales
+from ACCNTS import vsales, accounts
 from django.contrib.auth.decorators import login_required
 from django.conf.urls.static import static
 from ACCNTS import vexpenses
@@ -46,4 +46,35 @@ urlpatterns = [
     url(r'^purchases/delete/(?P<pk>\d+)/$', login_required(vexpenses.DeleteExpenseView.as_view()), name="expense_delete"),
     url(r'^purchases/detail/(?P<pk>\d+)/$', login_required(vexpenses.DetailExpenseView.as_view()), name="expense_detail"),
     url(r'^purchases/edit/(?P<pk>\d+)/$', login_required(vexpenses.UpdateExpenseView.as_view()), name="expense_edit"),
+
+    ## accounts
+    #asset
+    url(r'^assets/list/', login_required(accounts.AssetListView.as_view()), name = "asset_list"),
+    url(r'^assets/create/', login_required(accounts.AssetCreateView.as_view()), name = "asset_add"),
+    url(r'^assets/edit/(?P<pk>\d+)/$', login_required(accounts.AssetUpdateView.as_view()), name = "asset_edit"),
+    url(r'^assets/delete/(?P<pk>\d+)/$', login_required(accounts.AssetDeleteView.as_view()), name = "asset_delete"),
+    url(r'^assets/detail/(?P<pk>\d+)/$', login_required(accounts.AssetDetailView.as_view()), name = "asset_detail"),
+
+    #Income
+    url(r'^income/list/', login_required(accounts.IncomeListView.as_view()), name = "income_list"),
+    url(r'^income/create/', login_required(accounts.IncomeCreateView.as_view()), name = "income_add"),
+    url(r'^income/edit/(?P<pk>\d+)/$', login_required(accounts.IncomeUpdateView.as_view()), name = "income_edit"),
+    url(r'^income/delete/(?P<pk>\d+)/$', login_required(accounts.IncomeDeleteView.as_view()), name = "income_delete"),
+    url(r'^income/detail/(?P<pk>\d+)/$', login_required(accounts.IncomeDetailView.as_view()), name = "income_detail"),
+
+    #liability
+    url(r'^liability/list/', login_required(accounts.LiabilityListView.as_view()), name = "income_list"),
+    url(r'^liability/create/', login_required(accounts.LiabilityCreateView.as_view()), name = "income_add"),
+    url(r'^income/edit/(?P<pk>\d+)/$', login_required(accounts.LiabilityUpdateView.as_view()), name = "income_edit"),
+    url(r'^income/delete/(?P<pk>\d+)/$', login_required(accounts.LiabilityDeleteView.as_view()), name = "income_delete"),
+    url(r'^income/detail/(?P<pk>\d+)/$', login_required(accounts.LiabilityDetailView.as_view()), name = "income_detail"),
 ]+static(settings.STATIC_URL, document_root=settings.STATIC_DIR)
+
+
+
+
+
+
+
+
+

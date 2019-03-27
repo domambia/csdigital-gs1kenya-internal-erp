@@ -1,10 +1,10 @@
 from django.db import models
 from CRM.models import Client
 import datetime
-from django.urls import reverse
 from accounts.models import Employee
 import datetime
 from CRM.models import Supplier
+from django.urls import reverse
 # Create your models here.
 
 class Invoice(models.Model):
@@ -56,9 +56,19 @@ class PayRoll(models.Model):
 
     def get_absolute_url(self):
         return reverse("ACCNTS:list_payroll")
+
+class EmployeeTax(models.Model):
+    employee = models.ForeignKey(Employee, on_delete = models.CASCADE)
+    tax = models.IntegerField(default = 0)
+    month = models.DateField(default = datetime.datetime.now)
+
+    def __str__(self):
+        return "Employee Tax. {}".format(employee.user.username)
+
 '''
 Sales models
 '''
+
 
 class Sales(models.Model):
     member = models.ForeignKey(Client, on_delete = models.CASCADE, default = 1)
@@ -122,5 +132,92 @@ class Expense(models.Model):
 
     def get_absolute_url(self):
         return reverse("ACCNTS:expense_list")
+
+
+'''
+Accounts models:
+   Assets, Liability, Income,Expenses
+'''
+def assets_type():
+    assests = ['Current', 'Fixed']
+    list_asset = []
+    for y in assests:
+        list_asset.append((y.lower(), y.capitalize()))
+    return tuple(list_asset)
+
+class Asset(models.Model):
+    name = models.CharField(max_length =500)
+    type = models.CharField(max_length = 200, choices = assets_type(), default = 'current')
+    open_balance = models.IntegerField(default = 0, blank = True)
+    amount = models.IntegerField(default = 0)
+    memo  = models.CharField(max_length = 200)
+
+    def __str__(self):
+        return self.name
+    def get_absolute_url(self):
+        return reverse("ACCNTS:asset_list")
+
+def income():
+    income = ['other incomes', 'direct income',]
+    income_list = []
+    for y in income:
+        income_list.append((y.lower(), y.capitalize()))
+    return tuple(income_list)
+
+
+class Income(models.Model):
+    name = models.CharField(max_length = 500)
+    giver = models.CharField(max_length = 200)
+    type = models.CharField(max_length = 200, choices = income(), default = 'direct income')
+    amount = models.IntegerField(default = 0)
+    open_balance = models.IntegerField(default = 0, blank = True)
+    memo = models.CharField(max_length = 200)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("ACCNTS:income_list")
+
+def liability():
+    liab = ['current', 'short-term',]
+    liab_list = []
+    for y in liab:
+        liab_list.append((y.lower(), y.capitalize()))
+    return tuple(liab_list)
+
+
+class Liability(models.Model):
+    name = models.CharField(max_length = 200)
+    type = models.CharField(max_length = 100, choices = liability(), default = 'current')
+    amount = models.IntegerField(default = 0)
+    open_balance = models.IntegerField(default = 0, blank = True)
+    memo = models.CharField(max_length = 200)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("ACCNTS:liability_list")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
