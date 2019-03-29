@@ -18,10 +18,10 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card custom-h">
                         <div class="header">
-                            <h2> 
+                            <h2>
                             </h2>
                         </div>
-                        <span class="body" style="padding-left: 2rem;"><a class="btn btn-primary" href = "{% url 'ACCNTS:payment_list' %}" >BACK</a></span>
+                        <span class="body" style="padding-left: 2rem;"><a class="btn btn-primary" href = "{% url 'ACCNTS:asset_list' %}" >BACK</a></span>
                         <div class="body">
                             <!-- Nav tabs -->
                             <!-- Tab panes -->
@@ -30,39 +30,26 @@
                                 <form method="POST" enctype="multipart/form-data">
                                         {% csrf_token %}
                                     <div class="row">
-                                        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
+                                        <div class="col-lg-6 col-md-6">
                                             <div class="form-group form-float">
                                                <div class="form-line">
-                                                    {{ form.member | add_class:"form-control"}}
-                                                    <label class="form-label">Choose Member</label>
+                                                    {{ form.name | add_class:"form-control"}}
+                                                    <label class="form-label">Name of asset</label>
                                                      <ul>
-                                                        {% for error in form.member.errors%}
+                                                        {% for error in form.name.errors%}
                                                         <li class="alert alert-danger">{{ error }}</li>
                                                         {% endfor %}
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
+                                    <div class="col-lg-6 col-md-6">
                                         <div class="form-group form-float">
                                             <div class="form-line">
-                                                {{ form.payment_for | add_class:"form-control"}}
-                                                <label class="form-label">Reason for payment</label>
+                                                {{ form.type | add_class:"form-control"}}
+                                                <label class="form-label">Choose Type</label>
                                                     <ul>
-                                                    {% for error in form.payment_for.errors%}
-                                                    <li class="alert alert-danger">{{ error }}</li>
-                                                    {% endfor %}
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
-                                        <div class="form-group form-float">
-                                            <div class="form-line">
-                                                {{ form.description | add_class:"form-control"}}
-                                                <label class="form-label">Extra Descriptions</label>
-                                                <ul>
-                                                    {% for error in form.description.errors%}
+                                                    {% for error in form.type.errors%}
                                                     <li class="alert alert-danger">{{ error }}</li>
                                                     {% endfor %}
                                                 </ul>
@@ -74,24 +61,24 @@
                                 </div>
                     <!-- More data -->
                     <div class="row">
-                            <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
+                            <div class="col-lg-6 col-md-6">
                                 <div class="form-group form-float">
                                    <div class="form-line">
-                                        {{ form.VAT | add_class:"form-control"}}
-                                        <label class="form-label">Allow VAT</label>
+                                        {{ form.memo | add_class:"form-control"}}
+                                        <label class="form-label">Memo</label>
                                          <ul>
-                                            {% for error in form.VAT.errors%}
+                                            {% for error in form.memo.errors%}
                                             <li class="alert alert-danger">{{ error }}</li>
                                             {% endfor %}
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
+                            <div class="col-lg-6 col-md-6">
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         {{ form.amount | add_class:"form-control"}}
-                                        <label class="form-label">Amount to Pay</label>
+                                        <label class="form-label">Amount</label>
                                         <ul>
                                             {% for error in form.amount.errors%}
                                             <li class="alert alert-danger">{{ error }}</li>

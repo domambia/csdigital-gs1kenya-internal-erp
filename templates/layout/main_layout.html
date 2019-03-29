@@ -34,6 +34,7 @@
     </style>
     <link href="{% static 'css/all-themes.css' %}" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css" integrity="sha384-Mmxa0mLqhmOeaE8vgOSbKacftZcsNYDjQzuCOm6D02luYSzBG8vpaOykv9lFQ51Y" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 </head>
 
 <body>
@@ -113,7 +114,7 @@
 
                           <li><a href="{% url 'accounts:profile' employee.id %}"><i class="material-icons">person</i>Profile</a></li>
                           <li role="separator" class="divider"></li>
-                          <li><a href="{% url 'accounts:logout'%}"><i class="material-icons">input</i>Sign Out</a></li>
+                          <li><a href="{% url 'accounts:logout'%}"><i class="material-icons fas fa-door-open" style="font-size:24px; color:black;"></i></a></li>
                       </ul>
                   </div>
                   {% endif %}
@@ -136,7 +137,7 @@
                             <i class="material-icons">assignment</i>
                             <span>PROFILE &nbsp;</span>
                         </a>
-                        <ul class="ml-menu" style="font-size: 14px;">
+                        <ul class="ml-menu" style="font-size: 18px;">
                             <li>
                                 <a href="{% url 'accounts:profile' employee.id %}">PROFILE</a>
                             </li>
@@ -159,7 +160,7 @@
                             <i class="material-icons">business</i>
                             <span>DEPARTMENT</span>
                         </a>
-                        <ul class="ml-menu">
+                        <ul class="ml-menu" style="font-size:18px;">
                             <li>
                                 <a href="{% url 'departments:list_department' %}"> ALL DEPARTMENTS</a>
                             </li>
@@ -170,10 +171,10 @@
                   </li>
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">assignment</i>
+                            <i class="material-icons fas fa-file-signature"></i>
                             <span>LEAVE MANAGEMENT</span>
                         </a>
-                        <ul class="ml-menu" style="font-size: 14px;">
+                        <ul class="ml-menu" style="font-size: 18px;">
                             <li>
                                 <a href="{% url 'leave:leave_list'%}">LEAVE TYPE</a>
                             </li>
@@ -184,10 +185,10 @@
                   </li>
                   <li>
                         <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">assignment</i>
-                            <span>PERFORMANCE APPRAISAL &nbsp;</span>
+                            <i class="material-icons fas fa-graduation-cap" style="font-size:24px;"></i>
+                            <span>PERFORM APPRAISAL &nbsp;</span>
                         </a>
-                        <ul class="ml-menu" style="font-size: 14px;">
+                        <ul class="ml-menu" style="font-size: 18px;">
                             <li>
                                 <a href="{% url 'hrm:perfom_list'%}">PERFOMANCE</a>
                             </li>
@@ -202,7 +203,7 @@
                             <i class="material-icons">assignment</i>
                             <span>PROFILE &nbsp;</span>
                         </a>
-                        <ul class="ml-menu" style="font-size: 14px;">
+                        <ul class="ml-menu" style="font-size: 18px;">
                             <li>
                                 <a href="{% url 'accounts:profile' employee.id %}">PROFILE</a>
                             </li>
@@ -216,13 +217,13 @@
                   </li>
                     <li class="active">
                         <a href="{% url 'leave:applyleave_list' %}">
-                            <i class="material-icons">people</i>
+                            <i class="material-icons fas fa-file-signature" style="font-size:24px;"></i>
                             <span>APPLY LEAVE</span>
                         </a>
                     </li>
                     <li class="active">
                         <a href="{% url 'hrm:perfom_employee' %}">
-                            <i class="material-icons">people</i>
+                            <i class="material-icons fas fa-graduation-cap" style="font-size:24px;"></i>
                             <span>PERFOMANCE</span>
                         </a>
                     </li>

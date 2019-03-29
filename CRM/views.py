@@ -46,10 +46,6 @@ class ClientCreateView(SuccessMessageMixin, CreateView):
         context['employee'] = Employee.objects.get(user=user)
         return context
 
-# class ClientListView(ListView):
-#     model = Client
-#     context_object_name = "clients"
-#     template_name = "client/client_list.html"
 
 @login_required
 def all_clients(request):
@@ -561,3 +557,4 @@ class BarcodeDetailView(DetailView):
         user = self.request.user
         context['employee'] = Employee.objects.get( user= user)
         return context
+

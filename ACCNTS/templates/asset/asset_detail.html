@@ -6,7 +6,7 @@
 {{ form.media }}            {# Adds date-picker required JS and CSS #}
 {% block header %}
   <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
-      <h2 class="header pull-left">ACCOUNTS | LIABILITY DETAILS</h2>
+      <h2 class="header pull-left">ACCOUNTS | ASSET DETAILS</h2>
   </div>
 {% endblock%}
 
@@ -14,19 +14,19 @@
 
       <div class="body card">
             <div class="helper_cls body">
-                    <a href="{% url 'ACCNTS:liability_list' %}" class="btn btn-primary">BACK</a>
-                    <a href="{% url 'ACCNTS:liability_edit' pk=liability.pk %}" class="btn btn-success">EDIT</a>
+                    <a href="{% url 'ACCNTS:asset_list' %}" class="btn btn-primary">BACK</a>
+                    <a href="{% url 'ACCNTS:asset_edit' pk=asset.pk %}" class="btn btn-success">EDIT</a>
             </div>
             <div class="row clearfix body">
                 <div class="col-md-6 ">
                     <table class="table table-responsive">
                         <tr>
                             <td>Name: </td>
-                            <td>{{liability.name}}</td>
+                            <td>{{asset.name}}</td>
                         </tr>
                         <tr>
-                            <td>Type Of Liability</td>
-                            <td>{{ liability.type }}</td>
+                            <td>Type Of Income</td>
+                            <td>{{ asset.type }}</td>
                         </tr>
                     </table>
                 </div>
@@ -35,11 +35,11 @@
                     <table class="table table-responsive">
                         <tr>
                             <td>Amount</td>
-                            <td>{{liability.amount }}</td>
+                            <td>{{asset.amount }}</td>
                         </tr>
                         <tr>
                             <td>Memo</td>
-                            <td>{{liability.memo }}</td>
+                            <td>{{asset.memo }}</td>
                         </tr>
                     </table>
                 </div>

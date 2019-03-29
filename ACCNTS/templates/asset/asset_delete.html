@@ -2,15 +2,15 @@
 {% load widget_tweaks %}
 {% block header %}
 <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
-    <h2 class="header pull-left">ACCOUNTS | DELETE INCOME </h2>
+    <h2 class="header pull-left">ACCOUNTS | DELETE ASSET </h2>
 </div>
 {% endblock%}
 {% block content %}
 <div class="row jumbotron card">
     <form method="POST">
         {% csrf_token %}
-        Are you sure you want delete, from  ( {{income.giver }} of {{income.amount}})?
-        <input class="btn btn-danger" type="submit" value="YES" /> OR <a href="{% url 'ACCNTS:income_list'%}" class="btn btn-primary">NO</a>
+        Are you sure you want delete, from  ( {{asset.name }} of {{asset.amount}})?
+        <input class="btn btn-danger" type="submit" value="YES" /> OR <a href="{% url 'ACCNTS:asset_list'%}" class="btn btn-primary">NO</a>
     </form>
 </div>
 {% endblock %}

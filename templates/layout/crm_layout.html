@@ -28,14 +28,12 @@
     <style type="text/css">
         .multiselect { border: solid 1px #333; font-size: 1em;  overflow:scroll; height: 20rem;}
         .ui-multiselect ul { -moz-user-select: none; }
-        
         .ui-multiselect div.selected { position: relative; padding: 0; margin: 0; border: 0; float:left; }
         .ui-multiselect ul.selected { position: relative; padding: 0; overflow: auto; overflow-x: hidden; background: #fff; margin: 0; list-style: none; border: 0; position: relative; width: 100%; }
 
         .ui-multiselect div.available { position: relative; padding: 0; margin: 0; border: 0; float:left; border-left: 1px solid; }
         .ui-multiselect ul.available { position: relative; padding: 0; overflow: auto; overflow-x: hidden; background: #fff; margin: 0; list-style: none; border: 0; width: 100%; }
         .ui-multiselect ul.available li { padding-left: 10px; }
-        
         .ui-multiselect .ui-state-default { border: none; margin-bottom: 1px; position: relative; padding-left: 20px;}
         .ui-multiselect .ui-state-hover { border: none; }
         .ui-multiselect .ui-widget-header {border: none; font-size: 11px; margin-bottom: 1px;}
@@ -46,13 +44,13 @@
         .multiselect .search { opacity: 0;}
         .ui-multiselect .count { float: left; padding: 7px;}
         .ui-multiselect li a.action { position: absolute; right: 2px; top: 2px; height: 20px; }
-        
         .ui-multiselect input.search { height: 20px; padding: 4px; margin: 4px; width: 96%; }
     </style>
     <!-- Custom Css -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css" integrity="sha384-Mmxa0mLqhmOeaE8vgOSbKacftZcsNYDjQzuCOm6D02luYSzBG8vpaOykv9lFQ51Y" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 </head>
 
 <body>
@@ -99,7 +97,7 @@
               <ul class="nav navbar-nav navbar-right">
                   <!-- Start of Notifications -->
                   <li>
-                      <a href="{% url 'accounts:logout' %}" style="color:black;">log out</a>
+                      <li><a href="{% url 'accounts:logout'%}"><i class="material-icons fas fa-door-open" style="font-size:24px; color:black;"></i></a></li>
                   </li
               </ul>
           </div>

@@ -6,7 +6,6 @@ from django.urls import reverse
 from django.core.validators import  MinValueValidator, EmailValidator
 
 
-
 class Employee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     # additional attributes for the employee

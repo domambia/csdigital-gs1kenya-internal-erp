@@ -1,0 +1,53 @@
+{% extends 'layout/accnts_layout.html' %}
+{% load widget_tweaks %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+{{ form.media }}            {# Adds date-picker required JS and CSS #}
+{% block header %}
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
+      <h2 class="header pull-left">ACCOUNTS | INCOME DETAILS</h2>
+  </div>
+{% endblock%}
+
+{% block content %}
+
+      <div class="body card">
+            <div class="helper_cls body">
+                    <a href="{% url 'ACCNTS:income_list' %}" class="btn btn-primary">BACK</a>
+                    <a href="{% url 'ACCNTS:income_edit' pk=income.pk %}" class="btn btn-success">EDIT</a>
+            </div>
+            <div class="row clearfix body">
+                <div class="col-md-6 ">
+                    <table class="table table-responsive">
+                        <tr>
+                            <td>Name: </td>
+                            <td>{{income.name}}</td>
+                        </tr>
+                        <tr>
+                            <td>Type Of Income</td>
+                            <td>{{ income.type }}</td>
+                        </tr>
+                        <tr>
+                            <td>Amount</td>
+                            <td>{{ income.amount }}</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="col-md-6 ">
+                    <table class="table table-responsive">
+                        <tr>
+                            <td>From</td>
+                            <td>{{income.giver }}</td>
+                        </tr>
+                        <tr>
+                            <td>Memo</td>
+                            <td>{{income.memo }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+          </div>
+        </div>
+{% endblock %}

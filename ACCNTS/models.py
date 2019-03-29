@@ -151,7 +151,7 @@ class Asset(models.Model):
     open_balance = models.IntegerField(default = 0, blank = True)
     amount = models.IntegerField(default = 0)
     memo  = models.CharField(max_length = 200)
-
+    dated = models.DateField(default = datetime.datetime.now)
     def __str__(self):
         return self.name
     def get_absolute_url(self):
@@ -172,7 +172,7 @@ class Income(models.Model):
     amount = models.IntegerField(default = 0)
     open_balance = models.IntegerField(default = 0, blank = True)
     memo = models.CharField(max_length = 200)
-
+    dated = models.DateField(default = datetime.datetime.now)
     def __str__(self):
         return self.name
 
@@ -193,6 +193,7 @@ class Liability(models.Model):
     amount = models.IntegerField(default = 0)
     open_balance = models.IntegerField(default = 0, blank = True)
     memo = models.CharField(max_length = 200)
+    dated = models.DateField(default = datetime.datetime.now)
 
     def __str__(self):
         return self.name
