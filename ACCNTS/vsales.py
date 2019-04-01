@@ -10,7 +10,6 @@ from django.views.generic import (CreateView,
                                   DeleteView,
                                   DetailView,
                                   ListView)
-
 '''
 Adding a sale for  a specific invoice
 '''

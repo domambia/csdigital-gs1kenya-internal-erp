@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'accounts',
     'hrm',
     'homePage',
+    'website',
     'leave',
     'departments',
     'targets',
