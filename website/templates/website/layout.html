@@ -10,12 +10,9 @@
 	<meta name="description" content="">
 	<meta name="keywords" content"">
 	<meta name="author" content="Ben Kimathi">
-
     <title>GS1Kenya|The Global Language of Business</title>
-
-
-    <link rel="icon" href="images/favicon.ico">
-    <link rel="icon" type="image/x-icon" "images/favicon.ico" />
+    <link rel="icon" href="{% static 'website/images/favicon.ico' %}">
+    <link rel="icon" type="image/x-icon" href={% static 'website/images/favicon.ico' %}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <link rel="stylesheet" href="https://fonts.gs1.org/fonts/307565/0C1AFEF06D7B06FBF.css" />
@@ -30,7 +27,8 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <link href="{% static 'website/css/assets/yamm.css' %}">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116535828-1"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css" integrity="sha384-Mmxa0mLqhmOeaE8vgOSbKacftZcsNYDjQzuCOm6D02luYSzBG8vpaOykv9lFQ51Y" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -148,21 +146,21 @@ curobj.q.value="site:"+domainroot+" "+curobj.qfront.value
 
 <form class="form-group form-search-box" action="http://www.google.com/search" target="_blank" method="get" onSubmit="Gsitesearch(this)">
 
-<div class="input-wrapper glyphicon-search">
+<div class="input-wrapper">
 <input name="q" type="hidden" />
-<div class="input-wrapper icon-search">
-<input name="qfront" type="text"  class="form-control" placeholder="Search" />
+<div class="input-wrap">
+    <input name="qfront" type="text"  class="form-control" placeholder="Search" />
 </div>
 </div>
 <div>
                             <button type="submit" value="Search" class="btn-search">
-                                <span class="icon-arrow_right"></span>
+                                <i class="fas fa-angle-right"></i>
                             </button>
                         </div>
 </form>
 
 
-                    <a class="btn-primary login-button" role="button" target="" href=""><span class="icon-user"></span> Member Login</a>
+<a class="btn-primary login-button" role="button" target="" href=""> <i class="fas fa-user" style=" font-size: 20px; margin-left:-20px; margin-right:11px;"></i> Member Login</a>
                 </div>
             </div>
         </div>
@@ -183,12 +181,12 @@ curobj.q.value="site:"+domainroot+" "+curobj.qfront.value
                     <div id="navbar-collapse-example" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav ">
                             <li>
-                                <a  href="">Home</a>
+                                <a  href="/">Home</a>
                             </li>
                             <!--neew-->
 
                             <li class="dropdown yamm-fw">
-                                <a data-toggle="dropdown" class="dropdown-toggle" href="#0">New?Register</a>
+                                <a data-toggle="dropdown" href="#0">New?Register  <i class="fas fa-angle-down"></i></a>
                                 <ul class="dropdown-menu">
                                   <li>
 
@@ -208,16 +206,15 @@ curobj.q.value="site:"+domainroot+" "+curobj.qfront.value
 
                             <li class="dropdown yamm-fw">
 
-                                <a data-toggle="dropdown" class="dropdown-toggle" href="">About Us</a>
-                                <i class=""></i>
+                                <a data-toggle="dropdown" href="{% url 'website:about' %}">About Us <i class="fas fa-angle-down"></i></a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <div class="col-sm-4 column">
-                                            <h4><a href="about">Who we are</a></h4>
+                                            <h4><a href="{% url 'website:about' %}">Who we are</a></h4>
 
                                             <ul class="section">
-                                              <li><a href="bod">Board of directors</a></li>
-                                                <li><a href="staff">Staff</a></li>
+                                              <li><a href="{% url 'website:bod' %}">Board of directors</a></li>
+                                                <li><a href="{% url 'website:staff' %}">Staff</a></li>
                                                 <li><a href="contacts">Our Contacts</a></li>
                                               </ul>
 <h4><a href="our_history">Our History</a></h4>
@@ -260,7 +257,7 @@ curobj.q.value="site:"+domainroot+" "+curobj.qfront.value
                             </li>
 
 							<li  class="dropdown yamm-fw ">
-                                <a data-toggle="dropdown" class="dropdown-toggle" href="services">Our Services</a>
+                  <a data-toggle="dropdown" href="services">Our Services  <i class="fas fa-angle-down"></i></a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <div class="col-sm-4 column">
@@ -294,7 +291,7 @@ curobj.q.value="site:"+domainroot+" "+curobj.qfront.value
                                 </ul>
                             </li>
 							<li class="dropdown yamm-fw">
-                                <a data-toggle="dropdown" class="dropdown-toggle" href="#0">Membership</a>
+                  <a data-toggle="dropdown" href="#0">Membership  <i class="fas fa-angle-down"></i></a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <div class="col-sm-4 column">
@@ -338,7 +335,7 @@ curobj.q.value="site:"+domainroot+" "+curobj.qfront.value
                                 </ul>
                             </li>
                             <li class="dropdown yamm-fw">
-                                <a data-toggle="dropdown" class="dropdown-toggle" href="#0">GS1 Sectors</a>
+                                <a data-toggle="dropdown" href="#0">GS1 Sectors  <i class="fas fa-angle-down"></i> </a>
                                 <ul class="dropdown-menu">
                                   <li>
 
@@ -365,7 +362,7 @@ curobj.q.value="site:"+domainroot+" "+curobj.qfront.value
                                 </ul>
                             </li>
 							<li class="dropdown yamm-fw">
-                                <a data-toggle="dropdown" class="dropdown-toggle" href="#0">Resources</a>
+                  <a data-toggle="dropdown"  href="#0">Resources  <i class="fas fa-angle-down"></i></a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <div class="col-sm-4 column">
@@ -490,13 +487,13 @@ curobj.q.value="site:"+domainroot+" "+curobj.qfront.value
 
                           <h4>Contact Us:</h4>
 
-                          <a href="https://www.facebook.com/gs1kenya.org/" target="_blank" class="icon icon-facebook"></a>
-                          <a href="https://twitter.com/gs1kenya" target="_blank" class="icon icon-twitter"></a>
-                          <a href="https://www.linkedin.com/company/gs1-kenya" target="_blank" class="icon icon-linkedin"></a>
+                          <a href="https://www.facebook.com/gs1kenya.org/" target="_blank" style="margin-right:6px; font-size:18px;"><i class="fa fa-facebook"></i></a>
+                          <a href="https://twitter.com/gs1kenya" target="_blank"  style="margin-right:6px; font-size:18px;" ><i class="fa fa-twitter"></i></a>
+                          <a href="https://www.linkedin.com/company/gs1-kenya" target="_blank"  style="margin-right:6px; font-size:18px;" ><i class="fa fa-linkedin"></i></a>
                            <hr/>
                           <p><b>P:</b> +254 (20)2385270 <br> <b>E:</b> info@gs1kenya.org</p>
 
-                      </div>
+                     </div>
                   </div>
               </div>
 
