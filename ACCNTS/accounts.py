@@ -184,7 +184,6 @@ class BankCreateView(CreateView):
     fields = ('type', 'ref_number','name', 'banked', 'amount',)
     template_name  = "bank/bank_form.html"
     success_message = "Successfully! Create a bank item"
-    success_url = reverse_lazy("")
     def get_context_data(self, **kwargs):
         context = super(BankCreateView, self).get_context_data(**kwargs)
         context['employee'] = Employee.objects.get(user = User.objects.get(username = self.request.user).id)
