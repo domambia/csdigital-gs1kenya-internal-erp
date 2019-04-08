@@ -1,0 +1,57 @@
+{% extends 'layout/accnts_layout.html' %}
+{% load widget_tweaks %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+{{ form.media }}            {# Adds date-picker required JS and CSS #}
+{% block header %}
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
+      <h2 class="header pull-left">ACCOUNTS | BANKING</h2>
+  </div>
+{% endblock%}
+
+{% block content %}
+
+      <div class="body card">
+            <div class="helper_cls body">
+                    <a href="{% url 'ACCNTS:bank_list' %}" class="btn btn-primary">BACK</a>
+                    <a href="{% url 'ACCNTS:bank_edit' pk=bank.pk %}" class="btn btn-success">EDIT</a>
+            </div>
+            <div class="row clearfix body">
+                <div class="col-md-6 ">
+                    <table class="table table-responsive">
+                        <tr>
+                            <td>Name: </td>
+                            <td>{{bank.name}}</td>
+                        </tr>
+                        <tr>
+                            <td>Type Of Banking</td>
+                            <td>{{ bank.type }}</td>
+                        </tr>
+                        <tr>
+                            <td>Reference/ Serial No.</td>
+                            <td>{{ bank.ref_number }}</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="col-md-6 ">
+                    <table class="table table-responsive">
+                        <tr>
+                            <td>Banked By:</td>
+                            <td>{{bank.banked }}</td>
+                        </tr>
+                        <tr>
+                            <td>Amount:</td>
+                            <td>ksh.{{bank.amount }}</td>
+                        </tr>
+                        <tr>
+                            <td>Banked</td>
+                            <td>{{bank.dated }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+          </div>
+        </div>
+{% endblock %}

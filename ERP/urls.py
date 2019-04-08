@@ -8,8 +8,8 @@ from website.views import indexPage
 from django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^erp/$', login_required(index), name="index"),
-    url(r'^$', indexPage, name="website"),
+    url(r'^$', login_required(index), name="index"),
+    url(r'^website/', indexPage, name="website"),
     url(r'^hrm/home/', hrm_view_index, name = "hrm_index"),
     url(r'^leave/', include('leave.urls'), name = "leave"),
     url(r'^departments/', include('departments.urls'), name = "departments"),

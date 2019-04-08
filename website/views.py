@@ -14,3 +14,17 @@ def bod(request):
 def staff(request):
 
     return render(request, "website/staff.html")
+
+def contact(request):
+    return render(request, "website/contact.html")
+
+def standards(request):
+    return render(request, "website/standards.html")
+
+def history(request):
+    return render(request, "website/history.html")
+def memoradum(request):
+    return render(request, "website/memorandum.html")
+
+def identity(request):
+    return render(request, "website/identity.html")

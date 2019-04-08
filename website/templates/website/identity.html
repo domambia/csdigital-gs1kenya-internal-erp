@@ -1,0 +1,59 @@
+{% extends 'website/layout.html' %}
+{% block content %}
+
+<div class="container">
+    <section class="homeheader">
+		<h1>
+		Identification: Barcodes Numbers
+		</h1>
+		<div class="col-md-8">
+		<p>We provide a system of unambiguous numbers to identify goods, services, assets and locations in support of automated and secure supply chain processes.</p>
+		<p>By using GS1 ID Keys, companies have an efficient way to access information about items in their supply chains, and share this information with trading partners. Because GS1 ID keys are globally unique, they can be shared between organisations, increasing supply chain visibility for trading partners.</p>
+		</div>
+		<div class="col-md-4">
+		<img class="img-responsive" src="{{url('/images/gs1-identification.png')}}" alt="Use" />
+
+		</div>
+		<a class="btn-primary" role="button"  href="{{ url('/get_barcodes') }}">Join GS1 Kenya and Get Barcodes</a>
+    </section>
+</div>
+<div class="bg-light-gray">
+    <div class="container">
+		<section>
+		<h2>What GS1 Numbers are all about</h2>
+		<ul>
+	<li>can be used to identify products, logistic units, assets, locations, documents and more</li>
+	<li>are used in industry sectors including retail, healthcare and transport &amp; logistics</li>
+	<li>are unique and globally accepted</li>
+	<li>are licensed to be used by Companies on an annual basis</li>
+
+	</ul>
+	<h3>Benefits of GS1 Numbering System</h3>
+	<div class="row">
+                <div class="col-md-6">
+	<p><b>Local and universal recognition</b><br>
+	GS1 numbers are scanned and recognized both locally and globally from your local mini-supermarket to global supermarket brands.
+	</p>
+	<p><b>40+ Year of experience and a pool of support</b><br>
+	With presence in over 115 countries, GS1 has a large pool of expertise consultants to help in implementation of the standards.
+	</p>
+				</div>
+				<div class="col-md-6">
+			<p><b>Numbering Integrity</b><br>
+	GS1 Kenya is the only body authorized to issue the GS1 Numbering systems in Kenya.Getting numbers from us ensures integrity is observed and that the numbers are unique in nature.
+	</p>
+				</div>
+	</div>
+	<div class="row">
+	<img class="img-responsive" src="{{url('/images/identify-illustration.png')}}" alt="Use" />
+
+	</div>
+			<div>
+				<div class="row">
+            </section>
+
+</div>
+</div>
+
+
+{% endblock %}

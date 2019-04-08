@@ -78,7 +78,7 @@ class Sales(models.Model):
     date_of_sale = models.DateField(default = datetime.datetime.now)
 
     def __str__(self):
-        return member.company_name
+        return "Sales"
 
     def get_absolute_url(self):
         return reverse("ACCNTS:sales_list")
@@ -203,10 +203,25 @@ class Liability(models.Model):
 
 
 
+'''
+Banking Model'''
+class Bank(models.Model):
+    OPTIONS = (
+        ('Payment', 'Payment'),
+        ('Sales Receipt', 'Sales reciept'),
+    )
+    type = models.CharField(max_length = 50, choices = OPTIONS, default='Payment')
+    ref_number = models.CharField(max_length = 100)
+    dated = models.DateField(default = datetime.datetime.now)
+    name = models.CharField(max_length=200)
+    banked = models.CharField(max_length = 200)
+    amount = models.PositiveIntegerField(default = 0)
 
+    def __str__(self):
+        return self.name
 
-
-
+    def get_absolute_url(self):
+        return reverse("ACCNTS:bank_list")
 
 
 

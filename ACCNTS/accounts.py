@@ -1,4 +1,4 @@
-from ACCNTS.models import Asset, Income, Liability
+from ACCNTS.models import Asset, Income, Liability, Bank
 from  django.views.generic import CreateView, UpdateView, DeleteView, DetailView, ListView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
@@ -172,5 +172,60 @@ class IncomeDeleteView(DeleteView):
     success_url = reverse_lazy("ACCNTS:income_list")
     def get_context_data(self, **kwargs):
         context = super(IncomeDeleteView, self).get_context_data(**kwargs)
+        context['employee'] = Employee.objects.get(user = User.objects.get(username = self.request.user).id)
+        return context
+
+
+'''
+The Banking Views'''
+
+class BankCreateView(CreateView):
+    model = Bank
+    fields = ('type', 'ref_number','name', 'banked', 'amount',)
+    template_name  = "bank/bank_form.html"
+    success_message = "Successfully! Create a bank item"
+    success_url = reverse_lazy("")
+    def get_context_data(self, **kwargs):
+        context = super(BankCreateView, self).get_context_data(**kwargs)
+        context['employee'] = Employee.objects.get(user = User.objects.get(username = self.request.user).id)
+        return context
+
+
+class BankListView(ListView):
+    model = Bank
+    template_name  = "bank/bank_list.html"
+    context_object_name = 'banks'
+    def get_context_data(self, **kwargs):
+        context = super(BankListView, self).get_context_data(**kwargs)
+        context['employee'] = Employee.objects.get(user = User.objects.get(username = self.request.user).id)
+        return context
+
+
+class BankUpdateView(UpdateView):
+    model = Bank
+    fields = ('type', 'ref_number', 'name', 'banked', 'amount',)
+    template_name  = "bank/bank_form.html"
+    success_message = "Successfully! Updated a bank item"
+    def get_context_data(self, **kwargs):
+        context = super(BankUpdateView, self).get_context_data(**kwargs)
+        context['employee'] = Employee.objects.get(user = User.objects.get(username = self.request.user).id)
+        return context
+
+class BankDetailView(DetailView):
+    model = Bank
+    template_name  = "bank/bank_detail.html"
+    context_object_name = 'bank'
+    def get_context_data(self, **kwargs):
+        context = super(BankDetailView, self).get_context_data(**kwargs)
+        context['employee'] = Employee.objects.get(user = User.objects.get(username = self.request.user).id)
+        return context
+
+class BankDeleteView(DeleteView):
+    model = Bank
+    template_name  = "bank/bank_delete.html"
+    success_message = "Successfully! Deleted a bank item"
+    success_url = reverse_lazy("")
+    def get_context_data(self, **kwargs):
+        context = super(BankCreateView, self).get_context_data(**kwargs)
         context['employee'] = Employee.objects.get(user = User.objects.get(username = self.request.user).id)
         return context

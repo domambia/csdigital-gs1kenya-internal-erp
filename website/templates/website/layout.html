@@ -215,19 +215,19 @@ curobj.q.value="site:"+domainroot+" "+curobj.qfront.value
                                             <ul class="section">
                                               <li><a href="{% url 'website:bod' %}">Board of directors</a></li>
                                                 <li><a href="{% url 'website:staff' %}">Staff</a></li>
-                                                <li><a href="contacts">Our Contacts</a></li>
+                                                <li><a href="{% url 'website:contact' %}">Our Contacts</a></li>
                                               </ul>
-<h4><a href="our_history">Our History</a></h4>
-<h4><a href="" target="_blank">Memorandum</a></h4>
+<h4><a href="{% url 'website:history' %}">Our History</a></h4>
+<h4><a href="{% url 'website:memoradum' %}" target="_blank">Memorandum</a></h4>
 <h4><a href="agm">AGM</a></h4>
 
 
                                         </div>
                                         <div class="col-sm-4 column">
 
-                                            <h4><a href="our_standards">Our Standards</a></h4>
+                                            <h4><a href="{% url 'website:standards' %}">Our Standards</a></h4>
                                             <ul class="section">
-                                                <li><a href="identity">Identity</a></li>
+                                                <li><a href="{% url 'website:identity' %}">Identity</a></li>
                                                 <li><a href="capture">Capture</a></li>
                                                 <li><a href="share">Share</a></li>
 

@@ -154,6 +154,9 @@
                                 <a href="{% url 'ACCNTS:asset_list'%}">ASSETS</a>
                             </li>
                             <li>
+                                <a href="{% url 'ACCNTS:bank_list'%}">BANKING</a>
+                            </li>
+                            <li>
                                 <a href="{% url 'ACCNTS:expense_list' %}">EXPENSES</a>
                             </li>
                             <li>
@@ -162,16 +165,43 @@
                             <li>
                                 <a href="{% url 'ACCNTS:liability_list' %}">LIABILITY</a>
                             </li>
+                            <li>
+                                <a href="{% url 'ACCNTS:sales_list' %}">SALES</a>
+                            </li>
                         </ul>
                     </li>
-
-                    <li class="active">
-                        <a href="{% url 'ACCNTS:sales_list'%}">
-                            <i class="material-icons fas fa-arrows-alt-h" font-size: 24px;></i>
-                            <span>SALES</span>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-cions fas fa-file-invoice-dollar" style="font-size:24px; "></i>
+                            <span>SUMMARY REPORTS</span>
                         </a>
+                        <ul class="ml-menu" style="font-size: 16px;">
+                            <li>
+                                <a href="{% url 'ACCNTS:asset_list'%}">Banking Details</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'ACCNTS:bank_list'%}">Balance Sheet</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'ACCNTS:expense_list' %}">Fixed Assets</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'ACCNTS:income_list' %}">Profit & loss</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'ACCNTS:sales_report' %}">Sales Report</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'ACCNTS:expense_report' %}">Purchases Report</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'ACCNTS:liability_list' %}">Trial Report</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'ACCNTS:sales_list' %}">KRA Payments</a>
+                            </li>
+                        </ul>
                     </li>
-
                   {% else %}
                     <li class="active">
                         <a href="{% url 'ACCNTS:payslip'%}">

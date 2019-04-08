@@ -4,7 +4,7 @@ from ERP import settings
 from ACCNTS import vsales, accounts
 from django.contrib.auth.decorators import login_required
 from django.conf.urls.static import static
-from ACCNTS import vexpenses
+from ACCNTS import vexpenses, reports
 app_name  = "ACCNTS"
 
 urlpatterns = [
@@ -68,6 +68,16 @@ urlpatterns = [
     url(r'^liability/edit/(?P<pk>\d+)/$', login_required(accounts.LiabilityUpdateView.as_view()), name = "liability_edit"),
     url(r'^liability/delete/(?P<pk>\d+)/$', login_required(accounts.LiabilityDeleteView.as_view()), name = "liability_delete"),
     url(r'^liability/detail/(?P<pk>\d+)/$', login_required(accounts.LiabilityDetailView.as_view()), name = "liability_detail"),
+
+    url(r'^banking/list/', login_required(accounts.BankListView.as_view()), name = "bank_list"),
+    url(r'^banking/create/', login_required(accounts.BankCreateView.as_view()), name = "bank_add"),
+    url(r'^banking/edit/(?P<pk>\d+)/$', login_required(accounts.BankUpdateView.as_view()), name = "bank_edit"),
+    url(r'^banking/delete/(?P<pk>\d+)/$', login_required(accounts.BankDeleteView.as_view()), name = "bank_delete"),
+    url(r'^banking/detail/(?P<pk>\d+)/$', login_required(accounts.BankDetailView.as_view()), name = "bank_detail"),
+
+    # Reports
+    url(r'reports/sales', reports.sales_report, name ='sales_report'),
+    url(r'reports/purchases', reports.expenses_report, name ='expense_report'),
 ]+static(settings.STATIC_URL, document_root=settings.STATIC_DIR)
 
 
