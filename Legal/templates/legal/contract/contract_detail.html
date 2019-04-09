@@ -1,0 +1,67 @@
+{% extends 'layout/legal_layout.html' %}
+{% load widget_tweaks %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+{{ form.media }}            {# Adds date-picker required JS and CSS #}
+{% block header %}
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
+      <h2 class="header pull-left">LEGAL | CONTRACTS DETAILS</h2>
+  </div>
+{% endblock%}
+
+{% block content %}
+
+      <div class="body card">
+            <div class="helper_cls body">
+                    <a href="{% url 'Legal:contract_list' %}" class="btn btn-primary">BACK</a>
+                    <a href="{% url 'Legal:contract_edit' pk=contract.pk %}" class="btn btn-success">EDIT</a>
+            </div>
+            <div class="row clearfix body">
+                <div class="col-md-6 ">
+                    <table class="table table-responsive">
+                        <tr>
+                            <td>Contract Name</td>
+                            <td>{{ contract.name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Category</td>
+                            <td>{{contract.category }}</td>
+                        </tr>
+                        <tr>
+                            <td>Date of Signing</td>
+                            <td>{{contract.dofsigning }}</td>
+                        </tr>
+                        <tr>
+                            <td>Date of Lapsing</td>
+                            <td>{{contract.doflapsing }}</td>
+                        </tr>
+                        <tr>
+                            <td>Status</td>
+                            <td>
+                                {% if contract.status == 0%}
+                                    <span class="btn label bg-orange">Coming Soon</span>
+                                {% else %}
+                                    <span class="btn label bg-green"> Happened</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="col-md-6 ">
+                    <table class="table table-responsive">
+                        <tr>
+                            <td>Document</td>
+                            <td> <a href="{{ contract.document.url }}" target="_blank"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i> </a></td>
+                        </tr>
+                        <tr>
+                            <td>Description</td>
+                            <td>{{ contract.description }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+          </div>
+        </div>
+{% endblock %}

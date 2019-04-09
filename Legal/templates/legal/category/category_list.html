@@ -1,0 +1,61 @@
+{% extends "layout/legal_layout.html" %}
+{% block header %}
+  <div style="background: none; padding: .7rem; box-shadow: none;">
+      <h2 class="header pull-left">LEGAL | CONTRACT CATEGORY</h2>
+  </div>
+{% endblock%}
+{% block content %}
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card body">
+            <div class="">
+                <h2 class="body">
+                  <span><a class="btn btn-primary" href = "{% url 'Legal:category_add' %}" >ADD CATEGORY</a></span>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Dated On</th>
+                                <th>Description</th>
+                                <th style="text-align:center;">Status </th>
+                                <th style="text-align:center;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if categorys %}
+                              {% for category in categorys %}
+                                  <tr>
+                                      <td>{{ category.name }}</td>
+                                      <td>{{ category.dated }}</td>
+                                      <td>{{ category.description }}</td>
+                                      <td style="text-align:center;">
+                                            {% if category.status == 0%}
+                                                <span class="btn label bg-orange">Inactive</span>
+                                            {% else %}
+                                                <span class="btn label bg-green"> Active</span>
+                                            {% endif %}
+                                     </td>
+                                      <td>
+                                          <span> <a href = "{% url 'Legal:category_detail' pk=category.id %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>
+                                          <span> <a href = "{% url 'Legal:category_edit' pk=category.id %}"><i class="material-icons">edit</i></a> </span>
+                                          <span> <a href = "{% url 'Legal:category_delete' pk=category.id %}"><i class="material-icons" style = "color:#cc0000;">delete</i></a> </span>
+                                      </td>
+                                  </tr>
+                              {% endfor %}
+                            {% else %}
+
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Exportable Table -->
+{% endblock %}

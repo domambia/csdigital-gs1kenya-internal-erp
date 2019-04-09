@@ -30,7 +30,7 @@ class GS1Docs(models.Model):
     name = models.CharField(max_length = 200)
     description = models.CharField(max_length = 1000)
     dated  = models.DateField(default=datetime.datetime.now)
-    documents = models.FileField(upload_to=file_upload, blank = True)
+    document = models.FileField(upload_to=file_upload, blank = True)
     status = models.IntegerField(default = 0)
 
     '''String Name'''
@@ -39,7 +39,7 @@ class GS1Docs(models.Model):
 
     '''Get absolute url'''
     def get_absolute_url(self):
-        return reverse("Legal:gsdocs_list")
+        return reverse("Legal:gs1docs_list")
 
 
 '''
@@ -51,7 +51,7 @@ class Letter(models.Model):
     name = models.CharField(max_length = 200)
     description = models.CharField(max_length = 1000)
     dated  = models.DateField(default=datetime.datetime.now)
-    documents = models.FileField(upload_to=file_upload, blank = True)
+    document = models.FileField(upload_to=file_upload, blank = True)
     status = models.IntegerField(default=0)
 
     '''String name of the Letters'''
@@ -72,7 +72,7 @@ class Category(models.Model):
     name = models.CharField(max_length = 300)
     description = models.CharField(max_length = 1000)
     status = models.IntegerField(default = 0)
-
+    dated = models.DateField(default = datetime.datetime.now)
     '''String name of the category'''
     def __str__(self):
         return self.name
@@ -90,7 +90,7 @@ class Contract(models.Model):
     this gives the attributes of the ORM making up the contract model'''
     name  = models.CharField(max_length = 1000)
     dofsigning = models.DateField(default = datetime.datetime.now)
-    doflasping = models.DateField(default = datetime.datetime.now)
+    doflapsing = models.DateField(default = datetime.datetime.now)
     category =  models.ForeignKey(Category, on_delete = models.CASCADE, default =1)
     document = models.FileField(upload_to = file_upload, blank = True)
     description = models.CharField(max_length = 1000)

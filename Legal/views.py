@@ -4,7 +4,7 @@ from accounts.models import Employee
 from django.urls import reverse_lazy
 from .models import Category, Letter, Contract, GS1Docs
 from django.views.generic import CreateView, UpdateView, ListView, DetailView, DeleteView
-from django.contrib.messages import SuccessMessageMixin
+from django.contrib.messages.views import SuccessMessageMixin
 # Create your views here.
 
 '''
@@ -22,7 +22,7 @@ class GS1DocsCreateView(CreateView):
         'description',
     )
 
-    template_name  = "legal/gsidocs_form.html"
+    template_name  = "legal/gs1docs/gs1docs_form.html"
 
     # flash message
     success_message  = "Successfully! Create a gs1 document"
@@ -33,7 +33,7 @@ class GS1DocsCreateView(CreateView):
         return context
 
 
-class GS1DocsUpdateView(CreateView):
+class GS1DocsUpdateView(UpdateView):
     model = GS1Docs
 
     fields = (
@@ -41,14 +41,14 @@ class GS1DocsUpdateView(CreateView):
         'document',
         'description',
     )
-
-    template_name  = "legal/gsidocs_form.html"
+    context_object_name = "gs1doc"
+    template_name  = "legal/gs1docs/gs1docs_form.html"
 
     # flash message
     success_message  = "Successfully! Udpated a gs1 document"
 
     def get_context_data(self, **kwargs):
-        context = super(GS1DocsUdapteView, self).get_context_data(**kwargs)
+        context = super(GS1DocsUpdateView, self).get_context_data(**kwargs)
         context['employee'] = Employee.objects.get(user=User.objects.get(username = self.request.user).id)
         return context
 
@@ -56,8 +56,8 @@ class GS1DocsUpdateView(CreateView):
 class GS1DocsListView(ListView):
     model = GS1Docs
     #context manager
-    context_object_name = gs1docs
-    template_name  = "legal/gsidocs_list.html"
+    context_object_name = "gs1docs"
+    template_name  = "legal/gs1docs/gs1docs_list.html"
 
     def get_context_data(self, **kwargs):
         context = super(GS1DocsListView, self).get_context_data(**kwargs)
@@ -68,20 +68,19 @@ class GS1DocsListView(ListView):
 class GS1DocsDetailView(DetailView):
     model = GS1Docs
     context_object_name = "gs1doc"
-    template_name  = "legal/gsidocs_detail.html"
+    template_name  = "legal/gs1docs/gs1docs_detail.html"
 
     def get_context_data(self, **kwargs):
         context = super(GS1DocsDetailView, self).get_context_data(**kwargs)
         context['employee'] = Employee.objects.get(user=User.objects.get(username = self.request.user).id)
         return context
 
-class GS1DocsDeleteView(CreateView):
+class GS1DocsDeleteView(DeleteView):
     model = GS1Docs
-    template_name  = "legal/gsidocs_list.html"
-    success_url = reverse_lazy("Legal:gs1doc_list")
+    template_name  = "legal/gs1docs/gs1docs_delete.html"
+    success_url = reverse_lazy("Legal:gs1docs_list")
     # flash message
     success_message  = "Successfully! Deleles a gs1 documents"
-
     def get_context_data(self, **kwargs):
         context = super(GS1DocsDeleteView, self).get_context_data(**kwargs)
         context['employee'] = Employee.objects.get(user=User.objects.get(username = self.request.user).id)
@@ -101,7 +100,7 @@ class CategoryCreateView(CreateView):
         'description',
     )
 
-    template_name  = "legal/category/category_from.html"
+    template_name  = "legal/category/category_form.html"
 
     # flash message
     success_message  = "Successfully! Create a category"
@@ -114,17 +113,17 @@ class CategoryCreateView(CreateView):
 class CategoryListView(ListView):
     model = Category
     context_object_name = 'categorys'
-    template_name  = "legal/categroy/cagetory_list.html"
+    template_name  = "legal/category/category_list.html"
 
     def get_context_data(self, **kwargs):
-        context = super(CategroyListView, self).get_context_data(**kwargs)
+        context = super(CategoryListView, self).get_context_data(**kwargs)
         context['employee'] = Employee.objects.get(user=User.objects.get(username = self.request.user).id)
         return context
 
 class CategoryDetailView(DetailView):
     model = Category
     context_object_name  = 'category'
-    template_name  = "legal/category/categroy_detail.html"
+    template_name  = "legal/category/category_detail.html"
 
     def get_context_data(self, **kwargs):
         context = super(CategoryDetailView, self).get_context_data(**kwargs)
@@ -149,15 +148,15 @@ class CategoryUpdateView(CreateView):
         context['employee'] = Employee.objects.get(user=User.objects.get(username = self.request.user).id)
         return context
 
-class CategoryDeleteView(CreateView):
+class CategoryDeleteView(DeleteView):
     model = Category
     template_name  = "legal/category/category_delete.html"
-    success_message = reverse_lazy("Legal:category_list")
+    success_url = reverse_lazy("Legal:category_list")
     # flash message
     success_message  = "Successfully! Create a gs1 documents"
 
     def get_context_data(self, **kwargs):
-        context = super(GS1DocsCreateView, self).get_context_data(**kwargs)
+        context = super(CategoryDeleteView, self).get_context_data(**kwargs)
         context['employee'] = Employee.objects.get(user=User.objects.get(username = self.request.user).id)
         return context
 
@@ -170,7 +169,7 @@ class ContractCreateView(CreateView):
         'name',
         'category',
         'dofsigning',
-        'doflasping',
+        'doflapsing',
         'document',
         'description',
     )
@@ -185,12 +184,12 @@ class ContractCreateView(CreateView):
         return context
 
 
-class ContractCreateView(CreateView):
+class ContractUpdateView(UpdateView):
     model = Contract
     fields = (
         'name',
         'category',
-        'doflasping',
+        'doflapsing',
         'dofsigning',
         'document',
         'description',
@@ -201,14 +200,14 @@ class ContractCreateView(CreateView):
     success_message  = "Successfully! Udpated a contract"
 
     def get_context_data(self, **kwargs):
-        context = super(ContractUdapteView, self).get_context_data(**kwargs)
+        context = super(ContractUpdateView, self).get_context_data(**kwargs)
         context['employee'] = Employee.objects.get(user=User.objects.get(username = self.request.user).id)
         return context
 
 
 class ContractListView(ListView):
     model = Contract
-    context_object_view  = 'contracts'
+    context_object_name  = 'contracts'
     template_name  = "legal/contract/contract_list.html"
 
     def get_context_data(self, **kwargs):
@@ -262,7 +261,7 @@ class LetterCreateView(CreateView):
         return context
 
 
-class LetterUpdateView(UdpateView):
+class LetterUpdateView(UpdateView):
     model = Letter
     fields = (
         'name',
@@ -274,19 +273,20 @@ class LetterUpdateView(UdpateView):
     success_message  = "Successfully! Udpated a letter"
 
     def get_context_data(self, **kwargs):
-        context = super(LetterUdapteView, self).get_context_data(**kwargs)
+        context = super(LetterUpdateView, self).get_context_data(**kwargs)
         context['employee'] = Employee.objects.get(user=User.objects.get(username = self.request.user).id)
         return context
 
 
 class LetterListView(ListView):
     model = Letter
-    context_object_view  = 'letters'
+    context_object_name  = 'letters'
     template_name  = "legal/letter/letter_list.html"
 
     def get_context_data(self, **kwargs):
         context = super(LetterListView, self).get_context_data(**kwargs)
         context['employee'] = Employee.objects.get(user=User.objects.get(username = self.request.user).id)
+        print(context['letters'])
         return context
 
 class LetterDetailView(DetailView):

@@ -1,0 +1,72 @@
+{% extends 'layout/legal_layout.html' %}
+{% load widget_tweaks %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+{{ form.media }}            {# Adds date-picker required JS and CSS #}
+{% block header %}
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
+      <h2 class="pull-left">LEGAL | DASHBOARD</h2>
+  </div>
+{% endblock%}
+{% block content %}
+  <div class="row clearfix">
+      <div class="body">
+            <!-- Widgets -->
+            <div class="row clearfix">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="info-box bg-cyan hover-expand-effect">
+                        <a href="{% url 'CRM:list_client' %}">
+                            <div class="icon">
+                                <i class="material-icons">all_out</i>
+                            </div>
+                            <div class="content">
+                                <div class="text">CONTRACTS</div>
+                                <div class="number count-to" data-from="0" data-to="257" data-speed="1000" data-fresh-interval="20">{{ contracts }}</div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="info-box bg-light-green hover-expand-effect">
+                            <div class="icon">
+                                <i class="material-icons">local_shipping</i>
+                            </div>
+                            <div class="content">
+                                <div class="text">LETTERS</div>
+                                <div class="number count-to" data-from="0" data-to="243" data-speed="1000" data-fresh-interval="20">{{ letters }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="info-box bg-orange hover-expand-effect">
+                            <div class="icon">
+                                <i class="material-icons">feedback</i>
+                            </div>
+                            <div class="content">
+                                <div class="text">CATEGORY</div>
+                                <div class="number count-to" data-from="0" data-to="1225" data-speed="1000" data-fresh-interval="20"> {{ categorys }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="info-box bg-pink hover-expand-effect">
+                                <a href="{% url 'CRM:list_training' %}">
+                                <div class="icon">
+                                    <i class="material-icons">center_focus_weak</i>
+                                </div>
+                                <div class="content">
+                                    <div class="text">GS1Kenya DOCUMENTS</div>
+                                    <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20">{{ gs1docs }}</div>
+                                </div>
+                            </a>
+                            </div>
+                        </div>
+                </div>
+                <!-- #END# Widgets -->
+      </div>
+
+
+  </div>
+
+{% endblock %}

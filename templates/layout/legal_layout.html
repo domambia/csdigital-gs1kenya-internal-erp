@@ -140,34 +140,34 @@
           <div class="menu">
             <ul class="list">
                 <li class="active">
-                    <a href="{% url  'Legal:index' %}">
+                    <a href="{% url  'Legal:dashboard' %}">
                         <i class="material-icons">apps</i>
                         <span>DASHBOARD</span>
                     </a>
                 </li>
               <li>
                     <a href="javascript:void(0);" class="menu-toggle">
-                        <i class="material-icons">assignment</i>
+                        <i class="material-icons">content_paste</i>
                         <span>CONTRACTS</span>
                     </a>
                     <ul class="ml-menu" style="font-size: 14px;">
                         <li>
-                            <a href="{% url 'CRM:list_training'%}"> Contract Categories</a>
+                            <a href="{% url 'Legal:category_list'%}"> Contract Categories</a>
                         </li>
                         <li>
-                            <a href="{% url 'CRM:list_event' %}">CONTRACTS LIST</a>
+                            <a href="{% url 'Legal:contract_list' %}">Contracts List</a>
                         </li>
                     </ul>
               </li>
               <li class="active">
-                  <a href="{% url  'CRM:list_feedback' %}">
-                      <i class="material-icons">feedback</i>
+                  <a href="{% url  'Legal:gs1docs_list' %}">
+                      <i class="material-icons">filter_none</i>
                       <span>GS1 DOCUMENTS</span>
                   </a>
               </li>
               <li class="active">
-                  <a href="{% url  'CRM:list_feedback' %}">
-                      <i class="material-icons">feedback</i>
+                  <a href="{% url  'Legal:letter_list' %}">
+                      <i class="material-icons">drafts</i>
                       <span>LETTERS</span>
                   </a>
               </li>
@@ -208,7 +208,7 @@
     <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'plugins/bootstrap/js/bootstrap.js' %}"></script>
     <script src="{% static 'js/jquery-ui.min.js' %}"></script>
-    <script src="{% static 'js/ui-multiselect.js' %}"></script> 
+    <script src="{% static 'js/ui-multiselect.js' %}"></script>
     <script>
         $( function() {
             $( ".datepicker" ).datepicker();
@@ -219,7 +219,7 @@
         });
     </script>
     <script src="{% static 'plugins/node-waves/waves.js' %}"></script>
-    <script src="{% static 'js/admin.js' %}"></script> 
+    <script src="{% static 'js/admin.js' %}"></script>
     <script src="{% static 'plugins/jquery-datatable/jquery.dataTables.js' %}"></script>
     <script src="{% static 'js/pages/tables/jquery-datatable.js' %}"></script>
     <script src="{% static 'plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js' %}"></script>
@@ -229,7 +229,6 @@
     <script src="{% static 'plugins/jquery-datatable/extensions/export/vfs_fonts.js' %}"></script>
     <script src="{% static 'plugins/jquery-datatable/extensions/export/buttons.html5.min.js' %}"></script>
     <script src="{% static 'plugins/jquery-datatable/extensions/export/buttons.print.min.js' %}"></script>
-        
 </body>
 
 </html>

@@ -1,0 +1,126 @@
+{% extends 'layout/crm_layout.html' %}
+{% load widget_tweaks %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #} 
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+{{ form.media }}            {# Adds date-picker required JS and CSS #}
+{% block header %}
+  <div  class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
+      <h2 class="header pull-left">LEGAL | ADD CONTRACT</h2>
+  </div>
+{% endblock%}
+{% block content %}
+
+    <section>
+        <div class="container-fluid">
+             <!-- Tabs With Icon Title -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class=" body helper-cls">
+                        <span class="body" style="padding-left: 2rem;"><a class="btn btn-primary" href = "{% url 'Legal:contract_list' %}" >BACK</a></span>
+                        </div>
+                        <div class="body">
+                            <!-- Nav tabs -->
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade in active" id="home_with_icon_title">
+                                <form method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="row clearfix">
+                                        <div class="col-lg-4 col-md-4 col-sm-8 col-xs-6">
+                                            <div class="form-group form-float">
+                                                <div class="form-line">
+                                                    {{ form.name | add_class:"form-control"}}
+                                                    <label class="form-label">Contract Name</label>
+                                                    <ul>
+                                                        {% for error in form.name.errors%}
+                                                        <li class="alert alert-danger">{{ error }}</li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-8 col-xs-6">
+                                                <div class="form-group form-float">
+                                                    <div class="form-line">
+                                                        {{ form.category | add_class:"form-control"}}
+                                                        <label class="form-label"> Choose Category </label>
+                                                        <ul>
+                                                            {% for error in form.category.errors%}
+                                                            <li class="alert alert-danger">{{ error }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-8 col-xs-6">
+                                                <div class="form-group form-float">
+                                                    <div class="form-line">
+                                                        {{ form.dofsigning | add_class:"form-control datepicker"}}
+                                                        <label class="form-label"> Date of Signing </label>
+                                                        <ul>
+                                                            {% for error in form.dofsigning.errors%}
+                                                            <li class="alert alert-danger">{{ error }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    <!-- More -->
+                                    <div class="row clearfix">
+                                        <div class="col-lg-4 col-md-4 col-sm-8 col-xs-6">
+                                            <div class="form-group form-float">
+                                                <div class="form-line">
+                                                    {{ form.doflapsing | add_class:"form-control datepicker"}}
+                                                    <label class="form-label">Date of lapsing</label>
+                                                    <ul>
+                                                        {% for error in form.doflapsing.errors%}
+                                                        <li class="alert alert-danger">{{ error }}</li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-8 col-xs-6">
+                                                <div class="form-group form-float">
+                                                    <div class="form-line">
+                                                        {{ form.document | add_class:"form-control"}}
+                                                        <label class="form-label"> Document </label>
+                                                        <ul>
+                                                            {% for error in form.document.errors%}
+                                                            <li class="alert alert-danger">{{ error }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-8 col-xs-6">
+                                                <div class="form-group form-float">
+                                                    <div class="form-line">
+                                                        {{ form.description | add_class:"form-control"}}
+                                                        <label class="form-label"> Descriptions </label>
+                                                        <ul>
+                                                            {% for error in form.description.errors%}
+                                                            <li class="alert alert-danger">{{ error }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-3 col-sm-6 col-xs-12 pull-left">
+                                            <input type="submit" class="btn btn-primary btn-lg m-l-15 waves-effect" value = "SUBMIT">
+                                        </div>
+                                        <br><br>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# -->
+        </div>
+    </section>
+{% endblock %}

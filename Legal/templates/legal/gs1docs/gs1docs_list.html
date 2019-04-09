@@ -1,0 +1,62 @@
+{% extends "layout/legal_layout.html" %}
+{% block header %}
+  <div style="background: none; padding: .7rem; box-shadow: none;">
+      <h2 class="header pull-left">LEGAL | GS1 DOCUMENTS</h2>
+  </div>
+{% endblock%}
+{% block content %}
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card body">
+            <div class="">
+                <h2 class="body">
+                  <span><a class="btn btn-primary" href = "{% url 'Legal:gs1docs_add' %}" >ADD GS1 DOCUMENT</a></span>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Dated On</th>
+                                <th>Description</th>
+                                <th style="text-align:center;">Status </th>
+                                <th style="text-align:center;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if gs1docs %}
+                              {% for gs1doc in gs1docs %}
+                                  <tr>
+                                      <td>{{ gs1doc.name }}</td>
+                                      <td>{{ gs1doc.dated }}</td>
+                                      <td>{{ gs1doc.description }}</td>
+                                      <td style="text-align:center;">
+                                            {% if gs1doc.status == 0%}
+                                                <span class="btn label bg-orange">Inactive</span>
+                                            {% else %}
+                                                <span class="btn label bg-green"> Active</span>
+                                            {% endif %}
+                                     </td>
+                                      <td style="text-align:center;">
+                                          <span> <a href = "{% url 'Legal:gs1docs_detail' pk=gs1doc.id %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>
+                                          <span> <a href = "{% url 'Legal:gs1docs_edit' pk=gs1doc.id %}"><i class="material-icons">edit</i></a> </span>
+                                          <span> <a href = "{% url 'Legal:gs1docs_delete' pk=gs1doc.id %}"><i class="material-icons" style = "color:#cc0000;">delete</i></a> </span>
+                                      </td>
+                                  </tr>
+                              {% endfor %}
+                            {% else %}
+
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Exportable Table -->
+
+{% endblock %}

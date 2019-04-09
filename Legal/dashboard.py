@@ -11,4 +11,4 @@ def index(request):
     employee = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
 
     return render(request, "dashboard/index.html",
-                        {'letters': letters, 'categorys': categorys, 'gs1docs':gs1docs, 'contracts': comtracts, "employee": employee})
+                        {'letters': letters, 'categorys': categorys, 'gs1docs':gs1docs, 'contracts': contracts, "employee": employee})

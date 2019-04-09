@@ -6,7 +6,7 @@
 {{ form.media }}            {# Adds date-picker required JS and CSS #}
 {% block header %}
   <div  class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
-      <h2 class="header pull-left">CRM | ADD EVENT TO TRAINING</h2>
+      <h2 class="header pull-left">LEGAL | ADD GS1 DOCUMENT</h2>
   </div>
 {% endblock%}
 {% block content %}
@@ -18,38 +18,36 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class=" body helper-cls">
-                        <span class="body" style="padding-left: 2rem;"><a class="btn btn-primary" href = "{% url 'CRM:list_event' %}" >BACK</a></span>
+                        <span class="body" style="padding-left: 2rem;"><a class="btn btn-primary" href = "{% url 'Legal:gs1docs_list' %}" >BACK</a></span>
                         </div>
                         <div class="body">
                             <!-- Nav tabs -->
                             <!-- Tab panes -->
-                            <div class="tab-content col-md-offset-3 col-lg-offset-3">
+                            <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane fade in active" id="home_with_icon_title">
-                                <form action ="" method="POST" enctype="multipart/form-data">
+                                <form method="POST" enctype="multipart/form-data">
                                     {% csrf_token %}
                                     <div class="row clearfix">
                                         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    {{ form.event_name | add_class:"form-control"}}
-                                                    <label class="form-label">Event Name</label>
+                                                    {{ form.name | add_class:"form-control"}}
+                                                    <label class="form-label">Category Name</label>
                                                     <ul>
-                                                        {% for error in form.event_name.errors%}
+                                                        {% for error in form.category.errors%}
                                                         <li class="alert alert-danger">{{ error }}</li>
                                                         {% endfor %}
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                        <div class="row clearfix">
                                             <div class="col-lg-6 col-md-6 col-sm-8 col-xs-6">
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
-                                                        {{ form.training | add_class:"form-control"}}
-                                                        <label class="form-label"> Choose Training Activity </label>
+                                                        {{ form.description | add_class:"form-control"}}
+                                                        <label class="form-label"> Some Description </label>
                                                         <ul>
-                                                            {% for error in form.training.errors%}
+                                                            {% for error in form.descritpion.errors%}
                                                             <li class="alert alert-danger">{{ error }}</li>
                                                             {% endfor %}
                                                         </ul>
