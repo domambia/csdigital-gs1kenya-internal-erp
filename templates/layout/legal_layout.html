@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>GS1 ONLINE ERP</title>
+    <!-- Favicon-->
+    <link rel="icon" href="{% static 'images/gs1ea.png' %}" type="image/png">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="{% static 'plugins/bootstrap/css/bootstrap.css' %}" rel="stylesheet">
+
+    <!-- Waves Effect Css {% static '' %} -->
+    <link href="{% static 'plugins/node-waves/waves.css' %} " rel="stylesheet" />
+    <!-- JQuery DataTable Css -->
+    <link href="{% static 'plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css' %}" rel="stylesheet">
+    <!-- Animation Css -->
+    <link href="{% static 'plugins/animate-css/animate.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/redmond/jquery-ui.css" />
+    <style type="text/css">
+        .multiselect { border: solid 1px #333; font-size: 1em;  overflow:scroll; height: 20rem;}
+        .ui-multiselect ul { -moz-user-select: none; }
+        .ui-multiselect div.selected { position: relative; padding: 0; margin: 0; border: 0; float:left; }
+        .ui-multiselect ul.selected { position: relative; padding: 0; overflow: auto; overflow-x: hidden; background: #fff; margin: 0; list-style: none; border: 0; position: relative; width: 100%; }
+
+        .ui-multiselect div.available { position: relative; padding: 0; margin: 0; border: 0; float:left; border-left: 1px solid; }
+        .ui-multiselect ul.available { position: relative; padding: 0; overflow: auto; overflow-x: hidden; background: #fff; margin: 0; list-style: none; border: 0; width: 100%; }
+        .ui-multiselect ul.available li { padding-left: 10px; }
+        .ui-multiselect .ui-state-default { border: none; margin-bottom: 1px; position: relative; padding-left: 20px;}
+        .ui-multiselect .ui-state-hover { border: none; }
+        .ui-multiselect .ui-widget-header {border: none; font-size: 11px; margin-bottom: 1px;}
+        .actions a{
+            display: none;
+            opacity: 0;
+        }
+        .multiselect .search { opacity: 0;}
+        .ui-multiselect .count { float: left; padding: 7px;}
+        .ui-multiselect li a.action { position: absolute; right: 2px; top: 2px; height: 20px; }
+        .ui-multiselect input.search { height: 20px; padding: 4px; margin: 4px; width: 96%; }
+    </style>
+    <!-- Custom Css -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css" integrity="sha384-Mmxa0mLqhmOeaE8vgOSbKacftZcsNYDjQzuCOm6D02luYSzBG8vpaOykv9lFQ51Y" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+</head>
+
+<body>
+  <!-- Page Loader -->
+  <div class="page-loader-wrapper">
+      <div class="loader">
+          <div class="preloader">
+              <div class="spinner-layer pl-red">
+                  <div class="circle-clipper left">
+                      <div class="circle"></div>
+                  </div>
+                  <div class="circle-clipper right">
+                      <div class="circle"></div>
+                  </div>
+              </div>
+          </div>
+          <p>Please wait...</p>
+      </div>
+  </div>
+  <!-- #END# Page Loader -->
+  <!-- Overlay For Sidebars -->
+  <div class="overlay"></div>
+  <!-- #END# Overlay For Sidebars -->
+  <!-- Search Bar -->
+  <div class="search-bar">
+      <div class="search-icon">
+          <i class="material-icons">search</i>
+      </div>
+      <input type="text" placeholder="START TYPING...">
+      <div class="close-search">
+          <i class="material-icons">close</i>
+      </div>
+  </div>
+  <!-- #END# Search Bar -->
+  <!-- Top Bar -->
+  <nav class="navbar">
+      <div class="container-fluid">
+          <div class="navbar-header">
+              <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+              <a href="javascript:void(0);" class="bars"></a>
+              <div class="navbar-brand" >    <img style="display:inline-block;margin-top: -15px;" src="{% static 'images/gs1ea.png' %}" width="80" height="50" alt="User" /> ONLINE ERP</div>
+          </div>
+          <div class="collapse navbar-collapse" id="navbar-collapse">
+              <ul class="nav navbar-nav navbar-right">
+                  <!-- Start of Notifications -->
+                  <li>
+                      <li><a href="{% url 'accounts:logout'%}"><i class="material-icons fas fa-door-open" style="font-size:24px; color:black;"></i></a></li>
+                  </li
+              </ul>
+          </div>
+      </div>
+  </nav>
+  <!-- #Top Bar -->
+  <section>
+      <!-- Left Sidebar -->
+      <aside id="leftsidebar" class="sidebar">
+          <!-- User Info -->
+          <div class="user-info">
+              <div class="image">
+                    {% if employee.profile_pic %}
+                    <img src="{{ employee.profile_pic.url }}" width="48" height="48" alt="User" />
+                    {% elif employee.profile_pic == ""%}
+                    <img src="{% static 'images/user.png' %}" width="48" height="48" alt="User" />
+                    {% endif %}
+              </div>
+              <span>
+              <div class="info-container btn-primary">
+                {% if user.is_authenticated %}
+                  <div class="name " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{user.first_name }} &nbsp; &nbsp; {{user.last_name}}
+                  </div>
+                  <div class="email">{{ user.email }}</div>
+                  <div class="btn-group user-helper-dropdown">
+                      <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+                      <ul class="dropdown-menu pull-right">
+                          <li><a href="{% url 'accounts:profile' pk=employee.id %}"><i class="material-icons">person</i>Profile</a></li>
+                          <li role="separator" class="divider"></li>
+                          <li><a href="{% url 'accounts:logout'%}"><i class="material-icons">input</i>Sign Out</a></li>
+                      </ul>
+                  </div>
+                  {% endif %}
+              </div>
+            </span>
+          </div>
+          <!-- #User Info -->
+          <!-- Menu -->
+          <div class="menu">
+            <ul class="list">
+                <li class="active">
+                    <a href="{% url  'Legal:index' %}">
+                        <i class="material-icons">apps</i>
+                        <span>DASHBOARD</span>
+                    </a>
+                </li>
+              <li>
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">assignment</i>
+                        <span>CONTRACTS</span>
+                    </a>
+                    <ul class="ml-menu" style="font-size: 14px;">
+                        <li>
+                            <a href="{% url 'CRM:list_training'%}"> Contract Categories</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'CRM:list_event' %}">CONTRACTS LIST</a>
+                        </li>
+                    </ul>
+              </li>
+              <li class="active">
+                  <a href="{% url  'CRM:list_feedback' %}">
+                      <i class="material-icons">feedback</i>
+                      <span>GS1 DOCUMENTS</span>
+                  </a>
+              </li>
+              <li class="active">
+                  <a href="{% url  'CRM:list_feedback' %}">
+                      <i class="material-icons">feedback</i>
+                      <span>LETTERS</span>
+                  </a>
+              </li>
+              <li class="active">
+                  <a href="{% url  'index' %}">
+                      <i class="material-icons">keyboard_return</i>
+                      <span>BACK TO PANEL</span>
+                  </a>
+              </li>
+            </ul>
+          </div>
+          <!-- #Menu -->
+          <!-- Footer -->
+          <div class="legal">
+              <div class="copyright">
+                  &copy; 2018 <a href="javascript:void(0);">GS1 Kenya </a>.
+              </div>
+          </div>
+          <!-- #Footer -->
+      </aside>
+      <!-- #END# Left Sidebar -->
+      <section class="content">
+          <div class="container-fluid">
+              <div class="block-header">
+                  <h2>{% block header %} {% endblock%}</h2>
+              </div>
+              {% for message in messages %}
+              <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                  {{ message }}
+              </div>
+              {% endfor %}
+  {% block content %}
+
+  {% endblock %}
+    <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap/js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'js/ui-multiselect.js' %}"></script> 
+    <script>
+        $( function() {
+            $( ".datepicker" ).datepicker();
+        } );
+        $(function(){
+        // choose either the full version
+        $(".multiselect").multiselect();
+        });
+    </script>
+    <script src="{% static 'plugins/node-waves/waves.js' %}"></script>
+    <script src="{% static 'js/admin.js' %}"></script> 
+    <script src="{% static 'plugins/jquery-datatable/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'js/pages/tables/jquery-datatable.js' %}"></script>
+    <script src="{% static 'plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js' %}"></script>
+    <script src="{% static 'plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js' %}"></script>
+    <script src="{% static 'plugins/jquery-datatable/extensions/export/jszip.min.js' %}"></script>
+    <script src="{% static 'plugins/jquery-datatable/extensions/export/pdfmake.min.js' %}"></script>
+    <script src="{% static 'plugins/jquery-datatable/extensions/export/vfs_fonts.js' %}"></script>
+    <script src="{% static 'plugins/jquery-datatable/extensions/export/buttons.html5.min.js' %}"></script>
+    <script src="{% static 'plugins/jquery-datatable/extensions/export/buttons.print.min.js' %}"></script>
+        
+</body>
+
+</html>
