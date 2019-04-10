@@ -30,8 +30,8 @@ class GS1Docs(models.Model):
     name = models.CharField(max_length = 200)
     description = models.CharField(max_length = 1000)
     dated  = models.DateField(default=datetime.datetime.now)
-    document = models.FileField(upload_to=file_upload, blank = True)
-    status = models.IntegerField(default = 0)
+    document = models.FileField(upload_to=file_upload, blank = False)
+    status = models.BooleanField(default = True)
 
     '''String Name'''
     def __str__(self):
@@ -51,8 +51,8 @@ class Letter(models.Model):
     name = models.CharField(max_length = 200)
     description = models.CharField(max_length = 1000)
     dated  = models.DateField(default=datetime.datetime.now)
-    document = models.FileField(upload_to=file_upload, blank = True)
-    status = models.IntegerField(default=0)
+    document = models.FileField(upload_to=file_upload, blank = False)
+    status = models.BooleanField(default=True)
 
     '''String name of the Letters'''
     def __str__(self):
@@ -71,7 +71,7 @@ class Category(models.Model):
     this gives the categories do which the contracts may belong to'''
     name = models.CharField(max_length = 300)
     description = models.CharField(max_length = 1000)
-    status = models.IntegerField(default = 0)
+    status = models.BooleanField(default = True)
     dated = models.DateField(default = datetime.datetime.now)
     '''String name of the category'''
     def __str__(self):
@@ -92,9 +92,9 @@ class Contract(models.Model):
     dofsigning = models.DateField(default = datetime.datetime.now)
     doflapsing = models.DateField(default = datetime.datetime.now)
     category =  models.ForeignKey(Category, on_delete = models.CASCADE, default =1)
-    document = models.FileField(upload_to = file_upload, blank = True)
+    document = models.FileField(upload_to = file_upload, blank = False)
     description = models.CharField(max_length = 1000)
-    status = models.IntegerField(default = 0)
+    status = models.BooleanField(default = True)
 
     '''String name of the Contracts'''
     def __str__(self):

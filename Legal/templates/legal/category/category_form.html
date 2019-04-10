@@ -1,4 +1,4 @@
-{% extends 'layout/crm_layout.html' %}
+{% extends 'layout/legal_layout.html' %}
 {% load widget_tweaks %}
 {% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
 {% bootstrap_css %}         {# Embed Bootstrap CSS #} 
@@ -6,7 +6,7 @@
 {{ form.media }}            {# Adds date-picker required JS and CSS #}
 {% block header %}
   <div  class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
-      <h2 class="header pull-left">LEGAL | ADD GS1 DOCUMENT</h2>
+      <h2 class="header pull-left">LEGAL | CATEGORY</h2>
   </div>
 {% endblock%}
 {% block content %}
@@ -18,7 +18,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class=" body helper-cls">
-                        <span class="body" style="padding-left: 2rem;"><a class="btn btn-primary" href = "{% url 'Legal:gs1docs_list' %}" >BACK</a></span>
+                        <span class="body" style="padding-left: 2rem;"><a class="btn btn-primary" href = "{% url 'Legal:category_list' %}" >BACK</a></span>
                         </div>
                         <div class="body">
                             <!-- Nav tabs -->
@@ -54,7 +54,22 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-6">
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    {{ form.status | add_class:"form-control"}}
+                                                    <label class=""> Status </label>
+                                                    <ul>
+                                                        {% for error in form.status.errors%}
+                                                        <li class="alert alert-danger">{{ error }}</li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div
+                                    </div>
                                         <div class="col-lg-6 col-md-3 col-sm-6 col-xs-12 pull-left">
                                             <input type="submit" class="btn btn-primary btn-lg m-l-15 waves-effect" value = "SUBMIT">
                                         </div>

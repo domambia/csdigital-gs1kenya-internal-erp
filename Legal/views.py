@@ -20,6 +20,7 @@ class GS1DocsCreateView(CreateView):
         'name',
         'document',
         'description',
+        'status',
     )
 
     template_name  = "legal/gs1docs/gs1docs_form.html"
@@ -40,6 +41,7 @@ class GS1DocsUpdateView(UpdateView):
         'name',
         'document',
         'description',
+        'status',
     )
     context_object_name = "gs1doc"
     template_name  = "legal/gs1docs/gs1docs_form.html"
@@ -98,6 +100,7 @@ class CategoryCreateView(CreateView):
     fields = (
         'name',
         'description',
+        'status',
     )
 
     template_name  = "legal/category/category_form.html"
@@ -130,15 +133,16 @@ class CategoryDetailView(DetailView):
         context['employee'] = Employee.objects.get(user=User.objects.get(username = self.request.user).id)
         return context
 
-class CategoryUpdateView(CreateView):
+class CategoryUpdateView(UpdateView):
     model = Category
 
     fields = (
         'name',
         'description',
+        'status',
     )
 
-    template_name  = "legal/categroy/category_form.html"
+    template_name  = "legal/category/category_form.html"
 
     # flash message
     success_message  = "Successfully! Updated a category"
@@ -172,6 +176,7 @@ class ContractCreateView(CreateView):
         'doflapsing',
         'document',
         'description',
+        'status',
     )
 
     template_name  = "legal/contract/contract_form.html"
@@ -193,6 +198,7 @@ class ContractUpdateView(UpdateView):
         'dofsigning',
         'document',
         'description',
+        'status',
     )
     template_name  = "legal/contract/contract_form.html"
 
@@ -249,6 +255,7 @@ class LetterCreateView(CreateView):
         'name',
         'document',
         'description',
+        'status',
     )
 
     template_name  = "legal/letter/letter_form.html"
@@ -267,6 +274,7 @@ class LetterUpdateView(UpdateView):
         'name',
         'document',
         'description',
+        'status',
     )
     template_name  = "legal/letter/letter_form.html"
     # flash message

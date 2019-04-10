@@ -1,4 +1,4 @@
-{% extends 'layout/crm_layout.html' %}
+{% extends 'layout/legal_layout.html' %}
 {% load widget_tweaks %}
 {% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
 {% bootstrap_css %}         {# Embed Bootstrap CSS #} 
@@ -70,7 +70,7 @@
                                     </div>
                                     <!-- More -->
                                     <div class="row clearfix">
-                                        <div class="col-lg-4 col-md-4 col-sm-8 col-xs-6">
+                                        <div class="col-lg-3 col-md-3 col-sm-8 col-xs-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
                                                     {{ form.doflapsing | add_class:"form-control datepicker"}}
@@ -83,11 +83,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                            <div class="col-lg-4 col-md-4 col-sm-8 col-xs-6">
+                                            <div class="col-lg-3 col-md-3 col-sm-8 col-xs-6">
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
+                                                        <label> Document </label>
                                                         {{ form.document | add_class:"form-control"}}
-                                                        <label class="form-label"> Document </label>
                                                         <ul>
                                                             {% for error in form.document.errors%}
                                                             <li class="alert alert-danger">{{ error }}</li>
@@ -96,13 +96,26 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4 col-md-4 col-sm-8 col-xs-6">
+                                            <div class="col-lg-3 col-md-3 col-sm-8 col-xs-6">
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
                                                         {{ form.description | add_class:"form-control"}}
                                                         <label class="form-label"> Descriptions </label>
                                                         <ul>
                                                             {% for error in form.description.errors%}
+                                                            <li class="alert alert-danger">{{ error }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3 col-sm-8 col-xs-6">
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        {{ form.status | add_class:"form-control"}}
+                                                        <label class=""> Status </label>
+                                                        <ul>
+                                                            {% for error in form.status.errors%}
                                                             <li class="alert alert-danger">{{ error }}</li>
                                                             {% endfor %}
                                                         </ul>

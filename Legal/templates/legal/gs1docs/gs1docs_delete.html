@@ -9,8 +9,8 @@
 <div class="row jumbotron card">
     <form method="POST">
         {% csrf_token %}
-        Are you sure you want delete GS1 Document ( {{gs1doc.name }} )?
-        <input class="btn btn-danger" type="submit" value="YES" /> OR <a href="{% url 'Legal:letter_list'%}" class="btn btn-primary">NO</a>
+        Are you sure you want delete GS1 Document ( {{gs1docs.name }} )?
+        <input class="btn btn-danger" type="submit" value="YES" /> OR <a href="{% url 'Legal:gs1docs_list'%}" class="btn btn-primary">NO</a>
     </form>
 </div>
 {% endblock %}

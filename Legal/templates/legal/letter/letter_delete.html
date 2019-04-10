@@ -9,7 +9,7 @@
 <div class="row jumbotron card">
     <form method="POST">
         {% csrf_token %}
-        Are you sure you want delete Event ( {{letter.name }} )?
+        Are you sure you want delete Letter: ( {{letter.name }} )?
         <input class="btn btn-danger" type="submit" value="YES" /> OR <a href="{% url 'Legal:letter_list'%}" class="btn btn-primary">NO</a>
     </form>
 </div>
