@@ -110,16 +110,14 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-3 col-sm-8 col-xs-6">
-                                                <div class="form-group">
-                                                    <div class="form-line">
+                                                <div class="form-group" style="text-align:center;">
+                                                    <label>Status</label>
                                                         {{ form.status | add_class:"form-control"}}
-                                                        <label class=""> Status </label>
-                                                        <ul>
+                                                    <ul>
                                                             {% for error in form.status.errors%}
                                                             <li class="alert alert-danger">{{ error }}</li>
                                                             {% endfor %}
                                                         </ul>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

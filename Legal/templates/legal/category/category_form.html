@@ -57,19 +57,17 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-6">
-                                            <div class="form-group">
-                                                <div class="form-line">
+                                            <div class="form-group" style="text-align:center; padding-top:-3px;">
+                                                <label> Status</label>
                                                     {{ form.status | add_class:"form-control"}}
-                                                    <label class=""> Status </label>
                                                     <ul>
                                                         {% for error in form.status.errors%}
                                                         <li class="alert alert-danger">{{ error }}</li>
                                                         {% endfor %}
                                                     </ul>
-                                                </div>
                                             </div>
                                         </div
-                                    </div>
+                                    </div> <br>
                                         <div class="col-lg-6 col-md-3 col-sm-6 col-xs-12 pull-left">
                                             <input type="submit" class="btn btn-primary btn-lg m-l-15 waves-effect" value = "SUBMIT">
                                         </div>
