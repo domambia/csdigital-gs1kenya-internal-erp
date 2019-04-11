@@ -59,7 +59,7 @@
                                         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-6">
                                             <div class="form-group">
                                                 <label> Status</label>
-                                                    {{ form.status | add_class:"form-control"}}
+                                                    {{ form.status}}
                                                     <ul>
                                                         {% for error in form.status.errors%}
                                                         <li class="alert alert-danger">{{ error }}</li>
