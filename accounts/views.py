@@ -10,6 +10,7 @@ from django.views.generic import DetailView, UpdateView
 from django.core.mail import send_mail
 from helpers.help import get_country
 from django.contrib import messages
+from datetime import datetime
 from django.contrib.messages.views import SuccessMessageMixin
 """List
 """
@@ -71,6 +72,7 @@ def user_login(request):
             if user.is_active:
                 login(request, user)
                 request.session.session_key
+                #request.session['last_activity'] = datetime.now
                 if '@' in username:
                     print("Yes Omambia")
                     request.session['username'] = User.objects.get(email = username).username

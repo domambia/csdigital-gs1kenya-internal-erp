@@ -11,6 +11,6 @@ urlpatterns = [
         url(r'^edit/login/info/(?P<pk>\d+)/$',login_required(views.edit_authentications), name = 'authent'),
         url(r'^edit/other/info/(?P<pk>\d+)/$', login_required(views.EmployeeUdateDependentInfo.as_view()), name = 'other'),
         url(r'^edit/(?P<pk>\d+)/$', login_required(views.EmployeeUpdateView.as_view()), name = "employee_update"),
-        url(r'^user_login/$', views.user_login, name = "login"),
+        url(r'^login/$', views.user_login, name = "login"),
         url(r'^user_logout/$', views.user_logout, name = "logout"),
     ]

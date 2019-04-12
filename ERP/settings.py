@@ -61,6 +61,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+MIDDLEWARE_CLASSES = [
+    'helpers.middleware.RedirectUnAthorizedUsers',
+]
 ROOT_URLCONF = 'ERP.urls'
 TEMPLATES = [
     {
@@ -147,7 +151,8 @@ MEDIA_ROOT = MEDIA_DIR
 
 MEDIA_URL = '/media/'
 
-LOGIN_URL = 'users/user_login'
+#LOGIN_URL = '/users/user_login'
+LOGIN_REDIRECT_URL = '/accounts/login'
 
 BOOTSTRAP4 = {
     'include_jquery': True,
@@ -158,3 +163,11 @@ EMAIL_HOST_PASSWORD = 'SG.xPSLX_v_TRqxsv6elmDDGQ.g1h69lSMCxbHPJ8VcjfCmDjW66-XFF7
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+#Session timingout
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_AGE = 10 # set just 10 seconds to test
+SESSION_SAVE_EVERY_REQUEST = True
+
+#MiddleWare classes
+
