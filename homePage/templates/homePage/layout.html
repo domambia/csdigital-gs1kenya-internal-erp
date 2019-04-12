@@ -25,10 +25,10 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 
-<body>
+<body onload="timeMsg()">
     <div class="container" style ="margin-top: 30px;">
      {% for message in messages %}
-      <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+      <div id="hideMgs" class="alert {{ message.tags }} alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -48,7 +48,14 @@
 
     <!-- Waves Effect Plugin Js -->
     <script src="{% static 'plugins/node-waves/waves.js' %}"></script>
-
+    <script type="text/javascript">
+     $("document").ready(function(){
+         console.log("Form authentication Js");
+         setTimeout(function(){
+             $("div.alert").remove();
+         }, 5000);
+     });
+    </script>
     <!-- Validation Plugin Js -->
     <script src="{% static 'plugins/jquery-validation/jquery.validate.js' %}"></script>
 

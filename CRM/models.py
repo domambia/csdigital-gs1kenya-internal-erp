@@ -149,7 +149,6 @@ class Barcode(models.Model):
     gross_weight = models.CharField(max_length=50, blank = True) 
     net_weight = models.CharField(max_length=50, blank = True)
     size = models.IntegerField(blank = True)
-    
     def __str__(self):
         return self.GTIN
 

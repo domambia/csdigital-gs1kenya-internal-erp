@@ -41,7 +41,14 @@
 
     <!-- Jquery Core Js -->
     <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+    <script type="text/javascript">
+     $("document").ready(function(){
+         setTimeout(function(){
+             $("div.alert").remove();
+         }, 5000);
+     });
 
+    </script>
     <!-- Bootstrap Core Js -->
     <script src="{% static 'plugins/bootstrap/js/bootstrap.js' %}"></script>
 

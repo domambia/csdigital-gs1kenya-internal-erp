@@ -467,3 +467,14 @@ $(function () {
 
     setTimeout(function () { $('.page-loader-wrapper').fadeOut(); }, 50);
 });
+
+
+//function timing out
+
+$("document").ready(function(){
+    console.log("Omambia Dauglous");
+    setTimeout(function(){
+        $("div.alert").remove();
+    }, 5000 ); // 5 secs
+
+});

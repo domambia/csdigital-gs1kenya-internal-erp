@@ -53,7 +53,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 </head>
 
-<body>
+<body  onload ="timeMsg()">
   <!-- Page Loader -->
   <div class="page-loader-wrapper">
       <div class="loader">
@@ -226,13 +226,22 @@
         $( function() {
             $( ".datepicker" ).datepicker();
         } );
+
+     $("document").ready(function(){
+         console.log("Omambia Dauglous");
+         setTimeout(function(){
+             $("div.alert").remove();
+         }, 5000 ); // 5 secs
+
+     });
         $(function(){
         // choose either the full version
         $(".multiselect").multiselect();
         });
     </script>
     <script src="{% static 'plugins/node-waves/waves.js' %}"></script>
-    <script src="{% static 'js/admin.js' %}"></script> 
+    <script src="{% static 'js/admin.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
     <script src="{% static 'plugins/jquery-datatable/jquery.dataTables.js' %}"></script>
     <script src="{% static 'js/pages/tables/jquery-datatable.js' %}"></script>
     <script src="{% static 'plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js' %}"></script>
@@ -242,7 +251,6 @@
     <script src="{% static 'plugins/jquery-datatable/extensions/export/vfs_fonts.js' %}"></script>
     <script src="{% static 'plugins/jquery-datatable/extensions/export/buttons.html5.min.js' %}"></script>
     <script src="{% static 'plugins/jquery-datatable/extensions/export/buttons.print.min.js' %}"></script>
-        
 </body>
 
 </html>

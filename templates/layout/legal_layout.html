@@ -57,7 +57,7 @@
     </style>
 </head>
 
-<body>
+<body onload ="timeMsg()">
   <!-- Page Loader -->
   <div class="page-loader-wrapper">
       <div class="loader">
@@ -199,7 +199,7 @@
                   <h2>{% block header %} {% endblock%}</h2>
               </div>
               {% for message in messages %}
-              <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+              <div id ="hideMsg" class="alert {{ message.tags }} alert-dismissible" role="alert">
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                   </button>
@@ -217,6 +217,14 @@
         $( function() {
             $( ".datepicker" ).datepicker();
         } );
+
+     $("document").ready(function(){
+         console.log("Omambia Dauglous");
+         setTimeout(function(){
+             $("div.alert").remove();
+         }, 5000 ); // 5 secs
+
+     });
         $(function(){
         // choose either the full version
         $(".multiselect").multiselect();
@@ -224,6 +232,7 @@
     </script>
     <script src="{% static 'plugins/node-waves/waves.js' %}"></script>
     <script src="{% static 'js/admin.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
     <script src="{% static 'plugins/jquery-datatable/jquery.dataTables.js' %}"></script>
     <script src="{% static 'js/pages/tables/jquery-datatable.js' %}"></script>
     <script src="{% static 'plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js' %}"></script>
