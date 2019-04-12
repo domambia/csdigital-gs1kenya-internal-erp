@@ -15,6 +15,7 @@ from helpers.sendSMS import SMS
 from CRM.forms import TrainForm, EditClient
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
+from helpers.help import check_user_login
 # Create your views here.
 '''
 The views for the CRM part of the ERP
@@ -22,6 +23,7 @@ The dashboard page
 '''
 
 def index(request):
+    check_user_login(request)
     clients = Client.objects.count()
     suppliers =  Supplier.objects.count()
     feedbacks = Feedback.objects.count()
@@ -49,6 +51,7 @@ class ClientCreateView(SuccessMessageMixin, CreateView):
 
 @login_required
 def all_clients(request):
+    check_user_login(request)
     user = User.objects.get(username = request.session['username'])
     employee = Employee.objects.get(user = user.id)
     clients = Client.objects.all()
@@ -81,6 +84,7 @@ class ClientDetailView(DetailView):
 
 
 def clients(request, pk):
+    check_user_login(request)
     client = Client.objects.get(id = pk)
     user = User.objects.get(username = request.session['username'])
     employee = Employee.objects.get(user = user.id)
@@ -96,6 +100,7 @@ def notify(phone, first_name, last_name, company_name, when):
     SMS().send(phone, msg)
 
 def membership(request, pk):
+    check_user_login(request)
     employee = Employee.objects.get(position = Position.objects.get(initials = "CCM"))
     client = Client.objects.get(id = pk)
     client.is_me1 = 1
@@ -106,6 +111,7 @@ def membership(request, pk):
     return HttpResponseRedirect(reverse('CRM:list_client'))
     # Membership two
 def membership_2(request, pk):
+    check_user_login(request)
     client = Client.objects.get(id = pk)
     client.is_me2 = 1
     client.save()
@@ -114,6 +120,7 @@ def membership_2(request, pk):
     return HttpResponseRedirect(reverse('CRM:list_client'))
 
 def communication(request, pk):
+    check_user_login(request)
     employee = Employee.objects.get(position = Position.objects.get(initials = "ACCM"))
     client = Client.objects.get(id = pk)
     message  = "Dear {} {},You have been requested to generate profoma invoice for [ {} ],GS1 Kenya,({})"
@@ -126,6 +133,7 @@ def communication(request, pk):
     return HttpResponseRedirect(reverse('CRM:list_client'))
 
 def accounts_manager(request, pk):
+    check_user_login(request)
     employee = Employee.objects.get(position = Position.objects.get(initials = "TM"))
     client = Client.objects.get(id = pk)
     client.is_accm = 1
@@ -137,6 +145,7 @@ def accounts_manager(request, pk):
     return HttpResponseRedirect(reverse('CRM:list_client'))
 
 def accounts(request, pk):
+    check_user_login(request)
     employee = Employee.objects.get(position = Position.objects.get(initials = "GM"))
     client = Client.objects.get(id = pk)
     client.is_cacc = 1
@@ -147,6 +156,7 @@ def accounts(request, pk):
     return HttpResponseRedirect(reverse('CRM:list_client'))
 
 def accounts_ex(request, pk):
+    check_user_login(request)
     employee = Employee.objects.get(position = Position.objects.get(initials = "TM"))
     client = Client.objects.get(id = pk)
     client.is_cacc_x = 1
@@ -198,6 +208,7 @@ def assign_member_details(request, pk):
 
 
 def technical(request, pk):
+    check_user_login(request)
     employee = Employee.objects.get(position = Position.objects.get(initials = "CACC"))
     employee_2 = Employee.objects.get(position = Position.objects.get(initials = "ME1"))
     client = Client.objects.get(id = pk)
@@ -215,6 +226,7 @@ def technical(request, pk):
         return HttpResponseRedirect(reverse('CRM:list_client'))
 
 def general_manager(request, pk):
+    check_user_login(request)
     client = Client.objects.get(id = pk)
     client.is_gm = 1
     client.status = 1
@@ -362,6 +374,7 @@ class FeedbackDetailView(DetailView):
 ''' Status ACTIVATIONS '''
 @login_required
 def unpend(request, pk):
+    check_user_login(request)
     feedback = Feedback.objects.get(id = pk)
     feedback.status = 11
     feedback.save()
@@ -370,6 +383,7 @@ def unpend(request, pk):
 
 @login_required
 def close(request, pk):
+    check_user_login(request)
     feedback = Feedback.objects.get(id = pk)
     feedback.status = 1
     feedback.save()
@@ -380,6 +394,7 @@ def close(request, pk):
 The Training Feedback
 '''
 def get_clients():
+    check_user_login(request)
     list_clients = Client.objects.all()
     clients = []
     for cl in list_clients:

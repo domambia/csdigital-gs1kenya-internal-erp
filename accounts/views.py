@@ -12,11 +12,13 @@ from helpers.help import get_country
 from django.contrib import messages
 from datetime import datetime
 from django.contrib.messages.views import SuccessMessageMixin
+from helpers.help import check_user_login
 """List
 """
 
 @login_required
 def index(request):
+    check_user_login(request)
     current_user = User.objects.get(username = request.session['username'])
     users_details = Employee.objects.select_related('user')
     employee = Employee.objects.get(user = current_user.id)
@@ -28,6 +30,7 @@ This includes the login Information
 """
 @login_required
 def add_employee(request):
+    check_user_login(request)
     u = User.objects.all()
     countries = get_country()
     user_form = UserForm(request.POST or None)
@@ -40,9 +43,7 @@ def add_employee(request):
             password = user_form.cleaned_data['password']
             user.set_password(password)
             user.save()
-
             employee = employee_form.save(commit = False)
-
             employee.user = user
             if 'profile_pic' in request.FILES:
                 employee.profile_pic = request.FILES['profile_pic']
@@ -90,7 +91,6 @@ def user_login(request):
             print("Somone tried To  login and Failed")
             print("Username: {} with a Password: {}".format(username, password))
             return HttpResponseRedirect(reverse('index'))
-
     return render(request, "accounts/login.html", {})
 
 """LOGOUT: Module
@@ -107,6 +107,7 @@ def user_logout(request):
 """
 
 def employee_delete(request, pk):
+    check_user_login(request)
     employee = get_object_or_404(Employee, pk=pk)
     emp = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
     if request.method == "POST":
@@ -132,7 +133,7 @@ class EmployeeUpdateView(SuccessMessageMixin, UpdateView):
     fields = ('address', 'phone', 'date_of_birth',
         'county', 'dependant_name', 'dependant_contact', 'dependant_relationship',
         'position', 'salary', 'kin_email', 'alt_phone_number', 'profile_pic', 'company_benifits',
-              'KRA', 'id_no', 'nssf_no', 'nhif_no', 'employee_no', 'bank','huduma',)
+              'KRA', 'id_no', 'nssf_no', 'nhif_no', 'employee_no', 'bank','huduma', 'leave_bal',)
     model = Employee
     success_message = "Successfully! Updated employee data."
     template_name  = "accounts/edit.html"
@@ -158,6 +159,7 @@ class EmployeeDetailView(DetailView):
 Edit User authentications information
 '''
 def edit_authentications(request, pk):
+    check_user_login(request)
     form = UserForm(request.POST or None, instance=get_object_or_404(User, pk=pk))
     current_user = User.objects.get(id = pk)
     employee = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)

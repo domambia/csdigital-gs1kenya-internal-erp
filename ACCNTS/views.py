@@ -16,9 +16,13 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from helpers.utils import render_to_pdf
+from helpers.help import check_user_login
 #imports for creating pdf
 
 def dashboard(request):
+    if not request.session.get('username'):
+        messages.info(request, "Please login again.")
+        return HttpResponseRedirect(reverse("accounts:login"))
     current = User.objects.get(username = request.session['username'])
     employee = Employee.objects.get(user = current.id)
     return render(request, "accnts/dashboard.html", {"employee": employee })
@@ -89,6 +93,7 @@ def print_profoma(request, pk):
 So
 '''
 def make_payment(request, pk):
+    check_user_login(request)
     employee = Employee.objects.get(user= User.objects.get(username = request.session['username']).id)
     form = PaymentForm(request.POST or None,
                     instance = get_object_or_404(Invoice, pk=pk))
@@ -135,6 +140,7 @@ List All invoices
 '''
 
 def list_invoices(request):
+    check_user_login(request)
     invoices = Invoice.objects.all()
     employee = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
     return render(request, "accnts/invoice/list_all_invoices.html",
@@ -256,12 +262,14 @@ class UpdatePayrollView(SuccessMessageMixin, UpdateView):
 # list employee payslip
 
 def payslip(request):
+    check_user_login(request)
     employee = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
     payslip = PayRoll.objects.filter(employee = employee.id)
 
     return render(request, "accnts/payroll/payslip.html", {'employee': employee, 'payslip': payslip})
 
 def generate_payroll(request, pk):
+    check_user_login(request)
     employee  = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
     payroll = PayRoll.objects.get(id = pk)
     lunch = payroll.lunch

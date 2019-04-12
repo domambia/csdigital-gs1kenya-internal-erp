@@ -16,6 +16,7 @@ from easy_pdf.rendering import render_to_pdf_response
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from helpers.utils import render_to_pdf
+from helpers.help import check_user_login
 
 class LeaveListView(ListView):
     context_object_name = "leaves"
@@ -85,6 +86,7 @@ class CreateApplyLeaveView(SuccessMessageMixin, CreateView):
         print(context)
         return context
 def list_applyleave(request):
+    check_user_login(request)
     leaves = ApplyLeave.objects.all()
     current_user = User.objects.get(username = request.session['username'])
     user_leaves = ApplyLeave.objects.filter(employee = request.session['username'])
@@ -109,7 +111,7 @@ class ApplyLeaveUpdateView(SuccessMessageMixin, UpdateView):
 
 # approve the leave
 def approve_leave(request, pk):
-
+    check_user_login(request)
     leave = ApplyLeave.objects.get(id = pk)
     start_date = leave.start_date
     end_date = leave.end_date
@@ -155,6 +157,7 @@ Create pdf
 
 
 def render_pdf_docs(request, pk):
+    check_user_login(request)
     leave = ApplyLeave.objects.get(pk=pk)
     user  = User.objects.get(username = leave.employee)
     employee = Employee.objects.get(user = user.id)

@@ -10,9 +10,13 @@ from hrm.forms import PerformanceForm
 from django.http import HttpResponseRedirect
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
+from helpers.help import check_user_login
 # Create your views here.
 
 def index(request):
+    if not request.session.get('username'):
+        return HttpResponseRedirect(reverse("accounts:login"))
+
     applied_leaves = ApplyLeave.objects.count()
     employees = Employee.objects.count()
     positions = Position.objects.count()
@@ -86,6 +90,7 @@ class DeletePerformanceView(SuccessMessageMixin, DeleteView):
 Showing an employees perfomance control
 '''
 def show_employee_perfomance_control(request):
+    check_user_login(request)
     employee = Employee.objects.get(user= User.objects.get(username = request.session['username']).id)
     perform = Performance.objects.filter(employee = employee.id)
     print(perform)

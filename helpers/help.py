@@ -1,5 +1,7 @@
 from pycountry import countries
-
+from django.urls import reverse
+from django.http import HttpResponseRedirect
+from django.contrib import messages
 def get_country():
     list_country = [x for x in countries]
     country_name = []
@@ -26,3 +28,7 @@ def get_categs():
         categs.append((int(categ), categ ,))
     return tuple(categs)
 
+def check_user_login(request):
+    if not request.session.get('username'):
+        messages.info(request, "Please login again to continue.")
+        return HttpResponseRedirect(reverse("accounts:login"))

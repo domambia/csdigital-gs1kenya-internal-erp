@@ -110,6 +110,20 @@
                       </div>
                   </div>
               </div>
+              <div class="col-md-8">
+                  <div class="form-group">
+                      <div class="form-line">
+                          <label for="{{ form.profile_pic.id_for_label }}">Profile Picture</label>
+                          {{ form.profile_pic|add_class:"form-control" }}
+                          <ul>
+                              {% for error in form.profile_pic.errors%}
+                              <li class="alert alert-danger">{{ error }}</li>
+                              {% endfor %}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+
           </div>
           <!-- END OF Demographic INFORMATION  -->
           <!-- Start of Dependants INFORMATION -->
@@ -281,10 +295,10 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <div class="form-line">
-                        <label for="{{ form.profile_pic.id_for_label }}">Profile Picture</label>
-                        {{ form.profile_pic|add_class:"form-control" }}
+                        <label for="{{ form.profile_pic.id_for_label }}">Leave Balance</label>
+                        {{ form.leave_bal|add_class:"form-control" }}
                         <ul>
-                            {% for error in form.profile_pic.errors%}
+                            {% for error in form.leave_bal.errors%}
                             <li class="alert alert-danger">{{ error }}</li>
                             {% endfor %}
                         </ul>

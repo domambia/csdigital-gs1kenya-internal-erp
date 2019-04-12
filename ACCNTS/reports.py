@@ -5,10 +5,12 @@ import datetime
 from django.contrib.auth.models import User
 from accounts.models import Employee
 from django.db.models import Sum
+from helpers.help import check_user_login
 '''
 Sales Report'''
 
 def sales_report(request):
+    check_user_login(request)
     employee = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
     if request.method == "POST":
         start  = request.POST['start']
@@ -22,6 +24,7 @@ def sales_report(request):
     return render(request, "sales/sales_report.html", {'employee': employee, 'sales': []})
 
 def expenses_report(request):
+    check_user_login(request)
     employee = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
     if request.method == "POST":
         start  = request.POST['start']

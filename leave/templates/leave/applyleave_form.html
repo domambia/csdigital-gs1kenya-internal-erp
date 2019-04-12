@@ -17,7 +17,10 @@
         {% else %}
         <span><a class="btn btn-primary" href = "{% url 'leave:applyleave_list' %}">BACK</a></span>
         {% endif %}
-      <p> </p>
+
+        <div class="body">
+            <p style="text-align:center;"> <span class="label bg-orange" style="font-size:17px; border-radius:4px;">{{employee.leave_bal}} </span> &nbsp; Leave Days  </p>
+        </div>
       <form method="POST">
         {% csrf_token %}
           <div class="row clearfix">
