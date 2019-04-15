@@ -152,7 +152,7 @@ MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 
 #LOGIN_URL = '/users/user_login'
-LOGIN_REDIRECT_URL = '/accounts/login'
+LOGIN_REDIRECT_URL = '/account/login'
 
 BOOTSTRAP4 = {
     'include_jquery': True,
