@@ -14,11 +14,11 @@ urlpatterns = [
     url(r'^leave/', include('leave.urls'), name = "leave"),
     url(r'^departments/', include('departments.urls'), name = "departments"),
     url(r'^hrm/', include('hrm.urls'), name = "hrm"),
-    url(r'^account/', include('accounts.urls')),
+    url(r'^accounts/', include('accounts.urls')),
     url(r'^targets/', include('targets.urls')),
     url(r'^crm/', include('CRM.urls')),
         url(r'^legal/', include('Legal.urls')),
-    url(r'^ACCOUNTS/', include('ACCNTS.urls')),
+    url(r'^ACCNTS/', include('ACCNTS.urls')),
     url(r'^website/', include('website.urls')),
 ]
 
