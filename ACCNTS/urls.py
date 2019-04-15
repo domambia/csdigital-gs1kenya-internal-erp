@@ -76,8 +76,10 @@ urlpatterns = [
     url(r'^banking/detail/(?P<pk>\d+)/$', login_required(accounts.BankDetailView.as_view()), name = "bank_detail"),
 
     # Reports
-    url(r'reports/sales', reports.sales_report, name ='sales_report'),
-    url(r'reports/purchases', reports.expenses_report, name ='expense_report'),
+    url(r'reports/sales/', reports.sales_report, name ='sales_report'),
+    url(r'reports/banking/', reports.banking_report, name ='banking_report'),
+    url(r'reports/purchases/', reports.expenses_report, name ='expense_report'),
+    url(r'reports/fixed-assets/', reports.fixed_asset_report, name = 'asset_report'),
 ]+static(settings.STATIC_URL, document_root=settings.STATIC_DIR)
 
 

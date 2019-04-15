@@ -7,7 +7,7 @@
 {{ form.media }}            {# Adds date-picker required JS and CSS #}
 {% block header %}
   <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
-      <h2 class="header pull-left">ACCOUNTS | SALES</h2>
+      <h2 class="header pull-left">ACCOUNTS | ASSET</h2>
       <br>
   </div>
 {% endblock%}
@@ -21,7 +21,7 @@
                     <div class="card custom-h">
                         <div class="header">
                             <h2>
-                                ACCOUNTS | SALES REPORT
+                                ACCOUNTS | FXIED ASSETS REPORT
                             </h2>
                         </div>
                         <div class="body">
@@ -57,48 +57,46 @@
                                 <!-- More data -->
                                 </form>
 
-  <div class="table-responsive">
+                   <div class="table-responsive">
                     <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                         <thead>
                             <tr>
-                                <th>Vendor</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>memo</th>
                                 <th>Date</th>
-                                <th>Ref. No</th>
-                                <th>Amount</th>
+                                <th>Amount(ksh.)</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% if results %}
-                              {% for expense in results %}
+                            {% if assets %}
+                              {% for asset in assets %}
                                   <tr>
-                                      <td>{{ expense.vendor.name }}</td>
-                                      <td>{{ expense.date_of_expense }}</td>
-                                      <td>{{ expense.ref_no }}</td>
-                                      <td>ksh.{{ expense.amount }}.00</td>
+                                      <td>{{asset.name}}</td>
+                                      <td>{{asset.type}}</td>
+                                      <td>{{asset.memo}}</td>
+                                      <td>{{asset.date }}</td>
+                                      <td>{{asset.amount}}.00</td>
                                   </tr>
-
-                              {% endfor %}
+                                  {% endfor %}
+                                  <tr>
+                                      <td>Total:</td>
+                                      <td></td>
+                                      <td></td>
+                                      <td>KSH:</td>
+                                      <td>{{ total }}.00</td>
+                                  </tr>
                             {% else %}
 
                             {% endif %}
-                    </tbody>
+                        </tbody>
                     </table>
-
-                    <div class="row">
-                        <div class="col-md-8">
-                            <span style="text-align:center;">Total Amount</span>
-                        </div>
-                        <div class="col-md-4">
-                            <span style="text-align:center; font-weight:500;">ksh. {{total}}.00</span>
-                        </div>
-                    </div>
-  </div>
-
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- #END# Tabs With Icon Title -->
         </div>
     </section>
 {% endblock %}

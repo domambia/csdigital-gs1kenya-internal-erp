@@ -1,0 +1,108 @@
+
+{% extends 'layout/accnts_layout.html' %}
+{% load widget_tweaks %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+{{ form.media }}            {# Adds date-picker required JS and CSS #}
+{% block header %}
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
+      <h2 class="header pull-left">ACCOUNTS | SALES</h2>
+      <br>
+  </div>
+{% endblock%}
+{% block content %}
+
+    <section>
+        <div class="container-fluid">
+             <!-- Tabs With Icon Title -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card custom-h">
+                        <div class="header">
+                            <h2>
+                                ACCOUNTS | SALES REPORT
+                            </h2>
+                        </div>
+                        <div class="body">
+                            <!-- Nav tabs -->
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade in active">
+                                <form method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-5">
+                                            <div class="form-group form-float">
+                                                <div class="form-line">
+                                                    <label>From</label>
+                                                    <input type="date" class=" form-control" name="start" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <div class="col-lg-5 col-md-5">
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <label>To</label>
+                                                <input type="date" class="form-control" name="end">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-lg-2">
+                                        <div class="form-group form-float pull-right">
+                                            <input type="submit" name="submit" class="btn btn-primary" value="search">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- More data -->
+                                </form>
+
+                   <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr>
+                                <th>Member Name</th>
+                                <th>Member Number</th>
+                                <th>Address</th>
+                                <th>Payment Terms </th>
+                                <th>Date of Sale</th>
+                                <th>Payment Due</th>
+                                <th>Excl.Tax(ksh)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if sales %}
+                              {% for sale in sales %}
+                                  <tr>
+                                      <td>{{ sale.member.company_name }}</td>
+                                      <td>{{ sale.member.member_number }}</td>
+                                      <td>{{ sale.member.physical_location}}</td>
+                                      <td>{{ sale.payment_terms }}</td>
+                                      <td>{{ sale.date_of_sale }}</td>
+                                      <td>{{ sale.payment_due }}</td>
+                                      <td>{{ sale.member.category }}.00</td>
+                                  </tr>
+                                  {% endfor %}
+                                  <tr>
+                                      <td>Total</td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td>ksh.</td>
+                                      <td>{{total}}</td>
+                                  </tr>
+                            {% else %}
+
+                            {% endif %}
+                        </tbody>
+                    </table>
+                   </div>
+                      </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Tabs With Icon Title -->
+        </div>
+    </section>
+{% endblock %}
