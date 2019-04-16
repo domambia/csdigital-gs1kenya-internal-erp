@@ -166,7 +166,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 #Session timingout
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-SESSION_COOKIE_AGE = 300 # set just 10 minutes to test
+SESSION_COOKIE_AGE = 6000 # set just 100 minutes
 SESSION_SAVE_EVERY_REQUEST = True
 
 #MiddleWare classes
