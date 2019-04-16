@@ -68,31 +68,74 @@
                             <tbody>
                                 <tr>
                                     <td>Cerficate of Id</td>
-                                    <td> <a href="{{client.copy_of_id.url }}" target="_blank"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i> </a> </td>
+                                    <td>
+                                    {% if client.copy_of_id %} 
+                                        <a href="{{client.copy_of_id.url }}" target="_blank"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i> </a>
+                                    {% elif client.copy_of_id == "" %}
+                                    <td>National id was provided</td>
+                                    {% endif %}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Certificate of in Corporation</td>
-                                    <td> <a href="{{client.certificate_of_incorporation.url }}" target="_blank"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i> </a> </td>
+                                    <td> {% if client.certificate_of_incorporation %}
+                                        <a href="{{client.certificate_of_incorporation.url }}" target="_blank"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i> </a> 
+                                        {% elif client.certificate_of_incorporation == "" %}
+                                            <td>Record Not provided</td>
+                                        {% endif %}
+                                    </td>
+                                    
                                 </tr>
                                 <tr>
                                     <td>Company Certificate Pin</td>
-                                    <td> <a href="{{client.company_certificate_pin.url }}" target="_blank"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i> </a> </td>
+                                    <td> 
+                                        {% if client.company_certificate_pin %}
+                                        <a href="{{client.company_certificate_pin.url }}" target="_blank"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i> </a>
+                                        {% elif client.company_certificate_pin  == "" %}
+                                            <td>Record Not provided</td>
+                                        {% endif %} 
+                                    </td>
+                                        
                                 </tr>
                                 <tr>
                                     <td>Copy of blank Cheque</td>
-                                    <td> <a href="{{client.copy_of_blank_cheque.url }}" target="_blank"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i> </a> </td>
+                                    <td>
+                                        {% if  client.copy_of_blank_cheque %} 
+                                        <a href="{{client.copy_of_blank_cheque.url }}" target="_blank"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i> </a> 
+                                        {% elif client.copy_of_blank_cheque == "" %}
+                                        <td>Record not provided </td>
+                                        {% endif %}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Copy of KEBS Certificate</td>
-                                    <td> <a href="{{client.copy_of_kebs_certicate.url }}" target="_blank"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i> </a> </td>
+                                    <td>
+                                        {% if client.copy_of_kebs_certicate %} 
+                                        <a href="{{client.copy_of_kebs_certicate.url }}" target="_blank"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i> </a> 
+                                        {% elif client.copy_of_kebs_certicate == "" %}
+                                            <td>Record not provided </td>
+                                        {% endif %}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Director Pin Number</td>
-                                    <td> <a href="{{client.director_pin_number.url }}" target="_blank"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i> </a> </td>
+                                    <td> 
+                                        {% if client.director_pin_number %}
+                                        <a href="{{client.director_pin_number.url }}" target="_blank"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i> </a> 
+                                        {% elif client.director_pin_number == "" %}
+                                            <td>Record not provided</td>
+                                        {% endif %}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>List of product Barcoded</td>
-                                    <td> <a href="{{client.list_of_product_barcoded.url }}" target="_blank"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i> </a> </td>
+                                    <td>
+                                        {% if client.list_of_product_barcoded %} 
+                                        <a href="{{client.list_of_product_barcoded.url }}" target="_blank"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i> </a> 
+                                        {% elif client.list_of_product_barcoded == "" %}
+                                            <td>Record not provided</td>
+                                        {% endif %}
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
