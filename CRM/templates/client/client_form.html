@@ -159,8 +159,8 @@
                                          <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
                                             <div class="form-group ">
                                                 <div class="form-line" >
-                                                    {{ form.date_of_issue|add_class:"form-control datepicker"}}
-                                                    <label class="form-label">Choose date of issues</label>
+                                                  <label>Choose date of issues</label>
+                                                  <input type="date" class="form-control" name="{{form.date_of_issue.name}}">
                                                     {% for errror in form.date_of_issue.errors %}
                                                         <li class = "alert alert-danger"> {{ error }}</li>
                                                     {% endfor %}

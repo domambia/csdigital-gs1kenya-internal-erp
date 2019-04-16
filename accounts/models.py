@@ -9,7 +9,7 @@ from django.core.validators import  MinValueValidator, EmailValidator
 class Employee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     # additional attributes for the employee
-    address = models.CharField(max_length=50)
+    address = models.CharField(max_length=50, blank=True)
     phone = models.IntegerField(validators=[MinValueValidator(9)])
     date_of_birth = models.CharField(max_length=20)
     huduma = models.CharField(max_length =50, default = "HUD-001232")
@@ -29,7 +29,7 @@ class Employee(models.Model):
     dependant_name = models.CharField(max_length=100, blank=True)
     dependant_relationship = models.CharField(max_length=60, blank=True, )
     dependant_contact = models.CharField(max_length=60, blank=True)
-    leave_bal = models.IntegerField(default= 21)
+    leave_bal = models.PositiveIntegerField(default= 21, blank = True)
     profile_pic = models.ImageField(upload_to = 'profile_pics', blank = True)
     company_benifits = models.CharField(max_length = 1000, default = "Pay NHIF, NSSF")
     position = models.OneToOneField(Position, on_delete =models.CASCADE, default= 1)
