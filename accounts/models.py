@@ -31,7 +31,7 @@ class Employee(models.Model):
     dependant_contact = models.CharField(max_length=60, blank=True)
     leave_bal = models.PositiveIntegerField(default= 21, blank = True)
     profile_pic = models.ImageField(upload_to = 'profile_pics', blank = True)
-    company_benifits = models.CharField(max_length = 1000, default = "Pay NHIF, NSSF")
+    company_benifits = models.CharField(max_length = 1000, default = "NSSF", blank = True)
     position = models.OneToOneField(Position, on_delete =models.CASCADE, default= 1)
 
     # Salary Information
