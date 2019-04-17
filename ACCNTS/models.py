@@ -51,19 +51,13 @@ class PayRoll(models.Model):
     pension = models.IntegerField(default=0)
     lunch = models.IntegerField(default=0)
     month = models.DateField(default = datetime.datetime.now)
+    is_taxed = models.BooleanField(default = False)
     def __str__(self):
         return self.employee.user.username
 
     def get_absolute_url(self):
         return reverse("ACCNTS:list_payroll")
 
-class EmployeeTax(models.Model):
-    employee = models.ForeignKey(Employee, on_delete = models.CASCADE)
-    tax = models.IntegerField(default = 0)
-    month = models.DateField(default = datetime.datetime.now)
-
-    def __str__(self):
-        return "Employee Tax. {}".format(employee.user.username)
 
 '''
 Sales models
@@ -224,6 +218,21 @@ class Bank(models.Model):
         return reverse("ACCNTS:bank_list")
 
 
+"""
+Deductions from the payroll
+
+"""
+#Deduction(employee = emp_id, nssf = nssf, nhif=nhif, nhsb= nhe, paye = tax)
+class Deduction(models.Model):
+    employee = models.ForeignKey(Employee, on_delete = models.CASCADE)
+    nssf = models.IntegerField()
+    nhif = models.IntegerField()
+    nhsb = models.IntegerField()
+    paye = models.IntegerField()
+    dated = models.DateTimeField(default = datetime.datetime.now)
+
+    def __str__(self):
+        return "Tax"
 
 
 

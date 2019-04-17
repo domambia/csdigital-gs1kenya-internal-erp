@@ -32,6 +32,11 @@
                                       <td>ksh.{{ payroll.lunch }}</td>
                                       <td>{{ payroll.month }}</td>
                                       <td style="text-align:center;">
+                                          {% if payroll.is_taxed %}
+                                          <span class="btn label bg-green" style="margin-right:10px;">taxed</span>
+                                          {% else %}
+                                            <span><a href = "{% url 'ACCNTS:tax' tax_id=payroll.id %}" class="btn label bg-red" style="margin-right:10px;">tax</a></span>
+                                          {% endif %}
                                           <span> <a href = "{% url 'ACCNTS:detail_payroll' pk=payroll.id %}" class="btn label bg-orange" style="margin-right:10px;">print</a> </span>
                                           <span> <a href = "{% url 'ACCNTS:edit_payroll' pk=payroll.id %}"><i class="material-icons">edit</i></a> </span>
                                       </td>

@@ -32,6 +32,7 @@ urlpatterns = [
     url('^payroll/edit/(?P<pk>\d)/$', login_required(views.UpdatePayrollView.as_view()), name ="edit_payroll"),
     url('^payroll/generate/(?P<pk>\d)/$', login_required(views.generate_payroll), name ="detail_payroll"),
     url('^payslip/list/', login_required(views.payslip), name ="payslip"),
+    url('^payroll/tax/(?P<tax_id>\d)/$', login_required(views.post_deductions), name ="tax"),
     #sales
 
     url('^sales/list/', login_required(vsales.ListSalesView.as_view()), name = 'sales_list'),
@@ -81,6 +82,7 @@ urlpatterns = [
     url(r'reports/purchases/', reports.expenses_report, name ='expense_report'),
     url(r'reports/fixed-assets/', reports.fixed_asset_report, name = 'asset_report'),
     url(r'reports/profit-and-loss-report/', reports.profit_and_loss_report, name = 'p_loss_report'),
+    url(r'reports/kra-reports/', reports.kra_report, name = 'kra_report'),
 ]+static(settings.STATIC_URL, document_root=settings.STATIC_DIR)
 
 

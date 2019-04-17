@@ -1,4 +1,4 @@
-from ACCNTS.models import Sales, Bank, Expense, Liability, Asset, Income
+from ACCNTS.models import Sales, Bank, Expense, Liability, Asset, Income, Deduction
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 import datetime
@@ -120,4 +120,35 @@ def profit_and_loss_report(request):
                         'profit': 0, 
                         'employee': employee, 
                         }
+                    )
+
+"""
+KRA Reports
+"""
+def kra_report(request):
+    if not request.session.get('username'):
+        messages.info(request, "Please login again to continue.")
+        return HttpResponseRedirect(reverse("accounts:login"))
+    employee = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
+    if request.method == "POST":
+        start  = request.POST['start']
+        end = request.POST['end']
+        taxs = Deduction.objects.filter(dated__range = [start, end])
+        total_tax = Deduction.objects.filter(dated__range =[start, end]).aggregate(Sum('paye'))
+        print(taxs)
+        return render(request, "reports/kra_report.html", {
+                            'taxs': taxs, 
+                            'start': start,
+                            'end': end, 
+                            'employee': employee, 
+                            "total_tax": total_tax['paye__sum'],
+                             }
+                    )
+    return render(request, "reports/kra_report.html", {
+                            'employee': employee, 
+                            'taxs': [],  
+                            "total_tax": 0,
+                            'start':'select Date',
+                            'end':'select Date',
+                            }
                     )

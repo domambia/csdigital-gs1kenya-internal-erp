@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy, reverse
 from accounts.models import Employee
-from ACCNTS.models import Invoice, PayRoll, Payment, EmployeeTax
+from ACCNTS.models import Invoice, PayRoll, Payment, Deduction
 from ERP import settings
 from django.views.generic import (ListView,
                                   DeleteView,
@@ -10,7 +10,7 @@ from django.views.generic import (ListView,
                                   CreateView,
                                   DetailView)
 from easy_pdf.rendering import render_to_pdf_response
-from ACCNTS.forms import PaymentForm
+from ACCNTS.forms import PaymentForm, PayRollForm
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -256,6 +256,13 @@ class CreatePayrollView(SuccessMessageMixin, CreateView):
         return context
 
 
+# @login_required 
+# def create_payroll(request):
+#     form = PayRollForm()
+#     employee = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
+#     if request.method == "POST" and form.is_valid():
+
+
 class ListPayrollView(ListView):
     model = PayRoll
     context_object_name  = "payrolls"
@@ -285,6 +292,36 @@ def payslip(request):
     payslip = PayRoll.objects.filter(employee = employee.id)
 
     return render(request, "accnts/payroll/payslip.html", {'employee': employee, 'payslip': payslip})
+
+"""
+
+postings to the database
+"""
+
+def post_deductions(request, tax_id):
+    payroll = PayRoll.objects.get(id = tax_id)
+    payroll.is_taxed = 1
+    payroll.save()
+    lunch = payroll.lunch
+    basic_salary  = int(payroll.employee.salary)
+    nhif = get_nhif(basic_salary)
+    nssf = get_nssf(basic_salary)
+    gross_salary = basic_salary
+    nhe = 0
+    if (gross_salary * 0.015) > 5000: nhe = 2500
+    else: nhe = (gross_salary * 0.015)
+    nshe_contr = 0
+    if (nhe*2) > 5000:nshe_contr = 5000
+    else: nshe_contr = (nhe *2)
+    month = payroll.month.strftime('%B')
+    taxable_income = (gross_salary - nssf - payroll.pension)
+    tax =  round((get_tax(taxable_income) - 1408),2)
+    ded_data = Deduction(employee_id = payroll.employee.id, nssf = nssf, nhif=nhif, nhsb= nhe, paye = tax)
+    ded_data.save()
+    payroll.is_taxedb = 1
+    payroll.save()
+    messages.info(request, "Successfully! Recorded employee deductions.")
+    return HttpResponseRedirect(reverse('ACCNTS:list_payroll'))
 
 def generate_payroll(request, pk):
     if not request.session.get('username'):
