@@ -1,0 +1,134 @@
+
+{% extends 'layout/accnts_layout.html' %}
+{% load widget_tweaks %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+{{ form.media }}            {# Adds date-picker required JS and CSS #}
+{% block header %}
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
+      <h2 class="header pull-left">ACCOUNTS | BANKING</h2>
+      <br>
+  </div>
+{% endblock%}
+{% block content %}
+
+    <section>
+        <div class="container-fluid">
+             <!-- Tabs With Icon Title -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card custom-h">
+                        <div class="header">
+                            <h2>
+                                ACCOUNTS | BANKING REPORT DETAILS
+                            </h2>
+                        </div>
+                        <div class="body">
+                            <!-- Nav tabs -->
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade in active">
+                                <form method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-5">
+                                            <div class="form-group form-float">
+                                                <div class="form-line">
+                                                    <label>From</label>
+                                                    <input type="date" class=" form-control" name="start" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <div class="col-lg-5 col-md-5">
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <label>To</label>
+                                                <input type="date" class="form-control" name="end">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-lg-2">
+                                        <div class="form-group form-float pull-right">
+                                            <input type="submit" name="submit" class="btn btn-primary" value="search">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- More data -->
+                                </form>
+                                <div class="container">
+                                  <h3 style="text-align: center;">Profit and Loss Report</h3>
+                                  <p style="text-align: center">From <b>{{start}}</b> to <b>{{end}}</b></p>
+                                  <br>
+                                  <table class="table">
+                                    <thead>
+                                    <tr>
+                                      <th>Item</th>
+                                      <th style="text-align: center;">Debit</th>
+                                      <th style="text-align: center;" >Credit</th>
+                                      <th style="text-align: center;" ></th>
+
+                                    </tr>
+                                  </thead>
+                                    <tr>
+                                      <td style="text-align: left; font-weight: bold;">Incomes</td>
+                                      <td></td>
+                                      <td></td>
+                                    </tr>
+                                      {% for income in incomes %}
+                                        <tr>
+                                          <td>{{income.name}}</td>
+                                          <td style="text-align: center;">ksh.{{income.amount}}.00</td>
+                                          <td style="text-align: center;">ksh. 0.00 </td>
+                                          <td style="text-align: center;"></td>
+
+                                        <tr>
+                                      {% endfor %}
+                                    <tr>
+                                      <td style="text-align: center;">Total</td>
+                                      <td></td>
+                                      <td style="text-align: center;"></td>
+                                      <td style="text-align: center;"><span style="border-bottom: 2px solid #333;">ksh.{{ total_income }}.00</span></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="text-align: left; font-weight: bold;">Expenses</td>
+                                      <td></td>
+                                      <td></td>
+                                    </tr>
+                                      {% for expense in expenses %}
+                                        <tr>
+                                          <td>{{expense.vendor.name}}</td>
+                                          <td style="text-align: center;">ksh.{{expense.amount}}.00</td>
+                                          <td style="text-align: center;"> ksh. 0.00 </td>
+                                          <td style="text-align: center;"></td>
+                                        <tr>
+                                      {% endfor %}
+                                      <tr>
+                                        <td style="text-align: center;">Total</td>
+                                        <td></td>
+                                        <td style="text-align: center;"></td>
+                                        <td style="text-align: center; "><span style="border-bottom: 2px solid #333;">ksh. {{ total_expense }}.00</span></td>
+                                      </tr>
+                                  </table>
+                                  <br><br>
+                                  <table class="table">
+                                    <tr>
+                                      <td style="text-align:center;" >Total Profit</td>
+                                      <td style="text-align:center;">
+                                        {%if profit >= 0%}
+                                        <span style="border-bottom: 2px solid #333;">ksh. {{ profit }}.00</span>
+                                        {% else %}
+                                        <span style="border-bottom: 2px solid #333;">ksh. ({{ profit }}.00)</span>
+                                        {% endif %}
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -74,3 +74,43 @@ def fixed_asset_report(request):
         total = Asset.objects.filter(dated__range =[start, end]).aggregate(Sum('amount'))
         return render(request, "reports/asset_report.html", {'assets': results, 'employee': employee, "total": total['amount__sum'] })
     return render(request, "reports/asset_report.html", {'employee': employee, 'assets': [],  "total": 0})
+
+'''
+Banking Details Reports'''
+def profit_and_loss_report(request):
+    if not request.session.get('username'):
+        messages.info(request, "Please login again to continue.")
+        return HttpResponseRedirect(reverse("accounts:login"))
+    employee = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
+    if request.method == "POST":
+        start  = request.POST['start']
+        end = request.POST['end']
+        incomes = Income.objects.filter(dated__range = [start, end])
+        expenses = Expense.objects.filter(date_of_expense__range = [start, end])
+        total_income = Income.objects.filter(dated__range =[start, end]).aggregate(Sum('amount'))
+        total_expense = Expense.objects.filter(date_of_expense__range =[start, end]).aggregate(Sum('amount'))
+        profit = (total_income['amount__sum'] - total_expense['amount__sum'])
+        return render(request, "reports/profit_loss.html", 
+                {
+                'start': start,
+                'end': end,
+                'incomes': incomes, 
+                'expenses':expenses, 
+                'total_income': total_income['amount__sum'], 
+                'total_expense': total_expense['amount__sum'], 
+                'profit': profit,
+                'employee': employee, 
+                }
+            )
+    return render(request, "reports/profit_loss.html",
+                    {
+                        'start':'select Date',
+                        'end':'select Date',
+                        'incomes':[], 
+                        'expenses':[], 
+                        'total_income': 0,
+                        'total_expense': 0, 
+                        'profit': 0, 
+                        'employee': employee, 
+                        }
+                    )

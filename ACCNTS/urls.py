@@ -80,6 +80,7 @@ urlpatterns = [
     url(r'reports/banking/', reports.banking_report, name ='banking_report'),
     url(r'reports/purchases/', reports.expenses_report, name ='expense_report'),
     url(r'reports/fixed-assets/', reports.fixed_asset_report, name = 'asset_report'),
+    url(r'reports/profit-and-loss-report/', reports.profit_and_loss_report, name = 'p_loss_report'),
 ]+static(settings.STATIC_URL, document_root=settings.STATIC_DIR)
 
 
