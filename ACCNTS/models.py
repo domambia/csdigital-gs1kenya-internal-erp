@@ -229,7 +229,7 @@ class Deduction(models.Model):
     nhif = models.IntegerField()
     nhsb = models.IntegerField()
     paye = models.IntegerField()
-    dated = models.DateTimeField(default = datetime.datetime.now)
+    dated = models.DateTimeField(default  = datetime.datetime.now)
 
     def __str__(self):
         return "Tax"
