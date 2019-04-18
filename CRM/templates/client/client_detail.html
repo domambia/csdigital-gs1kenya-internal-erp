@@ -457,6 +457,13 @@
                 </div>
             {% endif %}
       </div>
+      <div class="row clearfix body">
+        <marquee scrolldelay= 180>
+            {% for note in notes %}
+            <span class="label bg-blue" style="border-radius: 20px;">{{note.current_user.position}}&nbsp; &nbsp;</span> &nbsp; to  <i class="label bg-red" style="border-radius: 18px;">{{note.member.company_name}}</i>&nbsp; <b style="font-size: 16px;">~</b>&nbsp;<span>{{note.notes|lower}} </span>
+            {% endfor %}
+        </marquee>
+      </div>
             </div>
         </div>
       </div>

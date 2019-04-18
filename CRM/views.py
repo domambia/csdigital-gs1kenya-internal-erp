@@ -87,8 +87,9 @@ def clients(request, pk):
     check_user_login(request)
     client = Client.objects.get(id = pk)
     user = User.objects.get(username = request.session['username'])
+    notes  = Note.objects.all()
     employee = Employee.objects.get(user = user.id)
-    return render(request, "client/client_detail.html", {"client": client, "employee": employee})
+    return render(request, "client/client_detail.html", {"client": client, 'notes':notes, "employee": employee})
 
 '''Approving Clients
 
