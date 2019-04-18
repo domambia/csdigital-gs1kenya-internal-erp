@@ -96,7 +96,18 @@ def profit_and_loss_report(request):
         expenses = Expense.objects.filter(date_of_expense__range = [start, end])
         total_income = Income.objects.filter(dated__range =[start, end]).aggregate(Sum('amount'))
         total_expense = Expense.objects.filter(date_of_expense__range =[start, end]).aggregate(Sum('amount'))
-        profit = (total_income['amount__sum'] - total_expense['amount__sum'])
+        income_sum = 0
+        expense_sum = 0
+        if total_expense['amount__sum'] == None:
+            expense_sum = 0
+        else:
+            expense_sum = total_expense['amount__sum']
+
+        if total_income['amount__sum'] == None:
+            income_sum = 0
+        else:
+            income_sum = total_income['amount__sum']
+        profit = (income_sum - expense_sum)
         return render(request, "reports/profit_loss.html", 
                 {
                 'start': start,
