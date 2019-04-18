@@ -167,3 +167,13 @@ class Note(models.Model):
 
     def __str__(self):
         return str(self.notes)[:50]
+"""
+Record who approved the member records
+"""
+class RecordApprove(models.Model):
+    member = models.ForeignKey(Client, on_delete = models.CASCADE)
+    current_user = models.ForeignKey(Employee, on_delete = models.CASCADE)
+    dated = models.DateTimeField(default = datetime.datetime.now)
+
+    def __str__(self):
+        return self.member.user.username
