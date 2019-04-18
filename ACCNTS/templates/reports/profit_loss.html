@@ -56,11 +56,13 @@
                                 </div>
                                 <!-- More data -->
                                 </form>
-                                <div class="container">
-                                  <h3 style="text-align: center;">Profit and Loss Report</h3>
+                                <h3 style="text-align: center;">Profit and Loss Report</h3>
                                   <p style="text-align: center">From <b>{{start}}</b> to <b>{{end}}</b></p>
                                   <br>
-                                  <table class="table">
+                                <div class="container">
+                                  
+                                  <div class="container">
+                                  <table class="table table-bordered table-striped" style="width: 80%;">
                                     <thead>
                                     <tr>
                                       <th>Item</th>
@@ -110,8 +112,10 @@
                                         <td style="text-align: center; "><span style="border-bottom: 2px solid #333;">ksh. {{ total_expense }}.00</span></td>
                                       </tr>
                                   </table>
+                                </div>
                                   <br><br>
-                                  <table class="table">
+                                  <div class="table-responsive">
+                                  <table class="table table-responsive">
                                     <tr>
                                       <td style="text-align:center;" >Total Profit</td>
                                       <td style="text-align:center;">
@@ -123,6 +127,7 @@
                                       </td>
                                     </tr>
                                   </table>
+                                </div>
                                 </div>
                             </div>
                         </div>
