@@ -1,5 +1,5 @@
 from django import forms 
-from CRM.models import Client, Training
+from CRM.models import Client, Training, Note
 
 def get_clients():
     list_clients = Client.objects.all()
@@ -20,3 +20,8 @@ class EditClient(forms.ModelForm):
     class Meta:
         model = Client
         fields = ('member_number', 'member_prefix')
+
+class NoteForm(forms.ModelForm):
+    class Meta:
+        model = Note
+        fields  = ('notes',)

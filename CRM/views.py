@@ -3,7 +3,7 @@ from accounts.models import Employee
 from django.contrib.auth.models import User
 from departments.models import Position
 from django.urls import reverse_lazy
-from CRM.models import Client, Supplier, Feedback, Training, Barcode, Event
+from CRM.models import Client, Supplier, Feedback, Training, Barcode, Event, Note
 from helpers.help import get_country, get_sectors
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
 from helpers.sendSMS import SMS
@@ -12,7 +12,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from datetime import datetime
 from helpers.sendSMS import SMS
-from CRM.forms import TrainForm, EditClient
+from CRM.forms import TrainForm, EditClient, NoteForm
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from helpers.help import check_user_login
@@ -573,3 +573,26 @@ class BarcodeDetailView(DetailView):
         context['employee'] = Employee.objects.get( user= user)
         return context
 
+def add_notes(request, pk):
+    member = Client.objects.get(id = pk)
+    employee = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
+    form = NoteForm(request.POST or None)
+    c_user = employee.id 
+    print(c_user)
+    dir(form)
+    print("Adding notes")
+    if request.method == "POST":
+        if form.is_valid():
+            print("Approved")
+            notes  = form.cleaned_data['notes']
+            note = Note(member_id = member.id, current_user_id = c_user, notes = notes)
+            note.save()
+            messages.info(request, "Successfully! Added notes, for <--> {} <-->".format(member.company_name))
+            return HttpResponseRedirect(reverse("CRM:list_client"))
+    return render(request, "client/add-notes.html",
+            {
+                'employee': employee,
+                'form': form,
+                'member': member,
+            }
+        )

@@ -17,6 +17,7 @@
                 {% if employee.position.initials == "HRM" or employee.position.initials == "GM" %}
                 <a href="{% url 'CRM:edit_client' pk=client.pk %}" class="btn btn-success">EDIT</a>
                 {% endif %}
+                <a href="{% url 'CRM:notes' pk=client.pk %}" class="label btn bg-orange">ADD NOTE</a>
             </div>
         <div class="row clearfix">
             <div class="col-md-6">

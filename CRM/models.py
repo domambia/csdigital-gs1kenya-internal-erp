@@ -155,3 +155,15 @@ class Barcode(models.Model):
     def get_absolute_url(self):
         return reverse("CRM:detail_barcode", kwargs={"pk": self.pk})
 
+
+"""
+Providing Notes for the Clients Activations"""
+
+class Note(models.Model):
+    member = models.ForeignKey(Client, on_delete = models.CASCADE)
+    current_user = models.ForeignKey(Employee, on_delete = models.CASCADE)
+    notes = models.CharField(max_length = 1000)
+    dated = models.DateTimeField(default = datetime.datetime.now)
+
+    def __str__(self):
+        return str(self.notes)[:50]
