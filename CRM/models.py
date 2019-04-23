@@ -177,3 +177,22 @@ class RecordApprove(models.Model):
 
     def __str__(self):
         return self.member.user.username
+
+"""
+'company_name', 'company_phone', 'company_phone_alt', 'company_email','certificate_of_incorporation','copy_of_id', 'copy_of_blank_cheque',
+            'copy_of_trade_licence', 'list_of_product_barcoded', 'director_pin_number', 'company_certificate_pin', 'copy_of_kebs_certicate',
+             'company_email_alt', 'post_address', 'physical_location', 'director_info','sector','date_of_issue', 'nature_of_business
+"""
+
+class Member(models.Model):
+    name        = models.CharField(max_length = 200)
+    email               = models.CharField(max_length = 200)
+    phone               = models.CharField(max_length = 200)
+    address             = models.CharField(max_length = 200)
+    country             = models.CharField(max_length = 200, blank = True)
+    description         = models.CharField(max_length = 400, blank = True)
+
+    def __str__(self):
+        return self.name
+
+

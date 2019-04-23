@@ -123,7 +123,7 @@ The views for Income
 
 class IncomeCreateView(CreateView):
     model = Income
-    fields = ('name', 'type', 'giver','memo', 'amount')
+    fields = ('member', 'type', 'name','memo', 'amount')
     template_name  = "income/income_form.html"
     success_message = "Successfully! Create an income"
     def get_context_data(self, **kwargs):
@@ -134,7 +134,7 @@ class IncomeCreateView(CreateView):
 
 class IncomeUpdateView(UpdateView):
     model = Income
-    fields = ('name', 'type', 'memo', 'giver', 'amount')
+    fields = ('member', 'type', 'memo', 'name', 'amount')
     template_name  = "income/income_form.html"
     success_message = "Successfully! Update an income"
     def get_context_data(self, **kwargs):

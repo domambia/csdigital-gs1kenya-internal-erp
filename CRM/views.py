@@ -11,6 +11,7 @@ from CRM.models import (Client,
                         Event, 
                         Note, 
                         RecordApprove,
+                        Member,
                 )
 from helpers.help import get_country, get_sectors
 from django.views.generic import (CreateView, 
@@ -61,6 +62,7 @@ class ClientCreateView(SuccessMessageMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(ClientCreateView, self).get_context_data(**kwargs)
         user = self.request.user
+        Member(name = context['form'].cleaned_data['company_name'], email = context['form'].cleaned_data['company_email'], phone = context['form'].cleaned_data['company_phone'], address = context['form'].cleaned_data['post_address']).save()
         context['employee'] = Employee.objects.get(user=user)
         return context
 

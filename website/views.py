@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 def indexPage(request):
+
     return render(request, 'website/index.html')
 
 def about(request):
@@ -16,7 +17,7 @@ def staff(request):
     return render(request, "website/staff.html")
 
 def contact(request):
-    return render(request, "website/contact.html")
+    return render(request, "website/contacts.html")
 
 def standards(request):
     return render(request, "website/standards.html")

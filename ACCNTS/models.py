@@ -3,7 +3,7 @@ from CRM.models import Client
 import datetime
 from accounts.models import Employee
 import datetime
-from CRM.models import Supplier
+from CRM.models import Supplier, Member
 from django.urls import reverse
 # Create your models here.
 
@@ -160,8 +160,8 @@ def income():
 
 
 class Income(models.Model):
-    name = models.CharField(max_length = 500)
-    giver = models.CharField(max_length = 200)
+    name = models.CharField(max_length = 200)
+    member = models.ForeignKey(Member, on_delete = models.CASCADE, default = 1)
     type = models.CharField(max_length = 200, choices = income(), default = 'direct income')
     amount = models.IntegerField(default = 0)
     open_balance = models.IntegerField(default = 0, blank = True)

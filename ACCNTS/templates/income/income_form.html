@@ -34,7 +34,7 @@
                                             <div class="form-group form-float">
                                                <div class="form-line">
                                                     {{ form.name | add_class:"form-control"}}
-                                                    <label class="form-label">Name of Income</label>
+                                                    <label class="form-label">Client Name</label>
                                                      <ul>
                                                         {% for error in form.name.errors%}
                                                         <li class="alert alert-danger">{{ error }}</li>
@@ -46,10 +46,10 @@
                                     <div class="col-lg-4 col-md-4 col-sm-3 col-xs-6">
                                         <div class="form-group form-float">
                                             <div class="form-line">
-                                                {{ form.giver | add_class:"form-control"}}
-                                                <label class="form-label">From Who</label>
+                                                {{ form.member | add_class:"form-control"}}
+                                                <label class="form-label">Which Client</label>
                                                     <ul>
-                                                    {% for error in form.giver.errors%}
+                                                    {% for error in form.member.errors%}
                                                     <li class="alert alert-danger">{{ error }}</li>
                                                     {% endfor %}
                                                 </ul>
