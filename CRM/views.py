@@ -120,10 +120,11 @@ def notify(phone, first_name, last_name, company_name, when):
 def membership(request, pk):
     check_user_login(request)
     employee = Employee.objects.get(position = Position.objects.get(initials = "CCM"))
+    current_user = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
+    RecordApprove(member_id = client.id, current_user_id = current_user.id).save()
     client = Client.objects.get(id = pk)
     client.is_me1 = 1
     client.save()
-    RecordApprove(member_id = client.id, current_user_id = employee.id).save()
     messages.success(request, "Member Executive. Successfully! Approved member")
     print("ME1 -Approved")
     notify(employee.phone , employee.user.first_name, employee.user.last_name, client.company_name, datetime.now().date())
@@ -134,7 +135,8 @@ def membership_2(request, pk):
     client = Client.objects.get(id = pk)
     client.is_me2 = 1
     client.save()
-    RecordApprove(member_id = client.id, current_user_id = employee.id).save()
+    current_user = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
+    RecordApprove(member_id = client.id, current_user_id = current_user.id).save()
     messages.success(request, "Member Executive. Successfully! Approved member")
     print("ME2 -Approved")
     return HttpResponseRedirect(reverse('CRM:list_client'))
@@ -147,7 +149,8 @@ def communication(request, pk):
     msg = message.format(employee.user.first_name, employee.user.last_name, client.company_name, datetime.now())
     client.is_ccm = 1
     client.save()
-    RecordApprove(member_id = client.id, current_user_id = employee.id).save()
+    current_user = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
+    RecordApprove(member_id = client.id, current_user_id = current_user.id).save()
     print("CCM -Approved")
     SMS().send(employee.phone, msg)
     messages.success(request, "Corporate Communication. Successfully! Approved member")
@@ -159,7 +162,8 @@ def accounts_manager(request, pk):
     client = Client.objects.get(id = pk)
     client.is_accm = 1
     client.save()
-    RecordApprove(member_id = client.id, current_user_id = employee.id).save()
+    current_user = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
+    RecordApprove(member_id = client.id, current_user_id = current_user.id).save()
     messages.success(request, "Accounts Manager. Successfully! Approved member")
     print("ACCM -Approved")
     print("ME1 -Approved")
@@ -172,7 +176,8 @@ def accounts(request, pk):
     client = Client.objects.get(id = pk)
     client.is_cacc = 1
     client.save()
-    RecordApprove(member_id = client.id, current_user_id = employee.id).save()
+    current_user = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
+    RecordApprove(member_id = client.id, current_user_id = current_user.id).save()
     print("CACC -Approved")
     notify(employee.phone , employee.user.first_name, employee.user.last_name, client.company_name, datetime.now().date())
     messages.success(request, "Accounts Executive. Successfully! Approved member")
@@ -184,7 +189,8 @@ def accounts_ex(request, pk):
     client = Client.objects.get(id = pk)
     client.is_cacc_x = 1
     client.save()
-    RecordApprove(member_id = client.id, current_user_id = employee.id).save()
+    current_user = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
+    RecordApprove(member_id = client.id, current_user_id = current_user.id).save()
     print("CACC_ex -Approved")
     notify(employee.phone , employee.user.first_name, employee.user.last_name, client.company_name, datetime.now().date())
     return HttpResponseRedirect(reverse('CRM:list_client'))
@@ -225,6 +231,8 @@ def assign_member_details(request, pk):
             member_prefix = form.cleaned_data['member_prefix']
             message = "Dear {} you have been assigned {} as member and {} as prefix number.GS1 KENYA"
             form.save()
+            current_user = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
+            RecordApprove(member_id = client.id, current_user_id = current_user.id).save()
             SMS().send(phone, message.format(company_name, member_number, member_prefix))
             return HttpResponseRedirect(reverse('CRM:list_client'))
     return render(request, 'client/member_form.html', {'form': form,
@@ -246,7 +254,8 @@ def technical(request, pk):
         SMS().send(employee.phone, msg_1)
         SMS().send(employee_2.phone, msg)
         print("TM -Approved")
-        RecordApprove(member_id = client.id, current_user_id = employee.id).save()
+        current_user = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
+        RecordApprove(member_id = client.id, current_user_id = current_user.id).save()
         messages.success(request, "Technical Executive. Successfully! Approved member")
         return HttpResponseRedirect(reverse('CRM:list_client'))
 
@@ -256,7 +265,8 @@ def general_manager(request, pk):
     client.is_gm = 1
     client.status = 1
     client.save()
-    RecordApprove(member_id = client.id, current_user_id = employee.id).save()
+    current_user = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
+    RecordApprove(member_id = client.id, current_user_id = current_user.id).save()
     message = "Dear {} your membership has been approved with member number  [{}] by GS1 KENYA"
     SMS().send(client.company_phone, message.format(client.company_name, client.member_number))
     messages.success(request, "General Manager. Successfully! Approved member")

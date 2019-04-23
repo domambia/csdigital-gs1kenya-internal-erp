@@ -349,7 +349,8 @@ def generate_payroll(request, pk):
     net_income = gross_salary - (lunch + nhif + tax + nshe_contr)
     ded_before_tax = (nssf + payroll.pension)
     ded_after_tax = (nhif + payroll.lunch)
-    total_ded = (nssf + payroll.pension + nhif + lunch + round(get_tax(taxable_income), 2) + nshe_contr)
+    # total_ded = (nssf + payroll.pension + nhif + lunch + round(get_tax(taxable_income), 2) + nshe_contr)
+    total_ded = (nssf + payroll.pension + nhif + lunch + nshe_contr)
 
     pdf = render_to_pdf( "accnts/payroll/print.html",{'payroll':  payroll,'gross_salary': gross_salary,
                                                       'taxable_income': taxable_income,
