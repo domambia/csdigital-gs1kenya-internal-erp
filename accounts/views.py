@@ -37,27 +37,26 @@ def add_employee(request):
     employee_form = EmployeeForm(request.POST or None)
     emp = Employee.objects.get(user = User.objects.get(username = request.session['username']).id)
     if request.method == 'POST':
-
-        if user_form.is_valid() and employee_form.is_valid():
-            user = user_form.save(commit = False)
-            password = user_form.cleaned_data['password']
-            user.set_password(password)
-            user.save()
-            employee = employee_form.save(commit = False)
-            employee.user = user
-            if 'profile_pic' in request.FILES:
-                employee.profile_pic = request.FILES['profile_pic']
-            employee.save()
-            messages.success(request, 'You hav success added new employee!')
-            return HttpResponseRedirect(reverse('accounts:employees'))
-        else:
-            messages.warning(request, 'Some information missing!')
-            return render(request, "accounts/register.html",
-                                {'user_form': user_form, 'employee_form': employee_form, "countries": countries,"employee":emp,})
+        if employee_form.is_valid():
+            if user_form.is_valid():
+                user = user_form.save(commit = False)
+                password = user_form.cleaned_data['password']
+                user.set_password(password)
+                user.save()
+                employee = employee_form.save(commit = False)
+                employee.user = user
+                if 'profile_pic' in request.FILES:
+                    employee.profile_pic = request.FILES['profile_pic']
+                employee.save()
+                messages.success(request, 'You hav success added new employee!')
+                return HttpResponseRedirect(reverse('accounts:employees'))
+            else:
+                messages.warning(request, 'Some information missing!')
+                return render(request, "accounts/register.html",
+                                    {'user_form': user_form, 'employee_form': employee_form, "countries": countries,"employee":emp,})
 
     return render(request, "accounts/register.html",
                         {'user_form': user_form, 'employee_form': employee_form, "countries": countries,"employee":emp,})
-
 
 """LOGIN: All User
 """
