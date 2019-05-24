@@ -33,10 +33,17 @@ source venv/bin/activate
 ## Authors
 
 * **Omambia Dauglous** 
-# Screenshots
-
+## Screenshots
+### Panel
  ![Panel](panel.png)
-
+### Employees
+ ![Panel](employee.png)
+### Members
+ ![Panel](members.png)
+## Payroll
+ ![Panel](payroll.png)
+## Performance
+ ![Panel](performance.png)
 ## License
 
 This project is licensed under the MIT License
