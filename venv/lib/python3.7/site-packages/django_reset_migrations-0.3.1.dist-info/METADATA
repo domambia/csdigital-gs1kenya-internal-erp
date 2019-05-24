@@ -1,0 +1,20 @@
+Metadata-Version: 2.0
+Name: django-reset-migrations
+Version: 0.3.1
+Summary: Add one command to reset the migrations of one or more app
+Home-page: https://github.com/valdergallo/django_reset_migrations
+Author: valdergallo
+Author-email: valdergallo@gmail.com
+License: Apache Version 2
+Download-URL: https://github.com/valdergallo/django_reset_migrations/tarball/0.3.1/
+Description-Content-Type: UNKNOWN
+Keywords: Django reset migrations
+Platform: UNKNOWN
+Classifier: Framework :: Django
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Utilities
+Requires-Dist: django (>=1.7)
+
+**Django reset migrations** add one command to reset the django migrations
+
+

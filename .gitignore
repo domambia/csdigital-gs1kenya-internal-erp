@@ -1,5 +1,0 @@
-setup.cnf
-venv/
-*models.py
-*admin.py
-*__pycache__/

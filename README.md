@@ -33,6 +33,9 @@ source venv/bin/activate
 ## Authors
 
 * **Omambia Dauglous** 
+# Screenshots
+
+ ![Panel](panel.png)
 
 ## License
 
