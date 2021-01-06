@@ -2,7 +2,7 @@ africastalking==1.1.5
 argon2==0.1.10
 argon2-cffi==18.3.0
 cairocffi==1.0.1
-CairoSVG==2.3.0
+CairoSVG==2.5.1
 certifi==2018.11.29
 cffi==1.11.5
 chardet==3.0.4
