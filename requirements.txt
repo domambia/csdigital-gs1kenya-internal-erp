@@ -17,7 +17,7 @@ django-multiselectfield==0.1.8
 django-reset-migrations==0.3.1
 django-weasyprint==0.5.4
 django-widget-tweaks==1.4.3
-djangorestframework==3.9.1
+djangorestframework==3.11.2
 html5lib==1.0.1
 idna==2.8
 mysqlclient==1.4.1
