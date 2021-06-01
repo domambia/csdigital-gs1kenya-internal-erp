@@ -36,7 +36,7 @@ requests-oauthlib==1.2.0
 schema==0.6.8
 six==1.12.0
 tinycss2==0.6.1
-urllib3==1.24.1
+urllib3==1.26.5
 WeasyPrint==44
 webencodings==0.5.1
 xhtml2pdf==0.2.3
