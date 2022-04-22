@@ -26,7 +26,7 @@ Pillow==8.3.2
 pycountry==18.12.8
 pycparser==2.19
 PyMySQL==0.9.3
-PyPDF2==1.26.0
+PyPDF2==1.27.5
 Pyphen==0.9.5
 python3-openid==3.1.0
 pytz==2018.9
