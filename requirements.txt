@@ -3,7 +3,7 @@ argon2==0.1.10
 argon2-cffi==18.3.0
 cairocffi==1.0.1
 CairoSVG==2.5.1
-certifi==2018.11.29
+certifi==2022.12.7
 cffi==1.11.5
 chardet==3.0.4
 cssselect2==0.2.1
